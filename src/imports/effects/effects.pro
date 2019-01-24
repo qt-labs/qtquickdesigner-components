@@ -1,5 +1,5 @@
 TARGET = qtstudioeffectsplugin
-TARGETPATH = Studio/Effects
+TARGETPATH = QtQuick/Studio/Effects
 IMPORT_VERSION = 1.0
 
 QT += qml quick

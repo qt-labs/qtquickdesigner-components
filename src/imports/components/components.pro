@@ -1,5 +1,5 @@
 TARGET = studiocomponentsplugin
-TARGETPATH = Studio/Components
+TARGETPATH = QtQuick/Studio/Components
 IMPORT_VERSION = 1.0
 
 QT += qml quick
