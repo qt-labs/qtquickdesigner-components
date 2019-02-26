@@ -28,57 +28,117 @@
 ****************************************************************************/
 import QtQuick 2.10
 import TransitionItem 1.0
+import QtQuick.Timeline 1.0
 
 QtObject {
     id: root
     signal finished
     signal started
-    function start() {
+    signal reseted
+    function reset() {
+        /*
         if (root.duration === 0) {
             root.transitionView.__setupCurrentItem()
             return
-        }
+        }*/
 
         /* We set the parents to the content items to apply effects */
+
+        resetProperties()
+
+         for (var i = 0; i <  transitionView.__fromContentItem.children.length; ++i) {
+             print("letf over 1")
+         }
+
         from.parent = transitionView.__fromContentItem
         to.parent = transitionView.__toContentItem
+        root.progress = root.backwards ? 100 : 0
 
-        root.started()
-        anim.start()
+        enable()
+        root.progress = -1
+        root.progress = 0
     }
 
-     function stop() {
-         anim.complete()
-     }
+    function enable() {
+        timeline.enabled = true
+        root.started()
+    }
+
+    function start() {
+        anim.from = root.progress
+        anim.to = root.backwards ? 0 : 100
+        anim.duration = root.duration * Math.abs(anim.from - anim.to) / 100
+
+        anim.restart()
+    }
+
+    function abort() {
+
+        anim.from = root.progress
+        anim.to = root.backwards ? 100 : 0
+
+        anim.duration = root.duration * Math.abs(anim.from - anim.to) / 100
+
+        root.transitionView.nextItem = root.transitionView.currentItem
+        anim.restart()
+
+    }
+
+    function stop() {
+        anim.stop()
+    }
 
     property Item from
     property Item to
 
     property Item transitionView
 
-    property alias duration: anim.duration
+    property real duration: 250
     property alias easing: anim.easing
+
+    property Timeline timeline: Timeline {
+
+    }
+
+    property real progress: 0
+
+    property bool backwards: false
+
+    property Binding timelineBinding: Binding {
+        target: timeline
+        property: "currentFrame"
+        value: root.progress * 10
+    }
+
+    function resetProperties() {
+        transitionView.__fromContentItem.opacity = 1
+        transitionView.__fromContentItem.x = 0
+        transitionView.__fromContentItem.y = 0
+        transitionView.__fromContentItem.z = 0
+        transitionView.__fromContentItem.scale = 1
+
+        transitionView.__toContentItem.opacity = 1
+        transitionView.__toContentItem.x = 0
+        transitionView.__toContentItem.y = 0
+        transitionView.__toContentItem.z = 0
+        transitionView.__toContentItem.scale = 1
+    }
 
     property PropertyAnimation __anim: PropertyAnimation {
         id: anim
         duration: 250
         loops: 1
+        target: root
+        property: "progress"
         onStopped: {
+            timeline.enabled = false
             /* reset all typical properties */
-            transitionView.__fromContentItem.opacity = 1
-            transitionView.__fromContentItem.x = 0
-            transitionView.__fromContentItem.y = 0
-            transitionView.__fromContentItem.z = 0
-            transitionView.__fromContentItem.scale = 1
 
-            transitionView.__toContentItem.opacity = 1
-            transitionView.__toContentItem.x = 0
-            transitionView.__toContentItem.y = 0
-            transitionView.__toContentItem.z = 0
-            transitionView.__toContentItem.scale = 1
+            resetProperties()
 
             root.finished()
             root.transitionView.__setupCurrentItem()
+            root.progress = 0
         }
     }
 

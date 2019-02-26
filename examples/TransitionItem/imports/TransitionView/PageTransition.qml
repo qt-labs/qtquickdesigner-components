@@ -30,27 +30,62 @@
 import QtQuick 2.10
 import TransitionItem 1.0
 
-PageEffect {
-    id: effect
+QtObject {
+    id: root
 
-    duration: 250
-    onStarted: {
-        anim02.target = transitionView.__toContentItem
-        anim.start()
+    signal finished
+
+    /* Those should be lists that allow a n*n mappings. */
+    property Item from: null
+    property Item to: null
+    property int duration
+
+    property var transitionView: Item {}
+
+    property real progress: effect.progress
+
+    function __start() {
+        root.effect.start()
     }
 
-    property ParallelAnimation __FadeAnim: ParallelAnimation {
-        id: anim
+    function __enable() {
+        effect.enable()
+    }
 
-        loops: 1
+    function __reset(current, next) {
+        root.effect.from = current
+        root.effect.to = next
+        root.effect.transitionView = root.transitionView
 
-        PropertyAnimation {
-            id: anim02
-            duration: effect.duration
-            property: "y"
-            from: transitionView.height
-            to: 0
-            easing: effect.easing
-        }
+        root.effect.reset()
+    }
+
+    function __stop(current, next) {
+        root.effect.stop()
+    }
+
+    function trigger() {
+        if (root.from === null)
+            return;
+        if (root.to === null)
+            return;
+
+        if (root.from === transitionView.currentItem)
+            transitionView.gotoPage(root)
+    }
+
+    property PageEffect effect: DefaultPageEffect {
+        transitionView: transitionView
+
+    }
+
+    onEffectChanged: {
+        root.effect.transitionView = root.transitionView
+    }
+
+    property Connections effectConnection: Connections {
+        target: root.effect
+        onFinished: root.finished
     }
 }
+

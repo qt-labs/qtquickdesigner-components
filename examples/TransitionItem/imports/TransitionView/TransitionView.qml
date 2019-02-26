@@ -38,9 +38,13 @@ Item {
     property PageTransition defaultTransition
 
     property PageTransition currentTransition
+
     property PageTransition __forceTransition
 
     property list<PageTransition> transitions
+
+    property Item interaction: Item {
+    }
 
     enum EffectEnum {
         Instant,
@@ -51,14 +55,52 @@ Item {
 
     default property alias item: stack.children
 
+    property Item nextItem
+
     property Item currentItem
+    property Item activatedItem
+    property Item lastItem
     property int currentIndex: 0
 
     property int maxIndex: 0
 
+    signal transitionFinished
+
     Item {
         id: stack
         visible: false
+    }
+
+    property bool __isCompleted: false
+
+    property real progress: 0
+
+    property bool __blockSchedule: false
+
+    onActivatedItemChanged: {
+        if (!__isCompleted)
+            return
+
+        if (root.activatedItem === root.currentItem)
+            return;
+
+        root.nextItem = root.activatedItem
+
+        for (var i = 0; i <  root.allChildren.length; ++i) {
+            if (root.allChildren[i] === root.activatedItem)
+                root.currentIndex = i
+        }
+    }
+
+    function resetCurrentIndex() {
+        root.__blockSchedule = true
+        root.lastItem = root.currentItem
+        //root.currentItem = root.nextItem
+        for (var i = 0; i <  root.allChildren.length; ++i) {
+            if (root.allChildren[i] === root.currentItem)
+                root.currentIndex = i
+        }
+        root.__blockSchedule = false
     }
 
     Component.onCompleted: {
@@ -81,17 +123,19 @@ Item {
         }
 
         __setupCurrentItem()
+        __isCompleted = true
     }
 
-    onCurrentIndexChanged: {
-        var nextItem = root.allChildren[root.currentIndex]
+    function scheduleTransition()
+    {
+        root.progress = 0
 
         var pageTransition = null
 
         /* find correct transition */
         for (var i = 0; i < root.transitions.length; ++i) {
             var t = root.transitions[i]
-            if ((t.from === root.currentItem) && (t.to === nextItem)) {
+            if ((t.from === root.currentItem) && (t.to === root.nextItem)) {
                 pageTransition = t
             }
         }
@@ -110,17 +154,46 @@ Item {
             pageTransition = __forceTransition
         __forceTransition = null
 
-        pageTransition.__start(root.currentItem, nextItem)
+        root.currentTransition = pageTransition
+        root.currentTransition.__reset(root.currentItem, root.nextItem)
+
+        root.progress = Qt.binding(function () {
+            if (root.currentTransition)
+                return root.currentTransition.progress
+            return 0
+        })
+    }
+
+    onCurrentIndexChanged: {
+        root.nextItem = root.allChildren[root.currentIndex]
+
+       if (root.nextItem === root.currentItem)
+            return
+
+        if (root.__blockSchedule)
+            return
+
+
+        scheduleTransition()
+
+        root.lastItem = root.currentItem
+
+        root.currentTransition.__start()
     }
 
     function __setupCurrentItem() {
         if (root.currentItem)
             root.currentItem.parent = stack
 
-        root.currentItem = root.allChildren[root.currentIndex]
+        if (root.nextItem)
+            root.currentItem = root.nextItem
+        else
+            root.currentItem = root.allChildren[root.currentIndex]
+
 
         root.currentItem.parent = root
         root.currentTransition = null
+        transitionFinished()
     }
 
     function gotoPage(transition) {

@@ -29,41 +29,33 @@
 
 import QtQuick 2.10
 import TransitionItem 1.0
+import QtQuick.Timeline 1.0
 
 PageEffect {
     id: effect
-    //Fade Effect
+
     duration: 250
-    onStarted: {
-        anim01.target = transitionView.__fromContentItem
-        anim02.target = transitionView.__toContentItem
-        anim.start()
-    }
+    onStarted: group01.target = transitionView.__toContentItem
 
-    property ParallelAnimation __FadeAnim: ParallelAnimation {
-        id: anim
+    timeline: Timeline {
+        startFrame: 0
+        endFrame: 1000
 
-        loops: 1
-        PropertyAnimation {
-            id: anim01
-            duration: effect.duration
-            property: "opacity"
-            from: 1
-            to: 0
-            easing: effect.easing
+        KeyframeGroup {
+            id: group01
+
+            property: "x"
+
+            Keyframe {
+                frame: 0
+                value:transitionView.width
+            }
+
+            Keyframe {
+                frame: 1000
+                value: 0
+                easing: effect.easing
+            }
         }
-
-        PropertyAnimation {
-            id: anim02
-            duration: effect.duration
-            property: "opacity"
-            from: 0
-            to: 1
-            easing: effect.easing
-        }
-    }
-
-    onFinished: {
-
     }
 }

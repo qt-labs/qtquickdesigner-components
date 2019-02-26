@@ -1,3 +1,5 @@
+
+
 /****************************************************************************
 **
 ** Copyright (C) 2018 The Qt Company Ltd.
@@ -26,8 +28,7 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
-
-import QtQuick 2.10
+import QtQuick 2.12
 import TransitionItem 1.0
 import QtQuick.Controls 2.3
 import QtQuick.Timeline 1.0
@@ -40,36 +41,93 @@ Rectangle {
 
     color: Constants.backgroundColor
 
+    TransitionList {
+        id: pageList
+        intialItem: page01
+        items: [page01, page02, page03, page04, page05]
+    }
     TransitionView {
+
+        interaction: SwipeInteraction {
+            transitionView: view
+            list: pageList
+        }
         id: view
         x: 3
         y: -4
         width: 1277
         height: 727
-        currentIndex: slider.value
+
+        activatedItem: pageList.currentItem
+
         Image {
             id: page01
             source: "images/shuttle1.jpg"
+            objectName: "page01"
+
+            Text {
+                x: 1225
+                y: 17
+                color: "#ffffff"
+                text: qsTr("1")
+                font.pixelSize: 24
+            }
         }
 
         Image {
             id: page02
             source: "images/shuttle2.jpg"
+            objectName: "page02"
+
+            Text {
+                x: 1225
+                y: 17
+                color: "#ffffff"
+                text: qsTr("2")
+                font.pixelSize: 24
+            }
         }
 
         Image {
             id: page03
             source: "images/shuttle3.jpg"
+            objectName: "page03"
+
+            Text {
+                x: 1225
+                y: 17
+                color: "#ffffff"
+                text: qsTr("3")
+                font.pixelSize: 24
+            }
         }
 
         Image {
             id: page04
             source: "images/shuttle4.jpg"
+            objectName: "page04"
+
+            Text {
+                x: 1225
+                y: 17
+                color: "#ffffff"
+                text: qsTr("4")
+                font.pixelSize: 24
+            }
         }
 
         Image {
             id: page05
             source: "images/shuttle5.jpg"
+            objectName: "page05"
+
+            Text {
+                x: 1225
+                y: 17
+                color: "#ffffff"
+                text: qsTr("5")
+                font.pixelSize: 24
+            }
         }
 
         Image {
@@ -79,6 +137,14 @@ Rectangle {
             Button {
                 id: button
                 text: qsTr("Back")
+            }
+
+            Text {
+                x: 1225
+                y: 17
+                color: "#ffffff"
+                text: qsTr("6")
+                font.pixelSize: 24
             }
         }
 
@@ -178,28 +244,16 @@ Rectangle {
         ]
     }
 
-    Slider {
-        id: slider
-        x: 30
-        y: 23
-        to: 5
-        stepSize: 1
-        value: 0
+    SimpleTabBar {
+        list: pageList
     }
 
-    /*
     Connections {
         target: button
         onClicked: {
             transitionToStart.trigger()
-            slider.value = 0
-
-
-            view.currentIndex = Qt.binding(function () {
-                return slider.value
-            })
         }
-    }*/
+    }
 
     Label {
         id: label
@@ -208,5 +262,53 @@ Rectangle {
         color: "#ffffff"
         text: view.currentIndex
         font.pointSize: 24
+    }
+
+    Label {
+        id: label1
+        x: 599
+        y: 24
+        color: "#ffffff"
+        text: Math.round(view.progress)
+        font.pointSize: 24
+    }
+
+    Connections {
+        target: next
+        onClicked: pageList.next()
+    }
+
+    Connections {
+        target: prev
+        onClicked: pageList.prev()
+    }
+
+    Connections {
+        target: back
+        onClicked: pageList.currentItem = view.lastItem
+    }
+
+    Button {
+        id: prev
+        x: 8
+        y: 631
+        text: qsTr("Prev ") + (pageList.prevItem ? pageList.prevItem.objectName : "")
+        enabled: pageList.prevItem !== null
+    }
+
+    Button {
+        id: next
+        x: 939
+        y: 631
+        text: qsTr("Next ") + (pageList.nextItem ? pageList.nextItem.objectName : "")
+        enabled: pageList.nextItem !== null
+    }
+
+    Button {
+        id: back
+        x: 11
+        y: 80
+        text: qsTr("Back ") + (view.lastItem ? view.lastItem.objectName : "")
+        enabled: view.lastItem !== null
     }
 }

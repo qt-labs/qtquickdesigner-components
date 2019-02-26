@@ -27,30 +27,25 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.10
+import QtQuick 2.12
 import TransitionItem 1.0
+import QtQuick.Controls 2.3
+import QtQuick.Timeline 1.0
 
-PageEffect {
-    id: effect
+Row {
+    spacing: 40
+    property var list
+    Repeater {
+        model: list.length
 
-    duration: 250
-    onStarted: {
-        anim02.target = transitionView.__toContentItem
-        anim.start()
-    }
-
-    property ParallelAnimation __FadeAnim: ParallelAnimation {
-        id: anim
-
-        loops: 1
-
-        PropertyAnimation {
-            id: anim02
-            duration: effect.duration
-            property: "x"
-            from: -transitionView.width
-            to: 0
-            easing: effect.easing
+        Text {
+            color: list.currentItem === list.items[modelData] ? "white" : "#bfbfbf"
+            text: list.items[modelData].objectName
+            font.pointSize: 24
+            MouseArea {
+                anchors.fill: parent
+                onClicked: list.currentItem = list.items[modelData]
+            }
         }
     }
 }

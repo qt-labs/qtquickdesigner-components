@@ -30,6 +30,7 @@
 import QtQuick 2.10
 import TransitionItem 1.0
 import QtQuick.Controls 2.3
+import TransitionView 1.0
 
 Rectangle {
     id: rectangle
