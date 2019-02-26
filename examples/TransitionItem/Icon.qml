@@ -26,7 +26,6 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
-
 import QtQuick 2.0
 
 Item {
@@ -71,16 +70,13 @@ Item {
     }
 
     onIdentiferChanged: {
-        textLabel.text =String.fromCharCode(parseInt(identifer, 16));
+        textLabel.text = String.fromCharCode(parseInt(identifer, 16))
     }
     Text {
         id: textLabel
         width: 196
         height: 196
         renderType: Text.NativeRendering
-
-
-
 
         FontLoader {
             id: fontLoader
@@ -109,57 +105,4 @@ Item {
         anchors.bottom: parent.bottom
         font.pixelSize: 32
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*##^## Designer {
-    D{i:0;height:196;width:196}
-}
- ##^##*/
