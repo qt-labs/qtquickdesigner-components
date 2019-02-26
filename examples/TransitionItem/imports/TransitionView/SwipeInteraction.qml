@@ -85,7 +85,6 @@ Item {
         }
 
         onActiveChanged: {
-
             if (handler.active) {
                 if (distance() < 0)
                     transitionView.nextItem = list.nextItem
@@ -93,15 +92,17 @@ Item {
                     transitionView.nextItem = list.prevItem
 
                 transitionView.scheduleTransition()
-                transitionView.currentTransition.effect.enable()
+                if (transitionView.currentTransition)
+                    transitionView.currentTransition.effect.enable()
             } else {
                 var p = Math.abs(distance()) * 100
-                if (transitionView.currentTransition.effect.progress > root.threshold) {
+                if (transitionView.currentTransition && transitionView.currentTransition.effect.progress > root.threshold) {
                     root.__activeItem = transitionView.nextItem
                     root.__reactToTransition = true
                     transitionView.currentTransition.__start()
-                } else {
-                    transitionView.currentTransition.effect.abort()
+                } else { /* Drag was released, but threshold was not passed */
+                    if (transitionView.currentTransition)
+                        transitionView.currentTransition.effect.abort()
                 }
                 /* Block for 100ms */
                 handler.enabled = false
@@ -112,8 +113,8 @@ Item {
         onCentroidChanged: {
             var p = Math.abs(distance()) * 100
 
-            if (view.currentTransition)
-                view.currentTransition.effect.progress = p * 2
+            if (transitionView.currentTransition)
+                transitionView.currentTransition.effect.progress = p * 2
         }
     }
 }

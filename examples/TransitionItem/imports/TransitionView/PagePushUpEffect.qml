@@ -34,14 +34,24 @@ import QtQuick.Timeline 1.0
 PageEffect {
     id: effect
 
-    property real itemHeight: transitionView.height
+    property real scale: 1
+    property real inOpacity: 1
     property real outOpacity: 1
+
+    property int fromItemHeight: effect.transitionView.height
+
+    property bool revealCurrent: false
 
     duration: 250
     onStarted: {
-        group01.target = transitionView.__toContentItem
-        group02.target = transitionView.__fromContentItem
-        group01.target.z = 1
+        group01.target = transitionView.__fromContentItem
+        group02.target = transitionView.__toContentItem
+        group03.target = transitionView.__fromContentItem
+        group04.target = transitionView.__toContentItem
+        group05.target = transitionView.__fromContentItem
+        group06.target = transitionView.__toContentItem
+        if (effect.revealCurrent)
+            group01.target.z = 1
     }
 
     timeline: Timeline {
@@ -55,7 +65,24 @@ PageEffect {
 
             Keyframe {
                 frame: 0
-                value: -effect.itemHeight
+                value: 0
+            }
+
+            Keyframe {
+                frame: 1000
+                value: -fromItemHeight
+                easing: effect.easing
+            }
+        }
+
+        KeyframeGroup {
+            id: group02
+
+            property: "y"
+
+            Keyframe {
+                frame: 0
+                value: effect.revealCurrent ? 0 : effect.transitionView.height
             }
 
             Keyframe {
@@ -66,7 +93,41 @@ PageEffect {
         }
 
         KeyframeGroup {
-            id: group02
+            id: group03
+
+            property: "scale"
+
+            Keyframe {
+                frame: 0
+                value: 1
+            }
+
+            Keyframe {
+                frame: 1000
+                value: effect.scale
+                easing: effect.easing
+            }
+        }
+
+        KeyframeGroup {
+            id: group04
+
+            property: "scale"
+
+            Keyframe {
+                frame: 0
+                value: effect.scale
+            }
+
+            Keyframe {
+                frame: 1000
+                value: 1
+                easing: effect.easing
+            }
+        }
+
+        KeyframeGroup {
+            id: group05
 
             property: "opacity"
 
@@ -78,6 +139,23 @@ PageEffect {
             Keyframe {
                 frame: 1000
                 value: effect.outOpacity
+                easing: effect.easing
+            }
+        }
+
+        KeyframeGroup {
+            id: group06
+
+            property: "opacity"
+
+            Keyframe {
+                frame: 0
+                value: effect.inOpacity
+            }
+
+            Keyframe {
+                frame: 1000
+                value: 1
                 easing: effect.easing
             }
         }

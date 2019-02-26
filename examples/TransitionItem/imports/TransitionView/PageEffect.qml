@@ -46,10 +46,6 @@ QtObject {
 
         resetProperties()
 
-         for (var i = 0; i <  transitionView.__fromContentItem.children.length; ++i) {
-             print("letf over 1")
-         }
-
         from.parent = transitionView.__fromContentItem
         to.parent = transitionView.__toContentItem
         root.progress = root.backwards ? 100 : 0
@@ -59,17 +55,21 @@ QtObject {
         root.progress = 0
     }
 
+    property bool __aborted: false
+
     function enable() {
         timeline.enabled = true
         root.started()
     }
 
     function start() {
-        anim.from = root.progress
+        anim.from = Math.min(root.progress, 100)
         anim.to = root.backwards ? 0 : 100
-        anim.duration = root.duration * Math.abs(anim.from - anim.to) / 100
+        anim.duration = root.duration * Math.abs(anim.to - anim.from) / 100
 
-        anim.restart()
+        root.__aborted = false
+
+        anim.start()
     }
 
     function abort() {
@@ -79,7 +79,7 @@ QtObject {
 
         anim.duration = root.duration * Math.abs(anim.from - anim.to) / 100
 
-        root.transitionView.nextItem = root.transitionView.currentItem
+        root.__aborted = true
         anim.restart()
 
     }
@@ -137,7 +137,18 @@ QtObject {
             resetProperties()
 
             root.finished()
-            root.transitionView.__setupCurrentItem()
+
+            if (!root.__aborted) {
+                root.transitionView.__setupCurrentItem()
+            } else {
+                if (root.transitionView.nextItem) {
+                    root.transitionView.nextItem.parent = transitionView.__stack
+                    root.transitionView.nextItem = root.transitionView.currentItem
+                }
+                root.transitionView.__setupCurrentItem()
+                root.transitionView.nextItem = null
+            }
+
             root.progress = 0
         }
     }

@@ -11,4 +11,5 @@ PageSlideUpEffect 1.0 PageSlideUpEffect.qml
 PageTransition 1.0 PageTransition.qml
 TransitionList 1.0 TransitionList.qml
 TransitionView 1.0 TransitionView.qml
+PagePushUpEffect 1.0 PagePushUpEffect.qml
 

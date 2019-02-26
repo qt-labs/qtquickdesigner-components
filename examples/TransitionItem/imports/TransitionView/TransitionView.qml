@@ -66,6 +66,8 @@ Item {
 
     signal transitionFinished
 
+    property alias __stack: stack
+
     Item {
         id: stack
         visible: false
@@ -155,7 +157,8 @@ Item {
         __forceTransition = null
 
         root.currentTransition = pageTransition
-        root.currentTransition.__reset(root.currentItem, root.nextItem)
+        if (root.currentTransition)
+            root.currentTransition.__reset(root.currentItem, root.nextItem)
 
         root.progress = Qt.binding(function () {
             if (root.currentTransition)
