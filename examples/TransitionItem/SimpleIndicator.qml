@@ -27,15 +27,29 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.10
+import QtQuick 2.12
 import TransitionItem 1.0
+import QtQuick.Controls 2.3
+import QtQuick.Timeline 1.0
 
-Item {
-    width: Constants.width
-    height: Constants.height
+Row {
+    spacing: 40
+    property var list
+    Repeater {
+        model: list.length
 
-    Screen04 {
-        transformOrigin: Item.TopLeft
-        scale: 0.5
+        Rectangle {
+            width: 40
+            height: 40
+            radius: 20
+            color: list.currentItem === list.items[modelData] ? "white" : "#7f7f7f"
+        }
     }
 }
+
+
+
+/*##^## Designer {
+    D{i:0;autoSize:true;height:480;width:640}
+}
+ ##^##*/
