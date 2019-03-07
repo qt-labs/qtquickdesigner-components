@@ -111,6 +111,9 @@ Item {
         }
 
         onCentroidChanged: {
+            if (!handler.enabled)
+                return
+
             var p = Math.abs(distance()) * 100
 
             if (transitionView.currentTransition)
