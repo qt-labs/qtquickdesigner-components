@@ -1,3 +1,5 @@
+
+
 /****************************************************************************
 **
 ** Copyright (C) 2018 The Qt Company Ltd.
@@ -26,12 +28,11 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
-
 import QtQuick 2.10
 import TransitionItem 1.0
 import QtQuick.Controls 2.3
 import QtQuick.Timeline 1.0
-import TransitionView 1.0
+import FlowView 1.0
 
 Rectangle {
     id: rectangle
@@ -40,7 +41,7 @@ Rectangle {
 
     color: Constants.backgroundColor
 
-    TransitionView {
+    FlowView {
         id: view
         x: 3
         y: -4
@@ -82,98 +83,92 @@ Rectangle {
             }
         }
 
-        defaultTransition: PageTransition {
-        }
+        defaultTransition: FlowTransition {}
 
-        transitions: [
-            PageTransition {
+        flowTransitions: [
+            FlowTransition {
                 from: page01
                 to: page02
 
-                effect: PageSlideRightEffect {
-                }
+                effect: FlowSlideRightEffect {}
             },
 
-            PageTransition {
+            FlowTransition {
                 from: page02
                 to: page03
 
-                effect: PageSlideRightEffect {
+                effect: FlowSlideRightEffect {
                     duration: 500
                 }
             },
-            PageTransition {
+            FlowTransition {
                 from: page03
                 to: page04
 
-                effect: PagePushRightEffect {
-                }
+                effect: FlowPushRightEffect {}
             },
-            PageTransition {
+            FlowTransition {
                 from: page04
                 to: page05
 
-                effect: PagePushRightEffect {
+                effect: FlowPushRightEffect {
                     duration: 500
                 }
             },
 
-            PageTransition {
+            FlowTransition {
                 from: page05
                 to: page06
 
-                effect: PageSlideUpEffect {
+                effect: FlowSlideUpEffect {
                     easing.bezierCurve: [0.236, 0.75, 0.592, 0.862, 0.768, 0.982, 0.861, 0.936, 0.812, 0.929, 0.886, 0.96, 0.93, 0.984, 0.957, 0.986, 1, 1]
                 }
             },
 
-            PageTransition {
+            FlowTransition {
                 from: page06
                 to: page05
 
-                effect: PageSlideDownEffect {
+                effect: FlowSlideDownEffect {
                     easing.bezierCurve: [0.236, 0.75, 0.592, 0.862, 0.768, 0.982, 0.861, 0.936, 0.812, 0.929, 0.886, 0.96, 0.93, 0.984, 0.957, 0.986, 1, 1]
                 }
             },
-            PageTransition {
+            FlowTransition {
                 from: page04
                 to: page03
 
-                effect: PagePushLeftEffect {
-                }
+                effect: FlowPushLeftEffect {}
             },
-            PageTransition {
+            FlowTransition {
                 from: page05
                 to: page04
 
-                effect: PagePushLeftEffect {
+                effect: FlowPushLeftEffect {
                     duration: 500
                 }
             },
 
-            PageTransition {
+            FlowTransition {
                 from: page02
                 to: page01
 
-                effect: PageSlideLeftEffect {
-                }
+                effect: FlowSlideLeftEffect {}
             },
 
-            PageTransition {
+            FlowTransition {
                 from: page03
                 to: page02
 
-                effect: PageSlideLeftEffect {
+                effect: FlowSlideLeftEffect {
                     duration: 500
                 }
             },
 
-            PageTransition {
+            FlowTransition {
                 id: transitionToStart
                 from: page06
                 to: page01
-                effect: PageFadeEffect {
-                }
+                effect: FlowFadeEffect {}
             }
         ]
     }
@@ -186,6 +181,7 @@ Rectangle {
         stepSize: 1
         value: 0
     }
+
 
     /*
     Connections {
@@ -200,7 +196,6 @@ Rectangle {
             })
         }
     }*/
-
     Label {
         id: label
         x: 331

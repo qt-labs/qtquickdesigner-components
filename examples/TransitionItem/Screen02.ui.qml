@@ -30,7 +30,7 @@
 import QtQuick 2.10
 import TransitionItem 1.0
 import QtQuick.Controls 2.3
-import TransitionView 1.0
+import FlowView 1.0
 
 Rectangle {
     id: rectangle
@@ -41,7 +41,7 @@ Rectangle {
 
     state: "Screen01"
 
-    TransitionView {
+    FlowView {
         id: transitionView
         x: 111
         y: 52
@@ -49,34 +49,34 @@ Rectangle {
         height: 640
         clip: true
 
-        defaultTransition: PageTransition {
+        defaultTransition: FlowTransition {
         }
 
-        transitions: [
-            PageTransition {
+        flowTransitions: [
+            FlowTransition {
                 from: page01
                 to: page02
-                effect: PageSlideUpEffect {
+                effect: FlowSlideUpEffect {
                 }
             },
-            PageTransition {
+            FlowTransition {
                 from: page02
                 to: page01
-                effect: PageSlideDownEffect {
+                effect: FlowSlideDownEffect {
                 }
             },
 
-            PageTransition {
+            FlowTransition {
                 from: page02
                 to: page03
-                effect: PagePushRightEffect {
+                effect: FlowPushRightEffect {
                 }
             },
 
-            PageTransition {
+            FlowTransition {
                 from: page03
                 to: page01
-                effect: PageFadeEffect {
+                effect: FlowFadeEffect {
                 }
             }
         ]

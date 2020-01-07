@@ -1,3 +1,4 @@
+
 /****************************************************************************
 **
 ** Copyright (C) 2018 The Qt Company Ltd.
@@ -28,7 +29,7 @@
 ****************************************************************************/
 import QtQuick 2.12
 import TransitionItem 1.0
-import TransitionView 1.0
+import FlowView 1.0
 
 Rectangle {
     width: 1080
@@ -41,19 +42,19 @@ Rectangle {
         list: pageList
     }
 
-    TransitionList {
+    FlowTransitionList {
         id: pageList
         intialItem: screen01
         items: [screen01, screen02, screen03]
     }
 
-    TransitionList {
+    FlowTransitionList {
         id: pageList2
         intialItem: appView
         items: [appView, settings]
     }
 
-    TransitionView {
+    FlowView {
         id: mainView
 
         anchors.fill: parent
@@ -66,22 +67,22 @@ Rectangle {
             horizontal: false
         }
 
-        transitions: [
-            PageTransition {
+        flowTransitions: [
+            FlowTransition {
                 from: appView
                 to: settings
 
-                effect: PageSlideDownEffect {
+                effect: FlowSlideDownEffect {
                     itemHeight: settings.height
                     outOpacity: 0
                 }
             },
 
-            PageTransition {
+            FlowTransition {
                 from: settings
                 to: appView
 
-                effect: PagePushUpEffect {
+                effect: FlowPushUpEffect {
                     fromItemHeight: settings.height
                     revealCurrent: true
                     inOpacity: 0.2
@@ -89,7 +90,7 @@ Rectangle {
             }
         ]
 
-        TransitionView {
+        FlowView {
             id: appView
 
             objectName: "appView"
@@ -107,40 +108,40 @@ Rectangle {
                 horizontal: true
             }
 
-            transitions: [
-                PageTransition {
+            flowTransitions: [
+                FlowTransition {
                     from: screen01
                     to: screen02
 
-                    effect: PagePushRightEffect {
+                    effect: FlowPushRightEffect {
                         scale: 0.6
                         opacity: 0
                     }
                 },
 
-                PageTransition {
+                FlowTransition {
                     from: screen02
                     to: screen03
 
-                    effect: PagePushRightEffect {
+                    effect: FlowPushRightEffect {
                         scale: 0.6
                         opacity: 0
                     }
                 },
-                PageTransition {
+                FlowTransition {
                     from: screen03
                     to: screen02
 
-                    effect: PagePushLeftEffect {
+                    effect: FlowPushLeftEffect {
                         scale: 0.6
                         opacity: 0
                     }
                 },
-                PageTransition {
+                FlowTransition {
                     from: screen02
                     to: screen01
 
-                    effect: PagePushLeftEffect {
+                    effect: FlowPushLeftEffect {
                         scale: 0.6
                         opacity: 0
                     }
