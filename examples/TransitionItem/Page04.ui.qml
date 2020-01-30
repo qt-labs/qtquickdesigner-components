@@ -1,6 +1,9 @@
+import QtQuick 2.12
+
+
 /****************************************************************************
 **
-** Copyright (C) 2020 The Qt Company Ltd.
+** Copyright (C) 2018 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -26,20 +29,63 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
+import TransitionItem 1.0
+import FlowView 1.0
+import QtQuick.Controls 2.3
 
-import QtQuick 2.10
+FlowItem {
+    id: page01
+    width: 640
+    height: 480
 
-MouseArea {
-    width: 40
-    height: 20
-    property Connections connections : Connections {
-        id: connections
+    PageTemplate {
+        id: pageTemplate
+        anchors.fill: parent
+
+        Rectangle {
+            id: rectangle
+            x: 156
+            y: 175
+            width: 328
+            height: 42
+            color: "#323244"
+        }
+
+        Rectangle {
+            id: rectangle1
+            x: 126
+            y: 260
+            width: 389
+            height: 42
+            color: "#323244"
+        }
+
+        Rectangle {
+            id: rectangle2
+            x: 257
+            y: 349
+            width: 127
+            height: 42
+            color: "#ffffff"
+            border.width: 4
+            border.color: "#323244"
+
+            Text {
+                id: element
+                text: qsTr("Text")
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.verticalCenter: parent.verticalCenter
+                font.bold: true
+                font.family: "Verdana"
+                font.pixelSize: 28
+            }
+        }
     }
-
-    property FlowTransition target
-
-    enabled: target !== null
-
-    onClicked: target.trigger()
-
 }
+
+/*##^##
+Designer {
+    D{i:0;height:480;width:640}
+}
+##^##*/
+

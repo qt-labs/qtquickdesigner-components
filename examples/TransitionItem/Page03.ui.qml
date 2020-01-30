@@ -1,6 +1,9 @@
+import QtQuick 2.12
+
+
 /****************************************************************************
 **
-** Copyright (C) 2020 The Qt Company Ltd.
+** Copyright (C) 2018 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -26,20 +29,25 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
+import TransitionItem 1.0
+import FlowView 1.0
+import QtQuick.Controls 2.3
 
-import QtQuick 2.10
+FlowItem {
+    id: page01
+    width: 640
+    height: 480
 
-MouseArea {
-    width: 40
-    height: 20
-    property Connections connections : Connections {
-        id: connections
+    PageTemplate {
+        id: pageTemplate
+        anchors.fill: parent
     }
-
-    property FlowTransition target
-
-    enabled: target !== null
-
-    onClicked: target.trigger()
-
 }
+
+
+/*##^##
+Designer {
+    D{i:0;height:415;width:478}
+}
+##^##*/
+
