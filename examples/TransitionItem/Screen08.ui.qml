@@ -34,74 +34,61 @@ import FlowView 1.0
 import QtQuick.Controls 2.3
 
 FlowView {
+    id: flowView
     width: 478
     height: 415
-    id: flow
-    children: [
-        Rectangle {
-            z: 10
-            color: "red"
-            width: 478
-            height: 20
-            MouseArea {
-                anchors.fill: parent
-                onClicked: flow.goBack()
-            }
-        }
-    ]
 
     flowDecisions: [
         DecisionDialog {
             id: dialog
             text: "This is a question?"
-            targets: [flowTransition6, flowTransition8]
+            targets: [flowTransition1, flowTransition2, flowTransition3]
         }
     ]
 
+    flowWildcards: [
+        FlowWildcard {
+            id: wildcard01
+            target: wildcardTransition
+        }
+    ]
+
+    defaultTransition: FlowTransition {}
+
     flowTransitions: [
         FlowTransition {
-            id: flowTransition
+            id: flowTransition1
             effect: FlowSlideUpEffect {}
-            to: page02
+            to: page05
             from: page01
         },
         FlowTransition {
-            id: flowTransition1
+            id: flowTransition2
             effect: FlowSlideRightEffect {}
             to: page04
             from: page01
         },
         FlowTransition {
-            id: flowTransition2
-            effect: FlowSlideDownEffect {}
-            to: page01
-            from: page02
-        },
-        FlowTransition {
             id: flowTransition3
-            effect: FlowSlideLeftEffect {}
-            to: page01
-            from: page04
+            effect: FlowSlideRightEffect {}
+            to: page06
+            from: page01
         },
+
         FlowTransition {
             id: flowTransition4
+            to: dialog
             from: page01
-            to: page05
         },
         FlowTransition {
-            id: flowTransition5
-            from: page05
-            to: page02
+            id: start
+            to: page01
+            from: flowView
         },
         FlowTransition {
-            id: flowTransition6
-            to: page06
-            from: page02
-        },
-        FlowTransition {
-            id: flowTransition7
-            to: page02
-            from: page06
+            id: wildcardTransition
+            to: page01
+            //from: null
         }
     ]
 
@@ -109,92 +96,53 @@ FlowView {
         id: page01
 
         FlowActionArea {
-            target: flowTransition1
-            x: 456
-            y: 248
-            width: 116
-            height: 70
-        }
-
-        FlowActionArea {
-            target: flowTransition
+            id: flowAction
+            target: flowTransition4
             x: 264
             y: 248
             width: 112
             height: 76
-        }
 
-        FlowActionArea {
-            target: flowTransition4
-            x: 58
-            y: 255
-            width: 122
-            height: 63
+            Connections {
+                target: flowTransition2
+                onClicked: flowAction.trigger()
+            }
         }
     }
 
-    Page02 {
-        id: page02
-
-        FlowActionArea {
-            id: area
-            target: flowTransition2
-            x: 168
-            y: 360
-            width: 108
-            height: 40
-
-            Connections {
-                target: parent
-                onClicked: area.trigger()
-            }
-        }
-
-        FlowActionArea {
-            target: dialog
-            x: 168
-            y: 154
-            width: 176
-            height: 20
-        }
+    Page05 {
+        id: page05
     }
 
     Page04 {
         id: page04
 
         FlowActionArea {
-            target: flowTransition3
-            x: 244
-            y: 342
-            width: 152
-            height: 56
+            x: 8
+            y: 8
+            width: 80
+            height: 63
+            goBack: true
         }
     }
 
     Page06 {
         id: page06
-
-        FlowActionArea {
-            target: flowTransition7
-            x: 394
-            y: 325
-            width: 159
-            height: 123
-        }
     }
 
-    Page05 {
-        id: page05
-
-        FlowActionArea {
-            target: flowTransition5
-            x: 389
-            y: 202
-            width: 144
-            height: 115
-        }
+    Page06 {
+        id: page061
     }
 }
 
-
+/*##^##
+Designer {
+    D{i:0;formeditorZoom:0.33000001311302185;height:10000;width:10000}D{i:2;flowX:1439.7878796307727;flowY:59.24242327911688}
+D{i:12;flowX:214.45454364834416;flowY:80.24242327911688}D{i:15;flowX:964;flowY:1395}
+D{i:13;flowX:214.45454364834416;flowY:80.24242327911688}D{i:16;flowX:964;flowY:1395}
+D{i:18;flowX:57.57575528790261;flowY:1212.696966927461}D{i:17;flowX:1371.3636349186752;flowY:383.39393782856496}
+D{i:19;flowX:57.57575528790261;flowY:1212.696966927461}D{i:20;flowX:3182.9999630451207;flowY:1339.0000134110448}
+D{i:1;flowX:494;flowY:791}
+}
+##^##*/
 

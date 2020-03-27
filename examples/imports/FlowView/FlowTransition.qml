@@ -37,8 +37,8 @@ QtObject {
     /* Those should be lists that allow a n*n mappings. */
     //property Item from: null
     //property Item to: null
-    property list<Item> from
-    property list<Item> to
+    property list<QtObject> from
+    property list<QtObject> to
     property int duration
 
     property var transitionView: Item {}
@@ -46,6 +46,7 @@ QtObject {
     property real progress: effect.progress
 
     function __start() {
+        print("start " + this)
         root.effect.start()
     }
 
@@ -75,10 +76,14 @@ QtObject {
     }
 
     function trigger() {
+        print("hmm")
         if (root.from === null)
             return;
         if (root.to === null)
             return;
+
+        if (to[0].isFlowDecision === true)
+            to[0].trigger();
 
         if (__checkInclude(root.from, transitionView.currentItem))
             transitionView.gotoPage(root)

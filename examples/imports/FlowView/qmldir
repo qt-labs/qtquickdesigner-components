@@ -13,4 +13,6 @@ FlowTransitionList 1.0 FlowTransitionList.qml
 FlowView 1.0 FlowView.qml
 FlowPushUpEffect 1.0 FlowPushUpEffect.qml
 FlowItem 1.0 FlowItem.qml
+FlowDecision 1.0 FlowDecision.qml
+FlowWildcard 1.0 FlowWildcard.qml
 FlowActionArea 1.0 FlowActionArea.qml

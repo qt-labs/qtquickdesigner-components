@@ -1,6 +1,7 @@
+
 /****************************************************************************
 **
-** Copyright (C) 2020 The Qt Company Ltd.
+** Copyright (C) 2018 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -27,48 +28,50 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.10
+import QtQuick 2.0
+import FlowView 1.0
+import QtQuick.Dialogs 1.1
 
-MouseArea {
-    width: 40
-    height: 20
-
+FlowDecision {
     id: root
 
+
+    property alias text: dialog.text
+
     function trigger() {
-        target.trigger()
+        dialog.open()
     }
 
-    property Connections connections : Connections {
-        id: connections
-    }
+    property MessageDialog dialog: MessageDialog {
 
-    property QtObject target
+        id: dialog
 
-    enabled: target !== null || root.goBack
+        //property QtObject yesTarget
+        //property QtObject noTarget
 
-    onClicked: {
-        if (root.goBack) {
-            print("go back")
-            var par = root.parent
-            while (parent) {
-                if (parent.__isFlowView) {
-                    parent.goBack()
-                    return
-                }
-                parent = parent.parent
-            }
-        } else {
-            target.trigger()
+        //modal: true
+
+        //visible: false
+
+        standardButtons: StandardButton.Yes | StandardButton.No
+
+        onYes: {
+            print("acc")
+            print("yes")
+            root.targets[0].trigger()
         }
+        onNo: {
+            root.targets[1].trigger()
+        }
+
+        Component.onCompleted: print(dialog.footer)
+
     }
-
-    property bool goBack: false
-
 }
+
 
 /*##^##
 Designer {
-    D{i:0;height:63;width:80}
+    D{i:0;autoSize:true;height:480;width:640}
 }
 ##^##*/

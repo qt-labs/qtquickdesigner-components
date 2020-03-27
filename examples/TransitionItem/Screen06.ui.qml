@@ -212,9 +212,9 @@ FlowView {
 
 /*##^##
 Designer {
-    D{i:0;height:6400;width:4800}D{i:9;inOffset:-24;outOffset:-64}D{i:17;inOffset:23}
-D{i:18;inOffset:-26}D{i:19;flowX:836;flowY:619}D{i:24;flowX:1710;flowY:595}D{i:26;flowX:968;flowY:41}
-D{i:29;flowX:28;flowY:914}D{i:31;flowX:1697;flowY:1348}
+    D{i:0;height:10000;width:10000}D{i:19;flowX:836;flowY:619}D{i:24;flowX:1710;flowY:595}
+D{i:26;flowX:968;flowY:41}D{i:29;flowX:28;flowY:914}D{i:31;flowX:1697;flowY:1348}
+D{i:9;color:"#c2c2c2";inOffset:"-24";outOffset:"-64"}D{i:17;inOffset:23}D{i:18;inOffset:"-26"}
 }
 ##^##*/
 

@@ -29,46 +29,13 @@
 
 import QtQuick 2.10
 
-MouseArea {
-    width: 40
-    height: 20
-
+QtObject {
     id: root
 
+    property FlowTransition target
+
     function trigger() {
-        target.trigger()
+
     }
-
-    property Connections connections : Connections {
-        id: connections
-    }
-
-    property QtObject target
-
-    enabled: target !== null || root.goBack
-
-    onClicked: {
-        if (root.goBack) {
-            print("go back")
-            var par = root.parent
-            while (parent) {
-                if (parent.__isFlowView) {
-                    parent.goBack()
-                    return
-                }
-                parent = parent.parent
-            }
-        } else {
-            target.trigger()
-        }
-    }
-
-    property bool goBack: false
 
 }
-
-/*##^##
-Designer {
-    D{i:0;height:63;width:80}
-}
-##^##*/

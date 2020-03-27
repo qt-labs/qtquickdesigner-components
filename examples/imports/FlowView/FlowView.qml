@@ -41,6 +41,8 @@ Item {
     property FlowTransition __forceTransition
 
     property list<FlowTransition> flowTransitions
+    property list<FlowDecision> flowDecisions
+    property list<FlowWildcard> flowWildcards
 
     property Item interaction: Item {
     }
@@ -52,6 +54,47 @@ Item {
         Pop
     }
 
+    property bool __blockHistory: false
+
+    property bool __isFlowView: true
+
+    function goBack() {
+        if (root.__history.length === 0)
+            return
+
+        var poppedItem = root.__history.pop()
+
+        root.__blockHistory = true
+        root.activatedItem = poppedItem
+        root.__activateItem()
+        root.__blockHistory = false
+
+
+        if (root.__history.length > 0)
+            root.lastItem = root.__history.slice(-1)[0]
+        else
+            root.lastItem = null
+    }
+
+    function __activateItem() {
+        if (!__isCompleted)
+            return
+
+        if (root.activatedItem === root.currentItem)
+            return;
+
+        if (root.activatedItem === root.nextItem)
+            return;
+
+        root.nextItem = root.activatedItem
+
+        for (var i = 0; i <  root.allChildren.length; ++i) {
+            if (root.allChildren[i] === root.activatedItem)
+                root.currentIndex = i
+        }
+
+    }
+
     default property alias item: stack.children
 
     property Item nextItem
@@ -60,6 +103,9 @@ Item {
     property Item activatedItem
     property Item lastItem
     property int currentIndex: 0
+
+    //property list<Item> __history
+    property var __history: []
 
     property int maxIndex: 0
 
@@ -79,24 +125,14 @@ Item {
     property bool __blockSchedule: false
 
     onActivatedItemChanged: {
-        if (!__isCompleted)
-            return
-
-        if (root.activatedItem === root.currentItem)
-            return;
-
-        root.nextItem = root.activatedItem
-
-        for (var i = 0; i <  root.allChildren.length; ++i) {
-            if (root.allChildren[i] === root.activatedItem)
-                root.currentIndex = i
-        }
+        root.__activateItem()
     }
 
     function resetCurrentIndex() {
         root.__blockSchedule = true
         root.lastItem = root.currentItem
-        //root.currentItem = root.nextItem
+        root.__history.push(root.lastItem)
+
         for (var i = 0; i <  root.allChildren.length; ++i) {
             if (root.allChildren[i] === root.currentItem)
                 root.currentIndex = i
@@ -187,7 +223,13 @@ Item {
 
         scheduleTransition()
 
-        root.lastItem = root.currentItem
+        if (!root.__blockHistory) {
+            root.lastItem = root.currentItem
+            if (!Array.isArray(root.__history))
+                root.__history = []
+
+            root.__history.push(root.lastItem)
+        }
 
         root.currentTransition.__start()
     }
@@ -233,8 +275,4 @@ Item {
     }
 }
 
-/*##^##
-Designer {
-    D{i:0;autoSize:true;height:480;width:640}
-}
-##^##*/
+

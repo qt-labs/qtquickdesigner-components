@@ -53,10 +53,7 @@ Rectangle {
             list: pageList
         }
         id: view
-        x: 3
-        y: -4
-        width: 1277
-        height: 727
+        anchors.fill: parent
 
         activatedItem: pageList.currentItem
 
