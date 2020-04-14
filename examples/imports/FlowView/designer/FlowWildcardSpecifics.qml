@@ -27,48 +27,32 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.10
+import QtQuick 2.1
+import HelperWidgets 2.0
+import QtQuick.Layouts 1.0
 
-MouseArea {
-    width: 40
-    height: 20
+Column {
+    anchors.left: parent.left
+    anchors.right: parent.right
 
-    id: root
+    Section {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        caption: qsTr("Outline Color")
 
-    function trigger() {
-        if (root.goBack) {
-            print("go back")
-            var par = root.parent
-            while (parent) {
-                if (parent.__isFlowView) {
-                    parent.goBack()
-                    return
-                }
-                parent = parent.parent
-            }
-        } else {
-            target.trigger()
+        ColorEditor {
+            backendValue: backendValues.color__AUX
+            supportGradient: false
         }
-    }
+   }
+   Section {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        caption: qsTr("Fill Color")
 
-    property Connections connections : Connections {
-        id: connections
-    }
-
-    property QtObject target
-
-    enabled: target !== null || root.goBack
-
-    onClicked: {
-        root.trigger()
-    }
-
-    property bool goBack: false
-
+        ColorEditor {
+            backendValue: backendValues.fillColor__AUX
+            supportGradient: false
+        }
+   }
 }
-
-/*##^##
-Designer {
-    D{i:0;height:63;width:80}
-}
-##^##*/
