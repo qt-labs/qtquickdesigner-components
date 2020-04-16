@@ -30,8 +30,8 @@
 import QtQuick 2.10
 
 MouseArea {
-    width: 40
-    height: 20
+    width: 80
+    height: 40
 
     id: root
 

@@ -38,53 +38,22 @@ Column {
     Section {
         anchors.left: parent.left
         anchors.right: parent.right
-        caption: qsTr("Outline Color")
+        caption: qsTr("Flow Item")
 
-        ColorEditor {
-            backendValue: backendValues.color__AUX
-            supportGradient: false
+        SectionLayout {
+            rows: 4
+            columns: 2
+
+            Label {
+                text: qsTr("Join Connections")
+                tooltip: qsTr("Join connections")
+            }
+            CheckBox {
+                backendValue: backendValues.joinConnection__AUX
+                Layout.fillWidth: true
+                text: backendValues.enabled
+            }
         }
-   }
-   Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Fill Color")
 
-        ColorEditor {
-            backendValue: backendValues.fillColor__AUX
-            supportGradient: false
-        }
-   }
-    Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Transition Parameters")
-
-         SectionLayout {
-             rows: 4
-             columns: 2
-
-             Label {
-                 text: qsTr("Line Width")
-                 tooltip: qsTr("Sets the margin, in pixels, around the text in the TextEdit..")
-             }
-             SpinBox {
-                 backendValue: backendValues.width__AUX
-                 maximumValue: 22
-                 minimumValue: 1
-             }
-
-             Label {
-                 visible: !textInputSection.isTextInput
-                 text: qsTr("Enabled")
-                 tooltip: qsTr("Sets the margin, in pixels, around the text in the TextEdit..")
-             }
-             CheckBox {
-                 Layout.fillWidth: true
-                 text: backendValues.enabled
-                 backendValue: backendValues.enabled
-             }
-
-         }
-   }
+    }
 }

@@ -159,6 +159,14 @@ Item {
             t.transitionView = root
         }
 
+        for (i = 0; i < root.flowTransitions.length; ++i) {
+            var t = root.flowTransitions[i]
+            if (root.checkInclude(t.from, root))
+                root.currentItem = t.to[0]
+        }
+
+        root.resetCurrentIndex()
+
         __setupCurrentItem()
         __isCompleted = true
     }
