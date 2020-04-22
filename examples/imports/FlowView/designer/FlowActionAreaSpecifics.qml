@@ -60,7 +60,7 @@ Column {
         anchors.right: parent.right
         caption: qsTr("FlowAction Parameters")
         SectionLayout {
-             rows: 1
+             rows: 2
              columns: 2
 
              Label {
@@ -71,6 +71,16 @@ Column {
                  Layout.fillWidth: true
                  text: backendValues.goBack
                  backendValue: backendValues.goBack
+             }
+
+             Label {
+                 text: qsTr("Event Ids")
+                 tooltip: qsTr("")
+             }
+             LineEdit {
+                 Layout.fillWidth: true
+                 text: backendValues.goBack
+                 backendValue: backendValues.eventIds
              }
 
         }

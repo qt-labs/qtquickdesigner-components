@@ -57,4 +57,16 @@ QtObject {
         root.target.trigger()
     }
 
+    property EventListener eventListener: EventListener {
+        id: eventListener
+        onTriggered: root.trigger()
+    }
+
+    property alias eventIds: eventListener.eventIds
 }
+
+/*##^##
+Designer {
+    D{i:0;formeditorZoom:0.8999999761581421}
+}
+##^##*/
