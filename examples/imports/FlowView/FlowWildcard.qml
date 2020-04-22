@@ -28,14 +28,33 @@
 ****************************************************************************/
 
 import QtQuick 2.10
+import EventSimulator 1.0
 
 QtObject {
     id: root
 
+    property list<FlowItem> whitelist
+    property list<FlowItem> blacklist
+
     property FlowTransition target
 
-    function trigger() {
+    property var transitionView: Item {}
 
+    function trigger() {
+        var cItem = root.transitionView.currentItem
+
+        if (cItem === undefined)
+            return
+
+        if (root.transitionView.checkInclude(root.blacklist, cItem))
+            return;
+
+        if (root.whitelist.length !== 0) {
+            if (!root.transitionView.checkInclude(root.whitelist, cItem))
+                return;
+        }
+
+        root.target.trigger()
     }
 
 }

@@ -154,6 +154,11 @@ Item {
             defaultTransition.transitionView = root
         }
 
+        for (i = 0; i < root.flowWildcards.length; ++i) {
+            var w = root.flowWildcards[i]
+            w.transitionView = root
+        }
+
         for (i = 0; i < root.flowTransitions.length; ++i) {
             var t = root.flowTransitions[i]
             t.transitionView = root

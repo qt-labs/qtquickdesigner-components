@@ -38,14 +38,68 @@ Column {
     Section {
         anchors.left: parent.left
         anchors.right: parent.right
+        caption: qsTr("Flow Wildcard")
+
+        SectionLayout {
+            rows: 3
+            columns: 2
+
+            Label {
+                text: qsTr("Event Ids")
+                tooltip: qsTr("")
+            }
+            LineEdit {
+                Layout.fillWidth: true
+                text: backendValues.goBack
+                backendValue: backendValues.eventIds
+            }
+
+            Label {
+                text: qsTr("Whitelist")
+            }
+            SecondColumnLayout {
+                EditableListView {
+                    id: whitelistView
+                    backendValue: backendValues.whitelist
+                    model: whitelistView.backendValue.expressionAsList
+                    Layout.fillWidth: true
+                    //typeFilter: "FlowView.FlowItem"
+
+                    onAdd: function(value) { whitelistView.backendValue.idListAdd(value) }
+                    onRemove: function(idx) { whitelistView.backendValue.idListRemove(idx) }
+                    onReplace: function (idx, value) { whitelistView.backendValue.idListReplace(idx, value) }
+                }
+            }
+            Label {
+                text: qsTr("Blacklist")
+            }
+            SecondColumnLayout {
+                EditableListView {
+                    id: blackListView
+                    backendValue: backendValues.blacklist
+                    model: blackListView.backendValue.expressionAsList
+                    Layout.fillWidth: true
+                    //typeFilter: "FlowView.FlowItem"
+
+                    onAdd: function(value) { blackListView.backendValue.idListAdd(value) }
+                    onRemove: function(idx) { blackListView.backendValue.idListRemove(idx) }
+                    onReplace: function (idx, value) { blackListView.backendValuet.idListReplace(idx, value) }
+                }
+            }
+        }
+    }
+
+    Section {
+        anchors.left: parent.left
+        anchors.right: parent.right
         caption: qsTr("Outline Color")
 
         ColorEditor {
             backendValue: backendValues.color__AUX
             supportGradient: false
         }
-   }
-   Section {
+    }
+    Section {
         anchors.left: parent.left
         anchors.right: parent.right
         caption: qsTr("Fill Color")
@@ -54,5 +108,5 @@ Column {
             backendValue: backendValues.fillColor__AUX
             supportGradient: false
         }
-   }
+    }
 }
