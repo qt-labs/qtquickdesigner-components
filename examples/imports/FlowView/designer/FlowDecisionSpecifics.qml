@@ -38,14 +38,35 @@ Column {
     Section {
         anchors.left: parent.left
         anchors.right: parent.right
+        caption: qsTr("Flow Decision")
+
+        SectionLayout {
+            rows: 1
+            columns: 2
+
+            Label {
+                text: qsTr("Dialog title")
+                tooltip: qsTr("Sets the title of the dialog.")
+            }
+            LineEdit {
+                backendValue: backendValues.dialogTitle
+                Layout.fillWidth: true
+            }
+
+        }
+    }
+
+    Section {
+        anchors.left: parent.left
+        anchors.right: parent.right
         caption: qsTr("Outline Color")
 
         ColorEditor {
             backendValue: backendValues.color__AUX
             supportGradient: false
         }
-   }
-   Section {
+    }
+    Section {
         anchors.left: parent.left
         anchors.right: parent.right
         caption: qsTr("Fill Color")
@@ -54,5 +75,5 @@ Column {
             backendValue: backendValues.fillColor__AUX
             supportGradient: false
         }
-   }
+    }
 }

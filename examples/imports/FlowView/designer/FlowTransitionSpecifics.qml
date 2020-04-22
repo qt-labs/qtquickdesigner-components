@@ -44,66 +44,94 @@ Column {
             backendValue: backendValues.color__AUX
             supportGradient: false
         }
-   }
+    }
+    Section {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        caption: qsTr("Transition")
+
+        SectionLayout {
+            Label {
+                text: qsTr("Condition")
+                tooltip: qsTr("Determines whether the transition is active or not.")
+            }
+            CheckBox {
+                Layout.fillWidth: true
+                text: qsTr("Transtion Active")
+                backendValue: backendValues.condition
+            }
+
+            Label {
+                text: qsTr("Question")
+                tooltip: qsTr("The transition will pop up dialog with the question")
+            }
+            LineEdit {
+                backendValue: backendValues.question
+                Layout.fillWidth: true
+            }
+        }
+    }
+
+
     Section {
         anchors.left: parent.left
         anchors.right: parent.right
         caption: qsTr("Transition Parameters")
 
-         SectionLayout {
-             rows: 4
-             columns: 2
-
-             Label {
-                 text: qsTr("Line Width")
-                 tooltip: qsTr("Sets the margin, in pixels, around the text in the TextEdit..")
-             }
-             SpinBox {
-                 backendValue: backendValues.width__AUX
-                 maximumValue: 22
-                 minimumValue: 1
-             }
+        SectionLayout {
+            rows: 4
+            columns: 2
 
             Label {
-                 text: qsTr("In Offset")
-                 tooltip: qsTr("Sets the margin, in pixels, around the text in the TextEdit..")
-             }
-             SpinBox {
-                 backendValue: backendValues.inOffset__AUX
-                 maximumValue: 128
-                 minimumValue: -128
-             }
+                text: qsTr("Line Width")
+                tooltip: qsTr("Sets the margin, in pixels, around the text in the TextEdit..")
+            }
+            SpinBox {
+                backendValue: backendValues.width__AUX
+                maximumValue: 22
+                minimumValue: 1
+            }
 
-             Label {
-                 text: qsTr("Out Offset")
-                 tooltip: qsTr("Sets the margin, in pixels, around the text in the TextEdit..")
-             }
-             SpinBox {
-                 backendValue: backendValues.outOffset__AUX
-                 maximumValue: 128
-                 minimumValue: -128
-             }
+            Label {
+                text: qsTr("In Offset")
+                tooltip: qsTr("Sets the margin, in pixels, around the text in the TextEdit..")
+            }
+            SpinBox {
+                backendValue: backendValues.inOffset__AUX
+                maximumValue: 128
+                minimumValue: -128
+            }
 
-             Label {
-                 text: qsTr("Break Offset")
-                 tooltip: qsTr("Sets the margin, in pixels, around the text in the TextEdit..")
-             }
-             SpinBox {
-                 backendValue: backendValues.breakPoint__AUX
-                 maximumValue: 100
-                 minimumValue: 0
-             }
+            Label {
+                text: qsTr("Out Offset")
+                tooltip: qsTr("Sets the margin, in pixels, around the text in the TextEdit..")
+            }
+            SpinBox {
+                backendValue: backendValues.outOffset__AUX
+                maximumValue: 128
+                minimumValue: -128
+            }
 
-             Label {
-                 text: qsTr("Dash Line")
-                 tooltip: qsTr("Sets the margin, in pixels, around the text in the TextEdit..")
-             }
-             CheckBox {
-                 Layout.fillWidth: true
-                 text: backendValues.dash__AUX.value
-                 backendValue: backendValues.dash__AUX
-             }
+            Label {
+                text: qsTr("Break Offset")
+                tooltip: qsTr("Sets the margin, in pixels, around the text in the TextEdit..")
+            }
+            SpinBox {
+                backendValue: backendValues.breakPoint__AUX
+                maximumValue: 100
+                minimumValue: 0
+            }
 
-         }
-   }
+            Label {
+                text: qsTr("Dash Line")
+                tooltip: qsTr("Sets the margin, in pixels, around the text in the TextEdit..")
+            }
+            CheckBox {
+                Layout.fillWidth: true
+                text: backendValues.dash__AUX.value
+                backendValue: backendValues.dash__AUX
+            }
+
+        }
+    }
 }

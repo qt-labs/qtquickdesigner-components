@@ -45,6 +45,10 @@ QtObject {
 
     property real progress: effect.progress
 
+    property bool condition: true
+
+    property string question
+
     function __start() {
         print("start " + this)
         root.effect.start()
@@ -76,16 +80,12 @@ QtObject {
     }
 
     function trigger() {
-        print("hmm")
-        if (root.from === null)
-            return;
-        if (root.to === null)
-            return;
+        var fromEmpty = root.from.length === 0
 
         if (to[0].isFlowDecision === true)
             to[0].trigger();
 
-        if (__checkInclude(root.from, transitionView.currentItem))
+        if (fromEmpty || __checkInclude(root.from, transitionView.currentItem))
             transitionView.gotoPage(root)
     }
 
