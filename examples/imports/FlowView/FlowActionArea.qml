@@ -28,6 +28,7 @@
 ****************************************************************************/
 
 import QtQuick 2.10
+import EventSimulator 1.0
 
 MouseArea {
     width: 80
@@ -65,6 +66,22 @@ MouseArea {
 
     property bool goBack: false
 
+    property alias eventIds: eventListener.eventIds
+
+    function __receiveEvent(parameters) {
+        var flowItem = root.parent
+        var flow = flowItem.parent
+
+        if (flow.currentItem !== flowItem)
+            return;
+
+        root.trigger()
+    }
+
+    EventListener {
+        id: eventListener
+        onTriggered: root.__receiveEvent(parameters)
+    }
 }
 
 /*##^##
