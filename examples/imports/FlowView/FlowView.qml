@@ -95,7 +95,7 @@ Item {
 
     }
 
-    default property alias item: stack.children
+    default property alias item: stack.data
 
     property Item nextItem
 
