@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2018 The Qt Company Ltd.
+** Copyright (C) 2020 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -27,24 +27,30 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.0
-import QtQuick.Studio.EventSystem 1.0
-import QtQuick.Studio.EventSimulator 1.0
+#include <QtQml/qqmlextensionplugin.h>
 
-QtObject {
-    id: simulator
-    property bool active: true
+QT_BEGIN_NAMESPACE
 
-    property Timer timer: Timer {
-        interval: 100
-        onTriggered: {
-            EventSimulator.show()
-        }
-    }
+class QtStudioFlowViewPlugin: public QQmlExtensionPlugin
+{
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID QQmlExtensionInterface_iid)
 
-    Component.onCompleted: {
-        EventSystem.init(Qt.resolvedUrl("EventListModel.qml"))
-        if (simulator.active)
-            timer.start()
-    }
+public:
+    QtStudioFlowViewPlugin(QObject *parent = nullptr);
+    void registerTypes(const char *uri) override;
+};
+
+QtStudioFlowViewPlugin::QtStudioFlowViewPlugin(QObject *parent)
+    : QQmlExtensionPlugin(parent)
+{
+
 }
+
+void QtStudioFlowViewPlugin::registerTypes(const char *)
+{
+}
+
+QT_END_NAMESPACE
+
+#include "qtstudioflowviewplugin.moc"

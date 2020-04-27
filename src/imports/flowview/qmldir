@@ -1,3 +1,4 @@
+module FlowView
 DefaultFlowEffect 1.0 DefaultFlowEffect.qml
 SwipeInteraction 1.0 SwipeInteraction.qml
 FlowEffect 1.0 FlowEffect.qml
