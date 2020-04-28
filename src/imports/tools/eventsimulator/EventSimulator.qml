@@ -35,6 +35,16 @@ import QtQuick.Studio.EventSystem 1.0
 QtObject {
     id: root
     property ListModel model
+    property font font: {
+        family: "Verdana"
+        bold: true
+    }
+
+    property color cellColor: "#323244"
+    property color borderColor: "black"
+    property color textColor: "white"
+    property color backgroundColor: "darkgrey"
+    property alias listView: list
 
     function show(x, y, width, height)
     {
@@ -60,17 +70,22 @@ QtObject {
     property Window eventDialog: Window {
         width: 500
         height: 1280
+        color: root.backgroundColor
+
         ListView {
+            id: list
             model: EventSystem.model
             anchors.fill: parent
-            highlight: Rectangle { color: "lightsteelblue"; radius: 5 }
+            spacing: 2
+
             delegate:
                 Rectangle {
                     id: wrapper
-                    width: parent.width
+                    width: 200
                     height: 100
-                    border.color: "grey"
+                    border.color: root.borderColor
                     border.width: 1
+                    color: root.cellColor
 
                     MouseArea {
                          anchors.fill: parent
@@ -79,20 +94,20 @@ QtObject {
                          }
                     }
                     Column {
-                        spacing: 16
+                        spacing: 5
                         Text {
-                            width: 200
+                            width: 190
+                            color: root.textColor
                             text: eventId
-                            color: "grey"
-
+                            font.family: root.font.family
                         }
                         Text {
-                            width: 200
+                            width: 190
+                            color: root.textColor
                             text: "[" + shortcut +"]"
-                            color: "grey"
+                            font.family: root.font.family
                         }
                     }
-                    color: "lightgrey"
                     Shortcut {
                         sequence: shortcut
                         onActivated : {
