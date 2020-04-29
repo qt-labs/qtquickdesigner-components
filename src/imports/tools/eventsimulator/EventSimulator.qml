@@ -34,17 +34,17 @@ import QtQuick.Studio.EventSystem 1.0
 
 QtObject {
     id: root
-    property ListModel __filteredModel: ListModel{}
 
+    property ListModel __filteredModel: ListModel{}
     property font font: {
         family: "Verdana"
         bold: true
     }
 
-    property color cellColor: "#323244"
-    property color borderColor: "black"
-    property color textColor: "white"
-    property color backgroundColor: "darkgrey"
+    property alias cellColor: simulatorWindow.cellColor
+    property alias borderColor: simulatorWindow.borderColor
+    property alias textColor: simulatorWindow.textColor
+    property alias backgroundColor: simulatorWindow.backgroundColor
     property alias listView: list
 
     function show(x, y, width, height)
@@ -82,9 +82,20 @@ QtObject {
     }
 
     property Window eventDialog: Window {
+        id: simulatorWindow
         width: 500
         height: 1280
-        color: root.backgroundColor
+        color: backgroundColor
+
+        property color cellColor: defaultPalette.mid
+        property color borderColor: defaultPalette.dark
+        property color textColor: defaultPalette.text
+        property color backgroundColor: defaultPalette.window
+
+        SystemPalette {
+            id: defaultPalette
+            colorGroup: SystemPalette.Active
+        }
 
         Component.onCompleted: {
             // call the filter with an empty string to populate the list after component is created
