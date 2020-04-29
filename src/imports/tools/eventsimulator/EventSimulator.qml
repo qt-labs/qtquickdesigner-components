@@ -34,7 +34,8 @@ import QtQuick.Studio.EventSystem 1.0
 
 QtObject {
     id: root
-    property ListModel model
+    property ListModel __filteredModel: ListModel{}
+
     property font font: {
         family: "Verdana"
         bold: true
@@ -67,20 +68,54 @@ QtObject {
         eventDialog.lower()
     }
 
+    function __filterModel(idFilter) {
+        __filteredModel.clear()
+
+        // reset the model when the filter is empty
+        var alwaysAdd = idFilter === ""
+
+        for (var i = 0; i < EventSystem.model.count; i++) {
+            if (alwaysAdd || EventSystem.model.get(i).eventId.startsWith(idFilter)) {
+                __filteredModel.append(EventSystem.model.get(i))
+            }
+        }
+    }
+
     property Window eventDialog: Window {
         width: 500
         height: 1280
         color: root.backgroundColor
 
+        Component.onCompleted: {
+            // call the filter with an empty string to populate the list after component is created
+            root.__filterModel("")
+        }
+
+        TextInput {
+            id: filterInput
+            text: "Filter..."
+            selectByMouse: true
+            color: root.textColor
+
+            onTextEdited: {
+                root.__filterModel(this.text);
+            }
+
+            onEditingFinished: {
+                list.focus = true
+            }
+        }
+
         ListView {
             id: list
-            model: EventSystem.model
-            anchors.fill: parent
+            model: root.__filteredModel
+            anchors.top: filterInput.bottom
+            anchors.bottom: parent.bottom
             spacing: 2
 
             delegate:
                 Rectangle {
-                    id: wrapper
+                    id: delegateItem
                     width: 200
                     height: 100
                     border.color: root.borderColor
