@@ -28,7 +28,7 @@
 ****************************************************************************/
 
 import QtQuick 2.10
-import EventSimulator 1.0
+import QtQuick.Studio.EventSystem 1.0
 
 QtObject {
     id: root
