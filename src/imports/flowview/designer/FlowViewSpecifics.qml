@@ -38,7 +38,7 @@ Column {
     Section {
         anchors.left: parent.left
         anchors.right: parent.right
-        caption: qsTr("Flow View Parameters")
+        caption: qsTr("Flow View")
 
         SectionLayout {
             rows: 1
@@ -99,6 +99,25 @@ Column {
         ColorEditor {
             backendValue: backendValues.blockColor__AUX
             supportGradient: false
+        }
+    }
+    Section {
+        visible: !anchorBackend.hasParent
+        anchors.left: parent.left
+        anchors.right: parent.right
+        caption: qsTr("Flow View Parameters")
+
+        SectionLayout {
+            rows: 1
+            Label {
+                text: qsTr("Transition Radius")
+                tooltip: qsTr("The corner radius of the transitions")
+            }
+            SpinBox {
+                backendValue: backendValues.transitionRadius__AUX
+                minimumValue: 0
+                maximumValue: 150
+            }
         }
     }
 }

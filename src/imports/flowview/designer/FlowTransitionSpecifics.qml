@@ -131,7 +131,15 @@ Column {
                 text: backendValues.dash__AUX.value
                 backendValue: backendValues.dash__AUX
             }
-
+             Label {
+                text: qsTr("Radius")
+                tooltip: qsTr("The corner radius of the transition.")
+            }
+            SpinBox {
+                backendValue: backendValues.radius__AUX
+                minimumValue: 0
+                maximumValue: 150
+            }
         }
     }
 }
