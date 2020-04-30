@@ -47,25 +47,23 @@ QtObject {
     property alias backgroundColor: simulatorWindow.backgroundColor
     property alias listView: list
 
-    function show(x, y, width, height)
-    {
-        if (x !== undefined)
-            eventDialog.x = x
-        if (y !== undefined)
-            eventDialog.y = y
-        if (width !== undefined)
-            eventDialog.width = width
-        if (height !== undefined)
-            eventDialog.height = height
+    property alias x: simulatorWindow.x
+    property alias y: simulatorWindow.y
 
-        eventDialog.show()
-        eventDialog.raise()
+    property alias width: simulatorWindow.width
+    property alias height: simulatorWindow.height
+
+
+    function show()
+    {
+        simulatorWindow.show()
+        simulatorWindow.raise()
     }
 
     function hide()
     {
-        eventDialog.hide()
-        eventDialog.lower()
+        simulatorWindow.hide()
+        simulatorWindow.lower()
     }
 
     function __filterModel(idFilter) {
