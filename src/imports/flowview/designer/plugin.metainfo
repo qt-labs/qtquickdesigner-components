@@ -21,6 +21,26 @@ MetaInfo {
         }
     }
     Type {
+           name: "FlowView.FlowItem"
+           icon: ":/qtquickplugin/images/item-icon16.png"
+
+           Hints {
+               visibleInNavigator: true
+               canBeDroppedInNavigator: true
+               canBeDroppedInFormEditor: true
+               canBeContainer: false
+               visibleInLibrary: true
+               visibleInNavigator: true
+           }
+             ItemLibraryEntry {
+               name: "Flow Item"
+               category: "Flow View"
+               libraryIcon: ":/qtquickplugin/images/item-icon.png"
+               version: "1.0"
+               requiredImport: "FlowView"
+           }
+    }
+    Type {
         name: "FlowView.FlowDecision"
         icon: ":/qtquickplugin/images/item-icon16.png"
 

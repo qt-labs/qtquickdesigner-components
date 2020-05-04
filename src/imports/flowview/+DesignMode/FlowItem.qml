@@ -27,61 +27,30 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.1
-import HelperWidgets 2.0
-import QtQuick.Layouts 1.0
 
-Column {
-    anchors.left: parent.left
-    anchors.right: parent.right
+import QtQuick 2.12
 
-    Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Flow Item")
 
-        SectionLayout {
-            rows: 1
-            columns: 2
+Item {
+    id: flowItem
 
-            Label {
-                text: qsTr("Loader Source")
-            }
+    width: 400
+    height: 400
 
-            SecondColumnLayout {
-                UrlChooser {
-                    Layout.fillWidth: true
-                    backendValue: backendValues.loaderSource
-                    filter: "*.ui.qml"
-                }
+    property var flowView: Item {}
 
-                ExpandingSpacer {
-                }
-            }
-        }
+    property alias loaderSource: loader.source
 
+    property bool active: {
+       return true
     }
 
-    Section {
-        visible: anchorBackend.hasParent
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Flow View")
-
-        SectionLayout {
-            rows: 4
-            columns: 2
-
-            Label {
-                text: qsTr("Join Connections")
-                tooltip: qsTr("Join connections")
-            }
-            CheckBox {
-                backendValue: backendValues.joinConnection__AUX
-                Layout.fillWidth: true
-                text: backendValues.enabled
-            }
+    Loader {
+        id: loader
+        active: flowItem.active
+        onLoaded: {
+            flowItem.width = loader.item.childrenRect.width
+            flowItem.height = loader.item.childrenRect.height
         }
-
     }
 }

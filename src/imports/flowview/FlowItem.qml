@@ -32,4 +32,31 @@ import QtQuick 2.12
 
 
 Item {
+    id: flowItem
+
+    width: 400
+    height: 400
+
+    property var flowView: Item {}
+
+    property alias loaderSource: loader.source
+
+    property bool active: {
+        if (flowItem.flowView !== null
+                && flowItem.flowView.currentItem !== undefined
+                && flowItem.flowView.currentItem === flowItem)
+            return true
+
+        if (flowItem.flowView !== null
+                && flowItem.flowView.nextItem !== undefined
+                && flowItem.flowView.nextItem === flowItem)
+            return true
+
+        return false
+    }
+
+    Loader {
+        id: loader
+        active: flowItem.active
+    }
 }

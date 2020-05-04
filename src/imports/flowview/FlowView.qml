@@ -147,6 +147,7 @@ Item {
 
         for (var i = 0; i < stack.children.length; ++i) {
             root.allChildren.push(stack.children[i])
+            stack.children[i].flowView = root
         }
 
         /* Assign view to all flowTransitions */
