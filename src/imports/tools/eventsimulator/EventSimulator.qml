@@ -121,6 +121,7 @@ QtObject {
                 anchors.fill: inputContainer
 
                 selectByMouse: true
+                KeyNavigation.tab: list
 
                 onTextEdited: {
                     root.__filterModel(this.text);
