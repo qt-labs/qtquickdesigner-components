@@ -146,14 +146,15 @@ QtObject {
         }
         ListView {
             id: list
-            model: root.__filteredModel
             anchors {
                 top: inputContainer.bottom
                 left: inputContainer.left
                 bottom: parent.bottom
             }
-
+            focus: true
             spacing: 2
+
+            model: root.__filteredModel
             delegate: EventSimulatorDelegate { }
 
         }

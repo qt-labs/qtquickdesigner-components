@@ -39,12 +39,14 @@ Rectangle {
         color: simulatorWindow.borderColor
         width: 1
     }
+
     MouseArea {
         anchors.fill: parent
         onDoubleClicked: {
             EventSystem.triggerEvent(eventId)
         }
     }
+
     Column {
         anchors.centerIn: parent
         spacing: 5
@@ -56,6 +58,7 @@ Rectangle {
             verticalAlignment: Text.AlignVCenter
             font.family: root.font.family
         }
+
         Text {
             width: 190
             color: root.textColor
@@ -65,8 +68,10 @@ Rectangle {
             font.family: root.font.family
         }
     }
+
     Shortcut {
         sequence: shortcut
+        enabled: list.focus
         onActivated : {
             EventSystem.triggerEvent(eventId)
         }
