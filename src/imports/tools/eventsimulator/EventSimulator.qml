@@ -109,7 +109,7 @@ QtObject {
                 color: simulatorWindow.borderColor
                 width: 1
             }
-            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.horizontalCenter: simulatorWindow.horizontalCenter
 
             TextInput {
                 id: filterInput
@@ -139,52 +139,10 @@ QtObject {
                 left: inputContainer.left
                 bottom: parent.bottom
             }
+
             spacing: 2
+            delegate: EventSimulatorDelegate { }
 
-            delegate:
-            Rectangle {
-                id: delegateItem
-                width: 190
-                height: 60
-                color: simulatorWindow.cellColor
-                border {
-                    color: simulatorWindow.borderColor
-                    width: 1
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onDoubleClicked: {
-                        EventSystem.triggerEvent(eventId)
-                    }
-                }
-                Column {
-                    anchors.centerIn: parent
-                    spacing: 5
-                    Text {
-                        width: 190
-                        color: root.textColor
-                        text: eventId
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
-                        font.family: root.font.family
-                    }
-                    Text {
-                        width: 190
-                        color: root.textColor
-                        text: "[" + shortcut +"]"
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
-                        font.family: root.font.family
-                    }
-                }
-                Shortcut {
-                    sequence: shortcut
-                    onActivated : {
-                        EventSystem.triggerEvent(eventId)
-                    }
-                }
-            }
         }
     }
 }
