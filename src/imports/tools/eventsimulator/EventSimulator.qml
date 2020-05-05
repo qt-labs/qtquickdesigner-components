@@ -104,6 +104,7 @@ QtObject {
             color: defaultPalette.shadow
             height: 25
             width: 190
+            x: 5
 
             border {
                 color: simulatorWindow.borderColor
@@ -146,6 +147,7 @@ QtObject {
         }
         ListView {
             id: list
+            x: 5
             anchors {
                 top: inputContainer.bottom
                 left: inputContainer.left
