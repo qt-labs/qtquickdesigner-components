@@ -81,12 +81,12 @@ QtObject {
 
     property Window eventDialog: Window {
         id: simulatorWindow
-        width: 500
+        width: 200
         height: 1280
         color: backgroundColor
 
         property color cellColor: defaultPalette.mid
-        property color borderColor: defaultPalette.dark
+        property color borderColor: defaultPalette.light
         property color textColor: defaultPalette.text
         property color backgroundColor: defaultPalette.window
 
@@ -99,66 +99,92 @@ QtObject {
             // call the filter with an empty string to populate the list after component is created
             root.__filterModel("")
         }
+        Rectangle {
+            id: inputContainer
+            color: defaultPalette.shadow
+            height: 25
+            width: 190
 
-        TextInput {
-            id: filterInput
-            text: "Filter..."
-            selectByMouse: true
-            color: root.textColor
-
-            onTextEdited: {
-                root.__filterModel(this.text);
+            border {
+                color: simulatorWindow.borderColor
+                width: 1
             }
+            anchors.horizontalCenter: parent.horizontalCenter
 
-            onEditingFinished: {
-                list.focus = true
+            TextInput {
+                id: filterInput
+                text: qsTr("Filter...")
+                color: root.textColor
+
+                leftPadding: 5
+                verticalAlignment: Text.AlignVCenter
+                anchors.fill: inputContainer
+
+                selectByMouse: true
+
+                onTextEdited: {
+                    root.__filterModel(this.text);
+                }
+
+                onEditingFinished: {
+                    list.focus = true
+                }
             }
         }
-
         ListView {
             id: list
             model: root.__filteredModel
-            anchors.top: filterInput.bottom
-            anchors.bottom: parent.bottom
+            anchors {
+                top: inputContainer.bottom
+                left: inputContainer.left
+                bottom: parent.bottom
+            }
             spacing: 2
 
             delegate:
-                Rectangle {
-                    id: delegateItem
-                    width: 200
-                    height: 100
-                    border.color: root.borderColor
-                    border.width: 1
-                    color: root.cellColor
+            Rectangle {
+                id: delegateItem
+                width: 190
+                height: 60
+                color: simulatorWindow.cellColor
+                border {
+                    color: simulatorWindow.borderColor
+                    width: 1
+                }
 
-                    MouseArea {
-                         anchors.fill: parent
-                         onDoubleClicked: {
-                            EventSystem.triggerEvent(eventId)
-                         }
-                    }
-                    Column {
-                        spacing: 5
-                        Text {
-                            width: 190
-                            color: root.textColor
-                            text: eventId
-                            font.family: root.font.family
-                        }
-                        Text {
-                            width: 190
-                            color: root.textColor
-                            text: "[" + shortcut +"]"
-                            font.family: root.font.family
-                        }
-                    }
-                    Shortcut {
-                        sequence: shortcut
-                        onActivated : {
-                            EventSystem.triggerEvent(eventId)
-                        }
+                MouseArea {
+                    anchors.fill: parent
+                    onDoubleClicked: {
+                        EventSystem.triggerEvent(eventId)
                     }
                 }
+                Column {
+                    anchors.centerIn: parent
+                    spacing: 5
+                    Text {
+                        width: 190
+                        color: root.textColor
+                        text: eventId
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                        font.family: root.font.family
+                    }
+                    Text {
+                        width: 190
+                        color: root.textColor
+                        text: "[" + shortcut +"]"
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                        font.family: root.font.family
+                    }
+                }
+                Shortcut {
+                    sequence: shortcut
+                    onActivated : {
+                        EventSystem.triggerEvent(eventId)
+                    }
+                }
+            }
         }
     }
 }
