@@ -130,6 +130,18 @@ QtObject {
                 onEditingFinished: {
                     list.focus = true
                 }
+
+                onActiveFocusChanged: {
+                    if (focus == true) {
+                        if (text === "Filter...") {
+                            filterInput.clear()
+                        }
+                    } else {
+                        if (text === "") {
+                            text = qsTr("Filter...")
+                        }
+                    }
+                }
             }
         }
         ListView {
