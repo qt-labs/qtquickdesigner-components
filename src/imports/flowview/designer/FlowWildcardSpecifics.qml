@@ -63,7 +63,7 @@ Column {
                     backendValue: backendValues.whitelist
                     model: whitelistView.backendValue.expressionAsList
                     Layout.fillWidth: true
-                    //typeFilter: "FlowView.FlowItem"
+                    typeFilter: "FlowView.FlowItem"
 
                     onAdd: function(value) { whitelistView.backendValue.idListAdd(value) }
                     onRemove: function(idx) { whitelistView.backendValue.idListRemove(idx) }
@@ -79,7 +79,7 @@ Column {
                     backendValue: backendValues.blacklist
                     model: blackListView.backendValue.expressionAsList
                     Layout.fillWidth: true
-                    //typeFilter: "FlowView.FlowItem"
+                    typeFilter: "FlowView.FlowItem"
 
                     onAdd: function(value) { blackListView.backendValue.idListAdd(value) }
                     onRemove: function(idx) { blackListView.backendValue.idListRemove(idx) }
