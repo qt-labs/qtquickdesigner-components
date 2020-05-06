@@ -234,6 +234,15 @@ Item {
         if (root.__blockSchedule)
             return
 
+        if (root.nextItem.stateChangeTarget !== undefined) {
+            var itemVar = root.nextItem.stateChangeTarget
+            var stateVar = root.nextItem.targetState
+            itemVar.state = stateVar
+            for (var i = 0; i <  root.allChildren.length; ++i) {
+                if (root.allChildren[i] === itemVar)
+                    root.currentIndex = i
+            }
+        }
 
         scheduleTransition()
 

@@ -50,7 +50,6 @@ QtObject {
     property string question
 
     function __start() {
-        print("start " + this)
         root.effect.start()
     }
 
@@ -85,7 +84,16 @@ QtObject {
         if (to[0].isFlowDecision === true)
             to[0].trigger();
 
-        if (fromEmpty || __checkInclude(root.from, transitionView.currentItem))
+        var stateChanger = false
+
+        if (root.from[0] !== undefined)
+            stateChanger = root.from[0].stateChangeTarget !== undefined
+
+        if (stateChanger) {
+            root.to[0].state =root.to[0].defaultState
+        }
+
+        if (stateChanger || fromEmpty || __checkInclude(root.from, transitionView.currentItem))
             transitionView.gotoPage(root)
     }
 
@@ -103,10 +111,3 @@ QtObject {
         onFinished: root.finished
     }
 }
-
-
-/*##^##
-Designer {
-    D{i:0;autoSize:true;height:480;width:640}
-}
-##^##*/

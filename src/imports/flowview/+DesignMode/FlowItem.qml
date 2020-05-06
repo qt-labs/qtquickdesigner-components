@@ -39,7 +39,29 @@ Item {
 
     property var flowView: Item {}
 
+    property string __designer_url__
+
     property alias loaderSource: loader.source
+
+    property var stateChangeTarget: "none"
+
+    onStateChangeTargetChanged: {
+        loader.source = stateChangeTarget['__designer_url__']
+        loader.item.state = flowItem.targetState
+        flowItem.width = flowItem.stateChangeTarget.width
+        flowItem.height = flowItem.stateChangeTarget.height
+    }
+
+
+    property string targetState
+
+    onTargetStateChanged: {
+        loader.item.state = flowItem.targetState
+    }
+
+    Text {
+        text: flowItem.targetState
+    }
 
     property bool active: {
        return true

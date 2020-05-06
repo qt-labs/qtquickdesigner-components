@@ -41,6 +41,12 @@ Item {
 
     property alias loaderSource: loader.source
 
+    property var stateChangeTarget
+
+    property string targetState
+
+    property string defaultState
+
     property bool active: {
         if (flowItem.flowView !== null
                 && flowItem.flowView.currentItem !== undefined
@@ -58,5 +64,40 @@ Item {
     Loader {
         id: loader
         active: flowItem.active
+    }
+
+
+    Component.onCompleted: {
+
+        flowItem.defaultState = flowItem.state
+        var itemVar
+        var i
+        if (flowItem.stateChangeTarget === undefined) {
+
+            for (i = 0; i < flowItem.children.length; ++i) {
+                itemVar = flowItem.children[i]
+                if (itemVar.isActionArea === true
+                        && !itemVar.fromStateChange) {
+                    print("here")
+                    print(itemVar)
+                    print(flowItem.state)
+                    itemVar.activeState = flowItem.state
+                }
+
+            }
+        } else {
+            for (i = 0; i < flowItem.children.length; ++i) {
+                itemVar = flowItem.children[i]
+                if (itemVar.isActionArea === true) {
+                    print("here state")
+                    print(flowItem.stateChangeTarget)
+                    print(flowItem.targetState)
+                    print(itemVar)
+                    itemVar.fromStateChange = true
+                    itemVar.activeState = flowItem.targetState
+                    itemVar.parent = flowItem.stateChangeTarget
+                }
+            }
+        }
     }
 }

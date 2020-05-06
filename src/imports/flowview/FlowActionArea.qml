@@ -37,15 +37,22 @@ MouseArea {
     id: root
 
     function trigger() {
+
+        var one = root.activeState
+        var two = root.parent.state
+
+        if (one !== two)
+            return
+
         if (root.goBack) {
             print("go back")
             var par = root.parent
-            while (parent) {
-                if (parent.__isFlowView) {
-                    parent.goBack()
+            while (par) {
+                if (par.__isFlowView) {
+                    par.goBack()
                     return
                 }
-                parent = parent.parent
+                par = par.parent
             }
         } else {
             target.trigger()
@@ -57,6 +64,11 @@ MouseArea {
     }
 
     property QtObject target
+
+    readonly property bool isActionArea: true
+    property bool fromStateChange: false
+
+    property string activeState: ""
 
     enabled: target !== null || root.goBack
 
@@ -83,9 +95,3 @@ MouseArea {
         onTriggered: root.__receiveEvent(parameters)
     }
 }
-
-/*##^##
-Designer {
-    D{i:0;height:63;width:80}
-}
-##^##*/

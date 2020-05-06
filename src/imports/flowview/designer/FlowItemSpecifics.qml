@@ -41,8 +41,41 @@ Column {
         caption: qsTr("Flow Item")
 
         SectionLayout {
-            rows: 1
+            rows: 2
             columns: 2
+
+            Label {
+                text: qsTr("State Change Target")
+                tooltip: qsTr("Defines the target Flow Item of which the state is changed.")
+            }
+            SecondColumnLayout {
+                ItemFilterComboBox {
+                    typeFilter: "FlowView.FlowItem"
+                    validator: RegExpValidator { regExp: /(^$|^[a-z_]\w*)/ }
+                    backendValue: backendValues.stateChangeTarget
+                    Layout.fillWidth: true
+                }
+
+                ExpandingSpacer {
+                }
+            }
+
+            Label {
+                text: qsTr("Target State")
+            }
+
+            SecondColumnLayout {
+
+                ComboBox {
+                    Layout.fillWidth: true
+                    backendValue: backendValues.targetState
+                    model: allStatesForId(backendValues.stateChangeTarget.expression)
+                    valueType: ComboBox.String
+                }
+
+                ExpandingSpacer {
+                }
+            }
 
             Label {
                 text: qsTr("Loader Source")
