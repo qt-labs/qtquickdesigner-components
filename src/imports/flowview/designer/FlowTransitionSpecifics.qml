@@ -131,12 +131,60 @@ Column {
                 text: backendValues.dash__AUX.value
                 backendValue: backendValues.dash__AUX
             }
-             Label {
+
+            Label {
+                text: qsTr("Type")
+                tooltip: qsTr("The transition type.")
+            }
+            ComboBox {
+                id: typeComboBox
+                valueType: ComboBox.ValueType.Integer
+                backendValue: backendValues.type__AUX
+                implicitWidth: 180
+                model: [ "Default", "Bezier" ]
+                manualMapping: true
+
+                property bool block: false
+
+                onValueFromBackendChanged: {
+                    if (!__isCompleted)
+                        return;
+
+                    block = true
+
+                    currentIndex = backendValues.type__AUX.value
+
+                    block = false
+                }
+
+                onCurrentIndexChanged: {
+                    if (!__isCompleted)
+                        return;
+
+                    if (block)
+                        return;
+
+                    backendValues.type__AUX.value = currentIndex
+                }
+            }
+
+            Label {
                 text: qsTr("Radius")
                 tooltip: qsTr("The corner radius of the transition.")
             }
             SpinBox {
+                enabled: typeComboBox.currentIndex === 0
                 backendValue: backendValues.radius__AUX
+                minimumValue: 0
+                maximumValue: 150
+            }
+            Label {
+                text: qsTr("Bezier Factor")
+                tooltip: qsTr("Modifies the position of the control points used for bezier curve.")
+            }
+            SpinBox {
+                enabled: typeComboBox.currentIndex === 1
+                backendValue: backendValues.bezier__AUX
                 minimumValue: 0
                 maximumValue: 150
             }
