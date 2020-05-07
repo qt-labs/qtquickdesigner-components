@@ -69,6 +69,9 @@ Item {
 
     Component.onCompleted: {
 
+        flowItem.x = 0
+        flowItem.y = 0
+
         flowItem.defaultState = flowItem.state
         var itemVar
         var i
