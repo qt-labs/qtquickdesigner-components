@@ -9,6 +9,8 @@ FlowSlideDownEffect 1.0 FlowSlideDownEffect.qml
 FlowSlideLeftEffect 1.0 FlowSlideLeftEffect.qml
 FlowSlideRightEffect 1.0 FlowSlideRightEffect.qml
 FlowSlideUpEffect 1.0 FlowSlideUpEffect.qml
+FlowMoveEffect 1.0 FlowMoveEffect.qml
+FlowPushEffect 1.0 FlowPushEffect.qml
 FlowTransition 1.0 FlowTransition.qml
 FlowTransitionList 1.0 FlowTransitionList.qml
 FlowView 1.0 FlowView.qml

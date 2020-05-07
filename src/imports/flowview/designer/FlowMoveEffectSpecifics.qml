@@ -33,6 +33,7 @@ import QtQuick.Layouts 1.0
 import QtGraphicalEffects 1.1
 import StudioTheme 1.0 as StudioTheme
 
+
 Column {
     anchors.left: parent.left
     anchors.right: parent.right
@@ -40,4 +41,34 @@ Column {
     FlowEffectSection {
 
     }
+
+    Section {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        caption: qsTr("Move Effect")
+
+        SectionLayout {
+            rows: 1
+            columns: 2
+
+            Label {
+                text: qsTr("Direction")
+                tooltip: qsTr("Sets the direction of the effect")
+            }
+
+            SecondColumnLayout {
+                ComboBox {
+                    useInteger: true
+                    backendValue: backendValues.direction
+                    implicitWidth: 180
+                    model:  ["FromLeft", "FromRight", "FromTop", "FromBottom"]
+                }
+                ExpandingSpacer {
+
+                }
+            }
+
+        }
+    }
 }
+

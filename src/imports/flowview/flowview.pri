@@ -6,6 +6,7 @@ AUX_QML_FILES += \
     $$PWD/FlowFadeEffect.qml \
     $$PWD/FlowItem.qml \
     $$PWD/+DesignMode/FlowItem.qml \
+    $$PWD/FlowPushEffect.qml \
     $$PWD/FlowPushLeftEffect.qml \
     $$PWD/FlowPushRightEffect.qml \
     $$PWD/FlowPushUpEffect.qml \
@@ -13,6 +14,7 @@ AUX_QML_FILES += \
     $$PWD/FlowSlideLeftEffect.qml \
     $$PWD/FlowSlideRightEffect.qml \
     $$PWD/FlowSlideUpEffect.qml \
+    $$PWD/FlowMoveEffect.qml \
     $$PWD/FlowTransition.qml \
     $$PWD/FlowTransitionList.qml \
     $$PWD/FlowView.qml \
@@ -24,4 +26,7 @@ AUX_QML_FILES += \
     $$PWD/designer/FlowItemSpecifics.qml \
     $$PWD/designer/FlowTransitionSpecifics.qml \
     $$PWD/designer/FlowViewSpecifics.qml \
-    $$PWD/designer/FlowWildcardSpecifics.qml
+    $$PWD/designer/FlowWildcardSpecifics.qml \
+    $$PWD/designer/FlowEffectSection.qml \
+    $$PWD/designer/FlowPushEffectSpecifics.qml \
+    $$PWD/designer/FlowMoveEffectSpecifics.qml

@@ -33,11 +33,38 @@ import QtQuick.Layouts 1.0
 import QtGraphicalEffects 1.1
 import StudioTheme 1.0 as StudioTheme
 
-Column {
+Section {
     anchors.left: parent.left
     anchors.right: parent.right
+    caption: qsTr("Transition Effect")
 
-    FlowEffectSection {
+    SectionLayout {
+        rows: 2
+        columns: 2
 
+        Label {
+            text: qsTr("Duration")
+            tooltip: qsTr("Sets the duration of the effect")
+        }
+        SpinBox {
+            backendValue: backendValues.duration
+            maximumValue: 10000
+            minimumValue: 0
+        }
+        Label {
+            visible: section.showEasingCurve
+            text: qsTr("Easing Curve")
+            tooltip: qsTr("Define custom easing curve")
+        }
+
+        BoolButtonRowButton {
+            visible: section.showEasingCurve
+            buttonIcon: StudioTheme.Constants.curveDesigner
+            EasingCurveEditor {
+                id: easingCurveEditor
+                modelNodeBackendProperty: modelNodeBackend
+            }
+            onClicked: easingCurveEditor.runDialog()
+        }
     }
 }
