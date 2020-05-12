@@ -188,6 +188,26 @@ Column {
                 minimumValue: 0
                 maximumValue: 150
             }
+
+            Label {
+                text: qsTr("Label Position")
+                tooltip: qsTr("Modifies the position of the label.")
+            }
+            SpinBox {
+                backendValue: backendValues.labelPosition__AUX
+                minimumValue: 0
+                maximumValue: 100
+                decimals: 2
+            }
+            Label {
+                text: qsTr("Label Flip Side")
+                tooltip: qsTr("Flips the label to the other side.")
+            }
+            CheckBox {
+                Layout.fillWidth: true
+                text: backendValues.labelFlipSide__AUX.value
+                backendValue: backendValues.labelFlipSide__AUX
+            }
         }
     }
 }
