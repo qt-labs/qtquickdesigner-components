@@ -26,60 +26,11 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
-
-
+pragma Singleton
 import QtQuick 2.12
-import FlowView 1.0
 
-Item {
-    id: flowItem
+QtObject {
+    id: object
 
-    width: 400
-    height: 400
-
-    property var flowView: Item {}
-
-    property string __designer_url__
-
-    property alias loaderSource: loader.source
-
-    property var stateChangeTarget: "none"
-
-    onStateChangeTargetChanged: {
-        loader.source = stateChangeTarget['__designer_url__']
-        loader.item.state = flowItem.targetState
-        flowItem.width = flowItem.stateChangeTarget.width
-        flowItem.height = flowItem.stateChangeTarget.height
-    }
-
-
-    property string targetState
-
-    onTargetStateChanged: {
-        loader.item.state = flowItem.targetState
-    }
-
-    Text {
-        text: flowItem.targetState
-    }
-
-    property bool active: false
-
-    Component.onCompleted: {
-        if (FlowState.loading)
-            return
-
-        FlowState.loading = true
-        flowItem.active = true
-    }
-
-    Loader {
-        id: loader
-        active: flowItem.active
-        onLoaded: {
-            flowItem.width = loader.item.childrenRect.width
-            flowItem.height = loader.item.childrenRect.height
-            FlowState.loading = false
-        }
-    }
+    property bool loading: false
 }
