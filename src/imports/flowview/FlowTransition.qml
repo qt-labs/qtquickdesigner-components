@@ -28,6 +28,7 @@
 ****************************************************************************/
 
 import QtQuick 2.10
+import QtQuick.Studio.EventSystem 1.0
 
 QtObject {
     id: root
@@ -76,6 +77,23 @@ QtObject {
                 return true
         }
         return false
+    }
+
+    property alias eventIds: eventListener.eventIds
+
+    function __receiveEvent(parameters) {
+        var flowItem = root.from[0]
+        var flow = flowItem.parent
+
+        if (flow.currentItem !== flowItem)
+            return;
+
+        root.trigger()
+    }
+
+    property EventListener eventListener: EventListener {
+        id: eventListener
+        onTriggered: root.__receiveEvent(parameters)
     }
 
     function trigger() {

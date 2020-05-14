@@ -69,6 +69,15 @@ Column {
                 backendValue: backendValues.question
                 Layout.fillWidth: true
             }
+            Label {
+                text: qsTr("Event Ids")
+                tooltip: qsTr("")
+            }
+            LineEdit {
+                Layout.fillWidth: true
+                text: backendValues.goBack
+                backendValue: backendValues.eventIds
+            }
         }
     }
 
