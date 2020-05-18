@@ -17,6 +17,7 @@ AUX_QML_FILES += \
     $$PWD/FlowMoveEffect.qml \
     $$PWD/FlowTransition.qml \
     $$PWD/FlowTransitionList.qml \
+    $$PWD/FlowState.qml \
     $$PWD/FlowView.qml \
     $$PWD/FlowWildcard.qml \
     $$PWD/SwipeInteraction.qml \
