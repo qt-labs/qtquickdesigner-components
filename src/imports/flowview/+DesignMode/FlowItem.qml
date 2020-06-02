@@ -56,6 +56,8 @@ Item {
     property string targetState
 
     onTargetStateChanged: {
+        loader.active = false
+        loader.active = true
         loader.item.state = flowItem.targetState
     }
 
