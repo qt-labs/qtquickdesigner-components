@@ -71,6 +71,9 @@ Item {
         if (FlowState.loading)
             return
 
+        if (loader.source == "")
+            return
+
         FlowState.loading = true
         flowItem.active = true
     }
