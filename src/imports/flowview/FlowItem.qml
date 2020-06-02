@@ -67,7 +67,7 @@ Item {
     }
 
 
-    Component.onCompleted: {
+    function init() {
 
         flowItem.x = 0
         flowItem.y = 0

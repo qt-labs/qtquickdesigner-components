@@ -147,8 +147,10 @@ Item {
 
         for (var i = 0; i < stack.children.length; ++i) {
             root.allChildren.push(stack.children[i])
-            if (stack.children[i].flowView !== undefined)
+            if (stack.children[i].flowView !== undefined) {
                 stack.children[i].flowView = root
+                stack.children[i].init()
+            }
         }
 
         /* Assign view to all flowTransitions */
