@@ -78,6 +78,41 @@ Column {
                 text: backendValues.goBack
                 backendValue: backendValues.eventIds
             }
+
+
+            Label {
+                text: qsTr("From")
+            }
+            SecondColumnLayout {
+                EditableListView {
+                    id: fromListView
+                    backendValue: backendValues.from
+                    model: fromListView.backendValue.expressionAsList
+                    Layout.fillWidth: true
+                    typeFilter: "FlowView.FlowItem"
+
+                    onAdd: function(value) { fromListView.backendValue.idListAdd(value) }
+                    onRemove: function(idx) { fromListView.backendValue.idListRemove(idx) }
+                    onReplace: function (idx, value) { fromListView.backendValue.idListReplace(idx, value) }
+                }
+            }
+
+            Label {
+                text: qsTr("To")
+            }
+            SecondColumnLayout {
+                EditableListView {
+                    id: toListView
+                    backendValue: backendValues.to
+                    model: toListView.backendValue.expressionAsList
+                    Layout.fillWidth: true
+                    typeFilter: "FlowView.FlowItem"
+
+                    onAdd: function(value) { toListView.backendValue.idListAdd(value) }
+                    onRemove: function(idx) { toListView.backendValue.idListRemove(idx) }
+                    onReplace: function (idx, value) { toListView.backendValue.idListReplace(idx, value) }
+                }
+            }
         }
     }
 
