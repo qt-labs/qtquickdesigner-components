@@ -41,7 +41,7 @@ Column {
         caption: qsTr("Flow Decision")
 
         SectionLayout {
-            rows: 1
+            rows: 3
             columns: 2
 
             Label {
@@ -53,6 +53,25 @@ Column {
                 Layout.fillWidth: true
             }
 
+            Label {
+                text: qsTr("Size")
+                tooltip: qsTr("Sets the size in pixels.")
+            }
+            SpinBox {
+                backendValue: backendValues.blockSize__AUX
+                minimumValue: 140
+                maximumValue: 600
+            }
+
+            Label {
+                text: qsTr("Radius")
+                tooltip: qsTr("Sets the radius in pixels.")
+            }
+            SpinBox {
+                backendValue: backendValues.blockRadius__AUX
+                minimumValue: 0
+                maximumValue: 100
+            }
         }
     }
 

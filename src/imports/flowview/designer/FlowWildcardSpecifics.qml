@@ -41,7 +41,7 @@ Column {
         caption: qsTr("Flow Wildcard")
 
         SectionLayout {
-            rows: 3
+            rows: 5
             columns: 2
 
             Label {
@@ -85,6 +85,26 @@ Column {
                     onRemove: function(idx) { blackListView.backendValue.idListRemove(idx) }
                     onReplace: function (idx, value) { blackListView.backendValuet.idListReplace(idx, value) }
                 }
+            }
+
+            Label {
+                text: qsTr("Size")
+                tooltip: qsTr("Sets the size in pixels.")
+            }
+            SpinBox {
+                backendValue: backendValues.blockSize__AUX
+                minimumValue: 140
+                maximumValue: 600
+            }
+
+            Label {
+                text: qsTr("Radius")
+                tooltip: qsTr("Sets the radius in pixels.")
+            }
+            SpinBox {
+                backendValue: backendValues.blockRadius__AUX
+                minimumValue: 0
+                maximumValue: 100
             }
         }
     }
