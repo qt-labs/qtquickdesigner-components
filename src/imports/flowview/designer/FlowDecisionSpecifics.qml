@@ -41,7 +41,7 @@ Column {
         caption: qsTr("Flow Decision")
 
         SectionLayout {
-            rows: 3
+            rows: 5
             columns: 2
 
             Label {
@@ -51,6 +51,51 @@ Column {
             LineEdit {
                 backendValue: backendValues.dialogTitle
                 Layout.fillWidth: true
+            }
+
+            Label {
+                text: qsTr("Show label")
+                tooltip: qsTr("Makes the dialog title visible as a label.")
+            }
+            CheckBox {
+                id: showLabelCheckBox
+                Layout.fillWidth: true
+                text: backendValues.showDialogLabel__AUX.value
+                backendValue: backendValues.showDialogLabel__AUX
+            }
+
+            Label {
+                text: qsTr("Label position")
+                tooltip: qsTr("Sets preconfigured positions for the dialog title label.")
+            }
+            ComboBox {
+                enabled: showLabelCheckBox.checkState === Qt.Checked
+                valueType: ComboBox.ValueType.Integer
+                backendValue: backendValues.dialogLabelPosition__AUX
+                implicitWidth: 180
+                model: ["TopLeftCorner", "TopRightCorner", "BottomLeftCorner", "BottomRightCorner"]
+                manualMapping: true
+
+                property bool block: false
+
+                onValueFromBackendChanged: {
+                    if (!__isCompleted)
+                        return;
+
+                    block = true
+                    currentIndex = backendValues.dialogLabelPosition__AUX.value
+                    block = false
+                }
+
+                onCurrentIndexChanged: {
+                    if (!__isCompleted)
+                        return;
+
+                    if (block)
+                        return;
+
+                    backendValues.dialogLabelPosition__AUX.value = currentIndex
+                }
             }
 
             Label {
