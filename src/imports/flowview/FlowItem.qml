@@ -75,27 +75,29 @@ Item {
         flowItem.defaultState = flowItem.state
         var itemVar
         var i
+
         if (flowItem.stateChangeTarget === undefined) {
 
             for (i = 0; i < flowItem.children.length; ++i) {
                 itemVar = flowItem.children[i]
                 if (itemVar.isActionArea === true
                         && !itemVar.fromStateChange) {
-                    print("here")
-                    print(itemVar)
-                    print(flowItem.state)
                     itemVar.activeState = flowItem.state
                 }
 
             }
         } else {
+            var childNum = flowItem.children.length
+            var childArray = []
+
             for (i = 0; i < flowItem.children.length; ++i) {
-                itemVar = flowItem.children[i]
+                childArray.push(flowItem.children[i])
+            }
+
+            for (i = 0; i < childNum; ++i) {
+                itemVar = childArray[i]
+
                 if (itemVar.isActionArea === true) {
-                    print("here state")
-                    print(flowItem.stateChangeTarget)
-                    print(flowItem.targetState)
-                    print(itemVar)
                     itemVar.fromStateChange = true
                     itemVar.activeState = flowItem.targetState
                     itemVar.parent = flowItem.stateChangeTarget

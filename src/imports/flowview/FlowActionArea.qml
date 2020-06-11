@@ -70,7 +70,7 @@ MouseArea {
 
     property string activeState: ""
 
-    enabled: (target !== null || root.goBack) && (!root.fromStateChange || root.activeState === root.parent.state)
+    enabled: (target !== null || root.goBack) && (root.activeState === root.parent.state)
 
     onClicked: {
         root.trigger()
