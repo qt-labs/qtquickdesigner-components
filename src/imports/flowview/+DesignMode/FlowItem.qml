@@ -67,7 +67,7 @@ Item {
 
     property bool active: false
 
-    Component.onCompleted: {
+    function init() {
         if (FlowState.loading)
             return
 
