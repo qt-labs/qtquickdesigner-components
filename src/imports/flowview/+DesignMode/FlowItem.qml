@@ -45,6 +45,8 @@ Item {
 
     property var stateChangeTarget: "none"
 
+    clip: true
+
     onStateChangeTargetChanged: {
         loader.source = stateChangeTarget['__designer_url__']
         loader.item.state = flowItem.targetState
