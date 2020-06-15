@@ -112,7 +112,14 @@ QtObject {
         }
 
         if (stateChanger || fromEmpty || __checkInclude(root.from, transitionView.currentItem))
-            transitionView.gotoPage(root)
+            timer.restart()
+    }
+
+    property Timer timer: Timer {
+        interval: 1
+        running: false
+        repeat: false
+        onTriggered: transitionView.gotoPage(root)
     }
 
     property FlowEffect effect: DefaultFlowEffect {
