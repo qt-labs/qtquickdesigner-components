@@ -163,15 +163,22 @@ Item {
             w.transitionView = root
         }
 
+        var t
+
         for (i = 0; i < root.flowTransitions.length; ++i) {
-            var t = root.flowTransitions[i]
+            t = root.flowTransitions[i]
             t.transitionView = root
         }
 
         for (i = 0; i < root.flowTransitions.length; ++i) {
-            var t = root.flowTransitions[i]
-            if (root.checkInclude(t.from, root))
+            t = root.flowTransitions[i]
+            if (root.checkInclude(t.from, root)) {
                 root.currentItem = t.to[0]
+                if (root.currentItem.stateChangeTarget !== undefined) {
+                    root.currentItem.stateChangeTarget.state = root.currentItem.targetState
+                    root.currentItem = root.currentItem.stateChangeTarget
+                }
+            }
         }
 
         root.resetCurrentIndex()
