@@ -85,7 +85,8 @@ QtObject {
         var flowItem = root.from[0]
         var flow = root.transitionView
 
-        if (flowItem.stateChangeTarget === flow.currentItem) {
+        if (flowItem.stateChangeTarget !== undefined
+                && flowItem.stateChangeTarget === flow.currentItem) {
             if (flowItem.targetState === flow.currentItem.state)
                 flowItem = flowItem.stateChangeTarget
         }
@@ -112,9 +113,13 @@ QtObject {
         if (root.from[0] !== undefined)
             stateChanger = root.from[0].stateChangeTarget !== undefined
 
-        if (stateChanger) {
-            root.to[0].state =root.to[0].defaultState
-        }
+        var toStateChanger = false
+
+        if (root.to[0] !== undefined)
+            toStateChanger = root.to[0].stateChangeTarget !== undefined
+
+        if (!toStateChanger)
+            root.to[0].state = root.to[0].defaultState
 
         if (stateChanger || fromEmpty || __checkInclude(root.from, transitionView.currentItem))
             timer.restart()
