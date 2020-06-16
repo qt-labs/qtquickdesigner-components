@@ -175,7 +175,7 @@ Item {
             if (root.checkInclude(t.from, root)) {
                 root.currentItem = t.to[0]
                 if (root.currentItem.stateChangeTarget !== undefined) {
-                    root.currentItem.stateChangeTarget.state = root.currentItem.targetState
+                    root.currentItem.stateChangeTarget.setState(root.currentItem.targetState)
                     root.currentItem = root.currentItem.stateChangeTarget
                 }
             }

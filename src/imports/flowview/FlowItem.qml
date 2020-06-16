@@ -45,7 +45,11 @@ Item {
 
     property string targetState
 
-    property string defaultState
+    property string defaultState: undefined
+
+    function setState(newState) {
+        flowItem.state = newState
+    }
 
     property bool active: {
         if (flowItem.flowView !== null

@@ -43,9 +43,15 @@ Item {
 
     property alias loaderSource: loader.source
 
-    property var stateChangeTarget: "none"
+    property var stateChangeTarget
+
+    property string defaultState
 
     clip: true
+
+    function setState(state) {
+
+    }
 
     onStateChangeTargetChanged: {
         loader.source = stateChangeTarget['__designer_url__']
@@ -69,7 +75,9 @@ Item {
 
     property bool active: false
 
+
     function init() {
+        flowItem.defaultState = flowItem.state
         if (FlowState.loading)
             return
 
