@@ -83,7 +83,12 @@ QtObject {
 
     function __receiveEvent(parameters) {
         var flowItem = root.from[0]
-        var flow = flowItem.parent
+        var flow = root.transitionView
+
+        if (flowItem.stateChangeTarget === flow.currentItem) {
+            if (flowItem.targetState === flow.currentItem.state)
+                flowItem = flowItem.stateChangeTarget
+        }
 
         if (flow.currentItem !== flowItem)
             return;
