@@ -27,14 +27,131 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.10
+import QtQuick 2.12
 import QtQuick.Studio.EventSystem 1.0
 
-MouseArea {
+Item {
     width: 80
     height: 40
 
     id: root
+
+    enum ActionType{
+        LeftPress = 0,
+        LeftDoublePress = 1,
+        LeftLongPress = 2,
+        RightPress = 3,
+        RightDoublePress = 4,
+        RightLongPress = 5,
+        FlickUp = 6,
+        FlickDown = 7,
+        FlickLeft = 8,
+        FlickRight = 9,
+        PinchIn = 10,
+        PinchOut = 11
+    }
+
+    Item {
+        id: priv
+
+        property double dragStartTime;
+        property point dragStartPoint;
+    }
+
+    property real maxDragTime: 500
+    property real minDragDistance: 50
+    property real minPinchFactor: 2.0
+
+    property int eventType: FlowActionArea.LeftPress
+
+    TapHandler {
+        enabled: (root.eventType >= FlowActionArea.LeftPress && root.eventType <= FlowActionArea.LeftLongPress)
+        acceptedButtons: Qt.LeftButton
+        onTapped: if (root.eventType === FlowActionArea.LeftPress) { root.trigger(); }
+        onDoubleTapped: if (root.eventType === FlowActionArea.LeftDoublePress) { root.trigger(); }
+        onLongPressed: if (root.eventType === FlowActionArea.LeftLongPress) { root.trigger(); }
+    }
+
+    TapHandler {
+        enabled: (root.eventType >= FlowActionArea.RightPress && root.eventType <= FlowActionArea.RightLongPress)
+        acceptedButtons: Qt.RightButton
+        onTapped: if (root.eventType === FlowActionArea.RightPress) { root.trigger(); }
+        onDoubleTapped: if (root.eventType === FlowActionArea.RightDoublePress) { root.trigger(); }
+        onLongPressed: if (root.eventType === FlowActionArea.RightLongPress) { root.trigger(); }
+    }
+
+    PointHandler {
+        enabled: (root.eventType >= FlowActionArea.FlickUp && root.eventType <= FlowActionArea.FlickRight)
+        target: null
+
+        onActiveChanged: {
+            if (active) {
+                priv.dragStartTime = Date.now();
+                priv.dragStartPoint = point.position;
+            } else {
+                var time = Date.now() - priv.dragStartTime;
+                var distance = root.moveDistance(priv.dragStartPoint, point.position);
+                if (time < root.maxDragTime && distance > root.minDragDistance){
+                    var angle = root.moveAngle(priv.dragStartPoint, point.position);
+
+                    switch (root.eventType){
+                    case FlowActionArea.FlickUp:
+                        if (angle > 2.618 || angle < -2.618) {
+                            root.trigger();
+                        }
+                        break;
+                    case FlowActionArea.FlickDown:
+                        if (angle < 0.524 && angle > -0.524) {
+                            root.trigger();
+                        }
+                        break;
+                    case FlowActionArea.FlickLeft:
+                        if (angle < -1.047 && angle > -2.094) {
+                            root.trigger();
+                        }
+                        break;
+                    case FlowActionArea.FlickRight:
+                        if (angle < 2.094 && angle > 1.047) {
+                            root.trigger();
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    PinchHandler {
+        enabled: (root.eventType === FlowActionArea.PinchIn || root.eventType === FlowActionArea.PinchOut)
+        target: null
+
+        onActiveChanged: {
+            if (active) {
+                priv.dragStartTime = Date.now();
+            } else {
+                var time = Date.now() - priv.dragStartTime;
+                if (time < root.maxDragTime) {
+                    if (root.eventType  === FlowActionArea.PinchIn && activeScale < (1.0 / root.minPinchFactor)) {
+                        root.trigger();
+                    } else if (root.eventType === FlowActionArea.PinchOut && activeScale > root.minPinchFactor) {
+                        root.trigger();
+                    }
+                }
+            }
+        }
+    }
+
+    function moveDistance(start, end){
+        var x = end.x - start.x;
+        var y = end.y - start.y;
+        return Math.sqrt(x*x+y*y);
+    }
+
+    function moveAngle(start, end){
+        var x = end.x - start.x;
+        var y = end.y - start.y;
+        return Math.atan2(x,y);
+    }
 
     function trigger() {
 
@@ -71,10 +188,6 @@ MouseArea {
     property string activeState: ""
 
     enabled: (target !== null || root.goBack) && (root.activeState === root.parent.state)
-
-    onClicked: {
-        root.trigger()
-    }
 
     property bool goBack: false
 
