@@ -82,6 +82,21 @@ Column {
                  text: backendValues.goBack
                  backendValue: backendValues.eventIds
              }
+             Label {
+                 text: qsTr("Action Type")
+                 tooltip: qsTr("Type of the mouse action triggering the event")
+
+             }
+
+             ComboBox {
+                 visible: showElide
+                 Layout.fillWidth: true
+                 backendValue: backendValues.eventType
+                 valueType: ComboBox.ValueType.Integer
+
+                 model: ["Left Click", "Left Double Click", "Left Long Press", "Right Click", "Right Double Click",
+                     "Right Long Press", "Flic kUp", "Flick Down", "Flick Left", "Flick Right", "Pinch In","Pinch Out" ]
+             }
 
         }
    }
