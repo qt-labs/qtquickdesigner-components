@@ -118,7 +118,7 @@ QtObject {
         if (root.to[0] !== undefined)
             toStateChanger = root.to[0].stateChangeTarget !== undefined
 
-        if (toStateChanger)
+        if (!toStateChanger && root.to[0].defaultState !== undefined)
             root.to[0].state = root.to[0].defaultState
 
         if (stateChanger || fromEmpty || __checkInclude(root.from, transitionView.currentItem))
