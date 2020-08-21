@@ -96,7 +96,7 @@ QtObject {
                                 id: mouseArea
                                 hoverEnabled: true
                                 onClicked: {
-                                    root.targets[index].trigger()
+                                    root.targets[index].__decisionTrigger()
                                     loader.item.close()
                                     loader.active = false
                                 }

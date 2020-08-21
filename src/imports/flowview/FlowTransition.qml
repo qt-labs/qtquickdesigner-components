@@ -125,6 +125,13 @@ QtObject {
             timer.restart()
     }
 
+    function __decisionTrigger() {
+        /* Workaround for flowDecisions with multiple sources */
+        if (!__checkInclude(root.from, transitionView.currentItem) && root.from.length !== 0)
+            root.from = []
+        root.trigger()
+    }
+
     property Timer timer: Timer {
         interval: 1
         running: false
