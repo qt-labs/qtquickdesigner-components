@@ -6,6 +6,7 @@ AUX_QML_FILES += \
     $$PWD/FlowFadeEffect.qml \
     $$PWD/FlowItem.qml \
     $$PWD/+DesignMode/FlowItem.qml \
+    $$PWD/+DesignMode/FlowView.qml \
     $$PWD/FlowPushEffect.qml \
     $$PWD/FlowPushLeftEffect.qml \
     $$PWD/FlowPushRightEffect.qml \
