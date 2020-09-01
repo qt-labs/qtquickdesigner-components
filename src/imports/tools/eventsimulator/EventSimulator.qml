@@ -147,12 +147,13 @@ QtObject {
         }
         ListView {
             id: list
-            x: 5
+            width: inputContainer.width
             anchors {
                 top: inputContainer.bottom
                 left: inputContainer.left
                 bottom: parent.bottom
             }
+            clip: true
             focus: true
             spacing: 2
 
