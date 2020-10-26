@@ -1,0 +1,36 @@
+MetaInfo {
+ Type {
+        name: "QtQuick.Studio.MultiText.MultiTextItem"
+        icon: ":/qtquickplugin/images/item-icon16.png"
+
+        Hints {
+        }
+          ItemLibraryEntry {
+            name: "Multi Text Item"
+            category: "Multi Text"
+            libraryIcon: ":/qtquickplugin/images/item-icon.png"
+            version: "1.0"
+            requiredImport: "QtQuick.Studio.MultiText"
+        }
+    }
+    Type {
+           name: "QtQuick.Studio.MultiText.MultiTextElement"
+           icon: ":/qtquickplugin/images/item-icon16.png"
+
+           Hints {
+               visibleInNavigator: true
+               canBeDroppedInNavigator: true
+               canBeDroppedInFormEditor: true
+               canBeContainer: false
+               visibleInLibrary: true
+               visibleInNavigator: true
+           }
+             ItemLibraryEntry {
+               name: "Multi Text Element"
+               category: "Multi Text"
+               libraryIcon: ":/qtquickplugin/images/item-icon.png"
+               version: "1.0"
+               requiredImport: "QtQuick.Studio.MultiText"
+           }
+    }
+}

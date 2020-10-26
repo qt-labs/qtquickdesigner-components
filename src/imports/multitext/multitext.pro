@@ -1,5 +1,5 @@
-TARGET = studiocomponentsplugin
-TARGETPATH = QtQuick/Studio/Components
+TARGET = multitextplugin
+TARGETPATH = QtQuick/Studio/MultiText
 IMPORT_VERSION = 1.0
 
 QT += qml quick
@@ -7,14 +7,14 @@ QT_PRIVATE += core-private gui-private qml-private quick-private quicktemplates2
 
 DEFINES += QT_NO_CAST_TO_ASCII QT_NO_CAST_FROM_ASCII
 
-include(components.pri)
+include(multitext.pri)
 
 OTHER_FILES += \
     qmldir \
     $$QML_FILES
 
 SOURCES += \
-    $$PWD/qtstudiocomponentsplugin.cpp
+    $$PWD/multitextplugin.cpp
 
 
 !static: qtConfig(quick-designer): include(designer/designer.pri)
