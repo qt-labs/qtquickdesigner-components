@@ -7,7 +7,7 @@ MetaInfo {
         }
           ItemLibraryEntry {
             name: "Multi Text Item"
-            category: "Multi Text"
+            category: "Studio Multi Text"
             libraryIcon: ":/qtquickplugin/images/item-icon.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.MultiText"
@@ -27,7 +27,7 @@ MetaInfo {
            }
              ItemLibraryEntry {
                name: "Multi Text Element"
-               category: "Multi Text"
+               category: "Studio Multi Text"
                libraryIcon: ":/qtquickplugin/images/item-icon.png"
                version: "1.0"
                requiredImport: "QtQuick.Studio.MultiText"
