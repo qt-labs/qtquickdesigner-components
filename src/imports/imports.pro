@@ -4,5 +4,6 @@ SUBDIRS += \
 ##    effects \
     flowview \
     multitext \
-    tools
+    tools \
+    logichelper
 
