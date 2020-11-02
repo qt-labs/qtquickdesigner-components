@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2018 The Qt Company Ltd.
+** Copyright (C) 2020 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -31,7 +31,6 @@ import QtQuick 2.0
 import HelperWidgets 2.0
 import QtQuick.Layouts 1.0
 
-
 Column {
     anchors.left: parent.left
     anchors.right: parent.right
@@ -39,73 +38,68 @@ Column {
     Section {
         anchors.left: parent.left
         anchors.right: parent.right
-        caption: "Colorize"
+        caption: qsTr("Masked Blur")
 
         SectionLayout {
             rows: 2
             Label {
-                text: qsTr("hue")
-                toolTip: qsTr("This property defines the hue value which is used to colorize the source.")
+                text: qsTr("Radius")
+                toolTip: qsTr("This property defines the distance of the neighboring pixels which affect the blurring of an individual pixel. A larger radius increases the blur effect.")
             }
             SecondColumnLayout {
                 SpinBox {
-                    backendValue: backendValues.colorizeHue
-                    Layout.preferredWidth: 80
+                    backendValue: backendValues.radius
                     decimals: 1
                     minimumValue: 0
-                    maximumValue: 1
-                    stepSize: 0.1
+                    maximumValue: 100
+                    stepSize: 1
                 }
                 ExpandingSpacer {
                 }
             }
 
             Label {
-                text: qsTr("lightness")
-                toolTip: qsTr("This property defines how much the source lightness value is increased or decreased. Unlike hue and saturation properties, lightness does not set the used value, but it shifts the existing source pixel lightness value.")
+                text: qsTr("Samples")
+                toolTip: qsTr("This property defines how many samples are taken per pixel when blur calculation is done. Larger value produces better quality, but is slower to render.")
             }
             SecondColumnLayout {
                 SpinBox {
-                    backendValue: backendValues.colorizeLightness
-                    Layout.preferredWidth: 80
-                    decimals: 1
-                    minimumValue: -1
-                    maximumValue: 1
-                    stepSize: 0.1
+                    backendValue: backendValues.samples
+                    decimals: 0
+                    minimumValue: 0
+                    maximumValue: 1000
+                    stepSize: 1
                 }
                 ExpandingSpacer {
                 }
             }
 
             Label {
-                text: qsTr("saturation")
-                toolTip: qsTr("This property defines the saturation value which is used to colorize the source.")
+                text: qsTr("Mask Source")
+                toolTip: qsTr("This property defines the item that is controlling the final intensity of the blur.")
             }
             SecondColumnLayout {
-                SpinBox {
-                    backendValue: backendValues.colorizeSaturation
-                    Layout.preferredWidth: 80
-                    decimals: 1
-                    minimumValue: 0
-                    maximumValue: 1
-                    stepSize: 0.1
+                ItemFilterComboBox {
+                    typeFilter: "QtQuick.Item"
+                    validator: RegExpValidator { regExp: /(^$|^[a-z_]\w*)/ }
+                    backendValue: backendValues.maskSource
+                    Layout.fillWidth: true
                 }
                 ExpandingSpacer {
                 }
             }
-
         }
     }
 
     Section {
         anchors.left: parent.left
         anchors.right: parent.right
-        caption: "Caching"
+        caption: qsTr("Caching")
 
         SectionLayout {
             rows: 2
             Label {
-                text: qsTr("cached")
+                text: qsTr("Cached")
                 toolTip: qsTr("This property allows the effect output pixels to be cached in order to improve the rendering performance.")
             }
             SecondColumnLayout {
@@ -113,6 +107,8 @@ Column {
                     Layout.fillWidth: true
                     backendValue: backendValues.cached
                     text: backendValues.cached.valueToString
+                }
+                ExpandingSpacer {
                 }
             }
         }

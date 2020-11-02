@@ -14,4 +14,27 @@ AUX_QML_FILES += \
     $$PWD/TriangleItemSpecifics.qml
 
 AUX_QML_FILES += \
-    $$PWD/images/*.png
+    $$PWD/images/custom-border-16px.png \
+    $$PWD/images/custom-border-24px.png \
+    $$PWD/images/custom-border-24px@2x.png \
+    $$PWD/images/custom-rectangle-16px.png \
+    $$PWD/images/custom-rectangle-24px.png \
+    $$PWD/images/custom-rectangle-24px@2x.png \
+    $$PWD/images/iso-icons-16px.png \
+    $$PWD/images/iso-icons-24px.png \
+    $$PWD/images/iso-icons-24px@2x.png \
+    $$PWD/images/item-arc-16px.png \
+    $$PWD/images/item-arc-24px.png \
+    $$PWD/images/item-arc-24px@2x.png \
+    $$PWD/images/item-flippable-16px.png \
+    $$PWD/images/item-flippable-24px.png \
+    $$PWD/images/item-flippable-24px@2x.png \
+    $$PWD/images/item-pie-16px.png \
+    $$PWD/images/item-pie-24px.png \
+    $$PWD/images/item-pie-24px@2x.png \
+    $$PWD/images/item-svg-16px.png \
+    $$PWD/images/item-svg-24px.png \
+    $$PWD/images/item-svg-24px@2x.png \
+    $$PWD/images/item-triangle-16px.png \
+    $$PWD/images/item-triangle-24px.png \
+    $$PWD/images/item-triangle-24px@2x.png

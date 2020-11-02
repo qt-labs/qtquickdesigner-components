@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2018 The Qt Company Ltd.
+** Copyright (C) 2020 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -31,7 +31,6 @@ import QtQuick 2.0
 import HelperWidgets 2.0
 import QtQuick.Layouts 1.0
 
-
 Column {
     anchors.left: parent.left
     anchors.right: parent.right
@@ -39,21 +38,21 @@ Column {
     Section {
         anchors.left: parent.left
         anchors.right: parent.right
-        caption: "Desaturation"
+        caption: qsTr("Gamma Adjust")
 
         SectionLayout {
             rows: 2
             Label {
-                text: qsTr("desaturation")
-                toolTip: qsTr("This property defines how much the source colors are desaturated.")
+                text: qsTr("Gamma")
+                toolTip: qsTr("This property defines the change factor for how the luminance of each pixel is altered.")
             }
             SecondColumnLayout {
                 SpinBox {
-                    backendValue: backendValues.desaturation
-                    Layout.preferredWidth: 80
-                    decimals: 1
+                    backendValue: backendValues.gamma
+                    Layout.preferredWidth: 100
+                    decimals: 2
                     minimumValue: 0
-                    maximumValue: 1
+                    maximumValue: 100
                     stepSize: 0.1
                 }
                 ExpandingSpacer {
@@ -65,12 +64,12 @@ Column {
     Section {
         anchors.left: parent.left
         anchors.right: parent.right
-        caption: "Caching"
+        caption: qsTr("Caching")
 
         SectionLayout {
             rows: 2
             Label {
-                text: qsTr("cached")
+                text: qsTr("Cached")
                 toolTip: qsTr("This property allows the effect output pixels to be cached in order to improve the rendering performance.")
             }
             SecondColumnLayout {
@@ -78,6 +77,8 @@ Column {
                     Layout.fillWidth: true
                     backendValue: backendValues.cached
                     text: backendValues.cached.valueToString
+                }
+                ExpandingSpacer {
                 }
             }
         }

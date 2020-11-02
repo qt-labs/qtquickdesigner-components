@@ -1,7 +1,7 @@
 TEMPLATE = subdirs
 SUBDIRS += \
-##    components \
-##    effects \
+    components \
+    effects \
     flowview \
     multitext \
     tools \

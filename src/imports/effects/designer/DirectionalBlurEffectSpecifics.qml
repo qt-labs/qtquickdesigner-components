@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2018 The Qt Company Ltd.
+** Copyright (C) 2020 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -31,41 +31,31 @@ import QtQuick 2.0
 import HelperWidgets 2.0
 import QtQuick.Layouts 1.0
 
-
 Column {
+    id: root
     anchors.left: parent.left
     anchors.right: parent.right
 
-    Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Shadow Color")
-
-        ColorEditor {
-            caption: qsTr("Shadow Color")
-            backendValue: backendValues.color
-            supportGradient: false
-        }
-    }
+    property int spinBoxWidth: 90
 
     Section {
         anchors.left: parent.left
         anchors.right: parent.right
-        caption: "Shadow Details"
+        caption: qsTr("Directional Blur")
 
         SectionLayout {
             rows: 2
             Label {
-                text: qsTr("radius")
-                toolTip: qsTr("Radius defines the softness of the shadow. A larger radius causes the edges of the shadow to appear more blurry.")
+                text: qsTr("Angle")
+                toolTip: qsTr("This property defines the direction for the blur. Blur is applied to both sides of each pixel, therefore setting the direction to 0 and 180 produces the same result.")
             }
             SecondColumnLayout {
                 SpinBox {
-                    backendValue: backendValues.radius
-                    Layout.preferredWidth: 80
+                    backendValue: backendValues.angle
+                    Layout.preferredWidth: root.spinBoxWidth
                     decimals: 1
-                    minimumValue: 0
-                    maximumValue: 100
+                    minimumValue: -180
+                    maximumValue: 180
                     stepSize: 1
                 }
                 ExpandingSpacer {
@@ -73,16 +63,16 @@ Column {
             }
 
             Label {
-                text: qsTr("samples")
-                toolTip: qsTr("This property defines how many samples are taken per pixel when edge softening blur calculation is done, ideally, this value should be twice as large as the highest required radius value plus one.")
+                text: qsTr("Samples")
+                toolTip: qsTr("This property defines how many samples are taken per pixel when blur calculation is done. Larger value produces better quality, but is slower to render.")
             }
             SecondColumnLayout {
                 SpinBox {
                     backendValue: backendValues.samples
-                    Layout.preferredWidth: 80
-                    decimals: 1
+                    Layout.preferredWidth: root.spinBoxWidth
+                    decimals: 0
                     minimumValue: 0
-                    maximumValue: 201
+                    maximumValue: 1000
                     stepSize: 1
                 }
                 ExpandingSpacer {
@@ -90,59 +80,16 @@ Column {
             }
 
             Label {
-                text: qsTr("spread")
-                toolTip: qsTr("This property defines how large part of the shadow color is strengthened near the source edges.")
+                text: qsTr("Length")
+                toolTip: qsTr("This property defines the perceived amount of movement for each pixel. The movement is divided evenly to both sides of each pixel.")
             }
             SecondColumnLayout {
                 SpinBox {
-                    backendValue: backendValues.spread
-                    Layout.preferredWidth: 80
+                    backendValue: backendValues.length
+                    Layout.preferredWidth: root.spinBoxWidth
                     decimals: 1
                     minimumValue: 0
-                    maximumValue: 1
-                    stepSize: 0.1
-                }
-                ExpandingSpacer {
-                }
-            }
-        }
-    }
-
-    Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: "Offsets"
-
-        SectionLayout {
-            rows: 2
-            Label {
-                text: qsTr("horizontal offset")
-                toolTip: qsTr("HorizontalOffset defines the offset for the rendered shadow compared to the DropShadow items horizontal position.")
-            }
-            SecondColumnLayout {
-                SpinBox {
-                    backendValue: backendValues.horizontalOffset
-                    Layout.preferredWidth: 80
-                    decimals: 1
-                    minimumValue: 0
-                    maximumValue: 100
-                    stepSize: 1
-                }
-                ExpandingSpacer {
-                }
-            }
-
-            Label {
-                text: qsTr("vertical offset")
-                toolTip: qsTr("VerticalOffset defines the offset for the rendered shadow compared to the DropShadow items vertical position. ")
-            }
-            SecondColumnLayout {
-                SpinBox {
-                    backendValue: backendValues.verticalOffset
-                    Layout.preferredWidth: 80
-                    decimals: 1
-                    minimumValue: 0
-                    maximumValue: 100
+                    maximumValue: 1000
                     stepSize: 1
                 }
                 ExpandingSpacer {
@@ -151,15 +98,16 @@ Column {
         }
     }
 
+
     Section {
         anchors.left: parent.left
         anchors.right: parent.right
-        caption: "Caching and Border"
+        caption: qsTr("Caching and Border")
 
         SectionLayout {
             rows: 2
             Label {
-                text: qsTr("cached")
+                text: qsTr("Cached")
                 toolTip: qsTr("This property allows the effect output pixels to be cached in order to improve the rendering performance.")
             }
             SecondColumnLayout {
@@ -171,8 +119,9 @@ Column {
                 ExpandingSpacer {
                 }
             }
+
             Label {
-                text: qsTr("transparent border")
+                text: qsTr("Transparent border")
                 toolTip: qsTr("When set to true, the exterior of the item is padded with a transparent edge, making sampling outside the source texture use transparency instead of the edge pixels.")
             }
             SecondColumnLayout {
@@ -180,6 +129,8 @@ Column {
                     Layout.fillWidth: true
                     backendValue: backendValues.transparentBorder
                     text: backendValues.transparentBorder.valueToString
+                }
+                ExpandingSpacer {
                 }
             }
         }

@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2018 The Qt Company Ltd.
+** Copyright (C) 2020 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -31,47 +31,80 @@ import QtQuick 2.0
 import HelperWidgets 2.0
 import QtQuick.Layouts 1.0
 
-
 Column {
     anchors.left: parent.left
     anchors.right: parent.right
 
-
     Section {
         anchors.left: parent.left
         anchors.right: parent.right
-        caption: "Blur Details"
+        caption: qsTr("Hue and Saturation")
 
         SectionLayout {
             rows: 2
             Label {
-            text: qsTr("radius")
-            toolTip: qsTr("This property defines the distance of the neighboring pixels which affect the blurring of an individual pixel. A larger radius increases the blur effect.")
+                text: qsTr("Hue")
+                toolTip: qsTr("This property defines the hue value which is added to the source hue value.")
             }
             SecondColumnLayout {
                 SpinBox {
-                    backendValue: backendValues.radius
+                    backendValue: backendValues.hue
                     Layout.preferredWidth: 80
-                    decimals: 1
-                    minimumValue: 0
-                    maximumValue: 100
-                    stepSize: 1
+                    decimals: 2
+                    minimumValue: -1
+                    maximumValue: 1
+                    stepSize: 0.1
                 }
                 ExpandingSpacer {
                 }
             }
+
+            Label {
+                text: qsTr("Lightness")
+                toolTip: qsTr("This property defines the lightness value which is added to the source saturation value.")
+            }
+            SecondColumnLayout {
+                SpinBox {
+                    backendValue: backendValues.lightness
+                    Layout.preferredWidth: 80
+                    decimals: 2
+                    minimumValue: -1
+                    maximumValue: 1
+                    stepSize: 0.1
+                }
+                ExpandingSpacer {
+                }
+            }
+
+            Label {
+                text: qsTr("Saturation")
+                toolTip: qsTr("This property defines the saturation value value which is added to the source saturation value.")
+            }
+            SecondColumnLayout {
+                SpinBox {
+                    backendValue: backendValues.saturation
+                    Layout.preferredWidth: 80
+                    decimals: 2
+                    minimumValue: -1
+                    maximumValue: 1
+                    stepSize: 0.1
+                }
+                ExpandingSpacer {
+                }
+            }
+
         }
     }
 
     Section {
         anchors.left: parent.left
         anchors.right: parent.right
-        caption: "Caching and Border"
+        caption: qsTr("Caching")
 
         SectionLayout {
             rows: 2
             Label {
-                text: qsTr("cached")
+                text: qsTr("Cached")
                 toolTip: qsTr("This property allows the effect output pixels to be cached in order to improve the rendering performance.")
             }
             SecondColumnLayout {
@@ -81,17 +114,6 @@ Column {
                     text: backendValues.cached.valueToString
                 }
                 ExpandingSpacer {
-                }
-            }
-            Label {
-                text: qsTr("transparent border")
-                toolTip: qsTr("When set to true, the exterior of the item is padded with a transparent edge, making sampling outside the source texture use transparency instead of the edge pixels.")
-            }
-            SecondColumnLayout {
-                CheckBox {
-                    Layout.fillWidth: true
-                    backendValue: backendValues.transparentBorder
-                    text: backendValues.transparentBorder.valueToString
                 }
             }
         }

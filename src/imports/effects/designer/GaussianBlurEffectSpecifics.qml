@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2018 The Qt Company Ltd.
+** Copyright (C) 2020 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -31,7 +31,6 @@ import QtQuick 2.0
 import HelperWidgets 2.0
 import QtQuick.Layouts 1.0
 
-
 Column {
     anchors.left: parent.left
     anchors.right: parent.right
@@ -39,39 +38,53 @@ Column {
     Section {
         anchors.left: parent.left
         anchors.right: parent.right
-        caption: "Brightness and Contrast"
+        caption: qsTr("Gaussian Blur")
 
         SectionLayout {
             rows: 2
             Label {
-                text: qsTr("brightness")
-                toolTip: qsTr("This property defines how much the source brightness is increased or decreased.")
+                text: qsTr("Radius")
+                toolTip: qsTr("This property defines the distance of the neighboring pixels which affect the blurring of an individual pixel. A larger radius increases the blur effect.")
             }
             SecondColumnLayout {
                 SpinBox {
-                    backendValue: backendValues.brightness
-                    Layout.preferredWidth: 80
+                    backendValue: backendValues.radius
                     decimals: 1
-                    minimumValue: -1
-                    maximumValue: 1
-                    stepSize: 0.1
+                    minimumValue: 0
+                    maximumValue: 100
+                    stepSize: 1
                 }
                 ExpandingSpacer {
                 }
             }
 
             Label {
-                text: qsTr("contrast")
-                toolTip: qsTr("This property defines how much the source contrast is increased or decreased. The decrease of the contrast is linear, but the increase is applied with a non-linear curve to allow very high contrast adjustment at the high end of the value range.")
+                text: qsTr("Deviation")
+                toolTip: qsTr("This property is a parameter to the gaussian function that is used when calculating neighboring pixel weights for the blurring.")
             }
             SecondColumnLayout {
                 SpinBox {
-                    backendValue: backendValues.contrast
-                    Layout.preferredWidth: 80
-                    decimals: 1
-                    minimumValue: -1
-                    maximumValue: 1
-                    stepSize: 0.1
+                    backendValue: backendValues.deviation
+                    decimals: 2
+                    minimumValue: 0
+                    maximumValue: 50
+                    stepSize: 1
+                }
+                ExpandingSpacer {
+                }
+            }
+
+            Label {
+                text: qsTr("Samples")
+                toolTip: qsTr("This property defines how many samples are taken per pixel when blur calculation is done. Larger value produces better quality, but is slower to render.")
+            }
+            SecondColumnLayout {
+                SpinBox {
+                    backendValue: backendValues.samples
+                    decimals: 0
+                    minimumValue: 0
+                    maximumValue: 1000
+                    stepSize: 1
                 }
                 ExpandingSpacer {
                 }
@@ -82,12 +95,12 @@ Column {
     Section {
         anchors.left: parent.left
         anchors.right: parent.right
-        caption: "Caching"
+        caption: qsTr("Caching and Border")
 
         SectionLayout {
             rows: 2
             Label {
-                text: qsTr("cached")
+                text: qsTr("Cached")
                 toolTip: qsTr("This property allows the effect output pixels to be cached in order to improve the rendering performance.")
             }
             SecondColumnLayout {
@@ -95,6 +108,22 @@ Column {
                     Layout.fillWidth: true
                     backendValue: backendValues.cached
                     text: backendValues.cached.valueToString
+                }
+                ExpandingSpacer {
+                }
+            }
+
+            Label {
+                text: qsTr("Transparent border")
+                toolTip: qsTr("When set to true, the exterior of the item is padded with a transparent edge, making sampling outside the source texture use transparency instead of the edge pixels.")
+            }
+            SecondColumnLayout {
+                CheckBox {
+                    Layout.fillWidth: true
+                    backendValue: backendValues.transparentBorder
+                    text: backendValues.transparentBorder.valueToString
+                }
+                ExpandingSpacer {
                 }
             }
         }
