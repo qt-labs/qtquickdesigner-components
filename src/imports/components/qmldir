@@ -6,4 +6,5 @@ FlipableItem 1.0 FlipableItem.qml
 RectangleItem 1.0 RectangleItem.qml
 BorderItem 1.0 BorderItem.qml
 IsoItem 1.0 IsoItem.qml
+GroupItem 1.0 GroupItem.qml
 

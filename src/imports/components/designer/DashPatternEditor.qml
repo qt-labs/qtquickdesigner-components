@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2018 The Qt Company Ltd.
+** Copyright (C) 2019 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -27,10 +27,9 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.0
+import QtQuick 2.12
+import QtQuick.Layouts 1.12
 import HelperWidgets 2.0
-import QtQuick.Layouts 1.0
-import QtQuick.Controls 1.0 as Controls
 import QtQuickDesignerTheme 1.0
 
 GridLayout {
@@ -40,26 +39,25 @@ GridLayout {
     columnSpacing: 6
     rows: 2
     columns: 5
+
+    property bool __block: false
+    property int labelWidth: 32
     property bool enableEditors: true
-
     property variant backendValue: backendValues.dashPattern
-
     property string expression: backendValue.expression
 
     onExpressionChanged: root.parseExpression()
-
-    property bool __block: false
 
     function createArray() {
         if (root.__block)
             return
 
         var array = []
-
         array.push(dash01.value)
         array.push(gap01.value)
         array.push(dash02.value)
         array.push(gap02.value)
+
         root.__block = true
         root.backendValue.expression = '[' + array.toString() + ']'
         root.__block = false
@@ -69,23 +67,24 @@ GridLayout {
         if (root.__block)
             return
 
+        root.__block = true
+
         dash01.value = 0
         gap01.value = 0
         dash02.value = 0
         gap02.value = 0
+
         var array = backendValue.expression.toString()
         array = array.replace("[", "")
         array = array.replace("]", "")
         array = array.split(',')
 
-        root.__block = true
         try {
             dash01.value = array[0]
             gap01.value = array[1]
             dash02.value = array[2]
             gap02.value = array[3]
         } catch (err) {
-
         }
 
         root.__block = false
@@ -96,19 +95,25 @@ GridLayout {
         onSelectionChanged: parseExpression()
     }
 
-    Item {
-        width: 32
-        ExtendedFunctionButton {
-            x: 4
-            anchors.verticalCenter: parent.verticalCenter
-            backendValue: root.backendValue
-        }
+    ExtendedFunctionLogic {
+        id: extFuncLogic
+        backendValue: root.backendValue
     }
 
-    Controls.Label {
+    ActionIndicator {
+        id: actionIndicator
+
+        enabled: root.enableEditors
+        icon.color: extFuncLogic.color
+        icon.text: extFuncLogic.glyph
+        onClicked: extFuncLogic.show()
+    }
+
+    Label {
         text: qsTr("Dash")
         color: Theme.color(Theme.PanelTextColorLight)
         elide: Text.ElideRight
+        width: root.labelWidth
     }
 
     DoubleSpinBox {
@@ -122,12 +127,14 @@ GridLayout {
         }
         onValueChanged: root.createArray()
         maximumValue: 1000
+        Layout.fillWidth: true
     }
 
-    Controls.Label {
+    Label {
         text: qsTr("Gap")
         color: Theme.color(Theme.PanelTextColorLight)
         elide: Text.ElideRight
+        width: root.labelWidth
     }
 
     DoubleSpinBox {
@@ -138,16 +145,18 @@ GridLayout {
 
         onValueChanged: root.createArray()
         maximumValue: 1000
+        Layout.fillWidth: true
     }
 
     Item {
-        width: 32
+        width: actionIndicator.width
     }
 
-    Controls.Label {
+    Label {
         text: qsTr("Dash")
         color: Theme.color(Theme.PanelTextColorLight)
         elide: Text.ElideRight
+        width: root.labelWidth
     }
 
     DoubleSpinBox {
@@ -158,12 +167,14 @@ GridLayout {
 
         onValueChanged: root.createArray()
         maximumValue: 1000
+        Layout.fillWidth: true
     }
 
-    Controls.Label {
+    Label {
         text: qsTr("Gap")
         color: Theme.color(Theme.PanelTextColorLight)
         elide: Text.ElideRight
+        width: root.labelWidth
     }
 
     DoubleSpinBox {
@@ -174,5 +185,6 @@ GridLayout {
 
         onValueChanged: root.createArray()
         maximumValue: 1000
+        Layout.fillWidth: true
     }
 }

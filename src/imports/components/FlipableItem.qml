@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2018 The Qt Company Ltd.
+** Copyright (C) 2019 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -37,8 +37,7 @@ Flipable {
     property alias flipAngle: rotation.angle
     property real opacityFront: 1
     property real opacityBack: 1
-    property int xAxis: 0
-    property int yAxis: 1
+    property int rotationalAxis: 1 // 0: x-axis, 1: y-axis
 
     Binding {
         target: flipable.front
@@ -56,7 +55,6 @@ Flipable {
 
     property bool flipped: false
 
-
     Component.onCompleted: {
         flipable.front = flipable.children[0]
         flipable.back = flipable.children[1]
@@ -66,7 +64,9 @@ Flipable {
         id: rotation
         origin.x: flipable.width/2
         origin.y: flipable.height/2
-        axis.x: flipable.xAxis; axis.y: flipable.yAxis; axis.z: 0
+        axis.x: flipable.rotationalAxis === 0 ? 1 : 0
+        axis.y: flipable.rotationalAxis === 1 ? 1 : 0
+        axis.z: 0
         angle: 0    // the default angle
     }
 }

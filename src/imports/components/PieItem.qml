@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2018 The Qt Company Ltd.
+** Copyright (C) 2019 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -27,7 +27,6 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.0
 import QtQuick 2.9
 import QtQuick.Shapes 1.0
 
@@ -50,17 +49,20 @@ Shape {
     property real begin: 0
     property real end: 90
 
-    property real alpha: end - begin
+    property real alpha: clamp(end - begin,0, 359.9)
 
-    property bool antialiasing: false
     layer.enabled: antialiasing
     layer.smooth: antialiasing
     layer.textureSize: Qt.size(width * 2, height * 2)
 
+    function clamp(num, min, max) {
+        return num <= min ? min : num >= max ? max : num;
+    }
+
     property bool hideLine: {
         if (alpha <= 0)
             return true
-        if (alpha >= 360)
+        if (alpha >= 359)
             return true
         return false
     }
@@ -86,29 +88,28 @@ Shape {
         property real __Xcenter: width / 2
         property real __Ycenter: height / 2
 
-        fillColor: "transparent"
-        strokeColor: Qt.transparent
+        strokeColor: "red"
         capStyle: ShapePath.FlatCap
 
-        strokeWidth: 1
+        strokeWidth: 4
 
-        startX: root.hideLine ? root.polarToCartesianX(path.__Xcenter, path.__Ycenter, path.__xRadius, root.begin - 180)
+        startX: root.hideLine ? root.polarToCartesianX(path.__Xcenter, path.__Ycenter, path.__xRadius, root.begin - 90)
                               : __Xcenter
-        startY: root.hideLine ? root.polarToCartesianY(path.__Xcenter, path.__Ycenter, path.__yRadius, root.begin - 180)
+        startY: root.hideLine ? root.polarToCartesianY(path.__Xcenter, path.__Ycenter, path.__yRadius, root.begin - 90)
                               : __Ycenter
         //startX: __Xcenter
         //startY: __Ycenter
 
         PathLine {
-            x: root.polarToCartesianX(path.__Xcenter, path.__Ycenter, path.__xRadius, root.begin - 180)
-            y: root.polarToCartesianY(path.__Xcenter, path.__Ycenter, path.__yRadius, root.begin - 180)
+            x: root.polarToCartesianX(path.__Xcenter, path.__Ycenter, path.__xRadius, root.begin - 90)
+            y: root.polarToCartesianY(path.__Xcenter, path.__Ycenter, path.__yRadius, root.begin - 90)
         }
 
         PathArc {
             id: arc
 
-            x: root.polarToCartesianX(path.__Xcenter, path.__Ycenter, path.__xRadius, root.end - 180)
-            y: root.polarToCartesianY(path.__Xcenter, path.__Ycenter,  path.__yRadius, root.end - 180)
+            x: root.polarToCartesianX(path.__Xcenter, path.__Ycenter, path.__xRadius, root.begin + root.alpha - 90)
+            y: root.polarToCartesianY(path.__Xcenter, path.__Ycenter,  path.__yRadius, root.begin + root.alpha - 90)
 
             radiusY: path.__yRadius;
             radiusX: path.__xRadius;
@@ -117,9 +118,9 @@ Shape {
         }
 
         PathLine {
-            x: root.hideLine ? root.polarToCartesianX(path.__Xcenter, path.__Ycenter, path.__xRadius, root.end - 180)
+            x: root.hideLine ? root.polarToCartesianX(path.__Xcenter, path.__Ycenter, path.__xRadius, root.begin + root.alpha - 90)
                              : path.__Xcenter
-            y: root.hideLine ? root.polarToCartesianY(path.__Xcenter, path.__Ycenter,  path.__yRadius, root.end - 180)
+            y: root.hideLine ? root.polarToCartesianY(path.__Xcenter, path.__Ycenter,  path.__yRadius, root.begin + root.alpha - 90)
                              : path.__Ycenter
         }
     }

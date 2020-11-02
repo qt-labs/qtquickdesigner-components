@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2018 The Qt Company Ltd.
+** Copyright (C) 2019 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -44,6 +44,18 @@ Column {
         SectionLayout {
             rows: 2
             Label {
+                text: qsTr("Rotational Axis")
+            }
+            SecondColumnLayout {
+                ComboBox {
+                    model: ["X Axis", "Y Axis"]
+                    backendValue: backendValues.rotationalAxis
+                    Layout.fillWidth: true
+                    useInteger: true
+                }
+            }
+
+            Label {
                 text: qsTr("Flip Angle")
             }
             SecondColumnLayout {
@@ -64,7 +76,7 @@ Column {
     Section {
         anchors.left: parent.left
         anchors.right: parent.right
-        caption: "Opacity"
+        caption: qsTr("Opacity")
 
         SectionLayout {
             rows: 2
@@ -96,41 +108,6 @@ Column {
                     stepSize: 0.1
                 }
                 ExpandingSpacer {
-                }
-            }
-        }
-    }
-
-    Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: "Rotational Axis"
-
-        SectionLayout {
-            rows: 2
-            Label {
-                text: qsTr("X Rotational Axis")
-            }
-
-            SecondColumnLayout {
-                ComboBox {
-                    model: ["X Axis", "Y Axis"]
-                    backendValue: backendValues.xAxis
-                    Layout.fillWidth: true
-                    useInteger: true
-                }
-            }
-
-            Label {
-                text: qsTr("Y Rotational Axis")
-            }
-
-            SecondColumnLayout {
-                ComboBox {
-                    model: ["X Axis", "Y Axis"]
-                    backendValue: backendValues.yAxis
-                    Layout.fillWidth: true
-                    useInteger: true
                 }
             }
         }

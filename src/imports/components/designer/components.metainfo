@@ -1,4 +1,16 @@
 MetaInfo {
+ Type {
+        name: "QtQuick.Studio.Components.GroupItem"
+        icon: "images/group-16px.png"
+
+        ItemLibraryEntry {
+            name: "Group"
+            category: "Studio Components"
+            libraryIcon: "images/group-24px.png"
+            version: "1.0"
+            requiredImport: "QtQuick.Studio.Components"
+        }
+    }
     Type {
         name: "QtQuick.Studio.Components.ArcItem"
         icon: "images/item-arc-16px.png"
@@ -9,7 +21,7 @@ MetaInfo {
             libraryIcon: "images/item-arc-24px.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
-
+            Property { name: "fillColor"; type: "QColor"; value: "transparent"; }
         }
     }
     Type {

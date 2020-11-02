@@ -32,8 +32,8 @@ import HelperWidgets 2.0
 import QtQuick.Layouts 1.0
 
 ComboBox {
-    model: ["FlatCap", "SquareCap", "RoundCap"]
-    backendValue: backendValues.capStyle
+    model: ["Inside", "Middle", "Outside"]
+    backendValue: backendValues.borderMode
     Layout.fillWidth: true
     useInteger: true
     manualMapping: true
@@ -49,14 +49,14 @@ ComboBox {
         if (block)
             return
 
-        if (currentText === "FlatCap")
-            backendValues.capStyle.value = 0
+        if (currentText === "Inside")
+            backendValues.borderMode.value = 0
 
-        if (currentText === "SquareCap")
-            backendValues.capStyle.value = 16
+        if (currentText === "Middle")
+            backendValues.borderMode.value = 1
 
-        if (currentText === "RoundCap")
-            backendValues.capStyle.value = 32
+        if (currentText === "Outside")
+            backendValues.borderMode.value = 2
     }
 
     Connections {
@@ -71,11 +71,11 @@ ComboBox {
 
         block = true
 
-        if (backendValues.capStyle.value === 0)
+        if (backendValues.borderMode.value === 0)
             currentIndex = 0
-        if (backendValues.capStyle.value === 16)
+        if (backendValues.borderMode.value === 1)
             currentIndex = 1
-        if (backendValues.capStyle.value === 32)
+        if (backendValues.borderMode.value === 2)
             currentIndex = 2
 
         block = false

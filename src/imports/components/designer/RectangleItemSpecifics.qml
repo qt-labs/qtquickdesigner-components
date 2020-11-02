@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2018 The Qt Company Ltd.
+** Copyright (C) 2019 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -30,7 +30,7 @@
 import QtQuick 2.0
 import HelperWidgets 2.0
 import QtQuick.Layouts 1.0
-
+import StudioControls 1.0 as StudioControls
 
 Column {
     anchors.left: parent.left
@@ -44,7 +44,8 @@ Column {
         ColorEditor {
             caption: qsTr("Fill Color")
             backendValue: backendValues.fillColor
-            supportGradient: false
+            supportGradient: true
+            shapeGradients: true
         }
 
 
@@ -79,7 +80,7 @@ Column {
                     Layout.preferredWidth: 80
                     decimals: 1
                     minimumValue: 0
-                    maximumValue: 75
+                    maximumValue: 200
                     stepSize: 1
                 }
                 ExpandingSpacer {
@@ -95,7 +96,7 @@ Column {
                     Layout.preferredWidth: 80
                     decimals: 1
                     minimumValue: 0
-                    maximumValue: 75
+                    maximumValue: 200
                     stepSize: 1
                 }
                 ExpandingSpacer {
@@ -112,7 +113,7 @@ Column {
                     Layout.preferredWidth: 80
                     decimals: 1
                     minimumValue: 0
-                    maximumValue: 75
+                    maximumValue: 200
                     stepSize: 1
                 }
                 ExpandingSpacer {
@@ -129,7 +130,7 @@ Column {
                     Layout.preferredWidth: 80
                     decimals: 1
                     minimumValue: 0
-                    maximumValue: 75
+                    maximumValue: 200
                     stepSize: 1
                 }
                 ExpandingSpacer {
@@ -146,7 +147,7 @@ Column {
                     Layout.preferredWidth: 80
                     decimals: 1
                     minimumValue: 0
-                    maximumValue: 75
+                    maximumValue: 200
                     stepSize: 1
                 }
                 ExpandingSpacer {
@@ -154,6 +155,9 @@ Column {
                 }
             }
         }
+    }
+
+    BevelSection {
     }
 
     Section {
@@ -168,15 +172,41 @@ Column {
             }
             SecondColumnLayout {
                 SpinBox {
+                    id: strokeWidthSpin
                     backendValue: backendValues.strokeWidth
                     Layout.preferredWidth: 80
                     decimals: 1
-                    minimumValue: 0
-                    maximumValue: 10000
+                    minimumValue: -1
+                    maximumValue: 200
                     stepSize: 1
                 }
-                ExpandingSpacer {
 
+                Item { width: 20 }
+
+                StudioControls.CheckBox {
+                    id: strokeWidthCheck
+                    text: qsTr("Hide stroke")
+                    checked: (backendValues.strokeWidth.value >= 0 ? false : true)
+                    actionIndicator.visible: false
+
+                    onCheckedChanged: {
+                        if (strokeWidthCheck.checked === true)
+                            backendValues.strokeWidth.value = -1
+                        else
+                            backendValues.strokeWidth.value = ((backendValues.strokeWidth.value < 0) ? 4 : backendValues.strokeWidth.value)
+                    }
+                }
+
+                ExpandingSpacer {
+                }
+            }
+
+            Label {
+                text: qsTr("Border Mode")
+            }
+
+            SecondColumnLayout {
+                BorderModeComboBox {
                 }
             }
 
@@ -187,6 +217,7 @@ Column {
 
             SecondColumnLayout {
                 ComboBox {
+                    id: strokeStyle
                     model: ["None", "Solid", "Dash", "Dot", "Dash Dot", "Dash Dot Dot"]
                     backendValue: backendValues.strokeStyle
                     Layout.fillWidth: true
@@ -226,19 +257,6 @@ Column {
                     minimumValue: 0
                     maximumValue: 1000
                     stepSize: 1
-                }
-            }
-
-            Label {
-                text: qsTr("Anti Aliasing")
-            }
-            SecondColumnLayout {
-                CheckBox {
-                    backendValue: backendValues.antialiasing
-                    text: qsTr("Anti Aliasing")
-                }
-                ExpandingSpacer {
-
                 }
             }
         }

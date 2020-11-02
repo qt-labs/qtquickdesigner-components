@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2018 The Qt Company Ltd.
+** Copyright (C) 2019 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -27,7 +27,6 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.0
 import QtQuick 2.9
 import QtQuick.Shapes 1.0
 
@@ -67,9 +66,8 @@ Shape {
     property real rightMargin: 0
     property real bottomMargin: 0
 
-    property bool antiAlias: false
-    layer.enabled: antiAlias
-    layer.smooth: antiAlias
+    layer.enabled: antialiasing
+    layer.smooth: antialiasing
     layer.textureSize: Qt.size(width * 2, height * 2)
 
     ShapePath {
@@ -80,10 +78,10 @@ Shape {
         property real xOffset: root.strokeWidth / 2 + root.leftMargin
         property real yOffset: root.strokeWidth / 2 + root.topMargin
 
-        fillColor: "transparent"
-        strokeColor: Qt.transparent
-        strokeWidth: 1
+        strokeWidth: 4
+        strokeColor: "red"
         capStyle: ShapePath.FlatCap
+        joinStyle: ShapePath.MiterJoin
 
         startX: root.topIntersection1.x + path.xOffset
         startY: root.topIntersection1.y + path.yOffset
@@ -127,9 +125,6 @@ Shape {
             x: root.topIntersection1.x + path.xOffset
             y: root.topIntersection1.y + path.yOffset
         }
-
-
-
     }
 
     onWidthChanged: calc()
