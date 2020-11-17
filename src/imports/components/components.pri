@@ -5,4 +5,5 @@ QML_FILES += \
     $$PWD/IsoItem.qml \
     $$PWD/PieItem.qml \
     $$PWD/SvgPathItem.qml \
-    $$PWD/TriangleItem.qml
+    $$PWD/TriangleItem.qml \
+    $$PWD/RectangleItem.qml
