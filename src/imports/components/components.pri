@@ -6,4 +6,5 @@ QML_FILES += \
     $$PWD/PieItem.qml \
     $$PWD/SvgPathItem.qml \
     $$PWD/TriangleItem.qml \
-    $$PWD/RectangleItem.qml
+    $$PWD/RectangleItem.qml \
+    $$PWD/GroupItem.qml
