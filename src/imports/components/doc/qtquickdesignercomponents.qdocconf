@@ -1,0 +1,48 @@
+include($QT_INSTALL_DOCS/global/qt-module-defaults.qdocconf)
+
+project                 = QtQuickDesignerComponents
+description             = Qt Quick Designer Components Reference Documentation
+version                 = $QT_VERSION
+
+examplesinstallpath = qtquickdesignercomponents
+
+qhp.projects            = QtQuickDesignerComponents
+
+qhp.QtQuickDesignerComponents.file                = qtquickdesignercomponents.qhp
+qhp.QtQuickDesignerComponents.namespace           = org.qt-project.qtquickdesignercomponents.$QT_VERSION_TAG
+qhp.QtQuickDesignerComponents.virtualFolder       = qtquickdesignercomponents
+qhp.QtQuickDesignerComponents.indexTitle          = Qt Quick Designer Components
+qhp.QtQuickDesignerComponents.indexRoot           =
+
+qhp.QtQuickDesignerComponents.filterAttributes    = qtquickdesignercomponents $QT_VERSION qtrefdoc
+qhp.QtQuickDesignerComponents.customFilters.Qt.name = QtQuickDesignercomponents $QT_VERSION
+qhp.QtQuickDesignerComponents.customFilters.Qt.filterAttributes = qtquickdesignercomponents $QT_VERSION
+
+qhp.QtQuickDesignerComponents.subprojects         = qmltypes
+
+qhp.QtQuickDesignerComponents.subprojects.qmltypes.title      = QML Types
+qhp.QtQuickDesignerComponents.subprojects.qmltypes.indexTitle = Qt Quick Designer Components QML Types
+qhp.QtQuickDesignerComponents.subprojects.qmltypes.selectors  = qmlclass
+qhp.QtQuickDesignerComponents.subprojects.qmltypes.sortPages  = true
+
+#qhp.QtQuickDesignerComponents.subprojects.examples.title         = Examples
+#qhp.QtQuickDesignerComponents.subprojects.examples.indexTitle    = Qt Qt Quick Designer Components Examples
+#qhp.QtQuickDesignerComponents.subprojects.examples.selectors     = fake:example
+#qhp.QtQuickDesignerComponents.subprojects.examples.sortPages     = true
+
+headerdirs  += ..
+sourcedirs  += ..
+#exampledirs =
+imagedirs   += images \
+
+depends += qtcore qtdoc qtgui qtquick qtquickextras qtgraphicaleffects
+
+tagfile  = qtquickdesignercomponents.tags
+
+#add generic thumbnail images for example documentation that does not have an image.
+#manifestmeta.thumbnail.names  +=
+
+navigation.landingpage = "Qt Quick Designer Components"
+navigation.qmltypespage = "Qt Quick Designer Components QML Types"
+
+macro.QDS = "Qt Design Studio"

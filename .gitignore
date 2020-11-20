@@ -85,3 +85,8 @@ qt.conf
 *.qmlc
 .qmlcache
 codeattributions.qdoc
+
+# Directories to ignore
+# ---------------------
+
+/doc
