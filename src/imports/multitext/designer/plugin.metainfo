@@ -30,6 +30,7 @@ MetaInfo {
                category: "Studio Multi Text"
                libraryIcon: ":/qtquickplugin/images/item-icon.png"
                version: "1.0"
+               Property { name: "text"; type: "binding"; value: "qsTr(\"Text\")"; }
                requiredImport: "QtQuick.Studio.MultiText"
            }
     }
