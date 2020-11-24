@@ -55,35 +55,35 @@ Column {
             }
 
             Label {
-                text: qsTr("Whitelist")
+                text: qsTr("Positive List")
             }
             SecondColumnLayout {
                 EditableListView {
-                    id: whitelistView
-                    backendValue: backendValues.whitelist
-                    model: whitelistView.backendValue.expressionAsList
+                    id: positivelistView
+                    backendValue: backendValues.positivelist
+                    model: positivelistView.backendValue.expressionAsList
                     Layout.fillWidth: true
                     typeFilter: "FlowView.FlowItem"
 
-                    onAdd: function(value) { whitelistView.backendValue.idListAdd(value) }
-                    onRemove: function(idx) { whitelistView.backendValue.idListRemove(idx) }
-                    onReplace: function (idx, value) { whitelistView.backendValue.idListReplace(idx, value) }
+                    onAdd: function(value) { positivelistView.backendValue.idListAdd(value) }
+                    onRemove: function(idx) { positivelistView.backendValue.idListRemove(idx) }
+                    onReplace: function (idx, value) { positivelistView.backendValue.idListReplace(idx, value) }
                 }
             }
             Label {
-                text: qsTr("Blacklist")
+                text: qsTr("Negative List")
             }
             SecondColumnLayout {
                 EditableListView {
-                    id: blackListView
-                    backendValue: backendValues.blacklist
-                    model: blackListView.backendValue.expressionAsList
+                    id: negativelistView
+                    backendValue: backendValues.negativelist
+                    model: negativelistView.backendValue.expressionAsList
                     Layout.fillWidth: true
                     typeFilter: "FlowView.FlowItem"
 
-                    onAdd: function(value) { blackListView.backendValue.idListAdd(value) }
-                    onRemove: function(idx) { blackListView.backendValue.idListRemove(idx) }
-                    onReplace: function (idx, value) { blackListView.backendValuet.idListReplace(idx, value) }
+                    onAdd: function(value) { negativelistView.backendValue.idListAdd(value) }
+                    onRemove: function(idx) { negativelistView.backendValue.idListRemove(idx) }
+                    onReplace: function (idx, value) { negativelistView.backendValuet.idListReplace(idx, value) }
                 }
             }
 

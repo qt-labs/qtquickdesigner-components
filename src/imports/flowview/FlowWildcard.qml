@@ -33,8 +33,8 @@ import QtQuick.Studio.EventSystem 1.0
 QtObject {
     id: root
 
-    property list<FlowItem> whitelist
-    property list<FlowItem> blacklist
+    property list<FlowItem> positivelist
+    property list<FlowItem> negativelist
 
     property FlowTransition target
 
@@ -46,11 +46,11 @@ QtObject {
         if (cItem === undefined)
             return
 
-        if (root.transitionView.checkInclude(root.blacklist, cItem))
+        if (root.transitionView.checkInclude(root.negativelist, cItem))
             return;
 
-        if (root.whitelist.length !== 0) {
-            if (!root.transitionView.checkInclude(root.whitelist, cItem))
+        if (root.positivelist.length !== 0) {
+            if (!root.transitionView.checkInclude(root.positivelist, cItem))
                 return;
         }
 
