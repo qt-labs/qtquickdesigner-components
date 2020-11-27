@@ -11,7 +11,9 @@ AUX_QML_FILES += \
     $$PWD/PieItemSpecifics.qml \
     $$PWD/RectangleItemSpecifics.qml \
     $$PWD/SvgPathItemSpecifics.qml \
-    $$PWD/TriangleItemSpecifics.qml
+    $$PWD/TriangleItemSpecifics.qml \
+    $$PWD/BevelSection.qml \
+    $$PWD/BorderModeComboBox.qml
 
 AUX_QML_FILES += \
     $$PWD/images/custom-border-16px.png \
