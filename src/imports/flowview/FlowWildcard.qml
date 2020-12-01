@@ -27,7 +27,7 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.10
+import QtQuick 2.15
 import QtQuick.Studio.EventSystem 1.0
 
 QtObject {
