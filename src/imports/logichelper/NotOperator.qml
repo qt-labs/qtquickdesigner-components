@@ -32,6 +32,6 @@ import QtQuick 2.10
 QtObject {
     id: object
 
-    property real input
-    property real output: !object.input
+    property bool input
+    property bool output: !object.input
 }

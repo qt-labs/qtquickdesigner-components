@@ -32,7 +32,7 @@ import QtQuick 2.10
 QtObject {
     id: object
 
-    property real input01
-    property real input02
-    property real output: object.input01 || object.input02
+    property bool input01
+    property bool input02
+    property bool output: object.input01 || object.input02
 }
