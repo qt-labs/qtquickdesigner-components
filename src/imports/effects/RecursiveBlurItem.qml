@@ -27,24 +27,35 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.10
+import QtQuick 2.0
+import QtGraphicalEffects 1.0
 
 Item {
     id: root
-    property alias originX: rotation.origin.x
-    property alias originY: rotation.origin.y
-    property alias axisX: rotation.axis.x
-    property alias axisY: rotation.axis.y
-    property alias axisZ: rotation.axis.z
-    property alias angle: rotation.angle
 
-    implicitWidth: childrenRect.width + childrenRect.x
-    implicitHeight: childrenRect.height + childrenRect.y
+    default property alias contentStack: stack.children
+    property alias loops: recursiveBlur.loops
+    property alias progress: recursiveBlur.progress
+    property alias radius: recursiveBlur.radius
+    property alias transparentBorder: recursiveBlur.transparentBorder
+    property alias cached: recursiveBlur.cached
 
-    transform: Rotation {
-        id: rotation
-        origin.x: root.width / 2
-        origin.y: root.height / 2
-        angle: 45
+    implicitWidth: Math.max(32, stack.implicitWidth)
+    implicitHeight: Math.max(32, stack.implicitHeight)
+
+    Item {
+        id: stack
+        implicitWidth: childrenRect.width + childrenRect.x
+        implicitHeight: childrenRect.height + childrenRect.y
+        visible: false
+    }
+
+    RecursiveBlur {
+        id: recursiveBlur
+        transparentBorder: true
+        anchors.fill: stack
+        source: stack
+        radius: 8.0
+        loops: 12
     }
 }

@@ -27,24 +27,39 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.10
+import QtQuick 2.0
+import QtGraphicalEffects 1.0
 
 Item {
     id: root
-    property alias originX: rotation.origin.x
-    property alias originY: rotation.origin.y
-    property alias axisX: rotation.axis.x
-    property alias axisY: rotation.axis.y
-    property alias axisZ: rotation.axis.z
-    property alias angle: rotation.angle
 
-    implicitWidth: childrenRect.width + childrenRect.x
-    implicitHeight: childrenRect.height + childrenRect.y
+    default property alias contentStack: stack.children
+    property alias invert: mask.invert
+    property alias cached: mask.cached
 
-    transform: Rotation {
-        id: rotation
-        origin.x: root.width / 2
-        origin.y: root.height / 2
-        angle: 45
+    implicitWidth: Math.max(32, stack.implicitWidth)
+    implicitHeight: Math.max(32, stack.implicitHeight)
+
+    Item {
+        z: -1
+        id: stack
+        implicitWidth: mask.source.width + mask.source.x
+        implicitHeight: mask.source.height + mask.source.y
+        visible: false
+    }
+
+    OpacityMask {
+        id: mask
+        anchors.fill: parent
+        source: root.background
+        maskSource: root.foreground
+    }
+
+    property Item background
+    property Item foreground
+
+    Component.onCompleted: {
+        root.background = stack.children[0]
+        root.foreground = stack.children[1]
     }
 }

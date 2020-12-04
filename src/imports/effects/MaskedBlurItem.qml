@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2018 The Qt Company Ltd.
+** Copyright (C) 2019 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -32,57 +32,36 @@ import QtGraphicalEffects 1.0
 
 Item {
     id: root
+
     default property alias contentStack: stack.children
-    property alias maskBlurRadius: maskedBlur.radius
-    property alias maskBlurSamples: maskedBlur.samples
-    property alias gradientStopPosition1: stop1.position
-    property alias gradientStopPosition2: stop2.position
-    property alias gradientStopPosition3: stop3.position
-    property alias gradientStopPosition4: stop4.position
-    property alias maskRotation: gradient.rotation
+    property alias radius: maskedBlur.radius
+    property alias samples: maskedBlur.samples
 
     implicitWidth: Math.max(32, stack.implicitWidth)
     implicitHeight: Math.max(32, stack.implicitHeight)
 
     Item {
+        z: -1
         id: stack
-        implicitWidth: childrenRect.width + childrenRect.x
-        implicitHeight: childrenRect.height + childrenRect.y
-
+        implicitWidth: maskedBlur.source.width + maskedBlur.source.x
+        implicitHeight: maskedBlur.source.height + maskedBlur.source.y
         visible: false
-
-    }
-
-    Item {
-        id: mask
-        width: stack.width
-        height: stack.height
-        visible: false
-
-        LinearGradient{
-            id: gradient
-            height: stack.height * 2
-            width: stack.width * 2
-            y: -stack.height /2
-            x: -stack.width /2
-            rotation: 0
-            gradient: Gradient{
-                GradientStop {id: stop1; position: 0.2; color: "#ffffffff"}
-                GradientStop {id: stop2; position: 0.5; color: "#00ffffff"}
-                GradientStop {id: stop3; position: 0.8; color: "#00ffffff"}
-                GradientStop {id: stop4; position: 1.0; color: "#ffffffff"}
-            }
-            start: Qt.point(stack.width /2, 0)
-            end: Qt.point(stack.width + stack.width /2, 100)
-        }
     }
 
     MaskedBlur {
         id: maskedBlur
-        anchors.fill: stack
-        source: stack
-        maskSource: mask
+        anchors.fill: parent
+        source: root.background
+        maskSource: root.foreground
         radius: 32
         samples: 16
+    }
+
+    property Item background
+    property Item foreground
+
+    Component.onCompleted: {
+        root.background = stack.children[0]
+        root.foreground = stack.children[1]
     }
 }

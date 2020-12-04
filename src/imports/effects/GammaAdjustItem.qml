@@ -27,24 +27,31 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.10
+import QtQuick 2.0
+import QtGraphicalEffects 1.0
 
 Item {
     id: root
-    property alias originX: rotation.origin.x
-    property alias originY: rotation.origin.y
-    property alias axisX: rotation.axis.x
-    property alias axisY: rotation.axis.y
-    property alias axisZ: rotation.axis.z
-    property alias angle: rotation.angle
 
-    implicitWidth: childrenRect.width + childrenRect.x
-    implicitHeight: childrenRect.height + childrenRect.y
+    default property alias contentStack: stack.children
+    property alias gamma: gammaAdjust.gamma
+    property alias cached: gammaAdjust.cached
 
-    transform: Rotation {
-        id: rotation
-        origin.x: root.width / 2
-        origin.y: root.height / 2
-        angle: 45
+    implicitWidth: Math.max(32, stack.implicitWidth)
+    implicitHeight: Math.max(32, stack.implicitHeight)
+
+    Item {
+        id: stack
+        implicitWidth: childrenRect.width + childrenRect.x
+        implicitHeight: childrenRect.height + childrenRect.y
+
+        visible: false
+    }
+
+    GammaAdjust {
+        id: gammaAdjust
+        anchors.fill: stack
+        source: stack
+        gamma: 0.5
     }
 }

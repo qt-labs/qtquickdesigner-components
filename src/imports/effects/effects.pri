@@ -8,9 +8,18 @@ QML_FILES += \
     $$PWD/FastBlurItem.qml \
     $$PWD/GaussianBlurItem.qml \
     $$PWD/GlowItem.qml \
+    $$PWD/GaussianBlurItem.qml \
+    $$PWD/GammaAdjustItem.qml \
+    $$PWD/RecursiveBlurItem.qml \
+    $$PWD/ThresholdMaskItem.qml \
+    $$PWD/LevelAdjustItem.qml \
+    $$PWD/InnerShadowItem.qml \
+    $$PWD/DisplaceItem.qml \
+    $$PWD/DesaturationItem.qml \
     $$PWD/HueSaturationItem.qml \
     $$PWD/MaskedBlurItem.qml \
     $$PWD/MaskItem.qml \
+    $$PWD/OpacityMaskItem.qml \
     $$PWD/RadialBlurItem.qml \
     $$PWD/RotationItem.qml \
     $$PWD/SaturationItem.qml \

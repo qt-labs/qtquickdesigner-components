@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2018 The Qt Company Ltd.
+** Copyright (C) 2019 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -33,7 +33,6 @@ import QtGraphicalEffects 1.0
 Item {
     id: root
 
-
     default property alias contentStack: stack.children
     property alias colorizeHue: colorize.hue
     property alias colorizeSaturation: colorize.saturation
@@ -55,8 +54,8 @@ Item {
         id: colorize
         anchors.fill: stack
         source: stack
-        hue: 0.0
-        saturation: 0
-        lightness: 0
+        hue: 0.5
+        saturation: 0.5
+        lightness: 0.5
     }
 }

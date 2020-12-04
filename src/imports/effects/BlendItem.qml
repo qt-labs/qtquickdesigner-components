@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2018 The Qt Company Ltd.
+** Copyright (C) 2019 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -35,6 +35,7 @@ Item {
 
     default property alias contentStack: stack.children
     property alias mode: blend.mode
+    property alias cached: blend.cached
 
     implicitWidth: Math.max(32, stack.implicitWidth)
     implicitHeight: Math.max(32, stack.implicitHeight)
@@ -44,7 +45,6 @@ Item {
         id: stack
         implicitWidth: blend.source.width + blend.source.x
         implicitHeight: blend.source.height + blend.source.y
-
         visible: false
     }
 

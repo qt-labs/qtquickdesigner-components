@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2018 The Qt Company Ltd.
+** Copyright (C) 2019 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -33,7 +33,6 @@ import QtGraphicalEffects 1.0
 Item {
     id: root
 
-
     default property alias contentStack: stack.children
     property alias radius: glow.radius
     property alias samples: glow.samples
@@ -50,7 +49,6 @@ Item {
         implicitWidth: childrenRect.width + childrenRect.x
         implicitHeight: childrenRect.height + childrenRect.y
         visible: false
-
     }
 
     Glow {

@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2018 The Qt Company Ltd.
+** Copyright (C) 2019 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -44,14 +44,12 @@ Item {
     implicitWidth: Math.max(32, stack.implicitWidth)
     implicitHeight: Math.max(32, stack.implicitHeight)
 
-
     Item {
         id: stack
         implicitWidth: childrenRect.width + childrenRect.x
         implicitHeight: childrenRect.height + childrenRect.y
 
         visible: false
-
     }
 
     DirectionalBlur {

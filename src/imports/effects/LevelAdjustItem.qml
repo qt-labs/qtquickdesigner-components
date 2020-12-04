@@ -27,24 +27,36 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.10
+import QtQuick 2.12
+import QtGraphicalEffects 1.12
 
 Item {
     id: root
-    property alias originX: rotation.origin.x
-    property alias originY: rotation.origin.y
-    property alias axisX: rotation.axis.x
-    property alias axisY: rotation.axis.y
-    property alias axisZ: rotation.axis.z
-    property alias angle: rotation.angle
 
-    implicitWidth: childrenRect.width + childrenRect.x
-    implicitHeight: childrenRect.height + childrenRect.y
+    default property alias contentStack: stack.children
+    property real gammaR: 1.0
+    property real gammaG: 1.0
+    property real gammaB: 1.0
+    property alias maximumInput: levelAdjust.maximumInput
+    property alias maximumOutput: levelAdjust.maximumOutput
+    property alias minimumInput: levelAdjust.minimumInput
+    property alias minimumOutput: levelAdjust.minimumOutput
+    property alias cached: levelAdjust.cached
 
-    transform: Rotation {
-        id: rotation
-        origin.x: root.width / 2
-        origin.y: root.height / 2
-        angle: 45
+    implicitWidth: Math.max(32, stack.implicitWidth)
+    implicitHeight: Math.max(32, stack.implicitHeight)
+
+    Item {
+        id: stack
+        implicitWidth: childrenRect.width + childrenRect.x
+        implicitHeight: childrenRect.height + childrenRect.y
+        visible: true
+    }
+
+    LevelAdjust {
+        id: levelAdjust
+        anchors.fill: stack
+        source: stack
+        gamma: Qt.vector3d(root.gammaR, root.gammaG, root.gammaG)
     }
 }

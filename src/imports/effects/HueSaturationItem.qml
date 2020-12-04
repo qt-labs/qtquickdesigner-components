@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2018 The Qt Company Ltd.
+** Copyright (C) 2019 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -54,8 +54,8 @@ Item {
         id: hueSat
         anchors.fill: stack
         source: stack
-        hue: 0.0
+        hue: 0.5
         saturation: 0.5
-        lightness: -0.2
+        lightness: 0.5
     }
 }

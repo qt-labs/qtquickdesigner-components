@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2018 The Qt Company Ltd.
+** Copyright (C) 2019 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -33,27 +33,29 @@ import QtGraphicalEffects 1.0
 Item {
     id: root
 
-
-    default property alias content: stack.children
-    property alias gaussianBlurRadius: gaussianBlur.radius
-    property alias gaussianBlurSamples: gaussianBlur.samples
+    default property alias contentStack: stack.children
+    property alias deviation: gaussianBlur.deviation
+    property alias radius: gaussianBlur.radius
+    property alias samples: gaussianBlur.samples
+    property alias transparentBorder: gaussianBlur.transparentBorder
+    property alias cached: gaussianBlur.cached
 
     implicitWidth: Math.max(32, stack.implicitWidth)
     implicitHeight: Math.max(32, stack.implicitHeight)
 
     Item {
-        implicitWidth: contentItem.width
-        implicitHeight: contentItem.height
-        visible: true
         id: stack
-
+        implicitWidth: childrenRect.width + childrenRect.x
+        implicitHeight: childrenRect.height + childrenRect.y
+        visible: false
     }
 
     GaussianBlur {
         id: gaussianBlur
+        transparentBorder: true
         anchors.fill: stack
         source: stack
-        radius: 32
-        samples: 16
+        radius: 8.0
+        samples: 17
     }
 }
