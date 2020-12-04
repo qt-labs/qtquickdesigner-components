@@ -19,7 +19,7 @@ ColorizeEffect 1.0 ColorizeEffect.qml
 ColorOverlayEffect 1.0 ColorOverlayEffect.qml
 DesaturationEffect 1.0 DesaturationEffect.qml
 DirectionalBlurEffect 1.0 DirectionalBlurEffect.qml
-DisplaceEffect.qml 1.0 DisplaceEffect.qml
+DisplaceEffect 1.0 DisplaceEffect.qml
 DropShadowEffect 1.0 DropShadowEffect.qml
 FastBlurEffect 1.0 FastBlurEffect.qml
 GammaAdjustEffect 1.0 GammaAdjustEffect.qml
