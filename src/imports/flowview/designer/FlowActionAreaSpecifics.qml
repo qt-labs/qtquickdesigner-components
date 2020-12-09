@@ -95,7 +95,7 @@ Column {
                  valueType: ComboBox.ValueType.Integer
 
                  model: ["Left Click", "Left Double Click", "Left Long Press", "Right Click", "Right Double Click",
-                     "Right Long Press", "Flic kUp", "Flick Down", "Flick Left", "Flick Right", "Pinch In","Pinch Out" ]
+                     "Right Long Press", "Flick Up", "Flick Down", "Flick Left", "Flick Right", "Pinch In","Pinch Out" ]
              }
 
         }
