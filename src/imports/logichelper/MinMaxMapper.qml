@@ -37,7 +37,7 @@ QtObject {
 
     property bool minClipped: object.input < object.min
     property bool maxClipped: object.input > object.max
-    property bool outOfRage: object.maxClipped ||object.minClipped
+    property bool outOfRange: object.maxClipped ||object.minClipped
 
     property real value: {
         if (object.maxClipped)
