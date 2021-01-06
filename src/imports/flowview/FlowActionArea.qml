@@ -58,6 +58,8 @@ Item {
         property point dragStartPoint;
     }
 
+    signal triggered
+
     property real maxDragTime: 500
     property real minDragDistance: 50
     property real minPinchFactor: 2.0
@@ -174,6 +176,8 @@ Item {
         } else {
             target.trigger()
         }
+
+        root.triggered()
     }
 
     property Connections connections : Connections {
