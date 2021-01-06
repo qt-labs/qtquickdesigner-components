@@ -1,0 +1,49 @@
+include($QT_INSTALL_DOCS/global/qt-module-defaults.qdocconf)
+
+project                 = QtQuickStudioLogicHelper
+description             = Qt Quick Studio Logic Helper Reference Documentation
+version                 = $QT_VERSION
+
+examplesinstallpath = qtquickstudiologichelper
+
+moduleheader            =
+
+qhp.projects            = QtQuickStudioLogicHelper
+
+qhp.QtQuickStudioLogicHelper.file                = qtquickstudiologichelper.qhp
+qhp.QtQuickStudioLogicHelper.namespace           = org.qt-project.qtquickstudiologichelper.$QT_VERSION_TAG
+qhp.QtQuickStudioLogicHelper.virtualFolder       = qtquickstudiologichelper
+qhp.QtQuickStudioLogicHelper.indexTitle          = Qt Quick Studio Logic Helper
+qhp.QtQuickStudioLogicHelper.indexRoot           =
+
+qhp.QtQuickStudioLogicHelper.filterAttributes    = qtquickstudiologichelper $QT_VERSION qtrefdoc
+qhp.QtQuickStudioLogicHelper.customFilters.Qt.name = QtQuickStudiologichelper $QT_VERSION
+qhp.QtQuickStudioLogicHelper.customFilters.Qt.filterAttributes = qtquickstudiologichelper $QT_VERSION
+
+qhp.QtQuickStudioLogicHelper.subprojects         = qmltypes
+
+qhp.QtQuickStudioLogicHelper.subprojects.qmltypes.title      = QML Types
+qhp.QtQuickStudioLogicHelper.subprojects.qmltypes.indexTitle = Qt Quick Studio Logic Helper QML Types
+qhp.QtQuickStudioLogicHelper.subprojects.qmltypes.selectors  = qmlclass
+qhp.QtQuickStudioLogicHelper.subprojects.qmltypes.sortPages  = true
+
+#qhp.QtQuickStudioLogicHelper.subprojects.examples.title         = Examples
+#qhp.QtQuickStudioLogicHelper.subprojects.examples.indexTitle    = Qt Qt Quick Studio Logic Helper Examples
+#qhp.QtQuickStudioLogicHelper.subprojects.examples.selectors     = fake:example
+#qhp.QtQuickStudioLogicHelper.subprojects.examples.sortPages     = true
+
+sourcedirs += .
+#exampledirs =
+imagedirs   += images \
+
+depends += qtcore qtdoc qtgui qtqml qtquick qtquickcontrols
+
+tagfile  = qtquickstudiologichelper.tags
+
+#add generic thumbnail images for example documentation that does not have an image.
+#manifestmeta.thumbnail.names  +=
+
+navigation.landingpage = "Qt Quick Studio Logic Helper"
+navigation.qmltypespage = "Qt Quick Studio Logic Helper QML Types"
+
+macro.QDS = "Qt Design Studio"

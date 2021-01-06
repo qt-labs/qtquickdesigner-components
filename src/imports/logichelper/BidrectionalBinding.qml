@@ -29,12 +29,78 @@
 
 import QtQuick 2.10
 
+/*!
+    \qmltype BidirectionalBinding
+    \inqmlmodule QtQuick.Studio.LogicHelper
+    \since QtQuick.Studio.LogicHelper 1.0
+    \inherits QtObject
+
+    \brief Binds the values of two controls bi-directionally.
+
+    The BidirectionalBinding type binds the values of two controls
+    together, so that when one value is changed, the other one follows it.
+    For example, this type could be used to synchronize two sliders or a
+    slider and checkbox. Typically, it is used to bind a backend value to
+    a control, such as a slider.
+
+    The \l target01 and \l target02 properties specify the ids of the components
+    to bind together. The \l property01 and \l property02 properties specify the
+    names the properties to synchronize.
+
+    Designers can use the BidirectionalBinding type in \QDS instead of writing
+    JavaScript expressions.
+
+    A \l StringMapper type can be used to add a text property that displays the
+    value.
+
+    \section1 Example Usage
+
+    In the following example, we bind the values of two \l Slider types
+    together bidirectionally:
+
+    \code
+    Rectangle {
+        Slider {
+            id: slider
+            value: 0.5
+        }
+        Slider {
+            id: slider1
+            value: 0.5
+        }
+
+        BidrectionalBinding {
+            id: biDirectBinding
+            property02: "value"
+            property01: "value"
+            target02: slider1
+            target01: slider
+        }
+    }
+    \endcode
+*/
+
 QtObject {
     id: object
+
+/*!
+    The id of the component to bind to \l target02.
+*/
     property QtObject target01
+
+/*!
+    The id of the component to bind to \l target01.
+*/
     property QtObject target02
 
+/*!
+    The name of the property to synchronize with \l property02.
+*/
     property string property01
+
+/*!
+    The name of the property to synchronize with \l property01.
+*/
     property string property02
 
     property QtObject __internal: QtObject {

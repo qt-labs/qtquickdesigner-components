@@ -29,16 +29,87 @@
 
 import QtQuick 2.10
 
+/*!
+    \qmltype MinMaxMapper
+    \inqmlmodule QtQuick.Studio.LogicHelper
+    \since QtQuick.Studio.LogicHelper 1.0
+    \inherits QtObject
+
+    \brief Provides access to values that are out or range.
+
+    The MinMaxMapper type has output values even if the input value is out
+    of range or too small or big. This enables applying actions to values
+    even if they are out of range, such as changing a color in a state.
+
+    To access the values of a control, the \l input property of the
+    minimum-maximum mapper is bound to that of the \l value property
+    of the control.
+
+    For example, to restrict the maximum value of a slider to 0.60,
+    regardless of the maximum value set in the slider properties,
+    we bind the value of the \l input property of the mapper to
+    the value of the \l value property of the slider and set the value
+    of the \l max property to 0.60.
+
+    The \l outOfRange, \l maxClipped and \l minClipped properties are set to
+    \c true if the value of the \l input property is out of range.
+    For example, in the context of speed, \l maxClipped being \c true
+    would mean \e {too fast}, whereas \l minClipped being \c true would
+    mean \e {too slow}, and \l outOfRange being \c true would mean
+    \e {either too fast or too slow}.
+
+    Designers can use the Min Max Mapper type in \QDS instead of writing
+    JavaScript expressions.
+
+    \section1 Example Usage
+
+    In the following example, we use the MinMaxMapper type to restrict the
+    maximum value of a \l Slider type to 0.60, regardless of the maximum
+    value set in the Slider properties:
+
+    \code
+    Rectangle {
+        Slider {
+            id: slider
+            value: 0.5
+        }
+        MinMaxMapper {
+            id: minMaxMapper
+            input: slider.value
+            max: 0.6
+        }
+    }
+    \endcode
+*/
+
 QtObject {
     id: object
 
-
+/*!
+    The input value.
+*/
     property real input
 
+/*!
+    Whether \l input is less than \l min.
+*/
     property bool minClipped: object.input < object.min
+
+/*!
+    Whether \l input is larger than \l max.
+*/
     property bool maxClipped: object.input > object.max
+
+/*!
+    Whether \l input is out of range. Returns \c true if \l minClipped or
+    \l maxClipped is \c true.
+*/
     property bool outOfRange: object.maxClipped ||object.minClipped
 
+/*!
+    The value of \l input. If \l maxClipped is \c true, returns the value of
+    \l max. If \l minClipped is \c true, returns the value of \l min.
+*/
     property real value: {
         if (object.maxClipped)
             return object.max
@@ -49,7 +120,14 @@ QtObject {
         return object.input
     }
 
+/*!
+    The minimum value of \l input.
+*/
     property real min: 0
+
+/*!
+    The maximum value of \l input.
+*/
     property real max: 100
 }
 
