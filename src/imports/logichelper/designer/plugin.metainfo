@@ -1,6 +1,6 @@
 MetaInfo {
     Type {
-        name: "QtQuick.Studio.LogicHelper.BidrectionalBinding"
+        name: "QtQuick.Studio.LogicHelper.BidirectionalBinding"
         icon: "images/lc-bidirectional-binding-16px.png"
 
         Hints {

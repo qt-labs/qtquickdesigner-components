@@ -114,7 +114,10 @@ QtObject {
                 return;
 
             __internal.block = true;
-            object.target02[property02] =  __internal.value01
+            try {
+                object.target02[property02] =  __internal.value01
+            } catch(error) {
+            }
             __internal.block = false;
         }
 
@@ -123,7 +126,10 @@ QtObject {
                 return;
 
             __internal.block = true;
-            object.target01[property01] =  __internal.value02
+            try {
+                object.target01[property01] =  __internal.value02
+            } catch(error) {
+            }
             __internal.block = false;
         }
     }

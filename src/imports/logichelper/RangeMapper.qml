@@ -39,8 +39,8 @@ import QtQuick 2.10
     of the second range follows that of the original range.
 
     The minimum and maximum input and output values are specified as values of
-    the \l inputMin, \l inputMax, \l outputMin, and \l outputMax properties.
-    The original value is specified as the value of the \l value property.
+    the \l inputMinimum, \l inputMaximum, \l outputMinimum, and \l outputMaximum properties.
+    The original value is specified as the value of the \l output property.
 
     For example, if you map input in the range of \c {-1,1} to output in the
     range of \c {0,1000}, and the original value changes from -1 to 1, the
@@ -66,10 +66,10 @@ import QtQuick 2.10
         }
         RangeMapper {
             id: rangeMapper
-            outputMin: 10
-            outputMax: 1000
-            inputMin: slider.from
-            inputMax: slider.to
+            outputMinimum: 10
+            outputMaximum: 1000
+            inputMinimum: slider.from
+            inputMaximum: slider.to
             input: slider.value
         }
     }
@@ -85,37 +85,31 @@ QtObject {
     property real input
 
 /*!
-    The original value.
+    The output value.
 */
-    property real value: {
-        var slope = (object.outputMax - object.outputMin) / (object.inputMax - object.inputMin)
-        return object.outputMin + slope * (object.input - object.inputMin)
+    property real output: {
+        var slope = (object.outputMaximum - object.outputMinimum) / (object.inputMaximum - object.inputMinimum)
+        return object.outputMinimum + slope * (object.input - object.inputMinimum)
     }
 
 /*!
     The minimum input value.
 */
-    property real inputMin: 0
+    property real inputMinimum: 0
 
 /*!
     The maximum input value.
 */
-    property real inputMax: 100
+    property real inputMaximum: 100
 
 /*!
     The minimum output value.
 */
-    property real outputMin: 0
+    property real outputMinimum: 0
 
 /*!
     The maximum output value.
 */
-    property real outputMax: 100
+    property real outputMaximum: 100
 
 }
-
-/*##^##
-Designer {
-    D{i:0;autoSize:true;height:480;width:640}
-}
-##^##*/

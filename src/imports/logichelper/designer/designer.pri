@@ -2,7 +2,7 @@ AUX_QML_FILES += \
     $$PWD/plugin.metainfo
 
 AUX_QML_FILES += \
-    $$PWD/BidrectionalBindingSpecifics.qml
+    $$PWD/BidirectionalBindingSpecifics.qml
 
 AUX_QML_FILES += \
     $$PWD/images/lc-and-operator-16px.png \

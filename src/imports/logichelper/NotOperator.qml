@@ -76,7 +76,7 @@ QtObject {
 /*!
     The value to evaluate.
 */
-    property bool input
+    property bool input: false
 
 /*!
     The result of the evaluation.

@@ -84,12 +84,12 @@ QtObject {
 /*!
     The first value to evaluate.
 */
-    property bool input01
+    property bool input01: false
 
 /*!
     The second value to evaluate.
 */
-    property bool input02
+    property bool input02: false
 
 /*!
     The result of the evaluation.

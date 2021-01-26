@@ -1,4 +1,4 @@
-BidrectionalBinding 1.0 BidrectionalBinding.qml
+BidirectionalBinding 1.0 BidirectionalBinding.qml
 RangeMapper 1.0 RangeMapper.qml
 MinMaxMapper 1.0 MinMaxMapper.qml
 StringMapper 1.0 StringMapper.qml
