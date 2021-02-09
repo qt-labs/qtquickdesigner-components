@@ -20,7 +20,7 @@ MetaInfo {
            Hints {
                visibleInNavigator: true
                canBeDroppedInNavigator: true
-               canBeDroppedInFormEditor: true
+               canBeDroppedInFormEditor: false
                canBeContainer: false
                visibleInLibrary: true
                visibleInNavigator: true
