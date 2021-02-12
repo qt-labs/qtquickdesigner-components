@@ -28,10 +28,13 @@
 ****************************************************************************/
 
 import QtQuick 2.12
+import QtQuick.Layouts 1.3
 
-Text {
+StackLayout {
     id: root
-    lineHeight: fontMetrics.height - fontMetrics.descent + root.baseLineOffset - fontMetrics.leading
+    width: childrenRect.width
+    height: childrenRect.height
+
 
     property int maxIndex: {
         var ret = 0
@@ -62,7 +65,6 @@ Text {
                  textArray.push(root.data[i].text)
         }
 
-        root.text = textArray[root.stringIndex]
     }
 
     property string textModel: {
@@ -95,17 +97,7 @@ Text {
     }
 
 
-    property real descent: fontMetrics.descent
-    property real leading: fontMetrics.leading
 
-    property real baseLineOffset: 0
-
-    property FontMetrics metrics: FontMetrics {
-        id: fontMetrics
-        font: root.font
-    }
-
-    lineHeightMode: Text.FixedHeight
 
 }
 

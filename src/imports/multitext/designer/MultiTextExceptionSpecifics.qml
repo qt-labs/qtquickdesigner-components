@@ -38,13 +38,13 @@ Column {
     Section {
         anchors.left: parent.left
         anchors.right: parent.right
-        caption: qsTr("Multi Text")
+        caption: qsTr("Multi Text Exception")
         SectionLayout {
-            rows: 3
+            rows: 2
             columns: 2
 
             Label {
-                text:  qsTr("Text Element")
+                text:  qsTr("Language Exception")
 
             }
 
@@ -54,44 +54,71 @@ Column {
                 Layout.fillWidth: true
                 valueType: ComboBox.ValueType.Integer
                 manualMapping: true
-                currentIndex: backendValues.stringIndex.value
 
-                model: {
-                    backendValues.textModel.value.split('e\u001f' + 'e\u001d')
-                }
+                model: [
+                    "[None]",
+                    "Arabic-Egypt (ar)",
+                    "Chinese-China (zh)",
+                    "Czech-Czech Republic (cs)",
+                    "Danish-Denmark (da)",
+                    "Dutch-Netherlands (nl)",
+                    "English-Australia (en-AU)",
+                    "English-United Kingdom (en-GB)",
+                    "English-United States (en)",
+                    "Finnish-Finland (fi)",
+                    "Hebrew-Israel (he)",
+                    "Hindi-India (hi)",
+                    "Hungarian-Hungary (hu)",
+                    "French-France (fr)",
+                    "French-Canada (fr-CA)",
+                    "German-Germany (de)",
+                    "Italian-Italy (it)",
+                    "Japanese-Japan (ja)",
+                    "Korean-South Korea (ko)",
+                    "Norwegian Bokmal-Norway (nb)",
+                    "Persian-Iran (fa)",
+                    "Polish-Poland (pl)",
+                    "Portuguese-Brazil (pt)",
+                    "Portuguese-Portugal (pt-PT)",
+                    "Romanian-Romania (ro)",
+                    "Russian-Russia (ru)",
+                    "Slovak-Slovakia (sk)",
+                    "Slovenian-Slovenia (sl)",
+                    "Swedish-Sweden (sv)",
+                    "Spanish-Spain (es)",
+                    "Spanish-Mexico (es-MX)",
+                    "Turkish-Turkey (tr)",
+                    "Ukrainian-Ukraine (uk)" ]
 
-                onCurrentIndexChanged: {
-                    backendValues.currentIndex.value =  textComboBox.currentIndex
+                onCurrentTextChanged: {
+                    if (textComboBox.currentText === "[None]") {
+                        backendValues.languageCode.resetValue()
+                        return
+                    }
+
+                    var myReg = /\(([^()]*)\)/g;
+                    var result = myReg.exec(textComboBox.currentText);
+                    backendValues.languageCode.value = result[1]
                 }
             }
 
             Label {
-                text: qsTr("String Index")
+                text: qsTr("Exception Acive")
                 tooltip: qsTr("")
             }
-            SpinBox {
-                backendValue: backendValues.currentIndex
+            CheckBox {
+                backendValue: backendValues.exceptionAcive
             }
-
-
-            /*
-            Label {
-                text: qsTr("BaseLine Offset")
-                tooltip: qsTr("")
-            }
-            SpinBox {
-                backendValue: backendValues.baselineOffset
-            }*/
         }
-
     }
-    /*
+
     StandardTextSection {
         showVerticalAlignment: true
         showFormatProperty: true
         showElide: true
         showFontSizeMode: true
         showLineHeight: true
+        richTextEditorAvailable: true
     }
 
     Section {
@@ -120,11 +147,11 @@ Column {
         }
     }
 
-    FontSection {
-        showStyle: true
-    }
+   FontSection {
+       showStyle: true
+   }
 
-    PaddingSection {
-        visible: minorQtQuickVersion > 5
-    }*/
+   PaddingSection {
+       visible: minorQtQuickVersion > 5
+   }
 }

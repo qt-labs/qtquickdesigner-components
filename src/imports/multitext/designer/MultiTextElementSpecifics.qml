@@ -30,8 +30,6 @@
 import QtQuick 2.1
 import HelperWidgets 2.0
 import QtQuick.Layouts 1.0
-import StudioControls 1.0 as StudioControls
-import StudioTheme 1.0 as StudioTheme
 
 Column {
     anchors.left: parent.left
@@ -42,72 +40,58 @@ Column {
         anchors.right: parent.right
         caption: qsTr("Multi Text")
         SectionLayout {
-            rows: 3
-            columns: 2
-
+            rows: 1
+            columns: 1
             Label {
-                text:  qsTr("Text Element")
-
+                text: qsTr("BaseLine Offset")
+                tooltip: qsTr("")
             }
-            RowLayout {
-                LineEdit {
-                    backendValue: backendValues.text
-                    Layout.fillWidth: true
-                }
-
-                StudioControls.AbstractButton {
-                    id: richTextEditorButton
-                    buttonIcon: StudioTheme.Constants.edit
-                    onClicked: {
-                        richTextDialogLoader.show()
-                    }
-                }
-
-                RichTextEditor{
-                    onRejected: {
-                        hideWidget()
-                    }
-                    onAccepted: {
-                        hideWidget()
-                    }
-                }
-            }
-
-        }
-    }
-
-    Loader {
-        id: richTextDialogLoader
-
-        visible: false
-        active: visible
-
-        function show() {
-            richTextDialogLoader.visible = true
-        }
-
-        sourceComponent: Item {
-            id: richTextEditorParent
-
-            Component.onCompleted: {
-                richTextEditor.showWidget()
-                richTextEditor.richText = backendValues.text.value
-            }
-
-            RichTextEditor {
-                id: richTextEditor
-
-                onRejected: {
-                    hideWidget()
-                    richTextDialogLoader.visible = false
-                }
-                onAccepted: {
-                    backendValues.text.value = richTextEditor.richText
-                    backendValues.textFormat.setEnumeration("Text", "RichText")
-                    hideWidget()
-                    richTextDialogLoader.visible = false
-                }
+            SpinBox {
+                backendValue: backendValues.baselineOffset
             }
         }
     }
+
+    StandardTextSection {
+        showVerticalAlignment: true
+        showFormatProperty: true
+        showElide: true
+        showFontSizeMode: true
+        showLineHeight: true
+        richTextEditorAvailable: true
+    }
+
+    Section {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        caption: qsTr("Text Color")
+
+        ColorEditor {
+            caption: qsTr("Text Color")
+            backendValue: backendValues.color
+            supportGradient: false
+        }
+
+    }
+
+    Section {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        caption: qsTr("Style Color")
+        visible: backendValues.styleColor.isAvailable
+
+        ColorEditor {
+            caption: qsTr("Style Color")
+            backendValue:  backendValues.styleColor
+            supportGradient: false
+        }
+    }
+
+   FontSection {
+       showStyle: true
+   }
+
+   PaddingSection {
+       visible: minorQtQuickVersion > 5
+   }
 }
