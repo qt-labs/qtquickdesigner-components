@@ -1,0 +1,62 @@
+MetaInfo {
+    Type {
+        name: "QtQuickUltralite.Layers.Application"
+        icon: "images/item-icon.png"
+
+        ItemLibraryEntry {
+            name: "Application"
+            category: "QtQuickUltralite - Layers"
+            libraryIcon: "images/item-icon@2x.png"
+            version: "1.7"
+            requiredImport: "QtQuickUltralite.Layers"
+        }
+    }
+    Type {
+        name: "QtQuickUltralite.Layers.ImageLayer"
+        icon: "images/item-icon.png"
+
+        ItemLibraryEntry {
+            name: "Image Layer"
+            category: "QtQuickUltralite - Layers"
+            libraryIcon: "images/item-icon@2x.png"
+            version: "1.7"
+            requiredImport: "QtQuickUltralite.Layers"
+        }
+    }
+    Type {
+        name: "QtQuickUltralite.Layers.ItemLayer"
+        icon: "images/item-icon.png"
+
+        ItemLibraryEntry {
+            name: "Item Layer"
+            category: "QtQuickUltralite - Layers"
+            libraryIcon: "images/item-icon@2x.png"
+            version: "1.7"
+            requiredImport: "QtQuickUltralite.Layers"
+        }
+    }
+    Type {
+        name: "QtQuickUltralite.Layers.Screen"
+        icon: "images/item-icon.png"
+
+        ItemLibraryEntry {
+            name: "Screen"
+            category: "QtQuickUltralite - Layers"
+            libraryIcon: "images/item-icon@2x.png"
+            version: "1.7"
+            requiredImport: "QtQuickUltralite.Layers"
+        }
+    }
+    Type {
+        name: "QtQuickUltralite.Layers.SpriteLayer"
+        icon: "images/item-icon.png"
+
+        ItemLibraryEntry {
+            name: "Sprite Layer"
+            category: "QtQuickUltralite - Layers"
+            libraryIcon: "images/item-icon@2x.png"
+            version: "1.7"
+            requiredImport: "QtQuickUltralite.Layers"
+        }
+    }
+}

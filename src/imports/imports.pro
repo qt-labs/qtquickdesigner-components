@@ -5,5 +5,6 @@ SUBDIRS += \
     flowview \
     multitext \
     tools \
-    logichelper
+    logichelper \
+    compatibility
 
