@@ -34,4 +34,26 @@ MetaInfo {
                requiredImport: "QtQuick.Studio.MultiText"
            }
     }
+    Type {
+           name: "QtQuick.Studio.MultiText.MultiTextException"
+           icon: ":/qtquickplugin/images/item-icon16.png"
+
+           Hints {
+               visibleInNavigator: true
+               canBeDroppedInNavigator: true
+               canBeDroppedInFormEditor: true
+               canBeContainer: false
+               visibleInLibrary: true
+               visibleInNavigator: true
+           }
+             ItemLibraryEntry {
+               name: "Multi Text Exception"
+               category: "Studio Multi Text"
+               libraryIcon: ":/qtquickplugin/images/item-icon.png"
+               version: "1.0"
+               Property { name: "text"; type: "binding"; value: "qsTr(\"Text\")"; }
+               requiredImport: "QtQuick.Studio.MultiText"
+           }
+    }
+
 }
