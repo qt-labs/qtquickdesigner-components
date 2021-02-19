@@ -1,5 +1,4 @@
 TEMPLATE = subdirs
 SUBDIRS += \
-    Extras \
-    Layers
-
+    Extras/extras.pro \
+    Layers/layers.pro
