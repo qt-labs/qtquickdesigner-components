@@ -4,4 +4,4 @@ AUX_QML_FILES += \
 AUX_QML_FILES += \
     $$PWD/MultiTextElementSpecifics.qml \
     $$PWD/MultiTextItemSpecifics.qml \
-    $$PWD/MultiTextExceptionSpecifics
+    $$PWD/MultiTextExceptionSpecifics.qml
