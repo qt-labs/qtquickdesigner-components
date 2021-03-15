@@ -39,4 +39,7 @@ AUX_QML_FILES += \
     $$PWD/images/item-svg-24px@2x.png \
     $$PWD/images/item-triangle-16px.png \
     $$PWD/images/item-triangle-24px.png \
-    $$PWD/images/item-triangle-24px@2x.png
+    $$PWD/images/item-triangle-24px@2x.png \
+    $$PWD/images/group-16px.png \
+    $$PWD/images/group-24px.png \
+    $$PWD/images/group-24px@2.png
