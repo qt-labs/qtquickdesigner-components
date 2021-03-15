@@ -21,7 +21,7 @@ MetaInfo {
                visibleInNavigator: true
                canBeDroppedInNavigator: true
                canBeDroppedInFormEditor: false
-               canBeContainer: false
+               canBeContainer: true
                visibleInLibrary: true
                visibleInNavigator: true
            }
