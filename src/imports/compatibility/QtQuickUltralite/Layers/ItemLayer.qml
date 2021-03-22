@@ -42,7 +42,7 @@ Item {
     }
 
     property int depth: ColorDepth.Bpp32
-    property int refreshInterval: 0
+    property int refreshInterval: 1
     property int platformId: 0
     property int renderingHints: RenderingHints.OptimizeForSpeed
 }

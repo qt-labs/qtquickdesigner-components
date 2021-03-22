@@ -68,7 +68,7 @@ Column {
                     model: ["OptimizeForSpeed", "OptimizeForSize", "StaticContents"]
                     backendValue: backendValues.renderingHints
                     Layout.fillWidth: true
-                    scope: "RenderingHints"
+                    scope: "ImageLayer"
                 }
             }
 

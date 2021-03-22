@@ -1,5 +1,5 @@
-TARGET = QtQuickUltralitePlugin
-TARGETPATH = QtQuick/Studio/Compatibility/QtQuickUltralite/Extras
+TARGET = studioqtquickultraliteextras
+TARGETPATH = QtQuickUltralite/Extras
 IMPORT_VERSION = 1.0
 
 QT += core qml quick
@@ -12,11 +12,10 @@ OTHER_FILES += \
     $$QML_FILES
 
 SOURCES += \
-    $$PWD/ultralite_plugin.cpp \
+    $$PWD/studiocompatibilityqulextras.cpp \
     $$PWD/imagechecker.cpp
 
 HEADERS += \
-    $$PWD/ultralite_plugin.h \
     $$PWD/imagechecker.h
 
 !static: qtConfig(quick-designer): include(designer/designer.pri)

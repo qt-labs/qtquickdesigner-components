@@ -35,7 +35,7 @@ Item {
          Bpp16, Bpp16Alpha, Bpp24, Bpp32, Bpp32Alpha
      }
 
-    property int depth: ColorDepth.Bpp32
+    property int depth: ColorDepth.Bpp32Alpha
     property int platformId: 0
 }
 //! [SpriteLayer compatibility]

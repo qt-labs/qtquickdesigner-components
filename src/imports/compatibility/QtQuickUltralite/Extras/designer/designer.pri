@@ -1,5 +1,5 @@
 AUX_QML_FILES += \
-    $$PWD/QtQuickUltralitePlugin.metainfo
+    $$PWD/QtQuickUltraliteExtras.metainfo
 
 AUX_QML_FILES += \
     $$PWD/ColorizedImageSpecifics.qml \

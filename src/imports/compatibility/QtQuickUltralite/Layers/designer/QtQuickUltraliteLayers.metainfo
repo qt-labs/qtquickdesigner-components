@@ -21,6 +21,7 @@ MetaInfo {
             libraryIcon: "images/item-icon@2x.png"
             version: "1.7"
             requiredImport: "QtQuickUltralite.Layers"
+            Property { name: "renderingHints"; type: "enum"; value: "ImageLayer.OptimizeForSpeed"; }
         }
     }
     Type {
@@ -33,6 +34,9 @@ MetaInfo {
             libraryIcon: "images/item-icon@2x.png"
             version: "1.7"
             requiredImport: "QtQuickUltralite.Layers"
+            Property { name: "depth"; type: "enum"; value: "ItemLayer.Bpp32"; }
+            Property { name: "renderingHints"; type: "enum"; value: "ItemLayer.OptimizeForSpeed"; }
+            Property { name: "refreshInterval"; type: "int"; value: 1; }
         }
     }
     Type {
@@ -57,6 +61,7 @@ MetaInfo {
             libraryIcon: "images/item-icon@2x.png"
             version: "1.7"
             requiredImport: "QtQuickUltralite.Layers"
+            Property { name: "depth"; type: "enum"; value: "SpriteLayer.Bpp32Alpha"; }
         }
     }
 }

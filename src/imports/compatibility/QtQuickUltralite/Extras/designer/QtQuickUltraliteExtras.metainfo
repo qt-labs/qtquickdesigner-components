@@ -9,6 +9,7 @@ MetaInfo {
             libraryIcon: "images/image-icon@2x.png"
             version: "1.7"
             requiredImport: "QtQuickUltralite.Extras"
+            Property { name: "source"; type: "binding"; value: "\"source/text\""; }
         }
     }
     Type {
@@ -21,6 +22,7 @@ MetaInfo {
             libraryIcon: "images/text-icon@2x.png"
             version: "1.7"
             requiredImport: "QtQuickUltralite.Extras"
+            Property { name: "text"; type: "binding"; value: "qsTr(\"Static Text\")"; }
         }
     }
 }

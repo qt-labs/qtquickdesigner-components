@@ -1,5 +1,5 @@
-TARGET = studiocompatibilityqullayers
-TARGETPATH = QtQuick/Studio/Compatibility/QtQuickUltralite/Layers
+TARGET = studioqtquickultralitelayers
+TARGETPATH = QtQuickUltralite/Layers
 IMPORT_VERSION = 1.0
 
 QT += qml quick
@@ -16,7 +16,7 @@ OTHER_FILES += \
 SOURCES += \
     $$PWD/studiocompatibilityqullayers.cpp
 
-#!static: qtConfig(quick-designer): include(designer/designer.pri)
+!static: qtConfig(quick-designer): include(designer/designer.pri)
 ## include(doc/doc.pri)
 
 CONFIG += no_cxx_module install_qml_files qtquickcompiler
