@@ -53,7 +53,7 @@ Column {
 
             Label {
                 text: qsTr("Direction")
-                tooltip: qsTr("Sets the direction of the effect")
+                tooltip: qsTr("Direction of the effect.")
             }
 
             SecondColumnLayout {

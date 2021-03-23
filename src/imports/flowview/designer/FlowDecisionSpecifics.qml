@@ -46,7 +46,7 @@ Column {
 
             Label {
                 text: qsTr("Dialog title")
-                tooltip: qsTr("Sets the title of the dialog.")
+                tooltip: qsTr("Title of the decision dialog.")
             }
             LineEdit {
                 backendValue: backendValues.dialogTitle
@@ -55,7 +55,7 @@ Column {
 
             Label {
                 text: qsTr("Show label")
-                tooltip: qsTr("Makes the dialog title visible as a label.")
+                tooltip: qsTr("Shows the dialog title as a label.")
             }
             CheckBox {
                 id: showLabelCheckBox
@@ -66,7 +66,7 @@ Column {
 
             Label {
                 text: qsTr("Label position")
-                tooltip: qsTr("Sets preconfigured positions for the dialog title label.")
+                tooltip: qsTr("Position of the label.")
             }
             ComboBox {
                 enabled: showLabelCheckBox.checkState === Qt.Checked
@@ -100,7 +100,7 @@ Column {
 
             Label {
                 text: qsTr("Size")
-                tooltip: qsTr("Sets the size in pixels.")
+                tooltip: qsTr("Flow decision icon size in pixels.")
             }
             SpinBox {
                 backendValue: backendValues.blockSize__AUX
@@ -110,7 +110,7 @@ Column {
 
             Label {
                 text: qsTr("Radius")
-                tooltip: qsTr("Sets the radius in pixels.")
+                tooltip: qsTr("Flow decision icon corner radius in pixels.")
             }
             SpinBox {
                 backendValue: backendValues.blockRadius__AUX

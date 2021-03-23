@@ -45,8 +45,8 @@ Column {
             columns: 2
 
             Label {
-                text: qsTr("State Change Target")
-                tooltip: qsTr("Defines the target Flow Item of which the state is changed.")
+                text: qsTr("State change target")
+                tooltip: qsTr("Flow item to change the state of.")
             }
             SecondColumnLayout {
                 ItemFilterComboBox {
@@ -61,7 +61,8 @@ Column {
             }
 
             Label {
-                text: qsTr("Target State")
+                text: qsTr("Target state")
+                tooltip: qsTr("Applies the selected state.")
             }
 
             SecondColumnLayout {
@@ -78,7 +79,8 @@ Column {
             }
 
             Label {
-                text: qsTr("Loader Source")
+                text: qsTr("Loader source")
+                tooltip: qsTr("Includes the selected flow view into the current flow view as a flow item.")
             }
 
             SecondColumnLayout {
@@ -99,15 +101,15 @@ Column {
         visible: anchorBackend.hasParent
         anchors.left: parent.left
         anchors.right: parent.right
-        caption: qsTr("Flow View")
+        caption: qsTr("Transition Lines")
 
         SectionLayout {
             rows: 4
             columns: 2
 
             Label {
-                text: qsTr("Join Connections")
-                tooltip: qsTr("Join connections")
+                text: qsTr("Join lines")
+                tooltip: qsTr("Draws transition lines from edges of flow items instead of from action area.")
             }
             CheckBox {
                 backendValue: backendValues.joinConnection__AUX

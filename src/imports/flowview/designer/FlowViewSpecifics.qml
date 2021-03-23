@@ -45,8 +45,8 @@ Column {
             columns: 2
 
             Label {
-                text: qsTr("Current Index")
-                tooltip: qsTr("Current Index of the FlowView")
+                text: qsTr("Current index")
+                tooltip: qsTr("Index of the flow item currently visible in the flow view.")
             }
             SpinBox {
                 backendValue: backendValues.currentIndex__AUX
@@ -105,13 +105,13 @@ Column {
         visible: !anchorBackend.hasParent
         anchors.left: parent.left
         anchors.right: parent.right
-        caption: qsTr("Flow View Parameters")
+        caption: qsTr("Transition Lines")
 
         SectionLayout {
             rows: 3
             Label {
-                text: qsTr("Transition Type")
-                tooltip: qsTr("The transition type.")
+                text: qsTr("Type")
+                tooltip: qsTr("Specifies how transition lines are drawn.")
             }
             ComboBox {
                 id: typeComboBox
@@ -145,8 +145,8 @@ Column {
                 }
             }
             Label {
-                text: qsTr("Transition Radius")
-                tooltip: qsTr("The corner radius of the transitions")
+                text: qsTr("Radius")
+                tooltip: qsTr("Corner radius of default lines.")
             }
             SpinBox {
                 enabled: typeComboBox.currentIndex === 0
@@ -155,8 +155,8 @@ Column {
                 maximumValue: 150
             }
             Label {
-                text: qsTr("Transition Bezier Factor")
-                tooltip: qsTr("Modifies the position of the control points used for bezier curves.")
+                text: qsTr("Bezier factor")
+                tooltip: qsTr("Position of the control points used for bezier curves.")
             }
             SpinBox {
                 enabled: typeComboBox.currentIndex === 1

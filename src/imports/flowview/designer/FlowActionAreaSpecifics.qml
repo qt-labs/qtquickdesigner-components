@@ -58,14 +58,14 @@ Column {
    Section {
        anchors.left: parent.left
         anchors.right: parent.right
-        caption: qsTr("FlowAction Parameters")
+        caption: qsTr("Flow Action")
         SectionLayout {
              rows: 2
              columns: 2
 
              Label {
-                 text: qsTr("Go Back")
-                 tooltip: qsTr("")
+                 text: qsTr("Go back")
+                 tooltip: qsTr("Returns to the previous flow item.")
              }
              CheckBox {
                  Layout.fillWidth: true
@@ -74,8 +74,8 @@ Column {
              }
 
              Label {
-                 text: qsTr("Event Ids")
-                 tooltip: qsTr("")
+                 text: qsTr("Event IDs")
+                 tooltip: qsTr("IDs of the events to connect to, such as mouse, touch or keyboard events.")
              }
              LineEdit {
                  Layout.fillWidth: true
@@ -83,8 +83,8 @@ Column {
                  backendValue: backendValues.eventIds
              }
              Label {
-                 text: qsTr("Action Type")
-                 tooltip: qsTr("Type of the mouse action triggering the event")
+                 text: qsTr("Action type")
+                 tooltip: qsTr("Type of the mouse action triggering the event.")
 
              }
 
@@ -103,15 +103,15 @@ Column {
     Section {
         anchors.left: parent.left
         anchors.right: parent.right
-        caption: qsTr("Transition Parameters")
+        caption: qsTr("Action Area")
 
          SectionLayout {
              rows: 4
              columns: 2
 
              Label {
-                 text: qsTr("Line Width")
-                 tooltip: qsTr("Sets the margin, in pixels, around the text in the TextEdit..")
+                 text: qsTr("Line width")
+                 tooltip: qsTr("Width of the action area outline.")
              }
              SpinBox {
                  backendValue: backendValues.width__AUX
@@ -120,8 +120,8 @@ Column {
              }
 
              Label {
-                 text: qsTr("Dash Line")
-                 tooltip: qsTr("Sets the margin, in pixels, around the text in the TextEdit..")
+                 text: qsTr("Dashed line")
+                 tooltip: qsTr("Draws the area outline as a dashed line.")
              }
              CheckBox {
                  Layout.fillWidth: true
@@ -131,7 +131,7 @@ Column {
 
              Label {
                  text: qsTr("Enabled")
-                 tooltip: qsTr("Sets the margin, in pixels, around the text in the TextEdit..")
+                 tooltip: qsTr("Enables interaction with the action area during preview.")
              }
              CheckBox {
                  Layout.fillWidth: true

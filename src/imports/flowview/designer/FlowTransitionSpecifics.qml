@@ -53,25 +53,25 @@ Column {
         SectionLayout {
             Label {
                 text: qsTr("Condition")
-                tooltip: qsTr("Determines whether the transition is active or not.")
+                tooltip: qsTr("Determines whether the transition is active.")
             }
             CheckBox {
                 Layout.fillWidth: true
-                text: qsTr("Transtion Active")
+                text: qsTr("Transition active")
                 backendValue: backendValues.condition
             }
 
             Label {
                 text: qsTr("Question")
-                tooltip: qsTr("The transition will pop up dialog with the question")
+                tooltip: qsTr("The transition shows a dialog with the question.")
             }
             LineEdit {
                 backendValue: backendValues.question
                 Layout.fillWidth: true
             }
             Label {
-                text: qsTr("Event Ids")
-                tooltip: qsTr("")
+                text: qsTr("Event IDs")
+                tooltip: qsTr("IDs of the events to connect to, such as mouse, touch or keyboard events.")
             }
             LineEdit {
                 Layout.fillWidth: true
@@ -82,6 +82,7 @@ Column {
 
             Label {
                 text: qsTr("From")
+                tooltip: qsTr("Flow item where the transition starts.")
             }
             SecondColumnLayout {
                 EditableListView {
@@ -99,6 +100,7 @@ Column {
 
             Label {
                 text: qsTr("To")
+                tooltip: qsTr("Flow item where the transition ends.")
             }
             SecondColumnLayout {
                 EditableListView {
@@ -120,15 +122,15 @@ Column {
     Section {
         anchors.left: parent.left
         anchors.right: parent.right
-        caption: qsTr("Transition Parameters")
+        caption: qsTr("Transition Line")
 
         SectionLayout {
             rows: 4
             columns: 2
 
             Label {
-                text: qsTr("Line Width")
-                tooltip: qsTr("Sets the margin, in pixels, around the text in the TextEdit..")
+                text: qsTr("Line width")
+                tooltip: qsTr("Width of the transition line.")
             }
             SpinBox {
                 backendValue: backendValues.width__AUX
@@ -137,8 +139,8 @@ Column {
             }
 
             Label {
-                text: qsTr("In Offset")
-                tooltip: qsTr("Sets the margin, in pixels, around the text in the TextEdit..")
+                text: qsTr("In-offset")
+                tooltip: qsTr("Sets the start point of the line to the specified value.")
             }
             SpinBox {
                 backendValue: backendValues.inOffset__AUX
@@ -147,8 +149,8 @@ Column {
             }
 
             Label {
-                text: qsTr("Out Offset")
-                tooltip: qsTr("Sets the margin, in pixels, around the text in the TextEdit..")
+                text: qsTr("Out-offset")
+                tooltip: qsTr("Sets the end point of the line to the specified value.")
             }
             SpinBox {
                 backendValue: backendValues.outOffset__AUX
@@ -157,8 +159,8 @@ Column {
             }
 
             Label {
-                text: qsTr("Break Offset")
-                tooltip: qsTr("Sets the margin, in pixels, around the text in the TextEdit..")
+                text: qsTr("Break-offset")
+                tooltip: qsTr("Sets the break of the line to the specified value.")
             }
             SpinBox {
                 backendValue: backendValues.breakPoint__AUX
@@ -167,8 +169,8 @@ Column {
             }
 
             Label {
-                text: qsTr("Dash Line")
-                tooltip: qsTr("Sets the margin, in pixels, around the text in the TextEdit..")
+                text: qsTr("Dashed line")
+                tooltip: qsTr("Draws a dashed line.")
             }
             CheckBox {
                 Layout.fillWidth: true
@@ -178,7 +180,7 @@ Column {
 
             Label {
                 text: qsTr("Type")
-                tooltip: qsTr("The transition type.")
+                tooltip: qsTr("Specifies how the line is drawn.")
             }
             ComboBox {
                 id: typeComboBox
@@ -214,7 +216,7 @@ Column {
 
             Label {
                 text: qsTr("Radius")
-                tooltip: qsTr("The corner radius of the transition.")
+                tooltip: qsTr("Corner radius of a default line.")
             }
             SpinBox {
                 enabled: typeComboBox.currentIndex === 0
@@ -223,8 +225,8 @@ Column {
                 maximumValue: 150
             }
             Label {
-                text: qsTr("Bezier Factor")
-                tooltip: qsTr("Modifies the position of the control points used for bezier curve.")
+                text: qsTr("Bezier factor")
+                tooltip: qsTr("Position of the control points used for a bezier curve.")
             }
             SpinBox {
                 enabled: typeComboBox.currentIndex === 1
@@ -234,8 +236,8 @@ Column {
             }
 
             Label {
-                text: qsTr("Label Position")
-                tooltip: qsTr("Modifies the position of the label.")
+                text: qsTr("Label position")
+                tooltip: qsTr("Position of the label attached to the line.")
             }
             SpinBox {
                 backendValue: backendValues.labelPosition__AUX
@@ -244,8 +246,8 @@ Column {
                 decimals: 2
             }
             Label {
-                text: qsTr("Label Flip Side")
-                tooltip: qsTr("Flips the label to the other side.")
+                text: qsTr("Label flip side")
+                tooltip: qsTr("Flips the label to the other side of the line.")
             }
             CheckBox {
                 Layout.fillWidth: true

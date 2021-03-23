@@ -43,7 +43,7 @@ Column {
     Section {
         anchors.left: parent.left
         anchors.right: parent.right
-        caption: qsTr("Move Effect")
+        caption: qsTr("Push Effect")
 
         SectionLayout {
             rows: 5
@@ -51,7 +51,7 @@ Column {
 
             Label {
                 text: qsTr("Direction")
-                tooltip: qsTr("Sets the direction of the effect")
+                tooltip: qsTr("Direction of the effect.")
             }
 
             SecondColumnLayout {
@@ -68,7 +68,7 @@ Column {
 
             Label {
                 text: qsTr("Scale")
-                tooltip: qsTr("Adds a scaling to the effect.")
+                tooltip: qsTr("Adds scaling to the effect.")
             }
             SpinBox {
                 backendValue: backendValues.scale
@@ -80,8 +80,8 @@ Column {
             }
 
             Label {
-                text: qsTr("Incoming Opacity")
-                tooltip: qsTr("Adds opacity to the effect.")
+                text: qsTr("Incoming opacity")
+                tooltip: qsTr("Opacity of the effect at the end of the transition.")
             }
             SpinBox {
                 backendValue: backendValues.inOpacity
@@ -93,8 +93,8 @@ Column {
             }
 
             Label {
-                text: qsTr("Outgoing Opacity")
-                tooltip: qsTr("Adds opacity to the effect.")
+                text: qsTr("Outgoing opacity")
+                tooltip: qsTr("Opacity of the effect at the start of the transition.")
             }
             SpinBox {
                 backendValue: backendValues.outOpacity
@@ -107,7 +107,7 @@ Column {
 
             Label {
                 text: qsTr("Reveal")
-                tooltip: qsTr("Reveals the incoming page.")
+                tooltip: qsTr("Reveals the flow item where the transition starts.")
             }
             CheckBox {
                 backendValue: backendValues.revealCurrent

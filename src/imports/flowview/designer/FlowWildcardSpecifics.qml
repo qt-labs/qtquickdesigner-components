@@ -45,8 +45,8 @@ Column {
             columns: 2
 
             Label {
-                text: qsTr("Event Ids")
-                tooltip: qsTr("")
+                text: qsTr("Event IDs")
+                tooltip: qsTr("IDs of the events to connect to, such as mouse, touch or keyboard events.")
             }
             LineEdit {
                 Layout.fillWidth: true
@@ -55,7 +55,8 @@ Column {
             }
 
             Label {
-                text: qsTr("Positive List")
+                text: qsTr("Positive list")
+                tooltip: qsTr("Add flow items to give them high priority.")
             }
             SecondColumnLayout {
                 EditableListView {
@@ -71,7 +72,8 @@ Column {
                 }
             }
             Label {
-                text: qsTr("Negative List")
+                text: qsTr("Negative list")
+                tooltip: qsTr("Add flow items to block them.")
             }
             SecondColumnLayout {
                 EditableListView {
@@ -89,7 +91,7 @@ Column {
 
             Label {
                 text: qsTr("Size")
-                tooltip: qsTr("Sets the size in pixels.")
+                tooltip: qsTr("Wildcard icon size in pixels.")
             }
             SpinBox {
                 backendValue: backendValues.blockSize__AUX
@@ -99,7 +101,7 @@ Column {
 
             Label {
                 text: qsTr("Radius")
-                tooltip: qsTr("Sets the radius in pixels.")
+                tooltip: qsTr("Wildcard icon corner radius in pixels.")
             }
             SpinBox {
                 backendValue: backendValues.blockRadius__AUX

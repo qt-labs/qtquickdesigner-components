@@ -44,7 +44,7 @@ Section {
 
         Label {
             text: qsTr("Duration")
-            tooltip: qsTr("Sets the duration of the effect")
+            tooltip: qsTr("Duration of the effect.")
         }
         SpinBox {
             backendValue: backendValues.duration
@@ -53,8 +53,8 @@ Section {
         }
         Label {
             visible: section.showEasingCurve
-            text: qsTr("Easing Curve")
-            tooltip: qsTr("Define custom easing curve")
+            text: qsTr("Easing curve")
+            tooltip: qsTr("Defines a custom easing curve for the effect.")
         }
 
         BoolButtonRowButton {
