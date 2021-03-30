@@ -55,7 +55,7 @@ MetaInfo {
         icon: "images/item-svg-16px.png"
 
         ItemLibraryEntry {
-            name: "Svg Path"
+            name: "SVG Path Item"
             category: "Studio Components"
             libraryIcon: "images/item-svg-24px.png"
             version: "1.0"
