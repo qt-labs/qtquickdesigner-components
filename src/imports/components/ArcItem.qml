@@ -117,12 +117,12 @@ Shape {
 
     function sortedBegin()
     {
-        return(Math.min(root.begin, root.end))
+        return Math.min(root.begin, root.end)
     }
 
     function sortedEnd()
     {
-        return(Math.max(root.begin, root.end))
+        return Math.min(Math.max(root.begin, root.end), sortedBegin() + 359.9)
     }
 
 
