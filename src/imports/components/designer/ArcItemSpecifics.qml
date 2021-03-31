@@ -109,8 +109,8 @@ Column {
                 SpinBox {
                     backendValue: backendValues.begin
                     decimals: 1
-                    minimumValue: -360
-                    maximumValue: 360
+                    minimumValue: -720
+                    maximumValue: 720
                     stepSize: 1
                 }
                 ExpandingSpacer {
@@ -124,8 +124,8 @@ Column {
                 SpinBox {
                     backendValue: backendValues.end
                     decimals: 1
-                    minimumValue: -360
-                    maximumValue: 360
+                    minimumValue: -720
+                    maximumValue: 720
                     stepSize: 1
                 }
                 ExpandingSpacer {
