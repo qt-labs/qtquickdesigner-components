@@ -76,7 +76,6 @@ Column {
                 SpinBox {
                     id: strokeWidthSpin
                     backendValue: backendValues.strokeWidth
-                    Layout.preferredWidth: 80
                     decimals: 1
                     minimumValue: -1
                     maximumValue: 200
@@ -109,7 +108,6 @@ Column {
             SecondColumnLayout {
                 SpinBox {
                     backendValue: backendValues.begin
-                    Layout.preferredWidth: 80
                     decimals: 1
                     minimumValue: -360
                     maximumValue: 360
@@ -125,7 +123,6 @@ Column {
             SecondColumnLayout {
                 SpinBox {
                     backendValue: backendValues.end
-                    Layout.preferredWidth: 80
                     decimals: 1
                     minimumValue: -360
                     maximumValue: 360
@@ -170,7 +167,6 @@ Column {
             SecondColumnLayout {
                 SpinBox {
                     backendValue: backendValues.dashOffset
-                    Layout.preferredWidth: 80
                     decimals: 1
                     minimumValue: 0
                     maximumValue: 1000
@@ -205,7 +201,6 @@ Column {
             SecondColumnLayout {
                 SpinBox {
                     backendValue: backendValues.arcWidth
-                    Layout.preferredWidth: 80
                     decimals: 1
                     minimumValue: 0
                     maximumValue: 1000
@@ -221,7 +216,6 @@ Column {
             SecondColumnLayout {
                 SpinBox {
                     backendValue: backendValues.arcWidthBegin
-                    Layout.preferredWidth: 80
                     decimals: 1
                     minimumValue: 0
                     maximumValue: 1000
@@ -237,7 +231,6 @@ Column {
             SecondColumnLayout {
                 SpinBox {
                     backendValue: backendValues.arcWidthEnd
-                    Layout.preferredWidth: 80
                     decimals: 1
                     minimumValue: 0
                     maximumValue: 1000
@@ -289,7 +282,6 @@ Column {
             SecondColumnLayout {
                 SpinBox {
                     backendValue: backendValues.radiusInnerAdjust
-                    Layout.preferredWidth: 80
                     decimals: 1
                     minimumValue: 0
                     maximumValue: 1000
@@ -305,7 +297,6 @@ Column {
             SecondColumnLayout {
                 SpinBox {
                     backendValue: backendValues.radiusOuterAdjust
-                    Layout.preferredWidth: 80
                     decimals: 1
                     minimumValue: 0
                     maximumValue: 1000
