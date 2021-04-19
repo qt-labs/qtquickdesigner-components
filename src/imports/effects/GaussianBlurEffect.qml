@@ -33,7 +33,6 @@ import QtGraphicalEffects 1.0
 GaussianBlur {
     id: gaussianBlur
     transparentBorder: true
-    anchors.fill: stack
     radius: 8.0
     samples: 17
 }
