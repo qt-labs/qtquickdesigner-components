@@ -74,7 +74,7 @@ QtObject {
 /*!
     The value to convert to a string.
 */
-    property real input
+    property real input: 0
 
 /*!
     The number of digits after the decimal separator.

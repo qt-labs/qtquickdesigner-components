@@ -82,7 +82,7 @@ QtObject {
 /*!
     The input value.
 */
-    property real input
+    property real input: 0
 
 /*!
     The output value.

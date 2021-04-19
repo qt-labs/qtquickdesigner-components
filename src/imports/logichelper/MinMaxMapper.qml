@@ -88,7 +88,7 @@ QtObject {
 /*!
     The input value.
 */
-    property real input
+    property real input: 0
 
 /*!
     Whether \l input is less than \l minimum.
