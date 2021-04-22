@@ -32,5 +32,5 @@ import QtGraphicalEffects 1.0
 
 ColorOverlay {
     id: colorOverlay
-    color: "#80fff0"
+    color: "#80fff000"
 }
