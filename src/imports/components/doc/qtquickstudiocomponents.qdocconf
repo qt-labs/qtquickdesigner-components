@@ -1,0 +1,48 @@
+include($QT_INSTALL_DOCS/global/qt-module-defaults.qdocconf)
+
+project                 = QtQuickStudioComponents
+description             = Qt Quick Studio Components Reference Documentation
+version                 = $QT_VERSION
+
+examplesinstallpath = qtquickstudiocomponents
+
+qhp.projects            = QtQuickStudioComponents
+
+qhp.QtQuickStudioComponents.file                = qtquickstudiocomponents.qhp
+qhp.QtQuickStudioComponents.namespace           = org.qt-project.qtquickstudiocomponents.$QT_VERSION_TAG
+qhp.QtQuickStudioComponents.virtualFolder       = qtquickstudiocomponents
+qhp.QtQuickStudioComponents.indexTitle          = Qt Quick Studio Components
+qhp.QtQuickStudioComponents.indexRoot           =
+
+qhp.QtQuickStudioComponents.filterAttributes    = qtquickstudiocomponents $QT_VERSION qtrefdoc
+qhp.QtQuickStudioComponents.customFilters.Qt.name = QtQuickStudiocomponents $QT_VERSION
+qhp.QtQuickStudioComponents.customFilters.Qt.filterAttributes = qtquickstudiocomponents $QT_VERSION
+
+qhp.QtQuickStudioComponents.subprojects         = qmltypes
+
+qhp.QtQuickStudioComponents.subprojects.qmltypes.title      = QML Types
+qhp.QtQuickStudioComponents.subprojects.qmltypes.indexTitle = Qt Quick Studio Components QML Types
+qhp.QtQuickStudioComponents.subprojects.qmltypes.selectors  = qmlclass
+qhp.QtQuickStudioComponents.subprojects.qmltypes.sortPages  = true
+
+#qhp.QtQuickStudioComponents.subprojects.examples.title         = Examples
+#qhp.QtQuickStudioComponents.subprojects.examples.indexTitle    = Qt Quick Studio Components Examples
+#qhp.QtQuickStudioComponents.subprojects.examples.selectors     = fake:example
+#qhp.QtQuickStudioComponents.subprojects.examples.sortPages     = true
+
+headerdirs  += ..
+sourcedirs  += ..
+#exampledirs =
+imagedirs   += images \
+
+depends += qtcore qtdoc qtgui qtquick qtquickextras
+
+tagfile  = qtquickstudiocomponents.tags
+
+#add generic thumbnail images for example documentation that does not have an image.
+#manifestmeta.thumbnail.names  +=
+
+navigation.landingpage = "Qt Quick Studio Components"
+navigation.qmltypespage = "Qt Quick Studio Components QML Types"
+
+macro.QDS = "Qt Design Studio"

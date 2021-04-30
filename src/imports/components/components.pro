@@ -22,7 +22,7 @@ SOURCES += \
 
 CONFIG += no_cxx_module install_qml_files qtquickcompiler
 
-QMAKE_DOCS = $$PWD/doc/qtquickdesignercomponents.qdocconf
+QMAKE_DOCS = $$PWD/doc/qtquickstudiocomponents.qdocconf
 
 load(qml_plugin)
 

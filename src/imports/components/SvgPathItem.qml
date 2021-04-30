@@ -3,7 +3,7 @@
 ** Copyright (C) 2019 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
-** This file is part of Qt Quick Designer Components.
+** This file is part of Qt Quick Studio Components.
 **
 ** $QT_BEGIN_LICENSE:GPL$
 ** Commercial License Usage
@@ -33,8 +33,8 @@ import QtQuick.Shapes 1.0
 
 /*!
     \qmltype SvgPathItem
-    \inqmlmodule QtQuick.Designer.Components
-    \since QtQuick.Designer.Components 1.0
+    \inqmlmodule QtQuick.Studio.Components
+    \since QtQuick.Studio.Components 1.0
     \inherits Shape
 
     \brief A path defined using an SVG path data string.
