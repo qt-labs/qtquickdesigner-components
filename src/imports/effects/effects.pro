@@ -20,4 +20,7 @@ SOURCES += \
 ## include(doc/doc.pri)
 
 CONFIG += no_cxx_module install_qml_files qtquickcompiler
+
+QMAKE_DOCS = $$PWD/doc/qtquickstudioeffects.qdocconf
+
 load(qml_plugin)

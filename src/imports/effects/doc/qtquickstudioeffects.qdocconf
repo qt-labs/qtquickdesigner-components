@@ -1,0 +1,48 @@
+include($QT_INSTALL_DOCS/global/qt-module-defaults.qdocconf)
+
+project                 = QtQuickStudioEffects
+description             = Qt Quick Studio Effects Reference Documentation
+version                 = $QT_VERSION
+
+examplesinstallpath = qtquickstudioeffects
+
+qhp.projects            = QtQuickStudioEffects
+
+qhp.QtQuickStudioEffects.file                = qtquickstudioeffects.qhp
+qhp.QtQuickStudioEffects.namespace           = org.qt-project.qtquickstudioeffects.$QT_VERSION_TAG
+qhp.QtQuickStudioEffects.virtualFolder       = qtquickstudioeffects
+qhp.QtQuickStudioEffects.indexTitle          = Qt Quick Studio Effects
+qhp.QtQuickStudioEffects.indexRoot           =
+
+qhp.QtQuickStudioEffects.filterAttributes    = qtquickstudioeffects $QT_VERSION qtrefdoc
+qhp.QtQuickStudioEffects.customFilters.Qt.name = QtQuickStudioeffects $QT_VERSION
+qhp.QtQuickStudioEffects.customFilters.Qt.filterAttributes = qtquickstudioeffects $QT_VERSION
+
+qhp.QtQuickStudioEffects.subprojects         = qmltypes
+
+qhp.QtQuickStudioEffects.subprojects.qmltypes.title      = QML Types
+qhp.QtQuickStudioEffects.subprojects.qmltypes.indexTitle = Qt Quick Studio Effects QML Types
+qhp.QtQuickStudioEffects.subprojects.qmltypes.selectors  = qmlclass
+qhp.QtQuickStudioEffects.subprojects.qmltypes.sortPages  = true
+
+#qhp.QtQuickStudioEffects.subprojects.examples.title         = Examples
+#qhp.QtQuickStudioEffects.subprojects.examples.indexTitle    = Qt Quick Studio Effects Examples
+#qhp.QtQuickStudioEffects.subprojects.examples.selectors     = fake:example
+#qhp.QtQuickStudioEffects.subprojects.examples.sortPages     = true
+
+headerdirs  += ..
+sourcedirs  += ..
+#exampledirs =
+imagedirs   += images \
+
+depends += qtcore qtdoc qtgui qtquick qtquickextras qtgraphicaleffects
+
+tagfile  = qtquickstudioeffects.tags
+
+#add generic thumbnail images for example documentation that does not have an image.
+#manifestmeta.thumbnail.names  +=
+
+navigation.landingpage = "Qt Quick Studio Effects"
+navigation.qmltypespage = "Qt Quick Studio Effects QML Types"
+
+macro.QDS = "Qt Design Studio"

@@ -1,0 +1,344 @@
+/****************************************************************************
+**
+** Copyright (C) 2021 The Qt Company Ltd.
+** Contact: https://www.qt.io/licensing/
+**
+** This file is part of the documentation of the Qt Toolkit.
+**
+** $QT_BEGIN_LICENSE:FDL$
+** Commercial License Usage
+** Licensees holding valid commercial Qt licenses may use this file in
+** accordance with the commercial license agreement provided with the
+** Software or, alternatively, in accordance with the terms contained in
+** a written agreement between you and The Qt Company. For licensing terms
+** and conditions see https://www.qt.io/terms-conditions. For further
+** information use the contact form at https://www.qt.io/contact-us.
+**
+** GNU Free Documentation License Usage
+** Alternatively, this file may be used under the terms of the GNU Free
+** Documentation License version 1.3 as published by the Free Software
+** Foundation and appearing in the file included in the packaging of
+** this file. Please review the following information to ensure
+** the GNU Free Documentation License version 1.3 requirements
+** will be met: https://www.gnu.org/licenses/fdl-1.3.html.
+** $QT_END_LICENSE$
+**
+****************************************************************************/
+
+/*!
+    \page qtquickstudio-effects-overview.html
+
+    \title Qt Quick Studio Effects Overview
+
+    The Qt Quick Studio Effects module provides effects enhanced for creating
+    animated UIs that inherit the types in the \l {Qt Graphical Effects} module.
+
+    Effects have one or more source properties for specifying the visual input
+    for which the effect is applied to a component. The altered visual output is
+    then presented in the effect component itself. The source can be another,
+    often hidden, component in the scene. More complex effects can have multiple
+    sources. The source component can be any component, even video or another
+    effect. Pipelining multiple effects together is a simple way to create
+    even more impressive output.
+
+    Each effect has a set of properties that can be used to configure the effect
+    output. They can be animated just like any other properties. The
+    component documentation contains property descriptions and basic usage
+    examples.
+
+    \section1 Caching and Borders
+
+    The \c cached property allows the effect output pixels to be cached
+    in order to improve the rendering performance. Every time the source or
+    effect properties are changed, the pixels in the cache must be updated.
+    Memory consumption is increased, because an extra buffer of memory is
+    required for storing the effect output. We recommend that you disable the
+    cache when the source or the effect properties are animated.
+
+    The \c transparentBorder property determines the blur behavior
+    near the edges of the component, where the pixel blurring is affected by
+    the pixels outside the source edges.
+
+    If the property is set to \c true, the pixels outside the source are
+    interpreted as being transparent, which is similar to OpenGL clamp-to-border
+    extension. The blur is expanded slightly outside the effect component area.
+
+    If the property is set to \c false, the pixels outside the source are
+    interpreted as containing the same color as the pixels at the edge of
+    the component, which is similar to OpenGL clamp-to-edge behavior. The blur
+    does not expand outside the effect component area.
+
+    \section1 Summary of Qt Quick Studio Effects
+
+    The following table summarizes the available effects and contains links to
+    the developer documentation of the inherited component.
+
+    \note The effects are available when running with OpenGL.
+
+    \table
+    \header
+        \li Effect
+        \li Description
+    \row
+        \li \l [QML] Blend
+        \li Merges two source components by using a blend mode.
+
+            The default value of the \c mode property is \c subtract. Thus,
+            the pixel value from the component specified as the value of the
+            \c foregroundSource property, which is going to be blended over
+            the source component, is subtracted from the source and written
+            over it.
+
+            For a list of possible \c mode values and examples of their
+            use, see \l{Blend::mode}{Blend.mode}.
+    \row
+        \li \l BrightnessContrast
+        \li Adjusts \c brightness and \c contrast.
+    \row
+        \li \l Colorize
+        \li Sets the color in the HSL color space by specifying \c hue,
+            \c lightness, and \c saturation values.
+    \row
+        \li \l ColorOverlay
+        \li Alters the colors of the source component by applying a \c color
+            overlay.
+    \row
+        \li \l Desaturate
+        \li Reduces the saturation of the colors by the value set as a value of
+            the \c desaturate property. The value ranges from \c 0.0
+            (no change) to \c 1.0 (desaturated). Desaturated pixel values are
+            calculated as averages of the original RGB component values
+            of the source component.
+    \row
+        \li \l DirectionalBlur
+        \li Applies a blur effect to the specified direction. The value of the
+            \c angle property, defines the direction of the blur. This effect
+            makes the source component appear to be moving in the direction of
+            the blur. Blur is applied to both sides of each pixel and therefore
+            setting the direction to \c 0 and \c 180 provides the same result.
+
+            The value of the \c length property specifies the perceived
+            amount of movement for each pixel. The movement is divided evenly
+            to both sides of each pixel.
+
+            The quality of the blur depends on the value of the
+            \c samples property. If the \c length value is large,
+            more samples are needed to preserve high visual quality.
+    \row
+        \li \l Displace
+        \li Moves the pixels of the source component according to
+            the displacement map specified as the value of the
+            \c displacementSource property.
+
+            The value of the \c displacement property specifies the
+            scale for the displacement. The larger the scale, the larger the
+            displacement of the pixels. The value set to \c 0.0 causes no
+            displacement. The value of \c -1.0 sets the inverted maximum shift
+            according to the displacement source value, while \c 1.0 sets the
+            maximum shift.
+    \row
+        \li \l DropShadow
+        \li Generates a soft shadow behind the source component using a gaussian
+            blur. This effect blurs the alpha channel of the input and colorizes
+            the result, which it then places behind the source component to
+            create a soft shadow. You can set the shadow's color as a value of
+            the \c color property and change its location by setting the values
+            of the \c horizontalOffset and \c verticalOffset properties.
+
+            The value of the \c radius property specifies the softness of
+            the shadow. A larger radius causes the edges of the shadow to appear
+            more blurry. The ideal blur is achieved by setting the value of the
+            \c samples property to twice as large as the highest required
+            radius value plus one (\c {samples = 1 + radius * 2}).
+
+            The soft shadow is created by blurring the image live using a
+            gaussian blur, which is a costly operation. Fullscreen gaussian
+            blur with even a moderate number of samples will only run at 60
+            FPS on high-end graphics hardware.
+    \row
+        \li \l FastBlur
+        \li Applies a fast blur effect to one or more source components.
+            \l FastBlur offers lower blur quality than \l GaussianBlur, but
+            it is faster to render.
+            This effect softens the source content by blurring it with
+            an algorithm that uses source content downscaling and
+            bilinear filtering. Use this effect if the source content
+            is rapidly changing and the highest possible blur quality
+            is not needed.
+
+            The value of the \c radius property specifies the distance of
+            the neighboring pixels that affect the blurring of an individual
+            pixel. A larger radius increases the blur effect. The fast blur
+            algorithm may internally reduce the accuracy of the radius in order
+            to provide good rendering performance.
+    \row
+        \li \l [QML] GammaAdjust
+        \li Alters the luminance of the source component. This effect is applied
+            to each pixel according to the curve that is pre-defined as a
+            power-law expression, where the value of the \c gamma
+            property is used as the reciprocal scaling exponent.
+    \row
+        \li \l [QML] GaussianBlur
+        \li Applies a gaussian blur effect to one or more source components.
+            The effect softens the image by blurring it with an algorithm that
+            uses the gaussian function to calculate the effect. The effect
+            produces higher quality than \l FastBlur, but is slower
+            to render. Performing blur live is a costly operation. Fullscreen
+            gaussian blur with even a moderate number of \c samples
+            will only run at 60 FPS on high-end graphics hardware.
+
+            The value of the \c radius property specifies the distance of
+            the neighboring pixels that affect the blurring of an individual
+            pixel. The value of the \c deviation property is a parameter to
+            the gaussian function that is used when calculating neighboring
+            pixel weights for the blurring. A larger deviation causes an image
+            to appear more blurry, but it also reduces the quality of the blur.
+            A very large deviation value causes the effect to look a bit similar
+            to what, for exmple, a box blur algorithm produces. A too small
+            deviation value makes the effect insignificant for the pixels near
+            the radius.
+    \row
+        \li \l [QML] Glow
+        \li Generates a halo-like glow around the source component. This effect
+            blurs the alpha channel of the source and colorizes it with
+            \c color. It then places the alpha channel behind the source,
+            resulting in a halo or glow around the component. The quality
+            of the blurred edge can be controlled by using the values of the
+            \c samples and \c radius properties and the strength of the
+            glow can be changed using the value of the \c spread property.
+    \row
+        \li \l HueSaturation
+        \li Alters the source component colors in the HSL color space. This
+            effect is similar to the \l Colorize effect, but the \c hue and
+            \c saturation values are handled differently. This effect always
+            shifts these values, as well as the \c lightness value from the
+            original, instead of setting them.
+    \row
+        \li \l InnerShadow
+        \li Generates a colorized and blurred shadow inside the source using
+            the color that you specify as the value of the \c color property.
+
+            The quality of the shadow can be controlled by the values of the
+            \c samples and \c radius properties. Ideally, the
+            sample value should be twice as large as the highest required
+            radius value. For example, if the radius is animated between
+            \c 0.0 and \c 4.0, samples should be set to \c 8.
+
+            The value of the \c spread property specifies how large a part
+            of the shadow color is strengthened near the source edges.
+            The effect produces a high quality shadow image, and therefore the
+            rendering speed of the shadow might not be the highest possible.
+            The rendering speed is reduced especially if the shadow edges are
+            heavily softened. For use cases that require faster rendering speed
+            at the cost of high visual quality, set the \c fast property to
+            \c true.
+    \row
+        \li \l {LevelAdjust}{Level Adjust}
+        \li Adjusts color levels in the RGBA color space. This effect adjusts
+            the source component colors separately for each color channel. Source
+            component contrast can be adjusted and color balance altered.
+
+            The value of the \c gamma property specifies the change factor
+            for how the value of each pixel color channel is altered according
+            to the equation. Setting the gamma values under
+            \c QtVector3d(1.0, 1.0, 1.0) makes the image darker, whereas the
+            values above \c QtVector3d(1.0, 1.0, 1.0) lighten it. The value
+            ranges from \c QtVector3d(0.0, 0.0, 0.0) (darkest) to \c inf
+            (lightest).
+
+            You can specify the maximum and minimum input and output levels for
+            each color channel. \c maximumInput sets the white-point,
+            which means that all pixels with a higher value are rendered as
+            white (per color channel). Decreasing this value lightens the light
+            areas. To darken the light areas and to increase the contrast,
+            decrease the value of the \c maximumOutput property.
+
+            The value of the \c minimumInput property sets the minimum
+            input level for each color channel. It sets the black-point, which
+            means that all pixels with a lower value are rendered as black
+            (per color channel). Increasing this value darkens the dark areas.
+            To lighten the dark areas and to reduce the contrast, increase the
+            value of the \c minimumOutput property.
+    \row
+        \li \l MaskedBlur
+        \li Softens the image by blurring it. The intensity of the blur can be
+            controlled for each pixel by specifying a \c maskSource,
+            so that some parts of the source are blurred more than others.
+
+            The value of the \c radius property specifies the distance of
+            the neighboring pixels that affect the blurring of an individual
+            pixel.
+
+            The value of the \c samples property specifies, how many
+            samples are taken per pixel when blur calculation is done. Larger
+            samples produce better quality, but are slower to render.
+    \row
+        \li \l OpacityMask
+        \li Masks the source component with another component specified as a
+            value of the \c maskSource property. The mask component gets
+            rendered into an intermediate pixel buffer and the alpha values
+            from the result are used to determine the visibility of the source
+            component's pixels display.
+
+            Set the \c invert property to \c true to specify that the
+            resulting opacity is the source alpha multiplied with the
+            inverse of the mask alpha: \c {As * (1 - Am)}. When this property
+            is \c false, the resulting opacity is the source alpha multiplied
+            with the mask alpha: \c {As * Am}.
+    \row
+        \li \l RadialBlur
+        \li Applies a directional blur effect in a circular direction around the
+            component's center point. This effect makes the source component
+            appear to be rotating into the direction of the blur. Other
+            available motionblur effects are \l ZoomBlur and \l DirectionalBlur.
+
+            The value of the \c angle property specifies both the direction
+            of the blur and the level of blurring. The larger the angle, the
+            more blurred the result. The quality of the blur depends on the
+            value or the \c samples property. If the angle is large, more
+            samples are needed to preserve high visual quality.
+    \row
+        \li \l RecursiveBlur
+        \li Blurs repeatedly, providing a strong blur effect. This effect
+            softens the image by blurring it with an algorithm that uses a
+            recursive feedback loop to blur the source as many times as
+            specified by the value of the \c loops property.
+
+            The value of the \c radius property specifies the distance of
+            the neighboring pixels that affect the blurring of an individual
+            pixel.
+
+            The effect may produce more blurred results than \l FastBlur or
+            \l GaussianBlur but the result is produced asynchronously and
+            takes more time.
+    \row
+        \li \l ThresholdMask
+        \li Masks the source component with another component specified by the
+            value of the \c maskSource property. The value of the \c spread
+            property determines the smoothness of the mask edges near the
+            \c threshold alpha value. Setting spread to \c 0.0 uses
+            the mask with the specified threshold. Setting higher spread values
+            softens the transition from the transparent mask pixels towards
+            opaque mask pixels by adding interpolated values between them.
+    \row
+        \li \l ZoomBlur
+        \li Applies a directional blur effect towards source component's
+            center point. This effect makes the source component appear to be
+            moving towards the center point in Z-direction or the camera
+            appear to be zooming rapidly.
+
+            The value of the \c length property specifies the maximum
+            perceived amount of movement for each pixel. The amount is smaller
+            near the center specified by the \c horizontalOffset and
+            \c verticalOffset properties and reaches the specified value
+            at the edges.
+
+            The quality of the blur depends on the value of the
+            \c samples property. If the length value is large,
+            more samples are needed to preserve high visual quality.
+
+            Other available motion blur effects are \ DirectionalBlur and
+            \l RadialBlur.
+    \endtable
+
+*/
