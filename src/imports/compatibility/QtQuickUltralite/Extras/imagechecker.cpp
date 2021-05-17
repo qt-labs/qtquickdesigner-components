@@ -33,6 +33,7 @@
 #include <QQmlEngine>
 #include <QQuickImageProvider>
 #include <QQmlContext>
+#include <QDebug>
 
 namespace {
 
