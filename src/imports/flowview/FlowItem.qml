@@ -27,9 +27,7 @@
 **
 ****************************************************************************/
 
-
 import QtQuick 2.12
-
 
 Item {
     id: flowItem
@@ -47,11 +45,17 @@ Item {
 
     property string defaultState: undefined
 
+    property bool forceActive: false
+
+    property bool __isFlowItem: true
+
     function setState(newState) {
         flowItem.state = newState
     }
 
     property bool active: {
+        if (flowItem.forceActive)
+            return true;
         if (flowItem.flowView !== null
                 && flowItem.flowView.currentItem !== undefined
                 && flowItem.flowView.currentItem === flowItem)

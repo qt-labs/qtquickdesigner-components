@@ -41,7 +41,7 @@ Column {
         caption: qsTr("Flow Item")
 
         SectionLayout {
-            rows: 2
+            rows: 3
             columns: 2
 
             Label {
@@ -88,6 +88,20 @@ Column {
                     Layout.fillWidth: true
                     backendValue: backendValues.loaderSource
                     filter: "*.ui.qml"
+                }
+
+                ExpandingSpacer {
+                }
+            }
+
+            Label {
+                text: qsTr("Force Active")
+                tooltip: qsTr("Loads the specified QML file even if the FlowItem is inactive.")
+            }
+
+            SecondColumnLayout {
+                CheckBox {
+                    backendValue: backendValues.forceActive
                 }
 
                 ExpandingSpacer {

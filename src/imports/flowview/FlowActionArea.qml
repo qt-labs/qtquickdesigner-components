@@ -164,7 +164,6 @@ Item {
             return
 
         if (root.goBack) {
-            print("go back")
             var par = root.parent
             while (par) {
                 if (par.__isFlowView) {

@@ -47,6 +47,8 @@ Item {
     property Item interaction: Item {
     }
 
+    property bool __parentFlowChanged: false
+
     enum EffectEnum {
         Instant,
         Dissolve,
@@ -61,6 +63,11 @@ Item {
     function goBack() {
         if (root.__history.length === 0)
             return
+
+        if (root.__parentFlowChanged) {
+            root.__parentFlowChanged = false
+            parentFlowView().goBack()
+        }
 
         var poppedItem = root.__history.pop()
 
@@ -92,6 +99,27 @@ Item {
             if (root.allChildren[i] === root.activatedItem)
                 root.currentIndex = i
         }
+
+    }
+
+    function parentFlowView() {
+        var par = root.parent
+        while (par) {
+            if (par.__isFlowView)
+                return par
+            par = par.parent
+        }
+        return null
+    }
+
+    function parentFlowItem() {
+        var par = root.parent
+        while (par) {
+            if (par.__isFlowItem)
+                return par
+            par = par.parent
+        }
+        return null
 
     }
 
@@ -289,6 +317,15 @@ Item {
         for (var i = 0; i < root.allChildren.length; ++i) {
             if (page === root.allChildren[i]) {
                 root.currentIndex = i
+            }
+        }
+    }
+
+    function gotoItem(item) {
+        for (var i = 0; i < root.allChildren.length; ++i) {
+            if (item === root.allChildren[i]) {
+                root.currentIndex = i
+                print("index " + i )
             }
         }
     }

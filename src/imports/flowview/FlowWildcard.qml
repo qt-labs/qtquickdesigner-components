@@ -36,12 +36,21 @@ QtObject {
     property list<FlowItem> positivelist
     property list<FlowItem> negativelist
 
+    default property list<QtObject> data
+
     property FlowTransition target
 
     property var transitionView: Item {}
 
+    property bool globalWildcard: false
+
     function trigger() {
         var cItem = root.transitionView.currentItem
+
+        if (root.globalWildcard && root.transitionView.parentFlowView()) {
+            root.transitionView.__parentFlowChanged = true
+            root.transitionView.parentFlowView().gotoItem(root.transitionView.parentFlowItem())
+        }
 
         if (cItem === undefined)
             return
@@ -65,8 +74,4 @@ QtObject {
     property alias eventIds: eventListener.eventIds
 }
 
-/*##^##
-Designer {
-    D{i:0;formeditorZoom:0.8999999761581421}
-}
-##^##*/
+

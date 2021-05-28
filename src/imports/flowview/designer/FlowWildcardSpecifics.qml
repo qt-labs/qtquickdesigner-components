@@ -90,6 +90,14 @@ Column {
             }
 
             Label {
+                text: qsTr("Global Wildcard")
+                tooltip: qsTr("Allows triggering the wildcard from different flows.")
+            }
+            CheckBox {
+                backendValue: backendValues.globalWildcard
+            }
+
+            Label {
                 text: qsTr("Size")
                 tooltip: qsTr("Wildcard icon size in pixels.")
             }
