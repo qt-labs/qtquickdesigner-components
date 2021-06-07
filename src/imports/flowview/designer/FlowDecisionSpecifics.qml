@@ -74,6 +74,7 @@ Column {
                 backendValue: backendValues.dialogLabelPosition__AUX
                 implicitWidth: 180
                 model: ["TopLeftCorner", "TopRightCorner", "BottomLeftCorner", "BottomRightCorner"]
+                currentIndex: 1 // TopRightCorner is the default
                 manualMapping: true
 
                 property bool block: false
