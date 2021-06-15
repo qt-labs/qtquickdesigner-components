@@ -3,17 +3,18 @@ AUX_QML_FILES += \
 
 AUX_QML_FILES += \
     $$PWD/ArcItemSpecifics.qml \
+    $$PWD/BevelSection.qml \
     $$PWD/BorderItemSpecifics.qml \
+    $$PWD/BorderModeComboBox.qml \
     $$PWD/CapComboBox.qml \
+    $$PWD/CornerRadiusSection.qml \
     $$PWD/DashPatternEditor.qml \
     $$PWD/FlipableItemSpecifics.qml \
     $$PWD/IsoItemSpecifics.qml \
     $$PWD/PieItemSpecifics.qml \
     $$PWD/RectangleItemSpecifics.qml \
     $$PWD/SvgPathItemSpecifics.qml \
-    $$PWD/TriangleItemSpecifics.qml \
-    $$PWD/BevelSection.qml \
-    $$PWD/BorderModeComboBox.qml
+    $$PWD/TriangleItemSpecifics.qml
 
 AUX_QML_FILES += \
     $$PWD/images/custom-border-16px.png \

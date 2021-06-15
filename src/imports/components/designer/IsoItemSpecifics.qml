@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2019 The Qt Company Ltd.
+** Copyright (C) 2021 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -27,9 +27,9 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.0
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
 import HelperWidgets 2.0
-import QtQuick.Layouts 1.0
 
 Column {
     anchors.left: parent.left
@@ -38,12 +38,15 @@ Column {
     Section {
         anchors.left: parent.left
         anchors.right: parent.right
-        caption: qsTr("Icon Color")
+        caption: qsTr("Iso Icon")
 
-        ColorEditor {
-            caption: qsTr("Icon Color")
-            backendValue: backendValues.color
-            supportGradient: false
+        SectionLayout {
+            PropertyLabel { text: qsTr("Icon color") }
+
+            ColorEditor {
+                backendValue: backendValues.color
+                supportGradient: false
+            }
         }
     }
 }

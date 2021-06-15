@@ -34,38 +34,46 @@ import StudioTheme 1.0 as StudioTheme
 Section {
     anchors.left: parent.left
     anchors.right: parent.right
-    caption: qsTr("Corner Bevel")
+    caption: qsTr("Corner Radiuses")
 
     SectionLayout {
         PropertyLabel { text: qsTr("Top") }
 
         SecondColumnLayout {
-            CheckBox {
+            SpinBox {
                 implicitWidth: StudioTheme.Values.twoControlColumnWidth
-                               + StudioTheme.Values.actionIndicatorWidth
-                backendValue: backendValues.topLeftBevel
+                            + StudioTheme.Values.actionIndicatorWidth
+                backendValue: backendValues.topLeftRadius
+                decimals: 1
+                minimumValue: 0
+                maximumValue: 200
+                stepSize: 1
             }
 
             Spacer { implicitWidth: StudioTheme.Values.controlLabelGap }
 
             MultiIconLabel {
                 icon0: StudioTheme.Constants.cornerA
-                icon1: StudioTheme.Constants.bevelCorner
+                icon1: StudioTheme.Constants.cornerB
             }
 
             Spacer { implicitWidth: StudioTheme.Values.controlGap }
 
-            CheckBox {
+            SpinBox {
                 implicitWidth: StudioTheme.Values.twoControlColumnWidth
-                               + StudioTheme.Values.actionIndicatorWidth
-                backendValue: backendValues.topRightBevel
+                            + StudioTheme.Values.actionIndicatorWidth
+                backendValue: backendValues.topRightRadius
+                decimals: 1
+                minimumValue: 0
+                maximumValue: 200
+                stepSize: 1
             }
 
             Spacer { implicitWidth: StudioTheme.Values.controlLabelGap }
 
             MultiIconLabel {
                 icon0: StudioTheme.Constants.cornerA
-                icon1: StudioTheme.Constants.bevelCorner
+                icon1: StudioTheme.Constants.cornerB
                 rotation: 90
             }
 
@@ -75,33 +83,41 @@ Section {
         PropertyLabel { text: qsTr("Bottom") }
 
         SecondColumnLayout {
-            CheckBox {
+            SpinBox {
                 implicitWidth: StudioTheme.Values.twoControlColumnWidth
-                               + StudioTheme.Values.actionIndicatorWidth
-                backendValue: backendValues.bottomLeftBevel
+                            + StudioTheme.Values.actionIndicatorWidth
+                backendValue: backendValues.bottomLeftRadius
+                decimals: 1
+                minimumValue: 0
+                maximumValue: 200
+                stepSize: 1
             }
 
             Spacer { implicitWidth: StudioTheme.Values.controlLabelGap }
 
             MultiIconLabel {
                 icon0: StudioTheme.Constants.cornerA
-                icon1: StudioTheme.Constants.bevelCorner
+                icon1: StudioTheme.Constants.cornerB
                 rotation: 270
             }
 
             Spacer { implicitWidth: StudioTheme.Values.controlGap }
 
-            CheckBox {
+            SpinBox {
                 implicitWidth: StudioTheme.Values.twoControlColumnWidth
-                               + StudioTheme.Values.actionIndicatorWidth
-                backendValue: backendValues.bottomRightBevel
+                            + StudioTheme.Values.actionIndicatorWidth
+                backendValue: backendValues.bottomRightRadius
+                decimals: 1
+                minimumValue: 0
+                maximumValue: 200
+                stepSize: 1
             }
 
             Spacer { implicitWidth: StudioTheme.Values.controlLabelGap }
 
             MultiIconLabel {
                 icon0: StudioTheme.Constants.cornerA
-                icon1: StudioTheme.Constants.bevelCorner
+                icon1: StudioTheme.Constants.cornerB
                 rotation: 180
             }
 
@@ -111,15 +127,21 @@ Section {
         PropertyLabel { text: qsTr("Global") }
 
         SecondColumnLayout {
-            CheckBox {
+            SpinBox {
                 implicitWidth: StudioTheme.Values.twoControlColumnWidth
-                               + StudioTheme.Values.actionIndicatorWidth
-                backendValue: backendValues.bevel
+                            + StudioTheme.Values.actionIndicatorWidth
+                backendValue: backendValues.radius
+                decimals: 1
+                minimumValue: 0
+                maximumValue: 200
+                stepSize: 1
             }
 
             Spacer { implicitWidth: StudioTheme.Values.controlLabelGap }
 
-            IconLabel { icon: StudioTheme.Constants.bevelAll }
+            IconLabel {
+                icon: StudioTheme.Constants.cornersAll
+            }
 
             ExpandingSpacer {}
         }

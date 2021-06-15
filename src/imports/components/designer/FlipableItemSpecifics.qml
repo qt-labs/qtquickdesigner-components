@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2019 The Qt Company Ltd.
+** Copyright (C) 2021 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -27,88 +27,106 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.0
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
 import HelperWidgets 2.0
-import QtQuick.Layouts 1.0
-
+import StudioControls 1.0 as StudioControls
+import StudioTheme 1.0 as StudioTheme
 
 Column {
     anchors.left: parent.left
     anchors.right: parent.right
 
     Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
         caption: qsTr("Flipped Status")
 
+        anchors.left: parent.left
+        anchors.right: parent.right
+
         SectionLayout {
-            rows: 2
-            Label {
-                text: qsTr("Rotational Axis")
-            }
+            PropertyLabel { text: qsTr("Rotational axis") }
+
             SecondColumnLayout {
                 ComboBox {
-                    model: ["X Axis", "Y Axis"]
+                    implicitWidth: StudioTheme.Values.singleControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
+                    width: implicitWidth
                     backendValue: backendValues.rotationalAxis
-                    Layout.fillWidth: true
+                    model: ["X Axis", "Y Axis"]
                     useInteger: true
                 }
+
+                ExpandingSpacer {}
             }
 
-            Label {
-                text: qsTr("Flip Angle")
-            }
+            PropertyLabel { text: qsTr("Flip Angle") }
+
             SecondColumnLayout {
                 SpinBox {
+                    implicitWidth: StudioTheme.Values.singleControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
                     backendValue: backendValues.flipAngle
-                    Layout.preferredWidth: 80
                     minimumValue: -360
                     maximumValue: 360
                     stepSize: 10
+                    sliderIndicatorVisible: true
                 }
-                ExpandingSpacer {
 
-                }
+                Spacer { implicitWidth: StudioTheme.Values.controlLabelGap }
+
+                ControlLabel { text: "°" }
+
+                ExpandingSpacer {}
             }
         }
     }
 
     Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
         caption: qsTr("Opacity")
 
+        anchors.left: parent.left
+        anchors.right: parent.right
+
         SectionLayout {
-            rows: 2
-            Label {
-                text: qsTr("Opacity Front")
-            }
+            PropertyLabel { text: qsTr("Front") }
+
             SecondColumnLayout {
                 SpinBox {
-                    backendValue: backendValues.opacityFront
-                    Layout.preferredWidth: 80
+                    implicitWidth: StudioTheme.Values.singleControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
+                    backendValue: backendValues.opacityFront // TODO convert to %
                     decimals: 2
                     minimumValue: 0
                     maximumValue: 1
                     stepSize: 0.1
+                    sliderIndicatorVisible: true
                 }
-                ExpandingSpacer {
-                }
+
+                // Spacer { implicitWidth: StudioTheme.Values.controlLabelGap }
+
+                // ControlLabel { text: "%" }
+
+                ExpandingSpacer {}
             }
-            Label {
-                text: qsTr("Opacity Back")
-            }
+            PropertyLabel { text: qsTr("Back") }
+
             SecondColumnLayout {
                 SpinBox {
-                    backendValue: backendValues.opacityBack
-                    Layout.preferredWidth: 80
+                    implicitWidth: StudioTheme.Values.singleControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
+                    backendValue: backendValues.opacityBack // TODO convert to %
                     decimals: 2
                     minimumValue: 0
                     maximumValue: 1
                     stepSize: 0.1
+                    sliderIndicatorVisible: true
                 }
-                ExpandingSpacer {
-                }
+
+                // Spacer { implicitWidth: StudioTheme.Values.controlLabelGap }
+
+                // ControlLabel { text: "%" }
+
+                ExpandingSpacer {}
             }
         }
     }

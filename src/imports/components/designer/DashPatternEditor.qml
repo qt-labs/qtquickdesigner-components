@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2019 The Qt Company Ltd.
+** Copyright (C) 2021 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -27,21 +27,22 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.12
-import QtQuick.Layouts 1.12
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
 import HelperWidgets 2.0
 import QtQuickDesignerTheme 1.0
+import StudioTheme 1.0 as StudioTheme
 
 GridLayout {
     id: root
-    Layout.fillWidth: true
-    rowSpacing: 2
-    columnSpacing: 6
+    rowSpacing: StudioTheme.Values.sectionRowSpacing
+    columnSpacing: 0
     rows: 2
     columns: 5
+    Layout.fillWidth: true
 
     property bool __block: false
-    property int labelWidth: 32
+    property int labelWidth: 46
     property bool enableEditors: true
     property variant backendValue: backendValues.dashPattern
     property string expression: backendValue.expression
@@ -92,7 +93,7 @@ GridLayout {
 
     Connections {
         target: modelNodeBackend
-        onSelectionChanged: parseExpression()
+        function onSelectionChanged() { parseExpression() }
     }
 
     ExtendedFunctionLogic {
@@ -102,89 +103,97 @@ GridLayout {
 
     ActionIndicator {
         id: actionIndicator
-
-        enabled: root.enableEditors
+        myControl: dash01
+        icon.visible: dash01.hover || gap01.hover || dash02.hover || gap02.hover
         icon.color: extFuncLogic.color
         icon.text: extFuncLogic.glyph
+        enabled: root.enableEditors
         onClicked: extFuncLogic.show()
-    }
-
-    Label {
-        text: qsTr("Dash")
-        color: Theme.color(Theme.PanelTextColorLight)
-        elide: Text.ElideRight
-        width: root.labelWidth
     }
 
     DoubleSpinBox {
         id: dash01
 
-        enabled: root.enableEditors
         property color textColor: colorLogic.textColor
+
+        implicitWidth: StudioTheme.Values.twoControlColumnWidth
+        maximumValue: 1000
         ColorLogic {
             id: colorLogic
             backendValue: backendValues.dashPattern
         }
+        enabled: root.enableEditors
         onValueChanged: root.createArray()
-        maximumValue: 1000
-        Layout.fillWidth: true
     }
 
-    Label {
-        text: qsTr("Gap")
+    ControlLabel {
+        text: qsTr("Dash")
         color: Theme.color(Theme.PanelTextColorLight)
         elide: Text.ElideRight
         width: root.labelWidth
+        horizontalAlignment: Text.AlignLeft
+        leftPadding: StudioTheme.Values.controlLabelGap
     }
 
     DoubleSpinBox {
         id: gap01
 
-        enabled: root.enableEditors
         property color textColor: colorLogic.textColor
 
-        onValueChanged: root.createArray()
+        implicitWidth: StudioTheme.Values.twoControlColumnWidth
         maximumValue: 1000
-        Layout.fillWidth: true
-    }
-
-    Item {
-        width: actionIndicator.width
-    }
-
-    Label {
-        text: qsTr("Dash")
-        color: Theme.color(Theme.PanelTextColorLight)
-        elide: Text.ElideRight
-        width: root.labelWidth
-    }
-
-    DoubleSpinBox {
-        id: dash02
-
         enabled: root.enableEditors
-        property color textColor: colorLogic.textColor
-
         onValueChanged: root.createArray()
-        maximumValue: 1000
-        Layout.fillWidth: true
     }
 
-    Label {
+    ControlLabel {
         text: qsTr("Gap")
         color: Theme.color(Theme.PanelTextColorLight)
         elide: Text.ElideRight
         width: root.labelWidth
+        horizontalAlignment: Text.AlignLeft
+        leftPadding: StudioTheme.Values.controlLabelGap
+    }
+
+    Spacer { implicitWidth: StudioTheme.Values.actionIndicatorWidth }
+
+    DoubleSpinBox {
+        id: dash02
+
+        property color textColor: colorLogic.textColor
+
+        implicitWidth: StudioTheme.Values.twoControlColumnWidth
+        maximumValue: 1000
+        enabled: root.enableEditors
+        onValueChanged: root.createArray()
+    }
+
+    ControlLabel {
+        text: qsTr("Dash")
+        color: Theme.color(Theme.PanelTextColorLight)
+        elide: Text.ElideRight
+        width: root.labelWidth
+        horizontalAlignment: Text.AlignLeft
+        leftPadding: StudioTheme.Values.controlLabelGap
     }
 
     DoubleSpinBox {
         id: gap02
 
-        enabled: root.enableEditors
         property color textColor: colorLogic.textColor
 
-        onValueChanged: root.createArray()
+        implicitWidth: StudioTheme.Values.twoControlColumnWidth
         maximumValue: 1000
-        Layout.fillWidth: true
+        enabled: root.enableEditors
+        onValueChanged: root.createArray()
+    }
+
+    ControlLabel {
+        text: qsTr("Gap")
+        color: Theme.color(Theme.PanelTextColorLight)
+        elide: Text.ElideRight
+        width: root.labelWidth
+        horizontalAlignment: Text.AlignLeft
+        leftPadding: StudioTheme.Values.controlLabelGap
     }
 }

@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2019 The Qt Company Ltd.
+** Copyright (C) 2021 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -27,10 +27,10 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.0
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
 import HelperWidgets 2.0
-import QtQuick.Layouts 1.0
-import StudioControls 1.0 as StudioControls
+import StudioTheme 1.0 as StudioTheme
 
 Column {
     anchors.left: parent.left
@@ -39,155 +39,49 @@ Column {
     Section {
         anchors.left: parent.left
         anchors.right: parent.right
-        caption: qsTr("Fill Color")
-
-        ColorEditor {
-            caption: qsTr("Fill Color")
-            backendValue: backendValues.fillColor
-            supportGradient: true
-            shapeGradients: true
-        }
-
-
-    }
-
-    Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Stroke Color")
-
-        ColorEditor {
-            caption: qsTr("Stroke Color")
-            backendValue: backendValues.strokeColor
-            supportGradient: false
-        }
-    }
-
-
-    Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Corner Radiuses")
+        caption: qsTr("Rectangle Item")
 
         SectionLayout {
-            rows: 2
-            Label {
-                text: qsTr("Radius")
-            }
-            SecondColumnLayout {
-                SpinBox {
-                    backendValue: backendValues.radius
-                    Layout.preferredWidth: 80
-                    decimals: 1
-                    minimumValue: 0
-                    maximumValue: 200
-                    stepSize: 1
-                }
-                ExpandingSpacer {
+            PropertyLabel { text: qsTr("Fill Color") }
 
-                }
-            }
-            Label {
-                text: qsTr("Top Left Radius")
-            }
-            SecondColumnLayout {
-                SpinBox {
-                    backendValue: backendValues.topLeftRadius
-                    Layout.preferredWidth: 80
-                    decimals: 1
-                    minimumValue: 0
-                    maximumValue: 200
-                    stepSize: 1
-                }
-                ExpandingSpacer {
-
-                }
+            ColorEditor {
+                backendValue: backendValues.fillColor
+                supportGradient: true
+                shapeGradients: true
             }
 
-            Label {
-                text: qsTr("Top Right Radius")
-            }
-            SecondColumnLayout {
-                SpinBox {
-                    backendValue: backendValues.topRightRadius
-                    Layout.preferredWidth: 80
-                    decimals: 1
-                    minimumValue: 0
-                    maximumValue: 200
-                    stepSize: 1
-                }
-                ExpandingSpacer {
+            PropertyLabel { text: qsTr("Stroke Color") }
 
-                }
+            ColorEditor {
+                backendValue: backendValues.strokeColor
+                supportGradient: false
             }
 
-            Label {
-                text: qsTr("Bottom Right Radius")
-            }
-            SecondColumnLayout {
-                SpinBox {
-                    backendValue: backendValues.bottomRightRadius
-                    Layout.preferredWidth: 80
-                    decimals: 1
-                    minimumValue: 0
-                    maximumValue: 200
-                    stepSize: 1
-                }
-                ExpandingSpacer {
+            PropertyLabel { text: qsTr("Stroke Width") }
 
-                }
-            }
-
-            Label {
-                text: qsTr("Bottom Left Radius")
-            }
-            SecondColumnLayout {
-                SpinBox {
-                    backendValue: backendValues.bottomLeftRadius
-                    Layout.preferredWidth: 80
-                    decimals: 1
-                    minimumValue: 0
-                    maximumValue: 200
-                    stepSize: 1
-                }
-                ExpandingSpacer {
-
-                }
-            }
-        }
-    }
-
-    BevelSection {
-    }
-
-    Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: "Stroke Details"
-
-        SectionLayout {
-            rows: 2
-            Label {
-                text: qsTr("Stroke Width")
-            }
             SecondColumnLayout {
                 SpinBox {
                     id: strokeWidthSpin
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
                     backendValue: backendValues.strokeWidth
-                    Layout.preferredWidth: 80
                     decimals: 1
                     minimumValue: -1
                     maximumValue: 200
                     stepSize: 1
                 }
 
-                Item { width: 20 }
+                Spacer {
+                    implicitWidth: StudioTheme.Values.twoControlColumnGap
+                                   + StudioTheme.Values.actionIndicatorWidth
+                }
 
-                StudioControls.CheckBox {
+                CheckBox {
                     id: strokeWidthCheck
-                    text: qsTr("Hide stroke")
+                    text: qsTr("Hide")
                     checked: (backendValues.strokeWidth.value >= 0 ? false : true)
                     actionIndicator.visible: false
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
 
                     onCheckedChanged: {
                         if (strokeWidthCheck.checked === true)
@@ -197,67 +91,80 @@ Column {
                     }
                 }
 
-                ExpandingSpacer {
-                }
+                ExpandingSpacer {}
             }
+        }
+    }
 
-            Label {
-                text: qsTr("Border Mode")
-            }
+    CornerRadiusSection {}
+
+    BevelSection {}
+
+    Section {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        caption: qsTr("Stroke Details")
+
+        SectionLayout {
+            PropertyLabel { text: qsTr("Border mode") }
 
             SecondColumnLayout {
-                BorderModeComboBox {
-                }
+                BorderModeComboBox {}
+
+                ExpandingSpacer {}
             }
 
-
-            Label {
-                text: qsTr("Stroke Style")
-            }
+            PropertyLabel { text: qsTr("Stroke style") }
 
             SecondColumnLayout {
                 ComboBox {
                     id: strokeStyle
                     model: ["None", "Solid", "Dash", "Dot", "Dash Dot", "Dash Dot Dot"]
                     backendValue: backendValues.strokeStyle
-                    Layout.fillWidth: true
+                    implicitWidth: StudioTheme.Values.singleControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
+                    width: implicitWidth
                     useInteger: true
                 }
+
+                ExpandingSpacer {}
             }
 
-            Label {
-                Layout.alignment: Qt.AlignTop | Qt.AlignLeft
-                text: qsTr("Dash Pattern")
-            }
-
-            DashPatternEditor {
-                enableEditors: strokeStyle.currentIndex === 2
-            }
-
-            Label {
-                text: qsTr("Joint Style")
-            }
+            PropertyLabel { text: qsTr("Join style") }
 
             SecondColumnLayout {
                 ComboBox {
                     model: ["Miter Join", "Bevel Join", "Round Join"]
                     backendValue: backendValues.joinStyle
-                    Layout.fillWidth: true
+                    implicitWidth: StudioTheme.Values.singleControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
+                    width: implicitWidth
                     useInteger: true
                 }
+
+                ExpandingSpacer {}
             }
-            Label {
-                text: qsTr("Dash Offset")
+
+            PropertyLabel { text: qsTr("Dash pattern") }
+
+            DashPatternEditor {
+                enableEditors: strokeStyle.currentIndex === 2
             }
+
+            PropertyLabel { text: qsTr("Dash offset") }
+
             SecondColumnLayout {
                 SpinBox {
                     backendValue: backendValues.dashOffset
-                    Layout.preferredWidth: 80
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
                     decimals: 1
                     minimumValue: 0
                     maximumValue: 1000
                     stepSize: 1
                 }
+
+                ExpandingSpacer {}
             }
         }
     }

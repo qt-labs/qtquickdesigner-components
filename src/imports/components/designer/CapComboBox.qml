@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2019 The Qt Company Ltd.
+** Copyright (C) 2021 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -27,14 +27,17 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.0
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
 import HelperWidgets 2.0
-import QtQuick.Layouts 1.0
+import StudioTheme 1.0 as StudioTheme
 
 ComboBox {
+    implicitWidth: StudioTheme.Values.singleControlColumnWidth
+                   + StudioTheme.Values.actionIndicatorWidth
+    width: implicitWidth
     model: ["FlatCap", "SquareCap", "RoundCap"]
     backendValue: backendValues.capStyle
-    Layout.fillWidth: true
     useInteger: true
     manualMapping: true
 
@@ -61,7 +64,7 @@ ComboBox {
 
     Connections {
         target: modelNodeBackend
-        onSelectionChanged: fromBackendToFrontend()
+        function onSelectionChanged() { fromBackendToFrontend() }
     }
 
     function fromBackendToFrontend()
