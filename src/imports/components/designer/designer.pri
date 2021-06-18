@@ -42,4 +42,32 @@ AUX_QML_FILES += \
     $$PWD/images/item-triangle-24px@2x.png \
     $$PWD/images/group-16px.png \
     $$PWD/images/group-24px.png \
-    $$PWD/images/group-24px@2.png
+    $$PWD/images/group-24px@2.png \
+    $$PWD/images/item-arrow-16px.png \
+    $$PWD/images/item-arrow-arc-16px.png \
+    $$PWD/images/item-arrow-arc-24px.png \
+    $$PWD/images/item-arrow-arc-24px@2x.png \
+    $$PWD/images/item-arrow-down-24px.png \
+    $$PWD/images/item-arrow-down-24px@2.png \
+    $$PWD/images/item-arrow-down-left-24px.png \
+    $$PWD/images/item-arrow-down-left-24px@2.png \
+    $$PWD/images/item-arrow-down-right-24px.png \
+    $$PWD/images/item-arrow-down-right-24px@2.png \
+    $$PWD/images/item-arrow-left-24px.png \
+    $$PWD/images/item-arrow-left-24px@2.png \
+    $$PWD/images/item-arrow-left-down-24px.png \
+    $$PWD/images/item-arrow-left-down-24px@2.png \
+    $$PWD/images/item-arrow-left-up-24px.png \
+    $$PWD/images/item-arrow-left-up-24px@2.png \
+    $$PWD/images/item-arrow-right-24px.png \
+    $$PWD/images/item-arrow-right-24px@2.png \
+    $$PWD/images/item-arrow-right-down-24px.png \
+    $$PWD/images/item-arrow-right-down-24px@2.png \
+    $$PWD/images/item-arrow-right-up-24px.png \
+    $$PWD/images/item-arrow-right-up-24px@2.png \
+    $$PWD/images/item-arrow-up-24px.png \
+    $$PWD/images/item-arrow-up-24px@2.png \
+    $$PWD/images/item-arrow-up-left-24px.png \
+    $$PWD/images/item-arrow-up-left-24px@2.png \
+    $$PWD/images/item-arrow-up-right-24px.png \
+    $$PWD/images/item-arrow-up-right-24px@2.png

@@ -7,4 +7,6 @@ QML_FILES += \
     $$PWD/SvgPathItem.qml \
     $$PWD/TriangleItem.qml \
     $$PWD/RectangleItem.qml \
-    $$PWD/GroupItem.qml
+    $$PWD/GroupItem.qml \
+    $$PWD/ArcArrow \
+    $$PWD/StraightArrow
