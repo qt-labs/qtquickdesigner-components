@@ -99,69 +99,9 @@ Column {
         }
     }
 
-    Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Stroke Details")
-
-        SectionLayout {
-            PropertyLabel {  text: qsTr("Stroke style") }
-
-            SecondColumnLayout {
-                ComboBox {
-                    id: strokeStyle
-                    model: ["None", "Solid", "Dash", "Dot", "Dash Dot", "Dash Dot Dot"]
-                    backendValue: backendValues.strokeStyle
-                    implicitWidth: StudioTheme.Values.singleControlColumnWidth
-                                   + StudioTheme.Values.actionIndicatorWidth
-                    width: implicitWidth
-                    useInteger: true
-                }
-
-                ExpandingSpacer {}
-            }
-
-            PropertyLabel { text: qsTr("Join style") }
-
-            SecondColumnLayout {
-                ComboBox {
-                    model: ["Miter Join", "Bevel Join", "Round Join"]
-                    backendValue: backendValues.joinStyle
-                    implicitWidth: StudioTheme.Values.singleControlColumnWidth
-                                   + StudioTheme.Values.actionIndicatorWidth
-                    width: implicitWidth
-                    useInteger: true
-                }
-
-                ExpandingSpacer {}
-            }
-
-            PropertyLabel {
-                text: qsTr("Dash pattern")
-                Layout.alignment: Qt.AlignTop
-                Layout.topMargin: 5
-            }
-
-            DashPatternEditor {
-                enableEditors: strokeStyle.currentIndex === 2
-            }
-
-            PropertyLabel { text: qsTr("Dash offset") }
-
-            SecondColumnLayout {
-                SpinBox {
-                    backendValue: backendValues.dashOffset
-                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
-                                   + StudioTheme.Values.actionIndicatorWidth
-                    decimals: 1
-                    minimumValue: 0
-                    maximumValue: 1000
-                    stepSize: 1
-                }
-
-                ExpandingSpacer {}
-            }
-        }
+    StrokeDetailsSection {
+        showCapStyle: false
+        showJoinStyle: true
     }
 
     Section {
@@ -230,7 +170,7 @@ Column {
             SecondColumnLayout {
                 SpinBox {
                     implicitWidth: StudioTheme.Values.twoControlColumnWidth
-                                + StudioTheme.Values.actionIndicatorWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
                     decimals: 1
                     minimumValue: -10000
                     maximumValue: 10000
@@ -252,7 +192,7 @@ Column {
                 SpinBox {
                     id: spinBoxBottomMargin
                     implicitWidth: StudioTheme.Values.twoControlColumnWidth
-                                + StudioTheme.Values.actionIndicatorWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
                     decimals: 1
                     minimumValue: -10000
                     maximumValue: 10000
@@ -279,7 +219,7 @@ Column {
                 SpinBox {
                     id: spinBoxLeftMargin
                     implicitWidth: StudioTheme.Values.twoControlColumnWidth
-                                + StudioTheme.Values.actionIndicatorWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
                     decimals: 1
                     minimumValue: -10000
                     maximumValue: 10000
@@ -294,7 +234,7 @@ Column {
                     icon1: StudioTheme.Constants.paddingEdge
                     iconColor: StudioTheme.Values.themeTextColor
                     rotation: 270
-                    tooltip: qsTr("The margin left of the item.")
+                    tooltip: qsTr("The left margin of the item.")
                 }
 
                 Spacer { implicitWidth: StudioTheme.Values.controlGap }
@@ -302,7 +242,7 @@ Column {
                 SpinBox {
                     id: spinBoxRightMargin
                     implicitWidth: StudioTheme.Values.twoControlColumnWidth
-                                + StudioTheme.Values.actionIndicatorWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
                     decimals: 1
                     minimumValue: -10000
                     maximumValue: 10000
@@ -317,7 +257,7 @@ Column {
                     icon1: StudioTheme.Constants.paddingEdge
                     iconColor: StudioTheme.Values.themeTextColor
                     rotation: 90
-                    tooltip: qsTr("The margin right of the item.")
+                    tooltip: qsTr("The right margin of the item.")
                 }
 
                 ExpandingSpacer {}

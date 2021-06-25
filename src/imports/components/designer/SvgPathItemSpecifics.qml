@@ -95,78 +95,8 @@ Column {
         }
     }
 
-
-    Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Stroke Details")
-
-        SectionLayout {
-            PropertyLabel {  text: qsTr("Stroke style") }
-
-            SecondColumnLayout {
-                ComboBox {
-                    id: strokeStyle
-                    model: ["None", "Solid", "Dash", "Dot", "Dash Dot", "Dash Dot Dot"]
-                    backendValue: backendValues.strokeStyle
-                    implicitWidth: StudioTheme.Values.singleControlColumnWidth
-                                   + StudioTheme.Values.actionIndicatorWidth
-                    width: implicitWidth
-                    useInteger: true
-                }
-
-                ExpandingSpacer {}
-            }
-
-            PropertyLabel { text: qsTr("Join style") }
-
-            SecondColumnLayout {
-                ComboBox {
-                    model: ["Miter Join", "Bevel Join", "Round Join"]
-                    backendValue: backendValues.joinStyle
-                    implicitWidth: StudioTheme.Values.singleControlColumnWidth
-                                   + StudioTheme.Values.actionIndicatorWidth
-                    width: implicitWidth
-                    useInteger: true
-                }
-
-                ExpandingSpacer {}
-            }
-
-            PropertyLabel { text: qsTr("Cap style") }
-
-            SecondColumnLayout {
-                CapComboBox {}
-
-                ExpandingSpacer {}
-            }
-
-            PropertyLabel {
-                text: qsTr("Dash pattern")
-                Layout.alignment: Qt.AlignTop
-                Layout.topMargin: 5
-            }
-
-            DashPatternEditor {
-                enableEditors: strokeStyle.currentIndex === 2
-            }
-
-            PropertyLabel { text: qsTr("Dash offset") }
-
-            SecondColumnLayout {
-                SpinBox {
-                    backendValue: backendValues.dashOffset
-                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
-                                   + StudioTheme.Values.actionIndicatorWidth
-                    decimals: 1
-                    minimumValue: 0
-                    maximumValue: 1000
-                    stepSize: 1
-                }
-
-                ExpandingSpacer {}
-            }
-        }
+    StrokeDetailsSection {
+        showJoinStyle: true
     }
 
     Section {

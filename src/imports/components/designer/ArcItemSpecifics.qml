@@ -137,69 +137,7 @@ Column {
         }
     }
 
-
-    Section {
-        caption: qsTr("Stroke details")
-
-        anchors.left: parent.left
-        anchors.right: parent.right
-
-        SectionLayout {
-            PropertyLabel {  text: qsTr("Stroke style") }
-
-            SecondColumnLayout {
-                ComboBox {
-                    id: strokeStyle
-                    implicitWidth: StudioTheme.Values.singleControlColumnWidth
-                                   + StudioTheme.Values.actionIndicatorWidth
-                    width: implicitWidth
-                    model: ["None", "Solid", "Dash", "Dot", "Dash Dot", "Dash Dot Dot"]
-                    backendValue: backendValues.strokeStyle
-                    useInteger: true
-                }
-
-                ExpandingSpacer {}
-            }
-
-            PropertyLabel { text: qsTr("Cap style") }
-
-            SecondColumnLayout {
-                CapComboBox {}
-
-                ExpandingSpacer {}
-            }
-
-            PropertyLabel {
-                text: qsTr("Dash pattern")
-                Layout.alignment: Qt.AlignTop
-                Layout.topMargin: 5
-            }
-
-            SecondColumnLayout {
-                DashPatternEditor {
-                    enableEditors: strokeStyle.currentIndex === 2
-                }
-
-                ExpandingSpacer {}
-            }
-
-            PropertyLabel { text: qsTr("Dash offset") }
-
-            SecondColumnLayout {
-                SpinBox {
-                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
-                                   + StudioTheme.Values.actionIndicatorWidth
-                    backendValue: backendValues.dashOffset
-                    decimals: 1
-                    minimumValue: 0
-                    maximumValue: 1000
-                    stepSize: 1
-                }
-
-                ExpandingSpacer {}
-            }
-        }
-    }
+    StrokeDetailsSection {}
 
     Section {
         caption: qsTr("Outline")

@@ -42,7 +42,7 @@ Column {
         caption: qsTr("Rectangle Item")
 
         SectionLayout {
-            PropertyLabel { text: qsTr("Fill Color") }
+            PropertyLabel { text: qsTr("Fill color") }
 
             ColorEditor {
                 backendValue: backendValues.fillColor
@@ -50,14 +50,14 @@ Column {
                 shapeGradients: true
             }
 
-            PropertyLabel { text: qsTr("Stroke Color") }
+            PropertyLabel { text: qsTr("Stroke color") }
 
             ColorEditor {
                 backendValue: backendValues.strokeColor
                 supportGradient: false
             }
 
-            PropertyLabel { text: qsTr("Stroke Width") }
+            PropertyLabel { text: qsTr("Stroke width") }
 
             SecondColumnLayout {
                 SpinBox {
@@ -100,72 +100,9 @@ Column {
 
     BevelSection {}
 
-    Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Stroke Details")
-
-        SectionLayout {
-            PropertyLabel { text: qsTr("Border mode") }
-
-            SecondColumnLayout {
-                BorderModeComboBox {}
-
-                ExpandingSpacer {}
-            }
-
-            PropertyLabel { text: qsTr("Stroke style") }
-
-            SecondColumnLayout {
-                ComboBox {
-                    id: strokeStyle
-                    model: ["None", "Solid", "Dash", "Dot", "Dash Dot", "Dash Dot Dot"]
-                    backendValue: backendValues.strokeStyle
-                    implicitWidth: StudioTheme.Values.singleControlColumnWidth
-                                   + StudioTheme.Values.actionIndicatorWidth
-                    width: implicitWidth
-                    useInteger: true
-                }
-
-                ExpandingSpacer {}
-            }
-
-            PropertyLabel { text: qsTr("Join style") }
-
-            SecondColumnLayout {
-                ComboBox {
-                    model: ["Miter Join", "Bevel Join", "Round Join"]
-                    backendValue: backendValues.joinStyle
-                    implicitWidth: StudioTheme.Values.singleControlColumnWidth
-                                   + StudioTheme.Values.actionIndicatorWidth
-                    width: implicitWidth
-                    useInteger: true
-                }
-
-                ExpandingSpacer {}
-            }
-
-            PropertyLabel { text: qsTr("Dash pattern") }
-
-            DashPatternEditor {
-                enableEditors: strokeStyle.currentIndex === 2
-            }
-
-            PropertyLabel { text: qsTr("Dash offset") }
-
-            SecondColumnLayout {
-                SpinBox {
-                    backendValue: backendValues.dashOffset
-                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
-                                   + StudioTheme.Values.actionIndicatorWidth
-                    decimals: 1
-                    minimumValue: 0
-                    maximumValue: 1000
-                    stepSize: 1
-                }
-
-                ExpandingSpacer {}
-            }
-        }
+    StrokeDetailsSection {
+        showBorderMode: true
+        showJoinStyle: true
+        showCapStyle: false
     }
 }

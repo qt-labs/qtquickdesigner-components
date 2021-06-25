@@ -136,74 +136,7 @@ Column {
         }
     }
 
-    Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Stroke Details")
-
-        SectionLayout {
-            PropertyLabel { text: qsTr("Stroke style") }
-
-            SecondColumnLayout {
-                ComboBox {
-                    id: strokeStyle
-                    model: ["None", "Solid", "Dash", "Dot", "Dash Dot", "Dash Dot Dot"]
-                    backendValue: backendValues.strokeStyle
-                    implicitWidth: StudioTheme.Values.singleControlColumnWidth
-                                   + StudioTheme.Values.actionIndicatorWidth
-                    width: implicitWidth
-                    useInteger: true
-                }
-
-                ExpandingSpacer {}
-            }
-
-            PropertyLabel { text: qsTr("Cap Style") }
-
-            SecondColumnLayout {
-                CapComboBox {}
-
-                ExpandingSpacer {}
-            }
-
-            PropertyLabel {
-                text: qsTr("Dash pattern")
-                Layout.alignment: Qt.AlignTop
-                Layout.topMargin: 5
-            }
-
-            DashPatternEditor {
-                enableEditors: strokeStyle.currentIndex === 2
-            }
-
-            PropertyLabel { text: qsTr("Dash offset") }
-
-            SecondColumnLayout {
-                SpinBox {
-                    backendValue: backendValues.dashOffset
-                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
-                                   + StudioTheme.Values.actionIndicatorWidth
-                    decimals: 1
-                    minimumValue: 0
-                    maximumValue: 1000
-                    stepSize: 1
-                }
-
-                ExpandingSpacer {}
-            }
-
-            PropertyLabel { text: qsTr("Hide line") }
-
-            SecondColumnLayout {
-                CheckBox {
-                    backendValue: backendValues.hideLine
-                    text: qsTr("hide inside line")
-                    implicitWidth: StudioTheme.Values.singleControlColumnWidth
-                                   + StudioTheme.Values.actionIndicatorWidth
-                }
-
-                ExpandingSpacer {}
-            }
-        }
+    StrokeDetailsSection {
+        showHideLine: true
     }
 }

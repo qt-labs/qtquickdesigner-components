@@ -59,7 +59,7 @@ Column {
                 ExpandingSpacer {}
             }
 
-            PropertyLabel { text: qsTr("Flip Angle") }
+            PropertyLabel { text: qsTr("Flip angle") }
 
             SecondColumnLayout {
                 SpinBox {
