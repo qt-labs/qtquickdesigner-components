@@ -13,6 +13,7 @@ AUX_QML_FILES += \
     $$PWD/IsoItemSpecifics.qml \
     $$PWD/PieItemSpecifics.qml \
     $$PWD/RectangleItemSpecifics.qml \
+    $$PWD/StrokeDetailsSection.qml \
     $$PWD/SvgPathItemSpecifics.qml \
     $$PWD/TriangleItemSpecifics.qml
 
