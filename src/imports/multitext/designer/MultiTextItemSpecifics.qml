@@ -44,7 +44,7 @@ Column {
             columns: 2
 
             Label {
-                text:  qsTr("Text Element")
+                text:  qsTr("Text element")
 
             }
 
@@ -66,7 +66,7 @@ Column {
             }
 
             Label {
-                text: qsTr("String Index")
+                text: qsTr("String index")
                 tooltip: qsTr("")
             }
             SpinBox {

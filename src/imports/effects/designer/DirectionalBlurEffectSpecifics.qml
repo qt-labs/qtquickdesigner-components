@@ -47,7 +47,9 @@ Column {
             rows: 2
             Label {
                 text: qsTr("Angle")
-                toolTip: qsTr("This property defines the direction for the blur. Blur is applied to both sides of each pixel, therefore setting the direction to 0 and 180 produces the same result.")
+                toolTip: qsTr("The direction for the blur. Blur is applied to both sides of each "
+                              + "pixel. Therefore, setting the direction to 0 and 180 produces "
+                              + "the same result.")
             }
             SecondColumnLayout {
                 SpinBox {
@@ -64,7 +66,8 @@ Column {
 
             Label {
                 text: qsTr("Samples")
-                toolTip: qsTr("This property defines how many samples are taken per pixel when blur calculation is done. Larger value produces better quality, but is slower to render.")
+                toolTip: qsTr("Samples per pixel for blur calculation. A larger value produces "
+                              + "better quality, but is slower to render.")
             }
             SecondColumnLayout {
                 SpinBox {
@@ -81,7 +84,8 @@ Column {
 
             Label {
                 text: qsTr("Length")
-                toolTip: qsTr("This property defines the perceived amount of movement for each pixel. The movement is divided evenly to both sides of each pixel.")
+                toolTip: qsTr("The perceived amount of movement for each pixel. The movement is "
+                              + "divided evenly to both sides of each pixel.")
             }
             SecondColumnLayout {
                 SpinBox {
@@ -108,7 +112,8 @@ Column {
             rows: 2
             Label {
                 text: qsTr("Cached")
-                toolTip: qsTr("This property allows the effect output pixels to be cached in order to improve the rendering performance.")
+                toolTip: qsTr("Caches the effect output pixels to improve the rendering "
+                              + "performance.")
             }
             SecondColumnLayout {
                 CheckBox {
@@ -122,7 +127,9 @@ Column {
 
             Label {
                 text: qsTr("Transparent border")
-                toolTip: qsTr("When set to true, the exterior of the item is padded with a transparent edge, making sampling outside the source texture use transparency instead of the edge pixels.")
+                toolTip: qsTr("Pads the exterior of the item with a transparent edge, making "
+                              + "sampling outside the source texture use transparency instead of "
+                              + "the edge pixels.")
             }
             SecondColumnLayout {
                 CheckBox {

@@ -44,7 +44,7 @@ Column {
             rows: 2
             Label {
                 text: qsTr("Desaturation")
-                toolTip: qsTr("This property defines how much the source colors are desaturated.")
+                toolTip: qsTr("How much the source colors are desaturated.")
             }
             SecondColumnLayout {
                 SpinBox {
@@ -70,7 +70,8 @@ Column {
             rows: 2
             Label {
                 text: qsTr("Cached")
-                toolTip: qsTr("This property allows the effect output pixels to be cached in order to improve the rendering performance.")
+                toolTip: qsTr("Caches the effect output pixels to improve the rendering "
+                              + "performance.")
             }
             SecondColumnLayout {
                 CheckBox {

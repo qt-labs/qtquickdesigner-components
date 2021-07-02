@@ -44,7 +44,7 @@ Column {
             rows: 2
             Label {
                 text: qsTr("Invert")
-                toolTip: qsTr("This property controls how the alpha values of the sourceMask will behave.")
+                toolTip: qsTr("Controls how the alpha values of the source mask will behave.")
             }
             SecondColumnLayout {
                 CheckBox {
@@ -57,7 +57,7 @@ Column {
 
             Label {
                 text: qsTr("Mask Source")
-                toolTip: qsTr("This property defines the item that is going to be used as the mask.")
+                toolTip: qsTr("The item that is going to be used as the mask.")
             }
             SecondColumnLayout {
                 ItemFilterComboBox {
@@ -81,7 +81,8 @@ Column {
             rows: 2
             Label {
                 text: qsTr("Cached")
-                toolTip: qsTr("This property allows the effect output pixels to be cached in order to improve the rendering performance.")
+                toolTip: qsTr("Caches the effect output pixels to improve the rendering "
+                              + "performance.")
             }
             SecondColumnLayout {
                 CheckBox {

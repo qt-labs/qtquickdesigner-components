@@ -44,7 +44,7 @@ Column {
             columns: 2
 
             Label {
-                text:  qsTr("Language Exception")
+                text:  qsTr("Language exception")
 
             }
 
@@ -103,7 +103,7 @@ Column {
             }
 
             Label {
-                text: qsTr("Exception Acive")
+                text: qsTr("Exception active")
                 tooltip: qsTr("")
             }
             CheckBox {

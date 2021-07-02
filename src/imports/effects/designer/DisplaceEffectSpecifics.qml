@@ -44,7 +44,8 @@ Column {
             rows: 2
             Label {
                 text: qsTr("Displacement")
-                toolTip: qsTr("This property defines the scale for the displacement. The bigger scale, the bigger the displacement of the pixels.")
+                toolTip: qsTr("The scale for the displacement. The bigger the scale, the bigger "
+                              + "the displacement of the pixels.")
             }
             SecondColumnLayout {
                 SpinBox {
@@ -60,8 +61,8 @@ Column {
             }
 
             Label {
-                text: qsTr("Displacement Source")
-                toolTip: qsTr("This property defines the item that is going to be used as the displacement map.")
+                text: qsTr("Displacement source")
+                toolTip: qsTr("The item that is going to be used as the displacement map.")
             }
             SecondColumnLayout {
                 ItemFilterComboBox {
@@ -85,7 +86,8 @@ Column {
             rows: 2
             Label {
                 text: qsTr("Cached")
-                toolTip: qsTr("This property allows the effect output pixels to be cached in order to improve the rendering performance.")
+                toolTip: qsTr("Caches the effect output pixels to improve the rendering "
+                              + "performance.")
             }
             SecondColumnLayout {
                 CheckBox {

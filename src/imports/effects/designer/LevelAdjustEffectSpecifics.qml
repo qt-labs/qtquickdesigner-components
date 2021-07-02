@@ -44,7 +44,7 @@ Column {
             rows: 2
             Label {
                 text: qsTr("Gamma")
-                toolTip: qsTr("This property defines the change factor for how the luminance of each pixel is altered.")
+                toolTip: qsTr("The change factor for how the luminance of each pixel is altered.")
             }
             SecondColumnLayout {
                 ColumnLayout {
@@ -101,7 +101,7 @@ Column {
         caption: qsTr("Minimum Input")
 
         ColorEditor {
-            caption: qsTr("minimum input")
+            caption: qsTr("Minimum Input")
             backendValue: backendValues.minimumInput
             supportGradient: false
         }
@@ -113,7 +113,7 @@ Column {
         caption: qsTr("Minimum Output")
 
         ColorEditor {
-            caption: qsTr("minimum output")
+            caption: qsTr("Minimum Output")
             backendValue: backendValues.minimumOutput
             supportGradient: false
         }
@@ -125,7 +125,7 @@ Column {
         caption: qsTr("Maximum Input")
 
         ColorEditor {
-            caption: qsTr("maximum input")
+            caption: qsTr("Maximum Input")
             backendValue: backendValues.maximumInput
             supportGradient: false
         }
@@ -137,7 +137,7 @@ Column {
         caption: qsTr("Maximum Output")
 
         ColorEditor {
-            caption: qsTr("maximum output")
+            caption: qsTr("Maximum Output")
             backendValue: backendValues.maximumOutput
             supportGradient: false
         }
@@ -152,7 +152,8 @@ Column {
             rows: 2
             Label {
                 text: qsTr("Cached")
-                toolTip: qsTr("This property allows the effect output pixels to be cached in order to improve the rendering performance.")
+                toolTip: qsTr("Caches the effect output pixels to improve the rendering "
+                              + "performance.")
             }
             SecondColumnLayout {
                 CheckBox {

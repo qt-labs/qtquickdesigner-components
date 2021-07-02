@@ -56,7 +56,10 @@ Column {
             rows: 2
             Label {
                 text: qsTr("Radius")
-                toolTip: qsTr("Radius defines the softness of the glow. A larger radius causes the edges of the glow to appear more blurry. Depending on the radius value, value of the samples should be set to sufficiently large to ensure the visual quality.")
+                toolTip: qsTr("The softness of the glow. A larger radius causes the edges of the "
+                              + "glow to appear more blurry. Depending on the radius value, value "
+                              + "of the samples should be set to sufficiently large to ensure the "
+                              + "visual quality.")
             }
             SecondColumnLayout {
                 SpinBox {
@@ -73,7 +76,10 @@ Column {
 
             Label {
                 text: qsTr("Samples")
-                toolTip: qsTr("This property defines how many samples are taken per pixel when edge softening blur calculation is done. Larger value produces better quality, but is slower to render. Ideally, this value should be twice as large as the highest required radius value plus one")
+                toolTip: qsTr("Samples per pixel for edge softening blur calculation. A larger "
+                              + "value produces better quality, but is slower to render. Ideally, "
+                              + "this value should be twice as large as the highest required "
+                              + "radius value plus one.")
             }
             SecondColumnLayout {
                 SpinBox {
@@ -90,7 +96,8 @@ Column {
 
             Label {
                 text: qsTr("Spread")
-                toolTip: qsTr("This property defines how large part of the glow color is strengthened near the source edges.")
+                toolTip: qsTr("The part of the glow color that is strengthened near the source "
+                              + "edges.")
             }
             SecondColumnLayout {
                 SpinBox {
@@ -116,7 +123,8 @@ Column {
             rows: 2
             Label {
                 text: qsTr("Cached")
-                toolTip: qsTr("This property allows the effect output pixels to be cached in order to improve the rendering performance.")
+                toolTip: qsTr("Caches the effect output pixels to improve the rendering "
+                              + "performance.")
             }
             SecondColumnLayout {
                 CheckBox {
@@ -130,7 +138,9 @@ Column {
 
             Label {
                 text: qsTr("Transparent border")
-                toolTip: qsTr("When set to true, the exterior of the item is padded with a transparent edge, making sampling outside the source texture use transparency instead of the edge pixels.")
+                toolTip: qsTr("Pads the exterior of the item with a transparent edge, making "
+                              + "sampling outside the source texture use transparency instead of "
+                              + "the edge pixels.")
             }
             SecondColumnLayout {
                 CheckBox {

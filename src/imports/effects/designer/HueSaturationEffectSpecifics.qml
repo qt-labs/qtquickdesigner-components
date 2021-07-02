@@ -44,7 +44,7 @@ Column {
             rows: 2
             Label {
                 text: qsTr("Hue")
-                toolTip: qsTr("This property defines the hue value which is added to the source hue value.")
+                toolTip: qsTr("The hue value which is added to the source hue value.")
             }
             SecondColumnLayout {
                 SpinBox {
@@ -61,7 +61,7 @@ Column {
 
             Label {
                 text: qsTr("Lightness")
-                toolTip: qsTr("This property defines the lightness value which is added to the source saturation value.")
+                toolTip: qsTr("The lightness value which is added to the source saturation value.")
             }
             SecondColumnLayout {
                 SpinBox {
@@ -78,7 +78,8 @@ Column {
 
             Label {
                 text: qsTr("Saturation")
-                toolTip: qsTr("This property defines the saturation value value which is added to the source saturation value.")
+                toolTip: qsTr("The saturation value value which is added to the source saturation "
+                              + "value.")
             }
             SecondColumnLayout {
                 SpinBox {
@@ -105,7 +106,8 @@ Column {
             rows: 2
             Label {
                 text: qsTr("Cached")
-                toolTip: qsTr("This property allows the effect output pixels to be cached in order to improve the rendering performance.")
+                toolTip: qsTr("Caches the effect output pixels to improve the rendering "
+                              + "performance.")
             }
             SecondColumnLayout {
                 CheckBox {

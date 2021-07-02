@@ -37,7 +37,7 @@ Column {
     anchors.right: parent.right
 
     Section {
-        caption: qsTr("Arc item")
+        caption: qsTr("Arc Item")
 
         anchors.left: parent.left
         anchors.right: parent.right

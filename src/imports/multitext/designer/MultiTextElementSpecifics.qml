@@ -43,7 +43,7 @@ Column {
             rows: 1
             columns: 1
             Label {
-                text: qsTr("BaseLine Offset")
+                text: qsTr("Baseline offset")
                 tooltip: qsTr("")
             }
             SpinBox {

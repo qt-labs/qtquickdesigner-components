@@ -56,7 +56,8 @@ Column {
             rows: 2
             Label {
                 text: qsTr("Radius")
-                toolTip: qsTr("Radius defines the softness of the shadow. A larger radius causes the edges of the shadow to appear more blurry.")
+                toolTip: qsTr("The softness of the shadow. A larger radius causes the edges of the "
+                              + "shadow to appear more blurry.")
             }
             SecondColumnLayout {
                 SpinBox {
@@ -73,7 +74,9 @@ Column {
 
             Label {
                 text: qsTr("Samples")
-                toolTip: qsTr("This property defines how many samples are taken per pixel when edge softening blur calculation is done, ideally, this value should be twice as large as the highest required radius value plus one.")
+                toolTip: qsTr("Samples per pixel for edge softening blur calculation. Ideally, "
+                              + "this value should be twice as large as the highest required "
+                              + "radius value plus one.")
             }
             SecondColumnLayout {
                 SpinBox {
@@ -90,7 +93,8 @@ Column {
 
             Label {
                 text: qsTr("Spread")
-                toolTip: qsTr("This property defines how large part of the shadow color is strengthened near the source edges.")
+                toolTip: qsTr("The part of the shadow color that is strengthened near the source "
+                              + "edges.")
             }
             SecondColumnLayout {
                 SpinBox {
@@ -107,7 +111,8 @@ Column {
 
             Label {
                 text: qsTr("Fast")
-                toolTip: qsTr("This property selects the blurring algorithm that is used to produce the softness for the effect.")
+                toolTip: qsTr("The blurring algorithm that is used to produce the softness for the "
+                              + "effect.")
             }
             SecondColumnLayout {
                 CheckBox {
@@ -130,7 +135,8 @@ Column {
             rows: 2
             Label {
                 text: qsTr("Horizontal offset")
-                toolTip: qsTr("HorizontalOffset defines the offset for the rendered shadow compared to the InnerShadow items horizontal position.")
+                toolTip: qsTr("The horizontal offset for the rendered shadow compared to the inner "
+                              + "shadow component's horizontal position.")
             }
             SecondColumnLayout {
                 SpinBox {
@@ -147,7 +153,8 @@ Column {
 
             Label {
                 text: qsTr("Vertical offset")
-                toolTip: qsTr("VerticalOffset defines the offset for the rendered shadow compared to the InnerShadow items vertical position. ")
+                toolTip: qsTr("The vertical offset for the rendered shadow compared to the inner "
+                              + "shadow component's vertical position. ")
             }
             SecondColumnLayout {
                 SpinBox {
@@ -173,7 +180,8 @@ Column {
             rows: 2
             Label {
                 text: qsTr("Cached")
-                toolTip: qsTr("This property allows the effect output pixels to be cached in order to improve the rendering performance.")
+                toolTip: qsTr("Caches the effect output pixels to improve the rendering "
+                              + "performance.")
             }
             SecondColumnLayout {
                 CheckBox {

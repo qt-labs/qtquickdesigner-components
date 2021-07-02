@@ -44,7 +44,8 @@ Column {
             rows: 2
             Label {
                 text: qsTr("Mode")
-                toolTip: qsTr("This property defines the mode which is used when foregroundSource is blended over source.")
+                toolTip: qsTr("The mode which is used when foreground source is blended over "
+                               + "source.")
             }
             SecondColumnLayout {
                 ComboBox {
@@ -95,7 +96,7 @@ Column {
 
             Label {
                 text: qsTr("Foreground Source")
-                toolTip: qsTr("This property defines the item that is going to be blended over the source.")
+                toolTip: qsTr("The item that is going to be blended over the source.")
             }
             SecondColumnLayout {
                 ItemFilterComboBox {
@@ -119,7 +120,8 @@ Column {
             rows: 2
             Label {
                 text: qsTr("Cached")
-                toolTip: qsTr("This property allows the effect output pixels to be cached in order to improve the rendering performance.")
+                toolTip: qsTr("Caches the effect output pixels to improve the rendering "
+                              + "performance.")
             }
             SecondColumnLayout {
                 CheckBox {

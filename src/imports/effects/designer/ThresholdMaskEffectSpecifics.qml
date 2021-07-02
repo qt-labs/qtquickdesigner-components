@@ -44,7 +44,7 @@ Column {
             rows: 2
             Label {
                 text: qsTr("Spread")
-                toolTip: qsTr("This property defines the smoothness of the mask edges near the threshold alpha value.")
+                toolTip: qsTr("The smoothness of the mask edges near the threshold alpha value.")
             }
             SecondColumnLayout {
                 SpinBox {
@@ -61,7 +61,7 @@ Column {
 
             Label {
                 text: qsTr("Threshold")
-                toolTip: qsTr("This property defines a threshold value for the mask pixels.")
+                toolTip: qsTr("A threshold value for the mask pixels.")
             }
             SecondColumnLayout {
                 SpinBox {
@@ -78,7 +78,7 @@ Column {
 
             Label {
                 text: qsTr("Mask Source")
-                toolTip: qsTr("This property defines the item that is going to be used as the mask.")
+                toolTip: qsTr("The item that is going to be used as the mask.")
             }
             SecondColumnLayout {
                 ItemFilterComboBox {
@@ -102,7 +102,8 @@ Column {
             rows: 2
             Label {
                 text: qsTr("Cached")
-                toolTip: qsTr("This property allows the effect output pixels to be cached in order to improve the rendering performance.")
+                toolTip: qsTr("Caches the effect output pixels to improve the rendering "
+                              + "performance.")
             }
             SecondColumnLayout {
                 CheckBox {

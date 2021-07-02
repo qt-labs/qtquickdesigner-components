@@ -90,7 +90,7 @@ Column {
             }
 
             Label {
-                text: qsTr("Global Wildcard")
+                text: qsTr("Global wildcard")
                 tooltip: qsTr("Allows triggering the wildcard from different flows.")
             }
             CheckBox {

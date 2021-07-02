@@ -44,7 +44,7 @@ Column {
             rows: 2
             Label {
                 text: qsTr("Brightness")
-                toolTip: qsTr("This property defines how much the source brightness is increased or decreased.")
+                toolTip: qsTr("The increase or decrease of source brightness.")
             }
             SecondColumnLayout {
                 SpinBox {
@@ -61,7 +61,10 @@ Column {
 
             Label {
                 text: qsTr("Contrast")
-                toolTip: qsTr("This property defines how much the source contrast is increased or decreased. The decrease of the contrast is linear, but the increase is applied with a non-linear curve to allow very high contrast adjustment at the high end of the value range.")
+                toolTip: qsTr("The increase or decrease of source contrast. The decrease of the "
+                              + "contrast is linear, but the increase is applied with a "
+                              + "non-linear curve to allow very high contrast adjustment at the "
+                              + "high end of the value range.")
             }
             SecondColumnLayout {
                 SpinBox {
@@ -87,7 +90,8 @@ Column {
             rows: 2
             Label {
                 text: qsTr("Cached")
-                toolTip: qsTr("This property allows the effect output pixels to be cached in order to improve the rendering performance.")
+                toolTip: qsTr("Caches the effect output pixels to improve the rendering "
+                              + "performance.")
             }
             SecondColumnLayout {
                 CheckBox {

@@ -46,7 +46,7 @@ Column {
 
             Label {
                 text: qsTr("Target 01")
-                tooltip: qsTr("Defines the target of th binding.")
+                tooltip: qsTr("Target of the binding.")
             }
             SecondColumnLayout {
                 ItemFilterComboBox {
@@ -70,7 +70,7 @@ Column {
             }
             Label {
                 text: qsTr("Target 02")
-                tooltip: qsTr("Defines the target Flow Item of which the state is changed.")
+                tooltip: qsTr("Target Flow Item whose state is changed.")
             }
             SecondColumnLayout {
                 ItemFilterComboBox {

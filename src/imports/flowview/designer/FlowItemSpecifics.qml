@@ -95,7 +95,7 @@ Column {
             }
 
             Label {
-                text: qsTr("Force Active")
+                text: qsTr("Force active")
                 tooltip: qsTr("Loads the specified QML file even if the FlowItem is inactive.")
             }
 
