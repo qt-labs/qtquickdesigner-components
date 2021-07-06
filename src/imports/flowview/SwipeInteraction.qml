@@ -42,13 +42,9 @@ Item {
     z: -1
 
     property real threshold: 35
-
     property bool horizontal: true
-
     property Item __activeItem
-
     property bool __reactToTransition: false
-
 
     Timer {
         id: blocker
@@ -56,12 +52,11 @@ Item {
         interval: 200
         repeat: false
         onTriggered: handler.enabled = true
-
     }
 
     Connections {
         target: transitionView
-        onTransitionFinished: {
+        function onTransitionFinished() {
             if (!root.__reactToTransition)
                 return
             /* This is a tricky one. We have to also update the list.

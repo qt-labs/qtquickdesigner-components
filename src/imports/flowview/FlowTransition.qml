@@ -70,8 +70,7 @@ QtObject {
         root.effect.stop()
     }
 
-    function __checkInclude(list, item)
-    {
+    function __checkInclude(list, item) {
         for (var i = 0; i < list.length; ++i) {
             if (list[i] === item)
                 return true
@@ -150,6 +149,6 @@ QtObject {
 
     property Connections effectConnection: Connections {
         target: root.effect
-        onFinished: root.finished
+        function onFinished() { root.finished() }
     }
 }
