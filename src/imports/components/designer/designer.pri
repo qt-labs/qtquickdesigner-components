@@ -10,6 +10,7 @@ AUX_QML_FILES += \
     $$PWD/CornerRadiusSection.qml \
     $$PWD/DashPatternEditor.qml \
     $$PWD/FlipableItemSpecifics.qml \
+    $$PWD/GroupItemSpecifics.qml \
     $$PWD/IsoItemSpecifics.qml \
     $$PWD/PieItemSpecifics.qml \
     $$PWD/RectangleItemSpecifics.qml \
