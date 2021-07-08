@@ -35,64 +35,94 @@ import StudioTheme 1.0 as StudioTheme
 Section {
     anchors.left: parent.left
     anchors.right: parent.right
-    caption: qsTr("Bidrectional Binding")
+    caption: qsTr("Ranger Mapper")
 
     SectionLayout {
-        PropertyLabel {
-            text: qsTr("Target 01")
-            tooltip: qsTr("Target of the binding.")
-        }
+        PropertyLabel { text: qsTr("Input") }
 
         SecondColumnLayout {
-            ItemFilterComboBox {
-                typeFilter: "QtQml.QtObject"
-                validator: RegExpValidator { regExp: /(^$|^[a-z_]\w*)/ }
-                backendValue: backendValues.target01
+            SpinBox {
                 implicitWidth: StudioTheme.Values.singleControlColumnWidth
                                + StudioTheme.Values.actionIndicatorWidth
+                backendValue: backendValues.input
+                decimals: 2
+                minimumValue: Number.MIN_VALUE
+                maximumValue: Number.MAX_VALUE
             }
 
             ExpandingSpacer {}
         }
 
-        PropertyLabel { text: qsTr("Property 01") }
+        PropertyLabel { text: qsTr("Input min") }
 
         SecondColumnLayout {
-            LineEdit {
-                backendValue: backendValues.property01
-                showTranslateCheckBox: false
+            SpinBox {
                 implicitWidth: StudioTheme.Values.singleControlColumnWidth
                                + StudioTheme.Values.actionIndicatorWidth
+                backendValue: backendValues.inputMinimum
+                decimals: 2
+                minimumValue: Number.MIN_VALUE
+                maximumValue: Number.MAX_VALUE
             }
 
             ExpandingSpacer {}
         }
 
-        PropertyLabel {
-            text: qsTr("Target 02")
-            tooltip: qsTr("Target Flow Item whose state is changed.")
-        }
+        PropertyLabel { text: qsTr("Input max") }
 
         SecondColumnLayout {
-            ItemFilterComboBox {
-                typeFilter: "QtQml.QtObject"
-                validator: RegExpValidator { regExp: /(^$|^[a-z_]\w*)/ }
-                backendValue: backendValues.target02
+            SpinBox {
                 implicitWidth: StudioTheme.Values.singleControlColumnWidth
                                + StudioTheme.Values.actionIndicatorWidth
+                backendValue: backendValues.inputMaximum
+                decimals: 2
+                minimumValue: Number.MIN_VALUE
+                maximumValue: Number.MAX_VALUE
             }
 
             ExpandingSpacer {}
         }
 
-        PropertyLabel { text: qsTr("Property 02") }
+        PropertyLabel { text: qsTr("Output min") }
 
         SecondColumnLayout {
-            LineEdit {
-                backendValue: backendValues.property02
-                showTranslateCheckBox: false
+            SpinBox {
                 implicitWidth: StudioTheme.Values.singleControlColumnWidth
                                + StudioTheme.Values.actionIndicatorWidth
+                backendValue: backendValues.outputMinimum
+                decimals: 2
+                minimumValue: Number.MIN_VALUE
+                maximumValue: Number.MAX_VALUE
+            }
+
+            ExpandingSpacer {}
+        }
+
+        PropertyLabel { text: qsTr("Output max") }
+
+        SecondColumnLayout {
+            SpinBox {
+                implicitWidth: StudioTheme.Values.singleControlColumnWidth
+                               + StudioTheme.Values.actionIndicatorWidth
+                backendValue: backendValues.outputMaximum
+                decimals: 2
+                minimumValue: Number.MIN_VALUE
+                maximumValue: Number.MAX_VALUE
+            }
+
+            ExpandingSpacer {}
+        }
+
+        PropertyLabel { text: qsTr("Output") }
+
+        SecondColumnLayout {
+            SpinBox {
+                implicitWidth: StudioTheme.Values.singleControlColumnWidth
+                               + StudioTheme.Values.actionIndicatorWidth
+                backendValue: backendValues.output
+                decimals: 2
+                minimumValue: Number.MIN_VALUE
+                maximumValue: Number.MAX_VALUE
             }
 
             ExpandingSpacer {}

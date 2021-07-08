@@ -2,7 +2,13 @@ AUX_QML_FILES += \
     $$PWD/plugin.metainfo
 
 AUX_QML_FILES += \
-    $$PWD/BidirectionalBindingSpecifics.qml
+    $$PWD/AndOperatorSpecifics.qml \
+    $$PWD/BidirectionalBindingSpecifics.qml \
+    $$PWD/MinMaxMapperSpecifics.qml \
+    $$PWD/NotOperatorSpecifics.qml \
+    $$PWD/OrOperatorSpecifics.qml \
+    $$PWD/RangeMapperSpecifics.qml \
+    $$PWD/StringMapperSpecifics.qml
 
 AUX_QML_FILES += \
     $$PWD/images/lc-and-operator-16px.png \

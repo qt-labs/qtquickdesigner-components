@@ -35,64 +35,46 @@ import StudioTheme 1.0 as StudioTheme
 Section {
     anchors.left: parent.left
     anchors.right: parent.right
-    caption: qsTr("Bidrectional Binding")
+    caption: qsTr("String Mapper")
 
     SectionLayout {
-        PropertyLabel {
-            text: qsTr("Target 01")
-            tooltip: qsTr("Target of the binding.")
-        }
+        PropertyLabel { text: qsTr("Input") }
 
         SecondColumnLayout {
-            ItemFilterComboBox {
-                typeFilter: "QtQml.QtObject"
-                validator: RegExpValidator { regExp: /(^$|^[a-z_]\w*)/ }
-                backendValue: backendValues.target01
+            SpinBox {
                 implicitWidth: StudioTheme.Values.singleControlColumnWidth
                                + StudioTheme.Values.actionIndicatorWidth
+                backendValue: backendValues.input
+                decimals: 2
+                minimumValue: Number.MIN_VALUE
+                maximumValue: Number.MAX_VALUE
             }
 
             ExpandingSpacer {}
         }
 
-        PropertyLabel { text: qsTr("Property 01") }
+        PropertyLabel { text: qsTr("Decimal places") }
+
+        SecondColumnLayout {
+            SpinBox {
+                implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                               + StudioTheme.Values.actionIndicatorWidth
+                backendValue: backendValues.decimals
+                minimumValue: 0
+                maximumValue: 20
+            }
+
+            ExpandingSpacer {}
+        }
+
+        PropertyLabel { text: qsTr("Output text") }
 
         SecondColumnLayout {
             LineEdit {
-                backendValue: backendValues.property01
+                implicitWidth: StudioTheme.Values.singleControlColumnWidth
+                               + StudioTheme.Values.actionIndicatorWidth
+                backendValue: backendValues.text
                 showTranslateCheckBox: false
-                implicitWidth: StudioTheme.Values.singleControlColumnWidth
-                               + StudioTheme.Values.actionIndicatorWidth
-            }
-
-            ExpandingSpacer {}
-        }
-
-        PropertyLabel {
-            text: qsTr("Target 02")
-            tooltip: qsTr("Target Flow Item whose state is changed.")
-        }
-
-        SecondColumnLayout {
-            ItemFilterComboBox {
-                typeFilter: "QtQml.QtObject"
-                validator: RegExpValidator { regExp: /(^$|^[a-z_]\w*)/ }
-                backendValue: backendValues.target02
-                implicitWidth: StudioTheme.Values.singleControlColumnWidth
-                               + StudioTheme.Values.actionIndicatorWidth
-            }
-
-            ExpandingSpacer {}
-        }
-
-        PropertyLabel { text: qsTr("Property 02") }
-
-        SecondColumnLayout {
-            LineEdit {
-                backendValue: backendValues.property02
-                showTranslateCheckBox: false
-                implicitWidth: StudioTheme.Values.singleControlColumnWidth
-                               + StudioTheme.Values.actionIndicatorWidth
             }
 
             ExpandingSpacer {}

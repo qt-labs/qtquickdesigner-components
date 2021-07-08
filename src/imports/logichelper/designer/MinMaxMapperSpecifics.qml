@@ -35,64 +35,100 @@ import StudioTheme 1.0 as StudioTheme
 Section {
     anchors.left: parent.left
     anchors.right: parent.right
-    caption: qsTr("Bidrectional Binding")
+    caption: qsTr("Min Max Mapper")
 
     SectionLayout {
-        PropertyLabel {
-            text: qsTr("Target 01")
-            tooltip: qsTr("Target of the binding.")
-        }
+        PropertyLabel { text: qsTr("Input") }
 
         SecondColumnLayout {
-            ItemFilterComboBox {
-                typeFilter: "QtQml.QtObject"
-                validator: RegExpValidator { regExp: /(^$|^[a-z_]\w*)/ }
-                backendValue: backendValues.target01
+            SpinBox {
                 implicitWidth: StudioTheme.Values.singleControlColumnWidth
                                + StudioTheme.Values.actionIndicatorWidth
+                backendValue: backendValues.input
+                decimals: 2
+                minimumValue: Number.MIN_VALUE
+                maximumValue: Number.MAX_VALUE
             }
 
             ExpandingSpacer {}
         }
 
-        PropertyLabel { text: qsTr("Property 01") }
+        PropertyLabel { text: qsTr("Min") }
 
         SecondColumnLayout {
-            LineEdit {
-                backendValue: backendValues.property01
-                showTranslateCheckBox: false
+            SpinBox {
                 implicitWidth: StudioTheme.Values.singleControlColumnWidth
                                + StudioTheme.Values.actionIndicatorWidth
+                backendValue: backendValues.minimum
+                decimals: 2
+                minimumValue: Number.MIN_VALUE
+                maximumValue: Number.MAX_VALUE
             }
 
             ExpandingSpacer {}
         }
 
-        PropertyLabel {
-            text: qsTr("Target 02")
-            tooltip: qsTr("Target Flow Item whose state is changed.")
-        }
+        PropertyLabel { text: qsTr("Max") }
 
         SecondColumnLayout {
-            ItemFilterComboBox {
-                typeFilter: "QtQml.QtObject"
-                validator: RegExpValidator { regExp: /(^$|^[a-z_]\w*)/ }
-                backendValue: backendValues.target02
+            SpinBox {
                 implicitWidth: StudioTheme.Values.singleControlColumnWidth
                                + StudioTheme.Values.actionIndicatorWidth
+                backendValue: backendValues.maximum
+                decimals: 2
+                minimumValue: Number.MIN_VALUE
+                maximumValue: Number.MAX_VALUE
             }
 
             ExpandingSpacer {}
         }
 
-        PropertyLabel { text: qsTr("Property 02") }
+        PropertyLabel { text: qsTr("Output") }
 
         SecondColumnLayout {
-            LineEdit {
-                backendValue: backendValues.property02
-                showTranslateCheckBox: false
+            SpinBox {
                 implicitWidth: StudioTheme.Values.singleControlColumnWidth
                                + StudioTheme.Values.actionIndicatorWidth
+                backendValue: backendValues.output
+                decimals: 2
+                minimumValue: Number.MIN_VALUE
+                maximumValue: Number.MAX_VALUE
+            }
+
+            ExpandingSpacer {}
+        }
+
+        PropertyLabel { text: qsTr("Below min") }
+
+        SecondColumnLayout {
+            CheckBox {
+                implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                               + StudioTheme.Values.actionIndicatorWidth
+                backendValue: backendValues.belowMinimum
+            }
+
+            ExpandingSpacer {}
+        }
+
+        PropertyLabel { text: qsTr("Above max") }
+
+        SecondColumnLayout {
+            CheckBox {
+                implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                               + StudioTheme.Values.actionIndicatorWidth
+                backendValue: backendValues.aboveMaximum
+            }
+
+            ExpandingSpacer {}
+        }
+
+        PropertyLabel { text: qsTr("Out of range") }
+
+        SecondColumnLayout {
+            CheckBox {
+                implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                               + StudioTheme.Values.actionIndicatorWidth
+                backendValue: backendValues.outOfRange
             }
 
             ExpandingSpacer {}
