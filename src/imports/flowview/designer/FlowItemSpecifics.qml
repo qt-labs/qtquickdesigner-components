@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2020 The Qt Company Ltd.
+** Copyright (C) 2021 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -27,9 +27,10 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.1
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
 import HelperWidgets 2.0
-import QtQuick.Layouts 1.0
+import StudioTheme 1.0 as StudioTheme
 
 Column {
     anchors.left: parent.left
@@ -41,60 +42,55 @@ Column {
         caption: qsTr("Flow Item")
 
         SectionLayout {
-            rows: 3
-            columns: 2
-
-            Label {
+            PropertyLabel {
                 text: qsTr("State change target")
                 tooltip: qsTr("Flow item to change the state of.")
             }
+
             SecondColumnLayout {
                 ItemFilterComboBox {
+                    implicitWidth: StudioTheme.Values.singleControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
                     typeFilter: "FlowView.FlowItem"
                     validator: RegExpValidator { regExp: /(^$|^[a-z_]\w*)/ }
                     backendValue: backendValues.stateChangeTarget
-                    Layout.fillWidth: true
                 }
 
-                ExpandingSpacer {
-                }
+                ExpandingSpacer {}
             }
 
-            Label {
+            PropertyLabel {
                 text: qsTr("Target state")
                 tooltip: qsTr("Applies the selected state.")
             }
 
             SecondColumnLayout {
-
                 ComboBox {
-                    Layout.fillWidth: true
+                    implicitWidth: StudioTheme.Values.singleControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
                     backendValue: backendValues.targetState
                     model: allStatesForId(backendValues.stateChangeTarget.expression)
                     valueType: ComboBox.String
                 }
 
-                ExpandingSpacer {
-                }
+                ExpandingSpacer {}
             }
 
-            Label {
+            PropertyLabel {
                 text: qsTr("Loader source")
                 tooltip: qsTr("Includes the selected flow view into the current flow view as a flow item.")
             }
 
             SecondColumnLayout {
                 UrlChooser {
-                    Layout.fillWidth: true
                     backendValue: backendValues.loaderSource
                     filter: "*.ui.qml"
                 }
 
-                ExpandingSpacer {
-                }
+                ExpandingSpacer {}
             }
 
-            Label {
+            PropertyLabel {
                 text: qsTr("Force active")
                 tooltip: qsTr("Loads the specified QML file even if the FlowItem is inactive.")
             }
@@ -102,13 +98,13 @@ Column {
             SecondColumnLayout {
                 CheckBox {
                     backendValue: backendValues.forceActive
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
                 }
 
-                ExpandingSpacer {
-                }
+                ExpandingSpacer {}
             }
         }
-
     }
 
     Section {
@@ -118,19 +114,21 @@ Column {
         caption: qsTr("Transition Lines")
 
         SectionLayout {
-            rows: 4
-            columns: 2
-
-            Label {
+            PropertyLabel {
                 text: qsTr("Join lines")
                 tooltip: qsTr("Draws transition lines from edges of flow items instead of from action area.")
             }
-            CheckBox {
-                backendValue: backendValues.joinConnection__AUX
-                Layout.fillWidth: true
-                text: backendValues.enabled
+
+            SecondColumnLayout {
+                CheckBox {
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
+                    backendValue: backendValues.joinConnection__AUX
+                    text: backendValues.enabled.valueToString
+                }
+
+                ExpandingSpacer {}
             }
         }
-
     }
 }

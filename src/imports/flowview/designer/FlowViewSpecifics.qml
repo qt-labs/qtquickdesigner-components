@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2020 The Qt Company Ltd.
+** Copyright (C) 2021 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -27,9 +27,10 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.1
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
 import HelperWidgets 2.0
-import QtQuick.Layouts 1.0
+import StudioTheme 1.0 as StudioTheme
 
 Column {
     anchors.left: parent.left
@@ -41,66 +42,69 @@ Column {
         caption: qsTr("Flow View")
 
         SectionLayout {
-            rows: 1
-            columns: 2
-
-            Label {
+            PropertyLabel {
                 text: qsTr("Current index")
                 tooltip: qsTr("Index of the flow item currently visible in the flow view.")
             }
-            SpinBox {
-                backendValue: backendValues.currentIndex__AUX
-                maximumValue: 22
-                minimumValue: 1
+
+            SecondColumnLayout {
+                SpinBox {
+                    backendValue: backendValues.currentIndex__AUX
+                    minimumValue: 1
+                    maximumValue: 22
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
+                }
+
+                ExpandingSpacer {}
             }
 
+            PropertyLabel {
+                visible: !anchorBackend.hasParent
+                text: qsTr("Transition color")
+            }
+
+            ColorEditor {
+                visible: !anchorBackend.hasParent
+                backendValue: backendValues.transitionColor__AUX
+                supportGradient: false
+            }
+
+            PropertyLabel {
+                visible: !anchorBackend.hasParent
+                text: qsTr("Area outline color")
+            }
+
+            ColorEditor {
+                visible: !anchorBackend.hasParent
+                backendValue: backendValues.areaColor__AUX
+                supportGradient: false
+            }
+
+            PropertyLabel {
+                visible: !anchorBackend.hasParent
+                text: qsTr("Area fill color")
+            }
+
+            ColorEditor {
+                visible: !anchorBackend.hasParent
+                backendValue: backendValues.areaFillColor__AUX
+                supportGradient: false
+            }
+
+            PropertyLabel {
+                visible: !anchorBackend.hasParent
+                text: qsTr("Block item color")
+            }
+
+            ColorEditor {
+                visible: !anchorBackend.hasParent
+                backendValue: backendValues.blockColor__AUX
+                supportGradient: false
+            }
         }
     }
 
-    Section {
-        visible: !anchorBackend.hasParent
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Transition Color")
-
-        ColorEditor {
-            backendValue: backendValues.transitionColor__AUX
-            supportGradient: false
-        }
-    }
-    Section {
-        visible: !anchorBackend.hasParent
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Area Outline Color")
-
-        ColorEditor {
-            backendValue: backendValues.areaColor__AUX
-            supportGradient: false
-        }
-    }
-    Section {
-        visible: !anchorBackend.hasParent
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Area Fill Color")
-
-        ColorEditor {
-            backendValue: backendValues.areaFillColor__AUX
-            supportGradient: false
-        }
-    }
-    Section {
-        visible: !anchorBackend.hasParent
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Block Item Color")
-
-        ColorEditor {
-            backendValue: backendValues.blockColor__AUX
-            supportGradient: false
-        }
-    }
     Section {
         visible: !anchorBackend.hasParent
         anchors.left: parent.left
@@ -108,61 +112,82 @@ Column {
         caption: qsTr("Transition Lines")
 
         SectionLayout {
-            rows: 3
-            Label {
+            PropertyLabel {
                 text: qsTr("Type")
                 tooltip: qsTr("Specifies how transition lines are drawn.")
             }
-            ComboBox {
-                id: typeComboBox
-                valueType: ComboBox.ValueType.Integer
-                backendValue: backendValues.transitionType__AUX
-                implicitWidth: 180
-                model: [ "Default", "Bezier" ]
-                manualMapping: true
 
-                property bool block: false
+            SecondColumnLayout {
+                ComboBox {
+                    id: typeComboBox
+                    valueType: ComboBox.ValueType.Integer
+                    backendValue: backendValues.transitionType__AUX
+                    implicitWidth: StudioTheme.Values.singleControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
+                    model: [ "Default", "Bezier" ]
+                    manualMapping: true
 
-                onValueFromBackendChanged: {
-                    if (!__isCompleted)
-                        return;
+                    property bool block: false
 
-                    block = true
+                    onValueFromBackendChanged: {
+                        if (!__isCompleted)
+                            return
 
-                    currentIndex = backendValues.transitionType__AUX.value
+                        block = true
 
-                    block = false
+                        currentIndex = backendValues.transitionType__AUX.value
+
+                        block = false
+                    }
+
+                    onCurrentIndexChanged: {
+                        if (!__isCompleted)
+                            return
+
+                        if (block)
+                            return
+
+                        backendValues.transitionType__AUX.value = currentIndex
+                    }
                 }
 
-                onCurrentIndexChanged: {
-                    if (!__isCompleted)
-                        return;
-
-                    if (block)
-                        return;
-
-                    backendValues.transitionType__AUX.value = currentIndex
-                }
+                ExpandingSpacer {}
             }
-            Label {
+
+            PropertyLabel {
                 text: qsTr("Radius")
                 tooltip: qsTr("Corner radius of default lines.")
             }
-            SpinBox {
-                enabled: typeComboBox.currentIndex === 0
-                backendValue: backendValues.transitionRadius__AUX
-                minimumValue: 0
-                maximumValue: 150
+
+            SecondColumnLayout {
+                SpinBox {
+                    enabled: typeComboBox.currentIndex === 0
+                    backendValue: backendValues.transitionRadius__AUX
+                    minimumValue: 0
+                    maximumValue: 150
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
+                }
+
+                ExpandingSpacer {}
             }
-            Label {
+
+            PropertyLabel {
                 text: qsTr("Bezier factor")
                 tooltip: qsTr("Position of the control points used for bezier curves.")
             }
-            SpinBox {
-                enabled: typeComboBox.currentIndex === 1
-                backendValue: backendValues.transitionBezier__AUX
-                minimumValue: 0
-                maximumValue: 150
+
+            SecondColumnLayout {
+                SpinBox {
+                    enabled: typeComboBox.currentIndex === 1
+                    backendValue: backendValues.transitionBezier__AUX
+                    minimumValue: 0
+                    maximumValue: 150
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
+                }
+
+                ExpandingSpacer {}
             }
         }
     }

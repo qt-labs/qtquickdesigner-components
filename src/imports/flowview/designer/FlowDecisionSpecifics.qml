@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2020 The Qt Company Ltd.
+** Copyright (C) 2021 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -27,52 +27,46 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.1
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
 import HelperWidgets 2.0
-import QtQuick.Layouts 1.0
+import StudioTheme 1.0 as StudioTheme
 
-Column {
+Section {
     anchors.left: parent.left
     anchors.right: parent.right
+    caption: qsTr("Flow Decision")
 
-    Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Flow Decision")
+    SectionLayout {
+        PropertyLabel {
+            text: qsTr("Dialog title")
+            tooltip: qsTr("Title of the decision dialog.")
+        }
 
-        SectionLayout {
-            rows: 5
-            columns: 2
-
-            Label {
-                text: qsTr("Dialog title")
-                tooltip: qsTr("Title of the decision dialog.")
-            }
+        SecondColumnLayout {
             LineEdit {
                 backendValue: backendValues.dialogTitle
-                Layout.fillWidth: true
+                implicitWidth: StudioTheme.Values.singleControlColumnWidth
+                               + StudioTheme.Values.actionIndicatorWidth
+                width: implicitWidth
             }
 
-            Label {
-                text: qsTr("Show label")
-                tooltip: qsTr("Shows the dialog title as a label.")
-            }
-            CheckBox {
-                id: showLabelCheckBox
-                Layout.fillWidth: true
-                text: backendValues.showDialogLabel__AUX.value
-                backendValue: backendValues.showDialogLabel__AUX
-            }
+            ExpandingSpacer {}
+        }
 
-            Label {
-                text: qsTr("Label position")
-                tooltip: qsTr("Position of the label.")
-            }
+        PropertyLabel {
+            text: qsTr("Label position")
+            tooltip: qsTr("Position of the label.")
+        }
+
+        SecondColumnLayout {
             ComboBox {
-                enabled: showLabelCheckBox.checkState === Qt.Checked
+                enabled: showLabel.checked
                 valueType: ComboBox.ValueType.Integer
                 backendValue: backendValues.dialogLabelPosition__AUX
-                implicitWidth: 180
+                implicitWidth: StudioTheme.Values.singleControlColumnWidth
+                               + StudioTheme.Values.actionIndicatorWidth
+                width: implicitWidth
                 model: ["TopLeftCorner", "TopRightCorner", "BottomLeftCorner", "BottomRightCorner"]
                 currentIndex: 1 // TopRightCorner is the default
                 manualMapping: true
@@ -99,46 +93,70 @@ Column {
                 }
             }
 
-            Label {
-                text: qsTr("Size")
-                tooltip: qsTr("Flow decision icon size in pixels.")
-            }
-            SpinBox {
-                backendValue: backendValues.blockSize__AUX
-                minimumValue: 140
-                maximumValue: 600
+            Spacer { implicitWidth: StudioTheme.Values.twoControlColumnGap }
+
+            IconIndicator {
+                id: showLabel
+                property var backendValue: backendValues.showDialogLabel__AUX
+                property bool checked: showLabel.backendValue.value
+                icon: showLabel.checked ? StudioTheme.Constants.visibilityOn
+                                        : StudioTheme.Constants.visibilityOff
+                pixelSize: StudioTheme.Values.myIconFontSize + 4
+
+                onClicked: {
+                    showLabel.backendValue.value = !showLabel.backendValue.value
+                }
             }
 
-            Label {
-                text: qsTr("Radius")
-                tooltip: qsTr("Flow decision icon corner radius in pixels.")
-            }
-            SpinBox {
-                backendValue: backendValues.blockRadius__AUX
-                minimumValue: 0
-                maximumValue: 100
-            }
+            ExpandingSpacer {}
         }
-    }
 
-    Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Outline Color")
+        PropertyLabel { text: qsTr("Outline color") }
 
         ColorEditor {
             backendValue: backendValues.color__AUX
             supportGradient: false
         }
-    }
-    Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Fill Color")
+
+        PropertyLabel { text: qsTr("Fill color") }
 
         ColorEditor {
             backendValue: backendValues.fillColor__AUX
             supportGradient: false
+        }
+
+        PropertyLabel {
+            text: qsTr("Size")
+            tooltip: qsTr("Flow decision icon size in pixels.")
+        }
+
+        SecondColumnLayout {
+            SpinBox {
+                backendValue: backendValues.blockSize__AUX
+                minimumValue: 140
+                maximumValue: 600
+                implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                               + StudioTheme.Values.actionIndicatorWidth
+            }
+
+            ExpandingSpacer {}
+        }
+
+        PropertyLabel {
+            text: qsTr("Radius")
+            tooltip: qsTr("Flow decision icon corner radius in pixels.")
+        }
+
+        SecondColumnLayout {
+            SpinBox {
+                backendValue: backendValues.blockRadius__AUX
+                minimumValue: 0
+                maximumValue: 100
+                implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                               + StudioTheme.Values.actionIndicatorWidth
+            }
+
+            ExpandingSpacer {}
         }
     }
 }

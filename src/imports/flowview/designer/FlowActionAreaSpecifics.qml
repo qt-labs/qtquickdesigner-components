@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2020 The Qt Company Ltd.
+** Copyright (C) 2021 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -27,9 +27,10 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.1
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
 import HelperWidgets 2.0
-import QtQuick.Layouts 1.0
+import StudioTheme 1.0 as StudioTheme
 
 Column {
     anchors.left: parent.left
@@ -38,107 +39,139 @@ Column {
     Section {
         anchors.left: parent.left
         anchors.right: parent.right
-        caption: qsTr("Outline Color")
+        caption: qsTr("Flow Action Area")
 
-        ColorEditor {
-            backendValue: backendValues.color__AUX
-            supportGradient: false
+        SectionLayout {
+            PropertyLabel { text: qsTr("Outline color") }
+
+            ColorEditor {
+                backendValue: backendValues.color__AUX
+                supportGradient: false
+            }
+
+            PropertyLabel { text: qsTr("Fill color") }
+
+            ColorEditor {
+                backendValue: backendValues.fillColor__AUX
+                supportGradient: false
+            }
         }
-   }
-   Section {
+    }
+
+    Section {
         anchors.left: parent.left
         anchors.right: parent.right
-        caption: qsTr("Fill Color")
-
-        ColorEditor {
-            backendValue: backendValues.fillColor__AUX
-            supportGradient: false
-        }
-   }
-   Section {
-       anchors.left: parent.left
-        anchors.right: parent.right
         caption: qsTr("Flow Action")
+
         SectionLayout {
-             rows: 2
-             columns: 2
+            PropertyLabel {
+                text: qsTr("Go back")
+                tooltip: qsTr("Returns to the previous flow item.")
+            }
 
-             Label {
-                 text: qsTr("Go back")
-                 tooltip: qsTr("Returns to the previous flow item.")
-             }
-             CheckBox {
-                 Layout.fillWidth: true
-                 text: backendValues.goBack
-                 backendValue: backendValues.goBack
-             }
+            SecondColumnLayout {
+                CheckBox {
+                    text: backendValues.goBack.valueToString
+                    backendValue: backendValues.goBack
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
+                }
 
-             Label {
-                 text: qsTr("Event IDs")
-                 tooltip: qsTr("IDs of the events to connect to, such as mouse, touch or keyboard events.")
-             }
-             LineEdit {
-                 Layout.fillWidth: true
-                 text: backendValues.goBack
-                 backendValue: backendValues.eventIds
-             }
-             Label {
-                 text: qsTr("Action type")
-                 tooltip: qsTr("Type of the mouse action triggering the event.")
+                ExpandingSpacer {}
+            }
 
-             }
+            PropertyLabel {
+                text: qsTr("Event IDs")
+                tooltip: qsTr("IDs of the events to connect to, such as mouse, touch or keyboard events.")
+            }
 
-             ComboBox {
-                 visible: showElide
-                 Layout.fillWidth: true
-                 backendValue: backendValues.eventType
-                 valueType: ComboBox.ValueType.Integer
+            SecondColumnLayout {
+                LineEdit {
+                    text: backendValues.goBack
+                    backendValue: backendValues.eventIds
+                    implicitWidth: StudioTheme.Values.singleControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
+                    width: implicitWidth
+                }
 
-                 model: ["Left Click", "Left Double Click", "Left Long Press", "Right Click", "Right Double Click",
-                     "Right Long Press", "Flick Up", "Flick Down", "Flick Left", "Flick Right", "Pinch In","Pinch Out" ]
-             }
+                ExpandingSpacer {}
+            }
 
+            PropertyLabel {
+                text: qsTr("Action type")
+                tooltip: qsTr("Type of the mouse action triggering the event.")
+            }
+
+            SecondColumnLayout {
+                ComboBox {
+                    backendValue: backendValues.eventType
+                    valueType: ComboBox.ValueType.Integer
+                    model: ["Left Click", "Left Double Click", "Left Long Press", "Right Click",
+                            "Right Double Click", "Right Long Press", "Flick Up", "Flick Down",
+                            "Flick Left", "Flick Right", "Pinch In","Pinch Out" ]
+                    implicitWidth: StudioTheme.Values.singleControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
+                }
+
+                ExpandingSpacer {}
+            }
         }
-   }
+    }
+
     Section {
         anchors.left: parent.left
         anchors.right: parent.right
         caption: qsTr("Action Area")
 
-         SectionLayout {
-             rows: 4
-             columns: 2
+        SectionLayout {
+            PropertyLabel {
+                text: qsTr("Line width")
+                tooltip: qsTr("Width of the action area outline.")
+            }
 
-             Label {
-                 text: qsTr("Line width")
-                 tooltip: qsTr("Width of the action area outline.")
-             }
-             SpinBox {
-                 backendValue: backendValues.width__AUX
-                 maximumValue: 22
-                 minimumValue: 1
-             }
+            SecondColumnLayout {
+                SpinBox {
+                    backendValue: backendValues.width__AUX
+                    maximumValue: 22
+                    minimumValue: 1
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
+                }
 
-             Label {
-                 text: qsTr("Dashed line")
-                 tooltip: qsTr("Draws the area outline as a dashed line.")
-             }
-             CheckBox {
-                 Layout.fillWidth: true
-                 text: backendValues.dash__AUX.value
-                 backendValue: backendValues.dash__AUX
-             }
+                ExpandingSpacer {}
+            }
 
-             Label {
-                 text: qsTr("Enabled")
-                 tooltip: qsTr("Enables interaction with the action area during preview.")
-             }
-             CheckBox {
-                 Layout.fillWidth: true
-                 text: backendValues.enabled
-                 backendValue: backendValues.enabled
-             }
+            PropertyLabel {
+                text: qsTr("Dashed line")
+                tooltip: qsTr("Draws the area outline as a dashed line.")
+            }
 
-         }
-   }
+            SecondColumnLayout {
+                CheckBox {
+                    text: backendValues.dash__AUX.value
+                    backendValue: backendValues.dash__AUX
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
+                }
+
+                ExpandingSpacer {}
+            }
+
+            PropertyLabel {
+                text: qsTr("Enabled")
+                tooltip: qsTr("Enables interaction with the action area during preview.")
+            }
+
+            SecondColumnLayout {
+                CheckBox {
+                    text: backendValues.enabled.valueToString
+                    backendValue: backendValues.enabled
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
+                }
+
+                ExpandingSpacer {}
+            }
+        }
+    }
 }

@@ -25,6 +25,7 @@ AUX_QML_FILES += \
     $$PWD/designer/FlowActionAreaSpecifics.qml \
     $$PWD/designer/FlowDecisionSpecifics.qml \
     $$PWD/designer/FlowEffectSpecifics.qml \
+    $$PWD/designer/FlowFadeEffectSpecifics.qml \
     $$PWD/designer/FlowItemSpecifics.qml \
     $$PWD/designer/FlowTransitionSpecifics.qml \
     $$PWD/designer/FlowViewSpecifics.qml \
