@@ -68,7 +68,7 @@ ComboBox {
     }
 
     function fromBackendToFrontend() {
-        if (!__isCompleted)
+        if (!__isCompleted || backendValues.borderMode === undefined)
             return
 
         block = true

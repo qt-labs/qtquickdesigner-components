@@ -69,7 +69,7 @@ ComboBox {
 
     function fromBackendToFrontend()
     {
-        if (!__isCompleted)
+        if (!__isCompleted || backendValues.capStyle === undefined)
             return
 
         block = true
