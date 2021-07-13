@@ -28,43 +28,34 @@
 ****************************************************************************/
 
 import QtQuick 2.15
-
+import QtQuick.Layouts 1.15
 import HelperWidgets 2.0
-import QtQuick.Layouts 1.0
+import StudioTheme 1.0 as StudioTheme
 
 //! [Screen compatibility]
-Column {
+Section {
     anchors.left: parent.left
     anchors.right: parent.right
+    caption: qsTr("Screen")
 
-    Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Screen")
-
-        Label {
-            text: qsTr("Output Device")
-        }
+    SectionLayout {
+        PropertyLabel { text: qsTr("Output Device") }
 
         SecondColumnLayout {
             LineEdit {
                 backendValue: backendValues.outputDevice
-                Layout.fillWidth: true
                 showTranslateCheckBox: false
+                implicitWidth: StudioTheme.Values.singleControlColumnWidth
+                               + StudioTheme.Values.actionIndicatorWidth
+                width: implicitWidth
             }
 
-            ExpandingSpacer {
-            }
+            ExpandingSpacer {}
         }
-    }
 
-    Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Background Color")
+        PropertyLabel { text: qsTr("Background color") }
 
         ColorEditor {
-            caption: qsTr("Background Color")
             backendValue: backendValues.backgroundColor
             supportGradient: false
         }

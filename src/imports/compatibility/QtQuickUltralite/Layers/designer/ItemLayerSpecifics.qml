@@ -28,78 +28,73 @@
 ****************************************************************************/
 
 import QtQuick 2.15
-
+import QtQuick.Layouts 1.15
 import HelperWidgets 2.0
-import QtQuick.Layouts 1.0
+import StudioTheme 1.0 as StudioTheme
 
 //! [ItemLayer compatibility]
-Column {
+Section {
     anchors.left: parent.left
     anchors.right: parent.right
+    caption: qsTr("Item Layer")
 
-    Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Item Layer")
+    SectionLayout {
+        PropertyLabel { text: qsTr("Platform ID") }
 
-        SectionLayout {
-            Label {
-                text: qsTr("Platform ID")
+        SecondColumnLayout {
+            SpinBox {
+                backendValue: backendValues.platformId
+                minimumValue: 0
+                maximumValue: 2000
+                decimals: 0
+                implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                               + StudioTheme.Values.actionIndicatorWidth
             }
 
-            SecondColumnLayout {
-                SpinBox {
-                    backendValue: backendValues.platformId
-                    minimumValue: 0
-                    maximumValue: 2000
-                    decimals: 0
-                }
+            ExpandingSpacer {}
+        }
 
-                ExpandingSpacer {
-                }
+        PropertyLabel { text: qsTr("Rendering hints") }
+
+        SecondColumnLayout {
+            ComboBox {
+                model: ["OptimizeForSpeed", "OptimizeForSize", "StaticContents"]
+                backendValue: backendValues.renderingHints
+                scope: "ItemLayer"
+                implicitWidth: StudioTheme.Values.singleControlColumnWidth
+                               + StudioTheme.Values.actionIndicatorWidth
             }
 
-            Label {
-                text: qsTr("Rendering Hints")
+            ExpandingSpacer {}
+        }
+
+        PropertyLabel { text: qsTr("Depth") }
+
+        SecondColumnLayout {
+            ComboBox {
+                model: ["Bpp16", "Bpp16Alpha", "Bpp24", "Bpp32", "Bpp32Alpha"]
+                backendValue: backendValues.depth
+                scope: "ItemLayer"
+                implicitWidth: StudioTheme.Values.singleControlColumnWidth
+                               + StudioTheme.Values.actionIndicatorWidth
             }
 
-            SecondColumnLayout {
-                ComboBox {
-                    model: ["OptimizeForSpeed", "OptimizeForSize", "StaticContents"]
-                    backendValue: backendValues.renderingHints
-                    Layout.fillWidth: true
-                    scope: "ItemLayer"
-                }
+            ExpandingSpacer {}
+        }
+
+        PropertyLabel { text: qsTr("Refresh interval") }
+
+        SecondColumnLayout {
+            SpinBox {
+                backendValue: backendValues.refreshInterval
+                minimumValue: 0
+                maximumValue: 1000
+                decimals: 0
+                implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                               + StudioTheme.Values.actionIndicatorWidth
             }
 
-            Label {
-                text: qsTr("Depth")
-            }
-
-            SecondColumnLayout {
-                ComboBox {
-                    model: ["Bpp16", "Bpp16Alpha", "Bpp24", "Bpp32", "Bpp32Alpha"]
-                    backendValue: backendValues.depth
-                    Layout.fillWidth: true
-                    scope: "ItemLayer"
-                }
-            }
-
-            Label {
-                text: qsTr("Refresh Interval")
-            }
-
-            SecondColumnLayout {
-                SpinBox {
-                    backendValue: backendValues.refreshInterval
-                    minimumValue: 0
-                    maximumValue: 1000
-                    decimals: 0
-                }
-
-                ExpandingSpacer {
-                }
-            }
+            ExpandingSpacer {}
         }
     }
 }

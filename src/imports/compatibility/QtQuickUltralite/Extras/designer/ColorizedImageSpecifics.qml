@@ -28,236 +28,226 @@
 ****************************************************************************/
 
 import QtQuick 2.15
-
+import QtQuick.Layouts 1.15
 import HelperWidgets 2.0
-import QtQuick.Layouts 1.0
+import StudioTheme 1.0 as StudioTheme
 
 //! [ColorizedImage compatibility]
-Column {
+Section {
     anchors.left: parent.left
     anchors.right: parent.right
+    caption: qsTr("Image")
 
-    Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Image Color")
+    SectionLayout {
+        PropertyLabel { text: qsTr("Image color") }
 
         ColorEditor {
-            caption: qsTr("Image Color")
             backendValue: backendValues.color
             supportGradient: false
         }
-    }
 
-    Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Image")
+        PropertyLabel { text: qsTr("Source") }
 
-        SectionLayout {
-            Label {
-                text: qsTr("Source")
+        SecondColumnLayout {
+            UrlChooser {
+                backendValue: backendValues.source
             }
 
-            SecondColumnLayout {
-                UrlChooser {
-                    Layout.fillWidth: true
-                    backendValue: backendValues.source
-                }
+            ExpandingSpacer {}
+        }
 
-                ExpandingSpacer {
-                }
+        PropertyLabel { text: qsTr("Fill mode") }
+
+        SecondColumnLayout {
+            ComboBox {
+                scope: "Image"
+                model: ["Stretch", "PreserveAspectFit", "PreserveAspectCrop", "Tile", "TileVertically", "TileHorizontally", "Pad"]
+                backendValue: backendValues.fillMode
+                implicitWidth: StudioTheme.Values.singleControlColumnWidth
+                               + StudioTheme.Values.actionIndicatorWidth
+                width: implicitWidth
             }
 
-            Label {
-                text: qsTr("Fill mode")
+            ExpandingSpacer {}
+        }
+
+        PropertyLabel {
+            text: qsTr("Source size")
+            blockedByTemplate: !backendValues.sourceSize.isAvailable
+        }
+
+        SecondColumnLayout {
+            SpinBox {
+                backendValue: backendValues.sourceSize_width
+                minimumValue: 0
+                maximumValue: 8192
+                decimals: 0
+                enabled: backendValue.isAvailable
             }
 
-            SecondColumnLayout {
-                ComboBox {
-                    scope: "Image"
-                    model: ["Stretch", "PreserveAspectFit", "PreserveAspectCrop", "Tile", "TileVertically", "TileHorizontally", "Pad"]
-                    backendValue: backendValues.fillMode
-                    implicitWidth: 180
-                    Layout.fillWidth: true
-                }
+            Spacer { implicitWidth: StudioTheme.Values.controlLabelGap }
 
-                ExpandingSpacer {
-                }
+            ControlLabel {
+                //: The width of the object
+                text: qsTr("W", "width")
+                enabled: backendValues.sourceSize_width.isAvailable
             }
 
-            Label {
-                text: qsTr("Source size")
-                disabledState: !backendValues.sourceSize.isAvailable
+            SpinBox {
+                backendValue: backendValues.sourceSize_height
+                minimumValue: 0
+                maximumValue: 8192
+                decimals: 0
+                enabled: backendValue.isAvailable
             }
 
-            SecondColumnLayout {
-                Label {
-                    text: "W"
-                    width: 12
-                    disabledStateSoft: !backendValues.sourceSize_width.isAvailable
-                }
+            Spacer { implicitWidth: StudioTheme.Values.controlLabelGap }
 
-                SpinBox {
-                    backendValue: backendValues.sourceSize_width
-                    minimumValue: 0
-                    maximumValue: 8192
-                    decimals: 0
-                    enabled: backendValue.isAvailable
-                }
-
-                Item {
-                    width: 4
-                    height: 4
-                }
-
-                Label {
-                    text: "H"
-                    width: 12
-                    disabledStateSoft: !backendValues.sourceSize_height.isAvailable
-                }
-
-                SpinBox {
-                    backendValue: backendValues.sourceSize_height
-                    minimumValue: 0
-                    maximumValue: 8192
-                    decimals: 0
-                    enabled: backendValue.isAvailable
-                }
-
-                ExpandingSpacer {
-                }
+            ControlLabel {
+                //: The height of the object
+                text: qsTr("H", "height")
+                enabled: backendValues.sourceSize_height.isAvailable
             }
 
-            Label {
-                text: qsTr("Horizontal alignment")
+            ExpandingSpacer {}
+        }
+
+        PropertyLabel { text: qsTr("Alignment H") }
+
+        SecondColumnLayout {
+            ComboBox {
+                scope: "Image"
+                model: ["AlignLeft", "AlignRight", "AlignHCenter"]
+                backendValue: backendValues.horizontalAlignment
+                implicitWidth: StudioTheme.Values.singleControlColumnWidth
+                               + StudioTheme.Values.actionIndicatorWidth
+                width: implicitWidth
             }
 
-            SecondColumnLayout {
-                ComboBox {
-                    scope: "Image"
-                    model: ["AlignLeft", "AlignRight", "AlignHCenter"]
-                    backendValue: backendValues.horizontalAlignment
-                    implicitWidth: 180
-                    Layout.fillWidth: true
-                }
+            ExpandingSpacer {}
+        }
 
-                ExpandingSpacer {
-                }
+        PropertyLabel { text: qsTr("Alignment V") }
+
+        SecondColumnLayout {
+            ComboBox {
+                scope: "Image"
+                model: ["AlignTop", "AlignBottom", "AlignVCenter"]
+                backendValue: backendValues.verticalAlignment
+                implicitWidth: StudioTheme.Values.singleControlColumnWidth
+                               + StudioTheme.Values.actionIndicatorWidth
+                width: implicitWidth
             }
 
-            Label {
-                text: qsTr("Vertical alignment")
+            ExpandingSpacer {}
+        }
+
+        PropertyLabel {
+            text: qsTr("Asynchronous")
+            tooltip: qsTr("Loads images on the local filesystem asynchronously in a separate thread.")
+            blockedByTemplate: !backendValues.asynchronous.isAvailable
+        }
+
+        SecondColumnLayout {
+            CheckBox {
+                enabled: backendValues.asynchronous.isAvailable
+                text: backendValues.asynchronous.valueToString
+                backendValue: backendValues.asynchronous
+                implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                               + StudioTheme.Values.actionIndicatorWidth
             }
 
-            SecondColumnLayout {
-                ComboBox {
-                    scope: "Image"
-                    model: ["AlignTop", "AlignBottom", "AlignVCenter"]
-                    backendValue: backendValues.verticalAlignment
-                    implicitWidth: 180
-                    Layout.fillWidth: true
-                }
+            ExpandingSpacer {}
+        }
 
-                ExpandingSpacer {
-                }
+        PropertyLabel {
+            text: qsTr("Auto transform")
+            tooltip: qsTr("Automatically applies image transformation metadata such as EXIF orientation.")
+            blockedByTemplate: !backendValues.autoTransform.isAvailable
+        }
+
+        SecondColumnLayout {
+            CheckBox {
+                enabled: backendValues.autoTransform.isAvailable
+                text: backendValues.autoTransform.valueToString
+                backendValue: backendValues.autoTransform
+                implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                               + StudioTheme.Values.actionIndicatorWidth
             }
 
-            Label {
-                text: qsTr("Asynchronous")
-                tooltip: qsTr("Specifies that images on the local filesystem should be loaded asynchronously in a separate thread.")
-                disabledState: !backendValues.asynchronous.isAvailable
+            ExpandingSpacer {}
+        }
+
+        PropertyLabel {
+            text: qsTr("Cache")
+            tooltip: qsTr("Caches the image.")
+            blockedByTemplate: !backendValues.cache.isAvailable
+        }
+
+        SecondColumnLayout {
+            CheckBox {
+                enabled: backendValues.cache.isAvailable
+                text: backendValues.cache.valueToString
+                backendValue: backendValues.cache
+                implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                               + StudioTheme.Values.actionIndicatorWidth
             }
 
-            SecondColumnLayout {
-                CheckBox {
-                    enabled: backendValues.asynchronous.isAvailable
-                    text: backendValues.asynchronous.valueToString
-                    backendValue: backendValues.asynchronous
-                    implicitWidth: 180
-                }
-                ExpandingSpacer {}
+            ExpandingSpacer {}
+        }
+
+        PropertyLabel {
+            text: qsTr("Mipmap")
+            tooltip: qsTr("Uses mipmap filtering when the image is scaled or transformed.")
+            blockedByTemplate: !backendValues.mipmap.isAvailable
+        }
+
+        SecondColumnLayout {
+            CheckBox {
+                enabled: backendValues.mipmap.isAvailable
+                text: backendValues.mipmap.valueToString
+                backendValue: backendValues.mipmap
+                implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                               + StudioTheme.Values.actionIndicatorWidth
             }
 
-            Label {
-                text: qsTr("Auto transform")
-                tooltip: qsTr("Specifies whether the image should automatically apply image transformation metadata such as EXIF orientation.")
-                disabledState: !backendValues.autoTransform.isAvailable
+            ExpandingSpacer {}
+        }
+
+        PropertyLabel {
+            text: qsTr("Mirror")
+            tooltip: qsTr("Inverts the image horizontally.")
+            blockedByTemplate: !backendValues.mirror.isAvailable
+        }
+
+        SecondColumnLayout {
+            CheckBox {
+                enabled: backendValues.mirror.isAvailable
+                text: backendValues.mirror.valueToString
+                backendValue: backendValues.mirror
+                implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                               + StudioTheme.Values.actionIndicatorWidth
             }
 
-            SecondColumnLayout {
-                CheckBox {
-                    enabled: backendValues.autoTransform.isAvailable
-                    text: backendValues.autoTransform.valueToString
-                    backendValue: backendValues.autoTransform
-                    implicitWidth: 180
-                }
-                ExpandingSpacer {}
+            ExpandingSpacer {}
+        }
+
+        PropertyLabel {
+            text: qsTr("Smooth")
+            tooltip: qsTr("Smoothly filters the image when it is scaled or transformed.")
+            blockedByTemplate: !backendValues.smooth.isAvailable
+        }
+
+        SecondColumnLayout {
+            CheckBox {
+                enabled: backendValues.smooth.isAvailable
+                text: backendValues.smooth.valueToString
+                backendValue: backendValues.smooth
+                implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                               + StudioTheme.Values.actionIndicatorWidth
             }
 
-            Label {
-                text: qsTr("Cache")
-                tooltip: qsTr("Specifies whether the image should be cached.")
-                disabledState: !backendValues.cache.isAvailable
-            }
-
-            SecondColumnLayout {
-                CheckBox {
-                    enabled: backendValues.cache.isAvailable
-                    text: backendValues.cache.valueToString
-                    backendValue: backendValues.cache
-                    implicitWidth: 180
-                }
-                ExpandingSpacer {}
-            }
-
-            Label {
-                text: qsTr("Mipmap")
-                tooltip: qsTr("Specifies whether the image uses mipmap filtering when scaled or transformed.")
-                disabledState: !backendValues.mipmap.isAvailable
-            }
-
-            SecondColumnLayout {
-                CheckBox {
-                    enabled: backendValues.mipmap.isAvailable
-                    text: backendValues.mipmap.valueToString
-                    backendValue: backendValues.mipmap
-                    implicitWidth: 180
-                }
-                ExpandingSpacer {}
-            }
-
-            Label {
-                text: qsTr("Mirror")
-                tooltip: qsTr("Specifies whether the image should be horizontally inverted.")
-                disabledState: !backendValues.mirror.isAvailable
-            }
-
-            SecondColumnLayout {
-                CheckBox {
-                    enabled: backendValues.mirror.isAvailable
-                    text: backendValues.mirror.valueToString
-                    backendValue: backendValues.mirror
-                    implicitWidth: 180
-                }
-                ExpandingSpacer {}
-            }
-
-            Label {
-                text: qsTr("Smooth")
-                tooltip: qsTr("Specifies whether the image is smoothly filtered when scaled or transformed.")
-                disabledState: !backendValues.smooth.isAvailable
-            }
-
-            SecondColumnLayout {
-                CheckBox {
-                    enabled: backendValues.smooth.isAvailable
-                    text: backendValues.smooth.valueToString
-                    backendValue: backendValues.smooth
-                    implicitWidth: 180
-                }
-                ExpandingSpacer {}
-            }
+            ExpandingSpacer {}
         }
     }
 }

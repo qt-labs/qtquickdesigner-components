@@ -28,57 +28,33 @@
 ****************************************************************************/
 
 import QtQuick 2.15
-
+import QtQuick.Layouts 1.15
 import HelperWidgets 2.0
-import QtQuick.Layouts 1.0
 
 //! [StaticText compatibility]
 Column {
     anchors.left: parent.left
     anchors.right: parent.right
 
-    StandardTextSection {
+    CharacterSection {
+        richTextEditorAvailable: true
+        showLineHeight: true
         showVerticalAlignment: true
-        showFormatProperty: true
+    }
+
+    TextExtrasSection {
         showElide: true
+        showWrapMode: true
+        showFormatProperty: true
         showFontSizeMode: true
         showLineHeight: true
-        richTextEditorAvailable: true
     }
 
-    Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Text Color")
-
-        ColorEditor {
-            caption: qsTr("Text Color")
-            backendValue: backendValues.color
-            supportGradient: false
-        }
-
+    FontExtrasSection {
+        showStyle: true
     }
 
-    Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Style Color")
-        visible: backendValues.styleColor.isAvailable
-
-        ColorEditor {
-            caption: qsTr("Style Color")
-            backendValue:  backendValues.styleColor
-            supportGradient: false
-        }
-    }
-
-   FontSection {
-       showStyle: true
-   }
-
-   PaddingSection {
-       visible: minorQtQuickVersion > 5
-   }
+    PaddingSection {}
 }
 
 //! [StaticText compatibility]

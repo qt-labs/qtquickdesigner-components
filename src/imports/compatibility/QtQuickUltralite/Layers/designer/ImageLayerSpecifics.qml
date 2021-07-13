@@ -28,63 +28,54 @@
 ****************************************************************************/
 
 import QtQuick 2.15
-
+import QtQuick.Layouts 1.15
 import HelperWidgets 2.0
-import QtQuick.Layouts 1.0
+import StudioTheme 1.0 as StudioTheme
 
 //! [ImageLayer compatibility]
-Column {
+Section {
     anchors.left: parent.left
     anchors.right: parent.right
+    caption: qsTr("Image Layer")
 
-    Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Image Layer")
+    SectionLayout {
+        PropertyLabel { text: qsTr("Platform ID") }
 
-        SectionLayout {
-            Label {
-                text: qsTr("Platform ID")
+        SecondColumnLayout {
+            SpinBox {
+                backendValue: backendValues.platformId
+                minimumValue: 0
+                maximumValue: 2000
+                decimals: 0
+                implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                               + StudioTheme.Values.actionIndicatorWidth
             }
 
-            SecondColumnLayout {
-                SpinBox {
-                    backendValue: backendValues.platformId
-                    minimumValue: 0
-                    maximumValue: 2000
-                    decimals: 0
-                }
+            ExpandingSpacer {}
+        }
 
-                ExpandingSpacer {
-                }
+        PropertyLabel { text: qsTr("Rendering hints") }
+
+        SecondColumnLayout {
+            ComboBox {
+                model: ["OptimizeForSpeed", "OptimizeForSize", "StaticContents"]
+                backendValue: backendValues.renderingHints
+                scope: "ImageLayer"
+                implicitWidth: StudioTheme.Values.singleControlColumnWidth
+                               + StudioTheme.Values.actionIndicatorWidth
             }
 
-            Label {
-                text: qsTr("Rendering Hints")
+            ExpandingSpacer {}
+        }
+
+        PropertyLabel { text: qsTr("Source") }
+
+        SecondColumnLayout {
+            UrlChooser {
+                backendValue: backendValues.source
             }
 
-            SecondColumnLayout {
-                ComboBox {
-                    model: ["OptimizeForSpeed", "OptimizeForSize", "StaticContents"]
-                    backendValue: backendValues.renderingHints
-                    Layout.fillWidth: true
-                    scope: "ImageLayer"
-                }
-            }
-
-            Label {
-                text: qsTr("Source")
-            }
-
-            SecondColumnLayout {
-                UrlChooser {
-                    Layout.fillWidth: true
-                    backendValue: backendValues.source
-                }
-
-                ExpandingSpacer {
-                }
-            }
+            ExpandingSpacer {}
         }
     }
 }
