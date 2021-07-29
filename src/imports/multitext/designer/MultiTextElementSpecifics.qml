@@ -27,9 +27,10 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.1
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
 import HelperWidgets 2.0
-import QtQuick.Layouts 1.0
+import StudioTheme 1.0 as StudioTheme
 
 Column {
     anchors.left: parent.left
@@ -39,15 +40,18 @@ Column {
         anchors.left: parent.left
         anchors.right: parent.right
         caption: qsTr("Multi Text")
+
         SectionLayout {
-            rows: 1
-            columns: 1
-            Label {
-                text: qsTr("Baseline offset")
-                tooltip: qsTr("")
-            }
-            SpinBox {
-                backendValue: backendValues.baselineOffset
+            PropertyLabel { text: qsTr("Baseline offset") }
+
+            SecondColumnLayout {
+                SpinBox {
+                    backendValue: backendValues.baselineOffset
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                + StudioTheme.Values.actionIndicatorWidth
+                }
+
+                ExpandingSpacer {}
             }
         }
     }
@@ -61,37 +65,9 @@ Column {
         richTextEditorAvailable: true
     }
 
-    Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Text Color")
-
-        ColorEditor {
-            caption: qsTr("Text Color")
-            backendValue: backendValues.color
-            supportGradient: false
-        }
-
+    FontSection {
+        showStyle: true
     }
 
-    Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Style Color")
-        visible: backendValues.styleColor.isAvailable
-
-        ColorEditor {
-            caption: qsTr("Style Color")
-            backendValue:  backendValues.styleColor
-            supportGradient: false
-        }
-    }
-
-   FontSection {
-       showStyle: true
-   }
-
-   PaddingSection {
-       visible: minorQtQuickVersion > 5
-   }
+    PaddingSection {}
 }

@@ -27,9 +27,10 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.1
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
 import HelperWidgets 2.0
-import QtQuick.Layouts 1.0
+import StudioTheme 1.0 as StudioTheme
 
 Column {
     anchors.left: parent.left
@@ -39,92 +40,39 @@ Column {
         anchors.left: parent.left
         anchors.right: parent.right
         caption: qsTr("Multi Text")
+
         SectionLayout {
-            rows: 3
-            columns: 2
+            PropertyLabel { text:  qsTr("Text element") }
 
-            Label {
-                text:  qsTr("Text element")
+            SecondColumnLayout {
+                ComboBox {
+                    id: textComboBox
+                    valueType: ComboBox.ValueType.Integer
+                    manualMapping: true
+                    currentIndex: backendValues.stringIndex.value
+                    implicitWidth: StudioTheme.Values.singleControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
+                    model: backendValues.textModel.value.split('e\u001f' + 'e\u001d')
 
-            }
-
-            ComboBox {
-                id: textComboBox
-                visible: showElide
-                Layout.fillWidth: true
-                valueType: ComboBox.ValueType.Integer
-                manualMapping: true
-                currentIndex: backendValues.stringIndex.value
-
-                model: {
-                    backendValues.textModel.value.split('e\u001f' + 'e\u001d')
+                    onCurrentIndexChanged: {
+                        backendValues.currentIndex.value =  textComboBox.currentIndex
+                    }
                 }
 
-                onCurrentIndexChanged: {
-                    backendValues.currentIndex.value =  textComboBox.currentIndex
+                ExpandingSpacer {}
+            }
+
+            PropertyLabel { text: qsTr("String index") }
+
+            SecondColumnLayout {
+                SpinBox {
+                    backendValue: backendValues.currentIndex
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
                 }
+
+                ExpandingSpacer {}
             }
-
-            Label {
-                text: qsTr("String index")
-                tooltip: qsTr("")
-            }
-            SpinBox {
-                backendValue: backendValues.currentIndex
-            }
-
-
-            /*
-            Label {
-                text: qsTr("BaseLine Offset")
-                tooltip: qsTr("")
-            }
-            SpinBox {
-                backendValue: backendValues.baselineOffset
-            }*/
-        }
-
-    }
-    /*
-    StandardTextSection {
-        showVerticalAlignment: true
-        showFormatProperty: true
-        showElide: true
-        showFontSizeMode: true
-        showLineHeight: true
-    }
-
-    Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Text Color")
-
-        ColorEditor {
-            caption: qsTr("Text Color")
-            backendValue: backendValues.color
-            supportGradient: false
-        }
-
-    }
-
-    Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Style Color")
-        visible: backendValues.styleColor.isAvailable
-
-        ColorEditor {
-            caption: qsTr("Style Color")
-            backendValue:  backendValues.styleColor
-            supportGradient: false
         }
     }
-
-    FontSection {
-        showStyle: true
-    }
-
-    PaddingSection {
-        visible: minorQtQuickVersion > 5
-    }*/
 }
