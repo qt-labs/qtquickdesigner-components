@@ -26,9 +26,6 @@ AUX_QML_FILES += \
     $$PWD/ZoomBlurEffectSpecifics.qml
 
 AUX_QML_FILES += \
-    $$PWD/images/blend-mode-16px.png \
-    $$PWD/images/blend-mode-24px.png \
-    $$PWD/images/blend-mode-24px@2x.png \
     $$PWD/images/brightness-contrast-16px.png \
     $$PWD/images/brightness-contrast-24px.png \
     $$PWD/images/brightness-contrast-24px@2x.png \
@@ -38,9 +35,6 @@ AUX_QML_FILES += \
     $$PWD/images/desaturation-16px.png \
     $$PWD/images/desaturation-24px.png \
     $$PWD/images/desaturation-24px@2x.png \
-    $$PWD/images/directional-blur-16px.png \
-    $$PWD/images/directional-blur-24px.png \
-    $$PWD/images/directional-blur-24px@2x.png \
     $$PWD/images/displace-16px.png \
     $$PWD/images/displace-24px.png \
     $$PWD/images/displace-24px@2.png \
@@ -53,36 +47,18 @@ AUX_QML_FILES += \
     $$PWD/images/gamma-adjust-16px.png \
     $$PWD/images/gamma-adjust-24px.png \
     $$PWD/images/gamma-adjust-24px@2x.png \
-    $$PWD/images/gaussian-blur-16px.png \
-    $$PWD/images/gaussian-blur-24px.png \
-    $$PWD/images/gaussian-blur-24px@2.png \
     $$PWD/images/glow-16px.png \
     $$PWD/images/glow-24px.png \
     $$PWD/images/glow-24px@2x.png \
     $$PWD/images/hue-saturation-16px.png \
     $$PWD/images/hue-saturation-24px.png \
     $$PWD/images/hue-saturation-24px@2x.png \
-    $$PWD/images/inner-shadow-16px.png \
-    $$PWD/images/inner-shadow-24px.png \
-    $$PWD/images/inner-shadow-24px@2.png \
     $$PWD/images/levels-16px.png \
     $$PWD/images/levels-24px.png \
     $$PWD/images/levels-24px@2.png \
-    $$PWD/images/mask-blur-16px.png \
-    $$PWD/images/mask-blur-24px.png \
-    $$PWD/images/mask-blur-24px@2x.png \
     $$PWD/images/opacity-mask-16px.png \
     $$PWD/images/opacity-mask-24px.png \
     $$PWD/images/opacity-mask-24px@2x.png \
-    $$PWD/images/radial-blur-16px.png \
-    $$PWD/images/radial-blur-24px.png \
-    $$PWD/images/radial-blur-24px@2x.png \
-    $$PWD/images/recursive-blur-16px.png \
-    $$PWD/images/recursive-blur-24px.png \
-    $$PWD/images/recursive-blur-24px@2.png \
     $$PWD/images/theshold-24px@2.png \
     $$PWD/images/threshold-16px.png \
-    $$PWD/images/threshold-24px.png \
-    $$PWD/images/zoom-blur-16px.png \
-    $$PWD/images/zoom-blur-24px.png \
-    $$PWD/images/zoom-blur-24px@2x.png
+    $$PWD/images/threshold-24px.png
