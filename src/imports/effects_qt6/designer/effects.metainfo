@@ -15,8 +15,6 @@ MetaInfo {
         }
     }
 
-
-
     Type {
         name: "QtQuick.Studio.Effects.BrightnessContrastEffect"
         icon: "images/brightness-contrast-16px.png"
@@ -126,6 +124,14 @@ MetaInfo {
             visibleInNavigator: true
             forceNonDefaultProperty: "layer.effect"
             setParentProperty: "layer.enabled: true"
+        }
+
+        ItemLibraryEntry {
+            name: "Directional Blur"
+            category: "Effects"
+            libraryIcon: "images/directional-blur-24px.png"
+            version: "1.0"
+            requiredImport: "QtQuick.Studio.Effects"
         }
     }
 

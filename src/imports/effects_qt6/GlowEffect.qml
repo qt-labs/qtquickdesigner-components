@@ -34,7 +34,6 @@ Glow {
     property real samples: 0
     id: glow
     radius: 5
-    samples: 16
     spread: 0.5
     color: "#ffffffff"
     transparentBorder: true

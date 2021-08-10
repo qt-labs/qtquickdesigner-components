@@ -35,7 +35,6 @@ DropShadow {
     horizontalOffset: 3
     verticalOffset: 3
     radius: 8.0
-    samples: 17
     spread: 0.5
     transparentBorder: true
     color: "#80000000"
