@@ -8,5 +8,5 @@ QML_FILES += \
     $$PWD/TriangleItem.qml \
     $$PWD/RectangleItem.qml \
     $$PWD/GroupItem.qml \
-    $$PWD/ArcArrow \
-    $$PWD/StraightArrow
+    $$PWD/ArcArrow.qml \
+    $$PWD/StraightArrow.qml
