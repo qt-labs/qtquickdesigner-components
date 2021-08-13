@@ -1,4 +1,4 @@
-a/****************************************************************************
+/****************************************************************************
 **
 ** Copyright (C) 2020 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
@@ -34,6 +34,7 @@ FastBlur {
     property real directionalBlurAngle: 0
     property real directionalBlurLength: 0
     property int directionalBlurSamples: 10
+    property int length: 0
 
     id: directionalBlur
     transparentBorder: true
