@@ -57,5 +57,5 @@ Item {
         source: stack
         radius: 8.0
     }
-    Component.onCompleted: Console.log("GaussianBlur is not supported with Qt 6")
+    Component.onCompleted: console.log("GaussianBlur is not supported with Qt 6")
 }

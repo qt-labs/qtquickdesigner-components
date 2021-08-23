@@ -63,6 +63,6 @@ Item {
     Component.onCompleted: {
         root.background = stack.children[0]
         root.foreground = stack.children[1]
-        Console.log("MaskedBlur is not supported with Qt 6")
+        console.log("MaskedBlur is not supported with Qt 6")
     }
 }

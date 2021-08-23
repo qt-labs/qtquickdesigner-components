@@ -58,5 +58,5 @@ Item {
         source: stack
         transparentBorder: true
     }
-    Component.onCompleted: Console.log("DirectionalBlur is not supported with Qt 6")
+    Component.onCompleted: console.log("DirectionalBlur is not supported with Qt 6")
 }

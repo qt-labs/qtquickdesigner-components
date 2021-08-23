@@ -37,5 +37,5 @@ FastBlur {
     property real zoomBlurHoffset: 0
     property real zoomBlurVoffset: 0
     transparentBorder: true
-    Component.onCompleted: Console.log("ZoomBlur is not supported with Qt 6")
+    Component.onCompleted: console.log("ZoomBlur is not supported with Qt 6")
 }

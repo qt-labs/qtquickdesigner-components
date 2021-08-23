@@ -59,7 +59,7 @@ Item {
     Component.onCompleted: {
         root.background = stack.children[0]
         root.foreground = stack.children[1]
-        Console.log("Blend is not supported with Qt 6")
+        console.log("Blend is not supported with Qt 6")
     }
 }
 

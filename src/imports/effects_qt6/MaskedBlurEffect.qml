@@ -34,5 +34,5 @@ FastBlur {
     id: maskedBlur
     radius: 32
     property int samples: 0
-    Component.onCompleted: Console.log("MaskedBlur is not supported with Qt 6")
+    Component.onCompleted: console.log("MaskedBlur is not supported with Qt 6")
 }

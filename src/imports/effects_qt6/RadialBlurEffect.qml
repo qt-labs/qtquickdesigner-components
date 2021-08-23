@@ -42,5 +42,5 @@ FastBlur {
 
     transparentBorder: true
 
-    Component.onCompleted: Console.log("RadiallBlur is not supported with Qt 6")
+    Component.onCompleted: console.log("RadiallBlur is not supported with Qt 6")
 }

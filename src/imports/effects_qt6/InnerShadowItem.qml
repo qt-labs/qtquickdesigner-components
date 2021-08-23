@@ -59,5 +59,5 @@ Item {
         anchors.fill: stack
         source: stack
     }
-    Component.onCompleted: Console.log("InnerShadow is not supported with Qt 6")
+    Component.onCompleted: console.log("InnerShadow is not supported with Qt 6")
 }

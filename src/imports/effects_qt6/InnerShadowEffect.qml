@@ -41,5 +41,5 @@ FastBlur {
     property real spread: 0
     property real verticalOffset: 0
 
-    Component.onCompleted: Console.log("InnerShadow is not supported with Qt 6")
+    Component.onCompleted: console.log("InnerShadow is not supported with Qt 6")
 }

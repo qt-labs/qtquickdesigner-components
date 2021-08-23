@@ -57,5 +57,5 @@ Item {
         source: stack
         transparentBorder: true
     }
-    Component.onCompleted: Console.log("ZoomBlur is not supported with Qt 6")
+    Component.onCompleted: console.log("ZoomBlur is not supported with Qt 6")
 }

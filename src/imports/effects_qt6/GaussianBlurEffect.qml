@@ -37,5 +37,5 @@ FastBlur {
 
     property alias radius: gaussianBlur.radius
     property int samples: 0
-    Component.onCompleted: Console.log("GaussianBlur is not supported with Qt 6")
+    Component.onCompleted: console.log("GaussianBlur is not supported with Qt 6")
 }

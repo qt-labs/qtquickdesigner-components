@@ -33,5 +33,5 @@ import Qt5Compat.GraphicalEffects
 FastBlur {
     id: blend
     property string mode: "subtract"
-    Component.onCompleted: Console.log("Blend is not supported with Qt 6")
+    Component.onCompleted: console.log("Blend is not supported with Qt 6")
 }
