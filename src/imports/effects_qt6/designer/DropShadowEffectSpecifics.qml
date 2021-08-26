@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2020 The Qt Company Ltd.
+** Copyright (C) 2021 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -27,9 +27,10 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.0
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
 import HelperWidgets 2.0
-import QtQuick.Layouts 1.0
+import StudioTheme 1.0 as StudioTheme
 
 Column {
     anchors.left: parent.left
@@ -40,10 +41,13 @@ Column {
         anchors.right: parent.right
         caption: qsTr("Drop Shadow Color")
 
-        ColorEditor {
-            caption: qsTr("Drop Shadow Color")
-            backendValue: backendValues.color
-            supportGradient: false
+        SectionLayout {
+            PropertyLabel { text: qsTr("Drop shadow color") }
+
+            ColorEditor {
+                backendValue: backendValues.color
+                supportGradient: false
+            }
         }
     }
 
@@ -53,60 +57,65 @@ Column {
         caption: qsTr("Drop Shadow")
 
         SectionLayout {
-            rows: 2
-            Label {
+            PropertyLabel {
                 text: qsTr("Radius")
-                toolTip: qsTr("The softness of the shadow. A larger radius causes the edges of the "
+                tooltip: qsTr("The softness of the shadow. A larger radius causes the edges of the "
                               + "shadow to appear more blurry.")
             }
+
             SecondColumnLayout {
                 SpinBox {
                     backendValue: backendValues.radius
-                    Layout.preferredWidth: 80
                     decimals: 1
                     minimumValue: 0
                     maximumValue: 100
                     stepSize: 1
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
                 }
-                ExpandingSpacer {
-                }
+
+                ExpandingSpacer {}
             }
 
-            Label {
+            PropertyLabel {
                 text: qsTr("Samples")
-                toolTip: qsTr("Samples per pixel for edge softening blur calculation. Ideally, "
+                tooltip: qsTr("Samples per pixel for edge softening blur calculation. Ideally, "
                               + "this value should be twice as large as the highest required "
                               + "radius value plus one.")
             }
+
             SecondColumnLayout {
                 SpinBox {
                     backendValue: backendValues.samples
-                    Layout.preferredWidth: 80
                     decimals: 0
                     minimumValue: 0
                     maximumValue: 201
                     stepSize: 1
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
                 }
-                ExpandingSpacer {
-                }
+
+                ExpandingSpacer {}
             }
 
-            Label {
+            PropertyLabel {
                 text: qsTr("Spread")
-                toolTip: qsTr("The part of the shadow color that is strengthened near the source "
+                tooltip: qsTr("The part of the shadow color that is strengthened near the source "
                               + "edges.")
             }
+
             SecondColumnLayout {
                 SpinBox {
                     backendValue: backendValues.spread
-                    Layout.preferredWidth: 80
                     decimals: 2
                     minimumValue: 0
                     maximumValue: 1
                     stepSize: 0.1
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
                 }
-                ExpandingSpacer {
-                }
+
+                ExpandingSpacer {}
             }
         }
     }
@@ -117,41 +126,52 @@ Column {
         caption: qsTr("Offsets")
 
         SectionLayout {
-            rows: 2
-            Label {
-                text: qsTr("Horizontal offset")
-                toolTip: qsTr("The horizontal offset for the rendered shadow compared to the "
-                              + "drop shadow component's horizontal position.")
+            PropertyLabel {
+                text: qsTr("Offset")
             }
+
             SecondColumnLayout {
                 SpinBox {
                     backendValue: backendValues.horizontalOffset
-                    Layout.preferredWidth: 80
                     decimals: 1
                     minimumValue: -1000
                     maximumValue: 1000
                     stepSize: 1
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
                 }
-                ExpandingSpacer {
-                }
-            }
 
-            Label {
-                text: qsTr("Vertical offset")
-                toolTip: qsTr("The vertical offset for the rendered shadow compared to the drop "
-                              + "shadow component's vertical position.")
-            }
-            SecondColumnLayout {
+                Spacer { implicitWidth: StudioTheme.Values.controlLabelGap }
+
+                ControlLabel {
+                    //: The horizontal offset
+                    text: qsTr("H", "horizontal")
+                    tooltip: qsTr("The horizontal offset for the rendered shadow compared to the " +
+                                  "inner shadow component's horizontal position.")
+                }
+
+                Spacer { implicitWidth: StudioTheme.Values.controlGap }
+
                 SpinBox {
                     backendValue: backendValues.verticalOffset
-                    Layout.preferredWidth: 80
                     decimals: 1
                     minimumValue: -1000
                     maximumValue: 1000
                     stepSize: 1
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
                 }
-                ExpandingSpacer {
+
+                Spacer { implicitWidth: StudioTheme.Values.controlLabelGap }
+
+                ControlLabel {
+                    //: The vertical offset
+                    text: qsTr("V", "vertical")
+                    tooltip: qsTr("The vertical offset for the rendered shadow compared to the " +
+                                  "inner shadow component's vertical position. ")
                 }
+
+                ExpandingSpacer {}
             }
         }
     }
@@ -162,36 +182,39 @@ Column {
         caption: qsTr("Caching and Border")
 
         SectionLayout {
-            rows: 2
-            Label {
+            PropertyLabel {
                 text: qsTr("Cached")
-                toolTip: qsTr("Caches the effect output pixels to improve the rendering "
+                tooltip: qsTr("Caches the effect output pixels to improve the rendering "
                               + "performance.")
             }
+
             SecondColumnLayout {
                 CheckBox {
-                    Layout.fillWidth: true
                     backendValue: backendValues.cached
                     text: backendValues.cached.valueToString
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
                 }
-                ExpandingSpacer {
-                }
+
+                ExpandingSpacer {}
             }
 
-            Label {
+            PropertyLabel {
                 text: qsTr("Transparent border")
-                toolTip: qsTr("Pads the exterior of the item with a transparent edge, making "
+                tooltip: qsTr("Pads the exterior of the component with a transparent edge, making "
                               + "sampling outside the source texture use transparency instead of "
                               + "the edge pixels.")
             }
+
             SecondColumnLayout {
                 CheckBox {
-                    Layout.fillWidth: true
                     backendValue: backendValues.transparentBorder
                     text: backendValues.transparentBorder.valueToString
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
                 }
-                ExpandingSpacer {
-                }
+
+                ExpandingSpacer {}
             }
         }
     }

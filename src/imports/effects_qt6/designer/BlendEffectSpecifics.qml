@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2020 The Qt Company Ltd.
+** Copyright (C) 2021 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -27,9 +27,10 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.0
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
 import HelperWidgets 2.0
-import QtQuick.Layouts 1.0
+import StudioTheme 1.0 as StudioTheme
 
 Column {
     anchors.left: parent.left
@@ -41,23 +42,24 @@ Column {
         caption: qsTr("Blend")
 
         SectionLayout {
-            rows: 2
-            Label {
+            PropertyLabel {
                 text: qsTr("Mode")
-                toolTip: qsTr("The mode which is used when foreground source is blended over "
-                               + "source.")
+                tooltip: qsTr("The mode which is used when foreground source is blended over "
+                              + "source.")
             }
+
             SecondColumnLayout {
                 ComboBox {
                     id: blendMode
-
                     backendValue: backendValues.mode
-                    Layout.fillWidth: true
-
                     useInteger: true
                     manualMapping: true
-
-                    model: ["normal", "addition", "average", "color", "colorBurn", "colorDodge", "darken", "darkerColor", "difference", "divide", "exclusion", "hardLight", "hue", "lighten", "lighterColor", "lightness", "multiply", "negation", "saturation", "screen", "subtract", "softLight"]
+                    model: ["normal", "addition", "average", "color", "colorBurn", "colorDodge",
+                        "darken", "darkerColor", "difference", "divide", "exclusion", "hardLight",
+                        "hue", "lighten", "lighterColor", "lightness", "multiply", "negation",
+                        "saturation", "screen", "subtract", "softLight"]
+                    implicitWidth: StudioTheme.Values.singleControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
 
                     property bool block: false
 
@@ -78,8 +80,7 @@ Column {
                         onSelectionChanged: blendMode.fromBackendToFrontend()
                     }
 
-                    function fromBackendToFrontend()
-                    {
+                    function fromBackendToFrontend() {
                         if (!__isCompleted)
                             return
 
@@ -90,23 +91,25 @@ Column {
                         block = false
                     }
                 }
-                ExpandingSpacer {
-                }
+
+                ExpandingSpacer {}
             }
 
-            Label {
-                text: qsTr("Foreground Source")
-                toolTip: qsTr("The item that is going to be blended over the source.")
+            PropertyLabel {
+                text: qsTr("Foreground source")
+                tooltip: qsTr("The component that is going to be blended over the source.")
             }
+
             SecondColumnLayout {
                 ItemFilterComboBox {
                     typeFilter: "QtQuick.Item"
                     validator: RegExpValidator { regExp: /(^$|^[a-z_]\w*)/ }
                     backendValue: backendValues.foregroundSource
-                    Layout.fillWidth: true
+                    implicitWidth: StudioTheme.Values.singleControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
                 }
-                ExpandingSpacer {
-                }
+
+                ExpandingSpacer {}
             }
         }
     }
@@ -117,20 +120,22 @@ Column {
         caption: qsTr("Caching")
 
         SectionLayout {
-            rows: 2
-            Label {
+            PropertyLabel {
                 text: qsTr("Cached")
-                toolTip: qsTr("Caches the effect output pixels to improve the rendering "
+                tooltip: qsTr("Caches the effect output pixels to improve the rendering "
                               + "performance.")
             }
+
             SecondColumnLayout {
                 CheckBox {
                     Layout.fillWidth: true
                     backendValue: backendValues.cached
                     text: backendValues.cached.valueToString
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
                 }
-                ExpandingSpacer {
-                }
+
+                ExpandingSpacer {}
             }
         }
     }

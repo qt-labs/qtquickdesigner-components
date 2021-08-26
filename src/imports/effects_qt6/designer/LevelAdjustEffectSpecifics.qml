@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2020 The Qt Company Ltd.
+** Copyright (C) 2021 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -27,9 +27,10 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.0
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
 import HelperWidgets 2.0
-import QtQuick.Layouts 1.0
+import StudioTheme 1.0 as StudioTheme
 
 Column {
     anchors.left: parent.left
@@ -41,56 +42,76 @@ Column {
         caption: qsTr("Level Adjust")
 
         SectionLayout {
-            rows: 2
-            Label {
+            PropertyLabel {
                 text: qsTr("Gamma")
-                toolTip: qsTr("The change factor for how the luminance of each pixel is altered.")
+                tooltip: qsTr("The change factor for how the luminance of each pixel is altered.")
             }
+
             SecondColumnLayout {
-                ColumnLayout {
-                    RowLayout {
-                        Label {
-                            text: qsTr("R")
-                        }
-                        SpinBox {
-                            minimumValue: 0
-                            maximumValue: 100
-                            decimals: 2
-                            stepSize: 0.1
-                            backendValue: backendValues.gammaR
-                            Layout.fillWidth: true
-                            sliderIndicatorVisible: true
-                        }
-                    }
-                    RowLayout {
-                        Label {
-                            text: qsTr("G")
-                        }
-                        SpinBox {
-                            minimumValue: 0
-                            maximumValue: 100
-                            decimals: 2
-                            stepSize: 0.1
-                            backendValue: backendValues.gammaG
-                            Layout.fillWidth: true
-                            sliderIndicatorVisible: true
-                        }
-                    }
-                    RowLayout {
-                        Label {
-                            text: qsTr("B")
-                        }
-                        SpinBox {
-                            minimumValue: 0
-                            maximumValue: 100
-                            decimals: 2
-                            stepSize: 0.1
-                            backendValue: backendValues.gammaB
-                            Layout.fillWidth: true
-                            sliderIndicatorVisible: true
-                        }
-                    }
+                SpinBox {
+                    minimumValue: 0
+                    maximumValue: 100
+                    decimals: 2
+                    stepSize: 0.1
+                    backendValue: backendValues.gammaR
+                    sliderIndicatorVisible: true
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
                 }
+
+                Spacer { implicitWidth: StudioTheme.Values.controlLabelGap }
+
+                ControlLabel {
+                    text: qsTr("R", "red")
+                }
+
+                ExpandingSpacer {}
+            }
+
+            PropertyLabel {}
+
+            SecondColumnLayout {
+                SpinBox {
+                    minimumValue: 0
+                    maximumValue: 100
+                    decimals: 2
+                    stepSize: 0.1
+                    backendValue: backendValues.gammaG
+                    sliderIndicatorVisible: true
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
+                }
+
+                Spacer { implicitWidth: StudioTheme.Values.controlLabelGap }
+
+                ControlLabel {
+                    text: qsTr("G", "green")
+                }
+
+                ExpandingSpacer {}
+            }
+
+            PropertyLabel {}
+
+            SecondColumnLayout {
+                SpinBox {
+                    minimumValue: 0
+                    maximumValue: 100
+                    decimals: 2
+                    stepSize: 0.1
+                    backendValue: backendValues.gammaB
+                    sliderIndicatorVisible: true
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
+                }
+
+                Spacer { implicitWidth: StudioTheme.Values.controlLabelGap }
+
+                ControlLabel {
+                    text: qsTr("B", "blue")
+                }
+
+                ExpandingSpacer {}
             }
         }
     }
@@ -98,48 +119,44 @@ Column {
     Section {
         anchors.left: parent.left
         anchors.right: parent.right
-        caption: qsTr("Minimum Input")
+        caption: qsTr("Input")
 
-        ColorEditor {
-            caption: qsTr("Minimum Input")
-            backendValue: backendValues.minimumInput
-            supportGradient: false
+        SectionLayout {
+            PropertyLabel { text: qsTr("Minimum") }
+
+            ColorEditor {
+                backendValue: backendValues.minimumInput
+                supportGradient: false
+            }
+
+            PropertyLabel { text: qsTr("Maximum") }
+
+            ColorEditor {
+                backendValue: backendValues.maximumInput
+                supportGradient: false
+            }
         }
     }
 
     Section {
         anchors.left: parent.left
         anchors.right: parent.right
-        caption: qsTr("Minimum Output")
+        caption: qsTr("Output")
 
-        ColorEditor {
-            caption: qsTr("Minimum Output")
-            backendValue: backendValues.minimumOutput
-            supportGradient: false
-        }
-    }
+        SectionLayout {
+            PropertyLabel { text: qsTr("Minimum") }
 
-    Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Maximum Input")
+            ColorEditor {
+                backendValue: backendValues.minimumOutput
+                supportGradient: false
+            }
 
-        ColorEditor {
-            caption: qsTr("Maximum Input")
-            backendValue: backendValues.maximumInput
-            supportGradient: false
-        }
-    }
+            PropertyLabel { text: qsTr("Maximum") }
 
-    Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Maximum Output")
-
-        ColorEditor {
-            caption: qsTr("Maximum Output")
-            backendValue: backendValues.maximumOutput
-            supportGradient: false
+            ColorEditor {
+                backendValue: backendValues.maximumOutput
+                supportGradient: false
+            }
         }
     }
 
@@ -149,20 +166,21 @@ Column {
         caption: qsTr("Caching")
 
         SectionLayout {
-            rows: 2
-            Label {
+            PropertyLabel {
                 text: qsTr("Cached")
-                toolTip: qsTr("Caches the effect output pixels to improve the rendering "
+                tooltip: qsTr("Caches the effect output pixels to improve the rendering "
                               + "performance.")
             }
+
             SecondColumnLayout {
                 CheckBox {
-                    Layout.fillWidth: true
                     backendValue: backendValues.cached
                     text: backendValues.cached.valueToString
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
                 }
-                ExpandingSpacer {
-                }
+
+                ExpandingSpacer {}
             }
         }
     }

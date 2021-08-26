@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2020 The Qt Company Ltd.
+** Copyright (C) 2021 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -27,9 +27,10 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.0
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
 import HelperWidgets 2.0
-import QtQuick.Layouts 1.0
+import StudioTheme 1.0 as StudioTheme
 
 Column {
     anchors.left: parent.left
@@ -40,10 +41,13 @@ Column {
         anchors.right: parent.right
         caption: qsTr("Overlay Color")
 
-        ColorEditor {
-            caption: qsTr("Overlay Color")
-            backendValue: backendValues.color
-            supportGradient: false
+        SectionLayout {
+            PropertyLabel { text: qsTr("Overlay color") }
+
+            ColorEditor {
+                backendValue: backendValues.color
+                supportGradient: false
+            }
         }
     }
 
@@ -53,20 +57,21 @@ Column {
         caption: qsTr("Caching")
 
         SectionLayout {
-            rows: 2
-            Label {
+            PropertyLabel {
                 text: qsTr("Cached")
-                toolTip: qsTr("Caches the effect output pixels to improve the rendering "
+                tooltip: qsTr("Caches the effect output pixels to improve the rendering "
                               + "performance.")
             }
+
             SecondColumnLayout {
                 CheckBox {
-                    Layout.fillWidth: true
                     backendValue: backendValues.cached
                     text: backendValues.cached.valueToString
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
                 }
-                ExpandingSpacer {
-                }
+
+                ExpandingSpacer {}
             }
         }
     }

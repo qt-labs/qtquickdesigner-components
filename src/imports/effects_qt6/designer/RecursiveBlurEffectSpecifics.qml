@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2020 The Qt Company Ltd.
+** Copyright (C) 2021 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -27,9 +27,10 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.0
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
 import HelperWidgets 2.0
-import QtQuick.Layouts 1.0
+import StudioTheme 1.0 as StudioTheme
 
 Column {
     anchors.left: parent.left
@@ -41,13 +42,12 @@ Column {
         caption: qsTr("Recursive Blur")
 
         SectionLayout {
-            rows: 2
-
-            Label {
+            PropertyLabel {
                 text: qsTr("Loops")
-                toolTip: qsTr("The amount of blur iterations that are going to be performed for "
+                tooltip: qsTr("The amount of blur iterations that are going to be performed for "
                               + "the source.")
             }
+
             SecondColumnLayout {
                 SpinBox {
                     backendValue: backendValues.loops
@@ -55,16 +55,19 @@ Column {
                     minimumValue: 0
                     maximumValue: 1000
                     stepSize: 1
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
                 }
-                ExpandingSpacer {
-                }
+
+                ExpandingSpacer {}
             }
 
-            Label {
+            PropertyLabel {
                 text: qsTr("Radius")
-                toolTip: qsTr("The distance of the neighboring pixels which affect the blurring of "
+                tooltip: qsTr("The distance of the neighboring pixels which affect the blurring of "
                               + "an individual pixel. A larger radius increases the blur effect.")
             }
+
             SecondColumnLayout {
                 SpinBox {
                     backendValue: backendValues.radius
@@ -72,9 +75,11 @@ Column {
                     minimumValue: 0
                     maximumValue: 16
                     stepSize: 1
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
                 }
-                ExpandingSpacer {
-                }
+
+                ExpandingSpacer {}
             }
         }
     }
@@ -85,36 +90,39 @@ Column {
         caption: qsTr("Caching and Border")
 
         SectionLayout {
-            rows: 2
-            Label {
+            PropertyLabel {
                 text: qsTr("Cached")
-                toolTip: qsTr("Caches the effect output pixels  to improve the rendering "
+                tooltip: qsTr("Caches the effect output pixels  to improve the rendering "
                               + "performance.")
             }
+
             SecondColumnLayout {
                 CheckBox {
-                    Layout.fillWidth: true
                     backendValue: backendValues.cached
                     text: backendValues.cached.valueToString
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
                 }
-                ExpandingSpacer {
-                }
+
+                ExpandingSpacer {}
             }
 
-            Label {
+            PropertyLabel {
                 text: qsTr("Transparent border")
-                toolTip: qsTr("Pads the exterior of the item with a transparent edge, making "
+                tooltip: qsTr("Pads the exterior of the component with a transparent edge, making "
                               + "sampling outside the source texture use transparency instead of "
                               + "the edge pixels.")
             }
+
             SecondColumnLayout {
                 CheckBox {
-                    Layout.fillWidth: true
                     backendValue: backendValues.transparentBorder
                     text: backendValues.transparentBorder.valueToString
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
                 }
-                ExpandingSpacer {
-                }
+
+                ExpandingSpacer {}
             }
         }
     }

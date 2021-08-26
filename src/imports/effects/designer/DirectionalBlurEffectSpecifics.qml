@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2020 The Qt Company Ltd.
+** Copyright (C) 2021 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -27,16 +27,14 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.0
+import QtQuick 2.15
+import QtQuick.Layouts 1.15
 import HelperWidgets 2.0
-import QtQuick.Layouts 1.0
+import StudioTheme 1.0 as StudioTheme
 
 Column {
-    id: root
     anchors.left: parent.left
     anchors.right: parent.right
-
-    property int spinBoxWidth: 90
 
     Section {
         anchors.left: parent.left
@@ -44,60 +42,65 @@ Column {
         caption: qsTr("Directional Blur")
 
         SectionLayout {
-            rows: 2
-            Label {
+            PropertyLabel {
                 text: qsTr("Angle")
-                toolTip: qsTr("The direction for the blur. Blur is applied to both sides of each "
+                tooltip: qsTr("The direction for the blur. Blur is applied to both sides of each "
                               + "pixel. Therefore, setting the direction to 0 and 180 produces "
                               + "the same result.")
             }
+
             SecondColumnLayout {
                 SpinBox {
                     backendValue: backendValues.angle
-                    Layout.preferredWidth: root.spinBoxWidth
                     decimals: 1
                     minimumValue: -180
                     maximumValue: 180
                     stepSize: 1
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
                 }
-                ExpandingSpacer {
-                }
+
+                ExpandingSpacer {}
             }
 
-            Label {
+            PropertyLabel {
                 text: qsTr("Samples")
-                toolTip: qsTr("Samples per pixel for blur calculation. A larger value produces "
+                tooltip: qsTr("Samples per pixel for blur calculation. A larger value produces "
                               + "better quality, but is slower to render.")
             }
+
             SecondColumnLayout {
                 SpinBox {
                     backendValue: backendValues.samples
-                    Layout.preferredWidth: root.spinBoxWidth
                     decimals: 0
                     minimumValue: 0
                     maximumValue: 1000
                     stepSize: 1
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
                 }
-                ExpandingSpacer {
-                }
+
+                ExpandingSpacer {}
             }
 
-            Label {
+            PropertyLabel {
                 text: qsTr("Length")
-                toolTip: qsTr("The perceived amount of movement for each pixel. The movement is "
+                tooltip: qsTr("The perceived amount of movement for each pixel. The movement is "
                               + "divided evenly to both sides of each pixel.")
             }
+
             SecondColumnLayout {
                 SpinBox {
                     backendValue: backendValues.length
-                    Layout.preferredWidth: root.spinBoxWidth
                     decimals: 1
                     minimumValue: 0
                     maximumValue: 1000
                     stepSize: 1
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
                 }
-                ExpandingSpacer {
-                }
+
+                ExpandingSpacer {}
             }
         }
     }
@@ -109,36 +112,39 @@ Column {
         caption: qsTr("Caching and Border")
 
         SectionLayout {
-            rows: 2
-            Label {
+            PropertyLabel {
                 text: qsTr("Cached")
-                toolTip: qsTr("Caches the effect output pixels to improve the rendering "
+                tooltip: qsTr("Caches the effect output pixels to improve the rendering "
                               + "performance.")
             }
+
             SecondColumnLayout {
                 CheckBox {
-                    Layout.fillWidth: true
                     backendValue: backendValues.cached
                     text: backendValues.cached.valueToString
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
                 }
-                ExpandingSpacer {
-                }
+
+                ExpandingSpacer {}
             }
 
-            Label {
+            PropertyLabel {
                 text: qsTr("Transparent border")
-                toolTip: qsTr("Pads the exterior of the item with a transparent edge, making "
+                tooltip: qsTr("Pads the exterior of the component with a transparent edge, making "
                               + "sampling outside the source texture use transparency instead of "
                               + "the edge pixels.")
             }
+
             SecondColumnLayout {
                 CheckBox {
-                    Layout.fillWidth: true
                     backendValue: backendValues.transparentBorder
                     text: backendValues.transparentBorder.valueToString
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
                 }
-                ExpandingSpacer {
-                }
+
+                ExpandingSpacer {}
             }
         }
     }
