@@ -30,7 +30,7 @@
 import QtQuick 2.15
 
 //! [ImageLayer compatibility]
-Image {
+Item {
     enum RenderingHints {
          OptimizeForSpeed,
          OptimizeForSize,
@@ -38,6 +38,12 @@ Image {
     }
 
     property int platformId: 0
-    property int renderingHints: RenderingHints.OptimizeForSpeed
+    property int renderingHints: ImageLayer.RenderingHints.OptimizeForSpeed
+    property alias source: internalImage.source
+
+    Image {
+        id: internalImage
+        anchors.fill: parent
+    }
 }
 //! [ImageLayer compatibility]

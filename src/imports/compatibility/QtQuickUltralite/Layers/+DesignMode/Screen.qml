@@ -29,13 +29,15 @@
 
 import QtQuick 2.15
 
-//! [SpriteLayer compatibility]
-Item {
-     enum ColorDepth {
-         Bpp8, Bpp16, Bpp16Alpha, Bpp24, Bpp32, Bpp32Alpha
-     }
+//! [Screen compatibility]
+Rectangle {
+    id: wnd
+    property var outputDevice: "device"
+    property alias backgroundColor: color
 
-    property int depth: ColorDepth.Bpp32
-    property int platformId: 0
+    property int defaultApplicationWidth: width
+    property int defaultApplicationHeight: height
+
+    visible: true
 }
-//! [SpriteLayer compatibility]
+//! [Screen compatibility]

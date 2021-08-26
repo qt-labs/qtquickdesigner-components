@@ -36,7 +36,7 @@ import StudioTheme 1.0 as StudioTheme
 Section {
     anchors.left: parent.left
     anchors.right: parent.right
-    caption: qsTr("Item Layer")
+    caption: qsTr("Sprite Layer")
 
     SectionLayout {
         PropertyLabel { text: qsTr("Platform ID") }
@@ -58,7 +58,7 @@ Section {
 
         SecondColumnLayout {
             ComboBox {
-                model: ["Bpp16", "Bpp16Alpha", "Bpp24", "Bpp32", "Bpp32Alpha"]
+                model: ["Bpp8", "Bpp16", "Bpp16Alpha", "Bpp24", "Bpp32", "Bpp32Alpha"]
                 backendValue: backendValues.depth
                 scope: "SpriteLayer"
                 implicitWidth: StudioTheme.Values.singleControlColumnWidth

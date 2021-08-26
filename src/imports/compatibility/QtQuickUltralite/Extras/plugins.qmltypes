@@ -8,6 +8,6 @@ import QtQuick.tooling 1.2
 
 Module {
     dependencies: [
-        "QtQuick 2.11"
+        "QtQuick 2.12"
     ]
 }

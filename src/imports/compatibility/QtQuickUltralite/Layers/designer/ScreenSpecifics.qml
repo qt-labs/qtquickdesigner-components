@@ -59,6 +59,54 @@ Section {
             backendValue: backendValues.backgroundColor
             supportGradient: false
         }
+
+        PropertyLabel { text: qsTr("Application size") }
+
+        SecondColumnLayout {
+            SpinBox {
+                id: widthSpinBox
+                implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                               + StudioTheme.Values.actionIndicatorWidth
+                backendValue: backendValues.defaultApplicationWidth
+                maximumValue: 0xffff
+                minimumValue: 0
+                decimals: 0
+                enabled: true
+            }
+
+            Spacer { implicitWidth: StudioTheme.Values.controlLabelGap }
+
+            ControlLabel {
+                //: The width of the object
+                text: qsTr("W", "width")
+                tooltip: widthSpinBox.enabled ? qsTr("Width") : root.disbaledTooltip
+                enabled: widthSpinBox.enabled
+            }
+
+            Spacer { implicitWidth: StudioTheme.Values.controlGap }
+
+            SpinBox {
+                id: heightSpinBox
+                implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                               + StudioTheme.Values.actionIndicatorWidth
+                backendValue: backendValues.defaultApplicationHeight
+                maximumValue: 0xffff
+                minimumValue: 0
+                decimals: 0
+                enabled: true
+            }
+
+            Spacer { implicitWidth: StudioTheme.Values.controlLabelGap }
+
+            ControlLabel {
+                //: The height of the object
+                text: qsTr("H", "height")
+                tooltip: heightSpinBox.enabled ? qsTr("Height") : root.disbaledTooltip
+                enabled: heightSpinBox.enabled
+            }
+
+            ExpandingSpacer {}
+        }
     }
 }
 //! [Screen compatibility]

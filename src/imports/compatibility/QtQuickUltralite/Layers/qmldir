@@ -1,7 +1,7 @@
 module QtQuickUltralite.Layers
-Application 1.7 Application.qml
-Screen 1.7 Screen.qml
-ImageLayer 1.7 ImageLayer.qml
-ItemLayer 1.7 ItemLayer.qml
-SpriteLayer 1.7 SpriteLayer.qml
+Application 1.9 Application.qml
+Screen 1.9 Screen.qml
+ImageLayer 1.9 ImageLayer.qml
+ItemLayer 1.9 ItemLayer.qml
+SpriteLayer 1.9 SpriteLayer.qml
 designersupported

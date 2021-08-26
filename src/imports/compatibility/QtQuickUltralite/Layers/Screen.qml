@@ -27,15 +27,22 @@
 **
 ****************************************************************************/
 
+import QtQuick 2.15
 import QtQuick.Window 2.2
 
 //! [Screen compatibility]
-Window {
-    id: wnd
-    property var outputDevice: "device"
-    property var backgroundColor: "black"
+Item {
+    id: root
 
-    color: wnd.backgroundColor
-    visible: true
+    property var outputDevice: "device"
+    property alias backgroundColor: wnd.color
+
+    property alias defaultApplicationWidth: wnd.width
+    property alias defaultApplicationHeight: wnd.height
+
+    Window {
+        id: wnd
+        visible: true
+    }
 }
 //! [Screen compatibility]

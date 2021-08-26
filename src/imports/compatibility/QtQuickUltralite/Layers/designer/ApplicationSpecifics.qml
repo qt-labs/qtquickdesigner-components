@@ -33,9 +33,10 @@ import HelperWidgets 2.0
 import QtQuick.Layouts 1.0
 
 //! [Application compatibility]
-Column {
+Section {
     anchors.left: parent.left
     anchors.right: parent.right
+    caption: qsTr("Application")
 
     //Application type has no properties
 }

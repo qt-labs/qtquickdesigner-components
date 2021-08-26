@@ -36,7 +36,7 @@ import StudioTheme 1.0 as StudioTheme
 Section {
     anchors.left: parent.left
     anchors.right: parent.right
-    caption: qsTr("Image")
+    caption: qsTr("Colorized Image")
 
     SectionLayout {
         PropertyLabel { text: qsTr("Image color") }

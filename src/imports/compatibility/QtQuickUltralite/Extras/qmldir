@@ -1,5 +1,5 @@
 module QtQuickUltralite.Extras
-ColorizedImage 1.7 ColorizedImage.qml
-StaticText 1.7 StaticText.qml
+ColorizedImage 1.9 ColorizedImage.qml
+StaticText 1.9 StaticText.qml
 plugin studioqtquickultraliteextras
 designersupported

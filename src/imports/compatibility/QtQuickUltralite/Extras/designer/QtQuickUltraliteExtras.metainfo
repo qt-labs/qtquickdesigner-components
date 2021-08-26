@@ -7,7 +7,7 @@ MetaInfo {
             name: "Colorized Image"
             category: "QtQuickUltralite - Extras"
             libraryIcon: "images/image-icon@2x.png"
-            version: "1.7"
+            version: "1.9"
             requiredImport: "QtQuickUltralite.Extras"
             Property { name: "source"; type: "binding"; value: "\"source/text\""; }
         }
@@ -20,7 +20,7 @@ MetaInfo {
             name: "Static Text"
             category: "QtQuickUltralite - Extras"
             libraryIcon: "images/text-icon@2x.png"
-            version: "1.7"
+            version: "1.9"
             requiredImport: "QtQuickUltralite.Extras"
             Property { name: "text"; type: "binding"; value: "qsTr(\"Static Text\")"; }
         }

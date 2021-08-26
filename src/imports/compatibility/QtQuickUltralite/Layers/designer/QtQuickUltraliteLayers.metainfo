@@ -7,8 +7,15 @@ MetaInfo {
             name: "Application"
             category: "QtQuickUltralite - Layers"
             libraryIcon: "images/item-icon@2x.png"
-            version: "1.7"
+            version: "1.9"
             requiredImport: "QtQuickUltralite.Layers"
+        }
+
+        Hints {
+            visibleInNavigator: true
+            canBeDroppedInNavigator: true
+            canBeDroppedInFormEditor: false
+            canBeContainer: true
         }
     }
     Type {
@@ -19,9 +26,11 @@ MetaInfo {
             name: "Image Layer"
             category: "QtQuickUltralite - Layers"
             libraryIcon: "images/item-icon@2x.png"
-            version: "1.7"
+            version: "1.9"
             requiredImport: "QtQuickUltralite.Layers"
+
             Property { name: "renderingHints"; type: "enum"; value: "ImageLayer.OptimizeForSpeed"; }
+            Property { name: "platformId"; type: "int"; value: 0; }
         }
     }
     Type {
@@ -32,11 +41,13 @@ MetaInfo {
             name: "Item Layer"
             category: "QtQuickUltralite - Layers"
             libraryIcon: "images/item-icon@2x.png"
-            version: "1.7"
+            version: "1.9"
             requiredImport: "QtQuickUltralite.Layers"
+
             Property { name: "depth"; type: "enum"; value: "ItemLayer.Bpp32"; }
             Property { name: "renderingHints"; type: "enum"; value: "ItemLayer.OptimizeForSpeed"; }
             Property { name: "refreshInterval"; type: "int"; value: 1; }
+            Property { name: "platformId"; type: "int"; value: 0; }
         }
     }
     Type {
@@ -47,8 +58,15 @@ MetaInfo {
             name: "Screen"
             category: "QtQuickUltralite - Layers"
             libraryIcon: "images/item-icon@2x.png"
-            version: "1.7"
+            version: "1.9"
             requiredImport: "QtQuickUltralite.Layers"
+        }
+
+        Hints {
+            visibleInNavigator: true
+            canBeDroppedInNavigator: true
+            canBeDroppedInFormEditor: false
+            canBeContainer: true
         }
     }
     Type {
@@ -59,9 +77,11 @@ MetaInfo {
             name: "Sprite Layer"
             category: "QtQuickUltralite - Layers"
             libraryIcon: "images/item-icon@2x.png"
-            version: "1.7"
+            version: "1.9"
             requiredImport: "QtQuickUltralite.Layers"
-            Property { name: "depth"; type: "enum"; value: "SpriteLayer.Bpp32Alpha"; }
+
+            Property { name: "depth"; type: "enum"; value: "SpriteLayer.Bpp32"; }
+            Property { name: "platformId"; type: "int"; value: 0; }
         }
     }
 }
