@@ -46,7 +46,7 @@ Section {
                                + StudioTheme.Values.actionIndicatorWidth
                 backendValue: backendValues.input
                 decimals: 2
-                minimumValue: Number.MIN_VALUE
+                minimumValue: -Number.MAX_VALUE
                 maximumValue: Number.MAX_VALUE
             }
 
@@ -61,7 +61,7 @@ Section {
                                + StudioTheme.Values.actionIndicatorWidth
                 backendValue: backendValues.minimum
                 decimals: 2
-                minimumValue: Number.MIN_VALUE
+                minimumValue: -Number.MAX_VALUE
                 maximumValue: Number.MAX_VALUE
             }
 
@@ -76,7 +76,7 @@ Section {
                                + StudioTheme.Values.actionIndicatorWidth
                 backendValue: backendValues.maximum
                 decimals: 2
-                minimumValue: Number.MIN_VALUE
+                minimumValue: -Number.MAX_VALUE
                 maximumValue: Number.MAX_VALUE
             }
 
@@ -91,7 +91,7 @@ Section {
                                + StudioTheme.Values.actionIndicatorWidth
                 backendValue: backendValues.output
                 decimals: 2
-                minimumValue: Number.MIN_VALUE
+                minimumValue: -Number.MAX_VALUE
                 maximumValue: Number.MAX_VALUE
             }
 

@@ -46,7 +46,7 @@ Section {
                                + StudioTheme.Values.actionIndicatorWidth
                 backendValue: backendValues.input
                 decimals: 2
-                minimumValue: Number.MIN_VALUE
+                minimumValue: -Number.MAX_VALUE
                 maximumValue: Number.MAX_VALUE
             }
 
@@ -61,7 +61,7 @@ Section {
                                + StudioTheme.Values.actionIndicatorWidth
                 backendValue: backendValues.inputMinimum
                 decimals: 2
-                minimumValue: Number.MIN_VALUE
+                minimumValue: -Number.MAX_VALUE
                 maximumValue: Number.MAX_VALUE
             }
 
@@ -76,7 +76,7 @@ Section {
                                + StudioTheme.Values.actionIndicatorWidth
                 backendValue: backendValues.inputMaximum
                 decimals: 2
-                minimumValue: Number.MIN_VALUE
+                minimumValue: -Number.MAX_VALUE
                 maximumValue: Number.MAX_VALUE
             }
 
@@ -91,7 +91,7 @@ Section {
                                + StudioTheme.Values.actionIndicatorWidth
                 backendValue: backendValues.outputMinimum
                 decimals: 2
-                minimumValue: Number.MIN_VALUE
+                minimumValue: -Number.MAX_VALUE
                 maximumValue: Number.MAX_VALUE
             }
 
@@ -106,7 +106,7 @@ Section {
                                + StudioTheme.Values.actionIndicatorWidth
                 backendValue: backendValues.outputMaximum
                 decimals: 2
-                minimumValue: Number.MIN_VALUE
+                minimumValue: -Number.MAX_VALUE
                 maximumValue: Number.MAX_VALUE
             }
 
@@ -121,7 +121,7 @@ Section {
                                + StudioTheme.Values.actionIndicatorWidth
                 backendValue: backendValues.output
                 decimals: 2
-                minimumValue: Number.MIN_VALUE
+                minimumValue: -Number.MAX_VALUE
                 maximumValue: Number.MAX_VALUE
             }
 
