@@ -1,19 +1,4 @@
 MetaInfo {
-    Type {
-        name: "QtQuick.Studio.Effects.BlendEffect"
-        icon: "images/blend-mode-16px.png"
-
-        Hints {
-            canBeDroppedInFormEditor: false
-            canBeDroppedInNavigator: true
-            isMovable: false
-            isResizable: false
-            canBeReparented: false
-            visibleInNavigator: true
-            forceNonDefaultProperty: "layer.effect"
-            setParentProperty: "layer.enabled: true"
-        }
-    }
 
     Type {
         name: "QtQuick.Studio.Effects.BrightnessContrastEffect"
@@ -106,30 +91,6 @@ MetaInfo {
             name: "Desaturation"
             category: "Effects"
             libraryIcon: "images/desaturation-24px.png"
-            version: "1.0"
-            requiredImport: "QtQuick.Studio.Effects"
-        }
-    }
-
-    Type {
-        name: "QtQuick.Studio.Effects.DirectionalBlurEffect"
-        icon: "images/directional-blur-16px.png"
-
-        Hints {
-            canBeDroppedInFormEditor: false
-            canBeDroppedInNavigator: true
-            isMovable: false
-            isResizable: false
-            canBeReparented: false
-            visibleInNavigator: true
-            forceNonDefaultProperty: "layer.effect"
-            setParentProperty: "layer.enabled: true"
-        }
-
-        ItemLibraryEntry {
-            name: "Directional Blur"
-            category: "Effects"
-            libraryIcon: "images/directional-blur-24px.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.Effects"
         }
@@ -232,22 +193,6 @@ MetaInfo {
     }
 
     Type {
-        name: "QtQuick.Studio.Effects.GaussianBlurEffect"
-        icon: "images/gaussian-blur-16px.png"
-
-        Hints {
-            canBeDroppedInFormEditor: false
-            canBeDroppedInNavigator: true
-            isMovable: false
-            isResizable: false
-            canBeReparented: false
-            visibleInNavigator: true
-            forceNonDefaultProperty: "layer.effect"
-            setParentProperty: "layer.enabled: true"
-        }
-    }
-
-    Type {
         name: "QtQuick.Studio.Effects.GlowEffect"
         icon: "images/glow-16px.png"
 
@@ -296,22 +241,6 @@ MetaInfo {
     }
 
     Type {
-        name: "QtQuick.Studio.Effects.InnerShadowEffect"
-        icon: "images/inner-shadow-16px.png"
-
-        Hints {
-            canBeDroppedInFormEditor: false
-            canBeDroppedInNavigator: true
-            isMovable: false
-            isResizable: false
-            canBeReparented: false
-            visibleInNavigator: true
-            forceNonDefaultProperty: "layer.effect"
-            setParentProperty: "layer.enabled: true"
-        }
-    }
-
-    Type {
         name: "QtQuick.Studio.Effects.LevelAdjustEffect"
         icon: "images/levels-16px.png"
 
@@ -333,22 +262,6 @@ MetaInfo {
             libraryIcon: "images/levels-24px.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.Effects"
-        }
-    }
-
-    Type {
-        name: "QtQuick.Studio.Effects.MaskedBlurEffect"
-        icon: "images/mask-blur-16px.png"
-
-        Hints {
-            canBeDroppedInFormEditor: false
-            canBeDroppedInNavigator: true
-            isMovable: false
-            isResizable: false
-            canBeReparented: false
-            visibleInNavigator: true
-            forceNonDefaultProperty: "layer.effect"
-            setParentProperty: "layer.enabled: true"
         }
     }
 
@@ -377,38 +290,6 @@ MetaInfo {
     }
 
     Type {
-        name: "QtQuick.Studio.Effects.RadialBlurEffect"
-        icon: "images/radial-blur-16px.png"
-
-        Hints {
-            canBeDroppedInFormEditor: false
-            canBeDroppedInNavigator: true
-            isMovable: false
-            isResizable: false
-            canBeReparented: false
-            visibleInNavigator: true
-            forceNonDefaultProperty: "layer.effect"
-            setParentProperty: "layer.enabled: true"
-        }
-    }
-
-    Type {
-        name: "QtQuick.Studio.Effects.RecursiveBlurEffect"
-        icon: "images/recursive-blur-16px.png"
-
-        Hints {
-            canBeDroppedInFormEditor: false
-            canBeDroppedInNavigator: true
-            isMovable: false
-            isResizable: false
-            canBeReparented: false
-            visibleInNavigator: true
-            forceNonDefaultProperty: "layer.effect"
-            setParentProperty: "layer.enabled: true"
-        }
-    }
-
-    Type {
         name: "QtQuick.Studio.Effects.ThresholdMaskEffect"
         icon: "images/threshold-16px.png"
 
@@ -429,22 +310,6 @@ MetaInfo {
             libraryIcon: "images/threshold-24px.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.Effects"
-        }
-    }
-
-    Type {
-        name: "QtQuick.Studio.Effects.ZoomBlurEffect"
-        icon: "images/zoom-blur-16px.png"
-
-        Hints {
-            canBeDroppedInFormEditor: false
-            canBeDroppedInNavigator: true
-            isMovable: false
-            isResizable: false
-            canBeReparented: false
-            visibleInNavigator: true
-            forceNonDefaultProperty: "layer.effect"
-            setParentProperty: "layer.enabled: true"
         }
     }
 
