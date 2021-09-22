@@ -29,16 +29,27 @@
 
 import QtQuick 2.12
 import QtGraphicalEffects 1.12
-import QtQuickUltralite.Extras 1.0
+import QtQuickUltralite.Extras 1.9
 
-Image {
-    id: img
+Item {
+    id: colorizedRoot
     property var color: "transparent"
+    property alias source: internalImg.source
+    property alias fillMode: internalImg.fillMode
+    property alias horizontalAlignment: internalImg.horizontalAlignment
+    property alias verticalAlignment: internalImg.verticalAlignment
 
-    layer.enabled: ImageChecker.isMonochrome(img.source)
-    layer.effect: ColorOverlay {
-        anchors.fill: img
-        source: img
-        color: img.color
+    implicitWidth: internalImg.sourceSize.width
+    implicitHeight: internalImg.sourceSize.height
+
+    Image {
+        id: internalImg
+
+        layer.enabled: true
+        layer.effect: ColorOverlay {
+            anchors.fill: internalImg
+            source: internalImg
+            color: colorizedRoot.color
+        }
     }
 }
