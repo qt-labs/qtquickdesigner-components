@@ -276,34 +276,6 @@ Shape {
     property real arcWidth: 10
 
 /*!
-    The width of the beginning of an arc outline.
-
-    \sa arcWidthEnd, arcWidth
-*/
-    property real arcWidthBegin: arcWidth
-
-/*!
-    The width of the end of an arc outline.
-
-   \sa arcWidthBegin, arcWidth
-*/
-    property real arcWidthEnd: arcWidth
-
-/*!
-    The radius of the inside edge of the arc outline.
-
-    This property can be used to adjust the inner curve of the arc outline.
-*/
-    property real radiusInnerAdjust: 0
-
-/*!
-    The radius of the outside edge of the arc outline.
-
-    This property can be used to adjust the outer curve of the arc outline.
-*/
-    property real radiusOuterAdjust: 0
-
-/*!
     The area between the \l begin and \l end points of the arc.
 */
     property real alpha: clamp(sortedEnd() - sortedBegin(),0, 359.9)
@@ -375,16 +347,24 @@ Shape {
         path.__Xcenter = root.width / 2
         path.__Ycenter = root.height / 2
 
-        path.startX = root.polarToCartesianX(path.__Xcenter, path.__Ycenter, path.__xRadius, root.sortedBegin() - 90) +  root.__beginOff * myCos(root.sortedBegin() + 90)
-        path.startY = root.polarToCartesianY(path.__Xcenter, path.__Ycenter, path.__yRadius, root.sortedBegin() - 90) + root.__beginOff * mySin(root.sortedBegin() + 90)
+        path.startX = root.polarToCartesianX(path.__Xcenter, path.__Ycenter, path.__xRadius, root.sortedBegin() - 90)
+        path.startY = root.polarToCartesianY(path.__Xcenter, path.__Ycenter, path.__yRadius, root.sortedBegin() - 90)
 
-        arc1.x = root.polarToCartesianX(path.__Xcenter, path.__Ycenter, path.__xRadius, root.sortedEnd() - 90) + root.__endOff * myCos(root.sortedEnd() + 90)
-        arc1.y = root.polarToCartesianY(path.__Xcenter, path.__Ycenter,  path.__yRadius, root.sortedEnd() - 90) + root.__endOff * mySin(root.sortedEnd() + 90)
+        arc1.x = root.polarToCartesianX(path.__Xcenter, path.__Ycenter, path.__xRadius, root.sortedEnd() - 90)
+        arc1.y = root.polarToCartesianY(path.__Xcenter, path.__Ycenter,  path.__yRadius, root.sortedEnd() - 90)
 
-        arc1.radiusX =  path.__xRadius - root.__endOff / 2 -root.__beginOff / 2 + root.radiusOuterAdjust
-        arc1.radiusY =  path.__yRadius - root.__endOff / 2 -root.__beginOff / 2 + root.radiusOuterAdjust
+        arc1.radiusX =  path.__xRadius
+        arc1.radiusY =  path.__yRadius
 
-        arc1.useLargeArc =  root.alpha > 180
+        arc1.useLargeArc = root.alpha > 180
+
+        arc2.x = path.startX - root.arcWidth * myCos(root.sortedBegin() - 90)
+        arc2.y = path.startY - root.arcWidth * mySin(root.sortedBegin() - 90)
+
+        arc2.radiusX = path.__xRadius - root.arcWidth
+        arc2.radiusY = path.__yRadius - root.arcWidth
+
+        arc2.useLargeArc = arc1.useLargeArc
     }
 
     function sortedBegin()
@@ -397,12 +377,12 @@ Shape {
         return Math.min(Math.max(root.begin, root.end), sortedBegin() + 359.9)
     }
 
-
     onWidthChanged: calc()
     onHeightChanged: calc()
     onBeginChanged: calc()
     onEndChanged: calc()
     onAlphaChanged: calc()
+    onArcWidthChanged: calc()
 
     ShapePath {
         id: path
@@ -419,19 +399,12 @@ Shape {
     }
 
     property real __beginOff: {
-
-        if (root.arcWidthEnd > root.arcWidthBegin)
-            return (root.arcWidthEnd - root.arcWidthBegin) / 2
-
         return 0;
     }
 
     property real __endOff: {
-
-        if (root.arcWidthBegin > root.arcWidthEnd)
-            return (root.arcWidthBegin - root.arcWidthEnd) / 2
-
         return 0;
+
     }
 
     property real __startP: root.arcWidthBegin + __beginOff
@@ -445,61 +418,52 @@ Shape {
         }
 
         PathLine {
-            relativeX: root.arcWidthEnd * myCos(root.sortedEnd())
-            relativeY: root.arcWidthEnd * mySin(root.sortedEnd())
-            property bool add: !root.roundEnd && (root.outlineArc && root.alpha < 359.8)
-
+            relativeX: -root.arcWidth * myCos(root.sortedEnd() - 90)
+            relativeY: -root.arcWidth * mySin(root.sortedEnd() - 90)
+            property bool add: !root.roundEnd && root.outlineArc && (root.alpha < 359.5)
         }
 
         PathArc {
-            relativeX: root.arcWidthEnd * myCos(root.sortedEnd())
-            relativeY: root.arcWidthEnd * mySin(root.sortedEnd())
-            radiusX: root.arcWidthEnd /2
-            radiusY: root.arcWidthEnd /2
-            property bool add: root.roundEnd && (root.outlineArc && root.alpha < 359.8)
+            relativeX: -root.arcWidth * myCos(root.sortedEnd() - 90)
+            relativeY: -root.arcWidth * mySin(root.sortedEnd() - 90)
+            radiusX: root.arcWidth /2
+            radiusY: root.arcWidth /2
+            property bool add: root.roundEnd && root.outlineArc && (root.alpha < 359.5)
         }
 
         PathMove {
-            relativeX: root.arcWidthEnd * myCos(root.sortedEnd())
-            relativeY: root.arcWidthEnd * mySin(root.sortedEnd())
-            property bool add: root.outlineArc && root.alpha > 359.7
+            relativeX: -root.arcWidth * myCos(root.sortedEnd() - 90)
+            relativeY: -root.arcWidth * mySin(root.sortedEnd() - 90)
+            property bool add: root.outlineArc && (root.alpha > 359.7)
         }
 
         PathArc {
             id: arc2
             useLargeArc: arc1.useLargeArc
 
-            radiusX: path.__xRadius - root.arcWidthBegin + root.__beginOff / 2 + root.__endOff / 2  + root.radiusInnerAdjust
-            radiusY:path.__yRadius - root.arcWidthBegin + root.__beginOff / 2 + root.__endOff / 2 + root.radiusInnerAdjust
-
-            x: path.startX + root.arcWidthBegin * myCos(root.sortedBegin())
-            y: path.startY + root.arcWidthBegin * mySin(root.sortedBegin())
-
             direction: PathArc.Counterclockwise
 
             property bool add: root.outlineArc
         }
 
-
         PathLine {
             x: path.startX
             y: path.startY
-            property bool add: !root.roundBegin && root.outlineArc && root.alpha < 359.8
-
+            property bool add: !root.roundBegin && root.outlineArc && (root.alpha < 359.5)
         }
 
         PathArc {
             x: path.startX
             y: path.startY
-            radiusX: root.arcWidthEnd /2
-            radiusY: root.arcWidthEnd /2
-            property bool add: root.roundBegin && root.outlineArc && root.alpha < 359.8
+            radiusX: root.arcWidth /2
+            radiusY: root.arcWidth /2
+            property bool add: root.roundBegin && root.outlineArc && (root.alpha < 359.5)
         }
 
         PathMove {
             x: path.startX
             y: path.startY
-            property bool add: root.outlineArc && root.alpha == 360
+            property bool add: root.outlineArc && (root.alpha > 359.7)
         }
     }
 
@@ -512,7 +476,6 @@ Shape {
             if (s.add)
                 path.pathElements.push(s)
         }
-
     }
 
     property bool __completed: false
