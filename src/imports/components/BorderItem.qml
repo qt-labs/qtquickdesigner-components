@@ -345,7 +345,6 @@ Shape {
     property int borderMode: 0
 
     property real borderOffset: {
-
         if (root.borderMode === 0)
             return path.strokeWidth * 10.0 / 20.0
         if (root.borderMode === 1)
@@ -353,7 +352,6 @@ Shape {
 
         return -path.strokeWidth * 10.0 / 20.0
     }
-
 
     Item {
         anchors.fill: parent
@@ -363,101 +361,103 @@ Shape {
             if (root.borderMode === 1)
                 return -root.strokeWidth / 2.0
 
-
             return -root.strokeWidth
         }
     }
 
     ShapePath {
         id: path
+
+        property int __maxRadius: Math.floor(Math.min(root.width, root.height) / 2)
+        property int __topLeftRadius: Math.min(root.topLeftRadius, path.__maxRadius)
+        property int __topRightRadius: Math.min(root.topRightRadius, path.__maxRadius)
+        property int __bottomRightRadius: Math.min(root.bottomRightRadius, path.__maxRadius)
+        property int __bottomLeftRadius: Math.min(root.bottomLeftRadius, path.__maxRadius)
+
         joinStyle: ShapePath.MiterJoin
 
         strokeWidth: 4
         strokeColor: "red"
         fillColor: "transparent"
 
-        startX: root.topLeftRadius + root.borderOffset
+        startX: path.__topLeftRadius + root.borderOffset
         startY: root.borderOffset
-
-
     }
-
 
     Item {
         id: shapes
 
         PathLine {
-            x: root.width - root.topRightRadius - root.borderOffset
+            x: root.width - path.__topRightRadius - root.borderOffset
             y: root.borderOffset
             property bool add: root.drawTop
         }
 
         PathArc {
             x: root.width - root.borderOffset
-            y: root.topRightRadius + root.borderOffset
-            radiusX: topRightBevel ? 50000 : root.topRightRadius
-            radiusY: topRightBevel ? 50000 : root.topRightRadius
+            y: path.__topRightRadius + root.borderOffset
+            radiusX: topRightBevel ? 50000 : path.__topRightRadius
+            radiusY: topRightBevel ? 50000 : path.__topRightRadius
             property bool add: root.drawTop && root.drawRight
         }
 
         PathMove {
             x: root.width - root.borderOffset
-            y: root.topRightRadius + root.borderOffset
+            y: path.__topRightRadius + root.borderOffset
             property bool add: !root.drawTop
         }
 
-
         PathLine {
             x: root.width - root.borderOffset
-            y: root.height - root.bottomRightRadius - root.borderOffset
+            y: root.height - path.__bottomRightRadius - root.borderOffset
             property bool add: root.drawRight
         }
 
         PathArc {
-            x: root.width - root.bottomRightRadius - root.borderOffset
+            x: root.width - path.__bottomRightRadius - root.borderOffset
             y: root.height - root.borderOffset
-            radiusX: bottomRightBevel ? 50000 : root.bottomRightRadius
-            radiusY: bottomRightBevel ? 50000 : root.bottomRightRadius
+            radiusX: bottomRightBevel ? 50000 : path.__bottomRightRadius
+            radiusY: bottomRightBevel ? 50000 : path.__bottomRightRadius
             property bool add: root.drawRight && root.drawBottom
         }
 
         PathMove {
-            x: root.width - root.bottomRightRadius - root.borderOffset
+            x: root.width - path.__bottomRightRadius - root.borderOffset
             y: root.height - root.borderOffset
             property bool add: !root.drawRight
         }
 
         PathLine {
-            x: root.bottomLeftRadius + root.borderOffset
+            x: path.__bottomLeftRadius + root.borderOffset
             y: root.height - root.borderOffset
             property bool add: root.drawBottom
         }
 
         PathArc {
             x: root.borderOffset
-            y: root.height - root.bottomLeftRadius - root.borderOffset
-            radiusX: bottomLeftBevel ? 50000 : root.bottomLeftRadius
-            radiusY: bottomLeftBevel ? 50000 : root.bottomLeftRadius
+            y: root.height - path.__bottomLeftRadius - root.borderOffset
+            radiusX: bottomLeftBevel ? 50000 : path.__bottomLeftRadius
+            radiusY: bottomLeftBevel ? 50000 : path.__bottomLeftRadius
             property bool add: root.drawBottom && root.drawLeft
         }
 
         PathMove {
             x: root.borderOffset
-            y: root.height - root.bottomLeftRadius - root.borderOffset
+            y: root.height - path.__bottomLeftRadius - root.borderOffset
             property bool add: !root.drawBottom
         }
 
         PathLine {
             x: root.borderOffset
-            y: root.topLeftRadius + root.borderOffset
+            y: path.__topLeftRadius + root.borderOffset
             property bool add: root.drawLeft
         }
 
         PathArc {
-            x: root.topLeftRadius + root.borderOffset
+            x: path.__topLeftRadius + root.borderOffset
             y: root.borderOffset
-            radiusX: topLeftBevel ? 50000 : root.topLeftRadius
-            radiusY: topLeftBevel ? 50000 : root.topLeftRadius
+            radiusX: topLeftBevel ? 50000 : path.__topLeftRadius
+            radiusY: topLeftBevel ? 50000 : path.__topLeftRadius
             property bool add: root.drawTop && root.drawLeft
         }
     }
@@ -471,13 +471,12 @@ Shape {
             if (s.add)
                 path.pathElements.push(s)
         }
-
     }
 
     property bool __completed: false
 
     Component.onCompleted: {
         root.__completed = true
-        invalidatePaths()
+        root.invalidatePaths()
     }
 }

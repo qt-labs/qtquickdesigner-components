@@ -119,7 +119,7 @@ Column {
                                    + StudioTheme.Values.actionIndicatorWidth
                     decimals: 1
                     minimumValue: 0
-                    maximumValue: 10000
+                    maximumValue: backendValues.maxRadius.value
                     stepSize: 1
                 }
 
@@ -137,7 +137,7 @@ Column {
                     implicitWidth: StudioTheme.Values.twoControlColumnWidth
                                    + StudioTheme.Values.actionIndicatorWidth
                     decimals: 1
-                    minimumValue: 0
+                    minimumValue: 1
                     maximumValue: 10000
                     stepSize: 1
                 }

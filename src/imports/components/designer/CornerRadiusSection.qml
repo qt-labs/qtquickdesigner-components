@@ -42,11 +42,12 @@ Section {
         SecondColumnLayout {
             SpinBox {
                 implicitWidth: StudioTheme.Values.twoControlColumnWidth
-                            + StudioTheme.Values.actionIndicatorWidth
+                               + StudioTheme.Values.actionIndicatorWidth
                 backendValue: backendValues.topLeftRadius
                 decimals: 1
                 minimumValue: 0
-                maximumValue: 200
+                maximumValue: Math.min(backendValues.height.value,
+                                       backendValues.width.value) / 2
                 stepSize: 1
             }
 
@@ -61,11 +62,12 @@ Section {
 
             SpinBox {
                 implicitWidth: StudioTheme.Values.twoControlColumnWidth
-                            + StudioTheme.Values.actionIndicatorWidth
+                               + StudioTheme.Values.actionIndicatorWidth
                 backendValue: backendValues.topRightRadius
                 decimals: 1
                 minimumValue: 0
-                maximumValue: 200
+                maximumValue: Math.min(backendValues.height.value,
+                                       backendValues.width.value) / 2
                 stepSize: 1
             }
 
@@ -85,11 +87,12 @@ Section {
         SecondColumnLayout {
             SpinBox {
                 implicitWidth: StudioTheme.Values.twoControlColumnWidth
-                            + StudioTheme.Values.actionIndicatorWidth
+                               + StudioTheme.Values.actionIndicatorWidth
                 backendValue: backendValues.bottomLeftRadius
                 decimals: 1
                 minimumValue: 0
-                maximumValue: 200
+                maximumValue: Math.min(backendValues.height.value,
+                                       backendValues.width.value) / 2
                 stepSize: 1
             }
 
@@ -105,11 +108,12 @@ Section {
 
             SpinBox {
                 implicitWidth: StudioTheme.Values.twoControlColumnWidth
-                            + StudioTheme.Values.actionIndicatorWidth
+                               + StudioTheme.Values.actionIndicatorWidth
                 backendValue: backendValues.bottomRightRadius
                 decimals: 1
                 minimumValue: 0
-                maximumValue: 200
+                maximumValue: Math.min(backendValues.height.value,
+                                       backendValues.width.value) / 2
                 stepSize: 1
             }
 
@@ -129,11 +133,12 @@ Section {
         SecondColumnLayout {
             SpinBox {
                 implicitWidth: StudioTheme.Values.twoControlColumnWidth
-                            + StudioTheme.Values.actionIndicatorWidth
+                               + StudioTheme.Values.actionIndicatorWidth
                 backendValue: backendValues.radius
                 decimals: 1
                 minimumValue: 0
-                maximumValue: 200
+                maximumValue: Math.min(backendValues.height.value,
+                                       backendValues.width.value) / 2
                 stepSize: 1
             }
 

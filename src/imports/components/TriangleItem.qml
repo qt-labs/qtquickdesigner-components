@@ -300,6 +300,8 @@ Shape {
 */
     property real bottomMargin: 0
 
+    property int maxRadius: 0
+
     layer.enabled: antialiasing
     layer.smooth: antialiasing
     layer.textureSize: Qt.size(width * 2, height * 2)
@@ -321,12 +323,11 @@ Shape {
         startY: root.topIntersection1.y + path.yOffset
 
         PathArc {
-            radiusX: root.arcRadius
-            radiusY: root.arcRadius
+            radiusX: Math.max(root.arcRadius, 1)
+            radiusY: Math.max(root.arcRadius, 1)
 
             x: root.topIntersection2.x + path.xOffset
             y: root.topIntersection2.y + path.yOffset
-
         }
 
         PathLine {
@@ -335,8 +336,8 @@ Shape {
         }
 
         PathArc {
-            radiusX: root.arcRadius
-            radiusY: root.arcRadius
+            radiusX: Math.max(root.arcRadius, 1)
+            radiusY: Math.max(root.arcRadius, 1)
 
             x: root.rightIntersection2.x + path.xOffset
             y: root.rightIntersection2.y + path.yOffset
@@ -348,8 +349,8 @@ Shape {
         }
 
         PathArc {
-            radiusX: root.arcRadius
-            radiusY: root.arcRadius
+            radiusX: Math.max(root.arcRadius, 1)
+            radiusY: Math.max(root.arcRadius, 1)
 
             x: root.leftIntersection2.x + path.xOffset
             y: root.leftIntersection2.y + path.yOffset
@@ -361,37 +362,37 @@ Shape {
         }
     }
 
-    onWidthChanged: calc()
+    onWidthChanged: root.calc()
+    onHeightChanged: root.calc()
 
-    onHeightChanged: calc()
+    onRadiusChanged: root.calc()
+    onArcRadiusChanged: root.calc()
 
-    onRadiusChanged: calc()
-    onArcRadiusChanged: calc()
-
-    onTopMarginChanged: calc()
-    onBottomMarginChanged: calc()
-    onLeftMarginChanged: calc()
-    onRightMarginChanged: calc()
+    onTopMarginChanged: root.calc()
+    onBottomMarginChanged: root.calc()
+    onLeftMarginChanged: root.calc()
+    onRightMarginChanged: root.calc()
 
     Component.onCompleted: root.calc()
 
-    function normalize(x, y)
-    {
-        var length = Math.sqrt(x*x+y*y)
+    function length(x, y) {
+        return Math.sqrt(x * x + y * y)
+    }
+
+    function normalize(x, y) {
+        var l = length(x, y)
 
         return {
-            x: x / length,
-            y: y / length
+            x: x / l,
+            y: y / l
         }
     }
 
-    function dotProduct(x1, y1, x2, y2)
-    {
+    function dotProduct(x1, y1, x2, y2) {
         return x1 * x2 + y1 * y2;
     }
 
-    function project(x1, y1, x2, y2)
-    {
+    function project(x1, y1, x2, y2) {
         var normalized = normalize(x1, y1)
 
         var dot = dotProduct(normalized.x, normalized.y, x2, y2)
@@ -402,8 +403,7 @@ Shape {
         }
     }
 
-    function intersect(x1, y1, x2, y2, x3, y3, x4, y4)
-    {
+    function intersect(x1, y1, x2, y2, x3, y3, x4, y4) {
         var denom = (y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1)
 
         var ua = ((x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)) / denom
@@ -414,11 +414,10 @@ Shape {
         };
     }
 
-    function moveLine(startX, startY, endX, endY)
-    {
+    function moveLine(startX, startY, endX, endY) {
         var angle = Math.atan2(endY - startY, endX - startX)
-        var xOffset = Math.sin(angle) * root.radius
-        var yOffset = -Math.cos(angle) * root.radius
+        var xOffset = Math.sin(angle) * Math.min(root.radius, root.maxRadius)
+        var yOffset = -Math.cos(angle) * Math.min(root.radius, root.maxRadius)
 
         return {
             startX: startX + xOffset,
@@ -430,22 +429,28 @@ Shape {
 
     function calc() {
         var movedLine1 = moveLine(path.__width / 2, 0, 0, path.__height)
-
         var movedLine2 = moveLine(path.__width, path.__height, path.__width / 2, 0)
-
         var movedLine3 = moveLine(0, path.__height, path.__width, path.__height)
+
+        var lengthLine1 = Math.floor(length(movedLine1.endX - movedLine1.startX, movedLine1.endY - movedLine1.startY))
+        var lengthLine2 = Math.floor(length(movedLine2.endX - movedLine2.startX, movedLine2.endY - movedLine2.startY))
+        var lengthLine3 = Math.floor(length(movedLine3.endX - movedLine3.startX, movedLine3.endY - movedLine3.startY))
+
+        var perimeter = lengthLine1 + lengthLine2 + lengthLine3
+        var area = (path.__height) * (path.__width) * 0.5
+
+        root.maxRadius = area * 2 / perimeter
+
+        console.log("max radius", root.maxRadius)
 
         var intersectionTop = intersect(movedLine1.startX, movedLine1.startY, movedLine1.endX, movedLine1.endY,
                                         movedLine2.startX, movedLine2.startY, movedLine2.endX, movedLine2.endY)
-
         var intersectionLeft = intersect(movedLine1.startX, movedLine1.startY, movedLine1.endX, movedLine1.endY,
                                          movedLine3.startX, movedLine3.startY, movedLine3.endX, movedLine3.endY)
-
         var intersectionRight = intersect(movedLine2.startX, movedLine2.startY, movedLine2.endX, movedLine2.endY,
                                           movedLine3.startX, movedLine3.startY, movedLine3.endX, movedLine3.endY)
 
         var leftBottom = project(1, 0, intersectionLeft.x, intersectionLeft.y)
-
         var rightBottom = project(1, 0, intersectionRight.x, intersectionRight.y)
 
         root.leftIntersection1 = Qt.point(leftBottom.x, leftBottom.y + path.__height)
@@ -465,5 +470,4 @@ Shape {
         root.topIntersection2 = Qt.point(rightTop.x + path.__width / 2, rightTop.y)
         root.rightIntersection1 = Qt.point(rightBottom.x + path.__width / 2, rightBottom.y)
     }
-
 }
