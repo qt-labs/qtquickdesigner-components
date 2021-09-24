@@ -441,8 +441,6 @@ Shape {
 
         root.maxRadius = area * 2 / perimeter
 
-        console.log("max radius", root.maxRadius)
-
         var intersectionTop = intersect(movedLine1.startX, movedLine1.startY, movedLine1.endX, movedLine1.endY,
                                         movedLine2.startX, movedLine2.startY, movedLine2.endX, movedLine2.endY)
         var intersectionLeft = intersect(movedLine1.startX, movedLine1.startY, movedLine1.endX, movedLine1.endY,
