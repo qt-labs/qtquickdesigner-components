@@ -14,6 +14,7 @@ AUX_QML_FILES += \
     $$PWD/IsoItemSpecifics.qml \
     $$PWD/PieItemSpecifics.qml \
     $$PWD/RectangleItemSpecifics.qml \
+    $$PWD/RegularPolygonItemSpecifics.qml \
     $$PWD/StrokeDetailsSection.qml \
     $$PWD/SvgPathItemSpecifics.qml \
     $$PWD/TriangleItemSpecifics.qml
@@ -46,6 +47,9 @@ AUX_QML_FILES += \
     $$PWD/images/group-16px.png \
     $$PWD/images/group-24px.png \
     $$PWD/images/group-24px@2.png \
+    $$PWD/images/polygon-16px.png \
+    $$PWD/images/polygon-24px.png \
+    $$PWD/images/polygon-24px@2x.png \
     $$PWD/images/item-arrow-16px.png \
     $$PWD/images/item-arrow-arc-16px.png \
     $$PWD/images/item-arrow-arc-24px.png \

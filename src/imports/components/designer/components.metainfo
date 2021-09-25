@@ -77,20 +77,32 @@ MetaInfo {
         }
     }
 
-    Type {
-        name: "QtQuick.Studio.Components.RectangleItem"
-        icon: "images/custom-rectangle-16px.png"
+Type {
+    name: "QtQuick.Studio.Components.RectangleItem"
+    icon: "images/custom-rectangle-16px.png"
 
-        ItemLibraryEntry {
-            name: "Rectangle"
-            category: "Studio Components"
-            libraryIcon: "images/custom-rectangle-24px.png"
-            version: "1.0"
-            requiredImport: "QtQuick.Studio.Components"
+    ItemLibraryEntry {
+        name: "Rectangle"
+        category: "Studio Components"
+        libraryIcon: "images/custom-rectangle-24px.png"
+        version: "1.0"
+        requiredImport: "QtQuick.Studio.Components"
 
-        }
     }
+}
 
+Type {
+    name: "QtQuick.Studio.Components.RegularPolygonItem"
+    icon: "images/polygon-16px.png"
+
+    ItemLibraryEntry {
+        name: "Regular Polygon"
+        category: "Studio Components"
+        libraryIcon: "images/polygon-24px.png"
+        version: "1.0"
+        requiredImport: "QtQuick.Studio.Components"
+    }
+}
 
     Type {
         name: "QtQuick.Studio.Components.BorderItem"
