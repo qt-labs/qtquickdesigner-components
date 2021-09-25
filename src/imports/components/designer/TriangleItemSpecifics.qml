@@ -148,10 +148,12 @@ Column {
                     icon0: StudioTheme.Constants.triangleArcB
                     icon1: StudioTheme.Constants.triangleArcA
                 }
-
+/*
+                TODO QDS-4836
                 Spacer { implicitWidth: StudioTheme.Values.controlGap }
 
                 LinkIndicator2D {}
+*/
 
                 ExpandingSpacer {}
             }
