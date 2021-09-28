@@ -1,6 +1,7 @@
 QML_FILES += \
     $$PWD/ArcItem.qml \
     $$PWD/BorderItem.qml \
+    $$PWD/EllipseItem.qml \
     $$PWD/FlipableItem.qml \
     $$PWD/IsoItem.qml \
     $$PWD/PieItem.qml \

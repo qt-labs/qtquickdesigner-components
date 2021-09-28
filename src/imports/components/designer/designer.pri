@@ -9,6 +9,7 @@ AUX_QML_FILES += \
     $$PWD/CapComboBox.qml \
     $$PWD/CornerRadiusSection.qml \
     $$PWD/DashPatternEditor.qml \
+    $$PWD/EllipseItemSpecifics.qml \
     $$PWD/FlipableItemSpecifics.qml \
     $$PWD/GroupItemSpecifics.qml \
     $$PWD/IsoItemSpecifics.qml \
@@ -50,6 +51,9 @@ AUX_QML_FILES += \
     $$PWD/images/polygon-16px.png \
     $$PWD/images/polygon-24px.png \
     $$PWD/images/polygon-24px@2x.png \
+    $$PWD/images/ellipse-16px.png \
+    $$PWD/images/ellipse-24px.png \
+    $$PWD/images/ellipse-24px@2x.png \
     $$PWD/images/item-arrow-16px.png \
     $$PWD/images/item-arrow-arc-16px.png \
     $$PWD/images/item-arrow-arc-24px.png \

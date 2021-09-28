@@ -11,6 +11,7 @@ MetaInfo {
             requiredImport: "QtQuick.Studio.Components"
         }
     }
+
     Type {
         name: "QtQuick.Studio.Components.ArcItem"
         icon: "images/item-arc-16px.png"
@@ -24,6 +25,7 @@ MetaInfo {
             Property { name: "fillColor"; type: "QColor"; value: "transparent"; }
         }
     }
+
     Type {
         name: "QtQuick.Studio.Components.PieItem"
         icon: "images/item-pie-16px.png"
@@ -34,9 +36,9 @@ MetaInfo {
             libraryIcon: "images/item-pie-24px.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
-
         }
     }
+
     Type {
         name: "QtQuick.Studio.Components.TriangleItem"
         icon: "images/item-triangle-16px.png"
@@ -47,9 +49,9 @@ MetaInfo {
             libraryIcon: "images/item-triangle-24px.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
-
         }
     }
+
     Type {
         name: "QtQuick.Studio.Components.SvgPathItem"
         icon: "images/item-svg-16px.png"
@@ -60,9 +62,9 @@ MetaInfo {
             libraryIcon: "images/item-svg-24px.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
-
         }
     }
+
     Type {
         name: "QtQuick.Studio.Components.FlipableItem"
         icon: "images/item-flippable-16px.png"
@@ -73,36 +75,47 @@ MetaInfo {
             libraryIcon: "images/item-flippable-24px.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
-
         }
     }
 
-Type {
-    name: "QtQuick.Studio.Components.RectangleItem"
-    icon: "images/custom-rectangle-16px.png"
+    Type {
+        name: "QtQuick.Studio.Components.RectangleItem"
+        icon: "images/custom-rectangle-16px.png"
 
-    ItemLibraryEntry {
-        name: "Rectangle"
-        category: "Studio Components"
-        libraryIcon: "images/custom-rectangle-24px.png"
-        version: "1.0"
-        requiredImport: "QtQuick.Studio.Components"
-
+        ItemLibraryEntry {
+            name: "Rectangle"
+            category: "Studio Components"
+            libraryIcon: "images/custom-rectangle-24px.png"
+            version: "1.0"
+            requiredImport: "QtQuick.Studio.Components"
+        }
     }
-}
 
-Type {
-    name: "QtQuick.Studio.Components.RegularPolygonItem"
-    icon: "images/polygon-16px.png"
+    Type {
+        name: "QtQuick.Studio.Components.RegularPolygonItem"
+        icon: "images/polygon-16px.png"
 
-    ItemLibraryEntry {
-        name: "Regular Polygon"
-        category: "Studio Components"
-        libraryIcon: "images/polygon-24px.png"
-        version: "1.0"
-        requiredImport: "QtQuick.Studio.Components"
+        ItemLibraryEntry {
+            name: "Regular Polygon"
+            category: "Studio Components"
+            libraryIcon: "images/polygon-24px.png"
+            version: "1.0"
+            requiredImport: "QtQuick.Studio.Components"
+        }
     }
-}
+
+    Type {
+        name: "QtQuick.Studio.Components.EllipseItem"
+        icon: "images/ellipse-16px.png"
+
+        ItemLibraryEntry {
+            name: "Ellipse"
+            category: "Studio Components"
+            libraryIcon: "images/ellipse-24px.png"
+            version: "1.0"
+            requiredImport: "QtQuick.Studio.Components"
+        }
+    }
 
     Type {
         name: "QtQuick.Studio.Components.BorderItem"
@@ -114,7 +127,6 @@ Type {
             libraryIcon: "images/custom-border-24px.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
-
         }
     }
 
@@ -128,9 +140,9 @@ Type {
             libraryIcon: "images/iso-icons-24px.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
-
         }
     }
+
     Type {
         name: "QtQuick.Studio.Components.ArcArrow"
         icon: "images/item-arrow-arc-16px.png"
@@ -141,7 +153,6 @@ Type {
             libraryIcon: "images/item-arrow-arc-24px.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
-
         }
     }
 
@@ -154,7 +165,6 @@ Type {
             libraryIcon: "images/item-arrow-left-24px.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
-
         }
         ItemLibraryEntry {
             name: "Right"
@@ -247,7 +257,6 @@ Type {
             Property { name: "corner"; type: "bool"; value: "true"; }
             Property { name: "flipCorner"; type: "bool"; value: "true"; }
         }
-
         ItemLibraryEntry {
             name: "Right Down"
             category: "Studio Components Arrows"
@@ -260,5 +269,4 @@ Type {
             Property { name: "flipCorner"; type: "bool"; value: "true"; }
         }
     }
-
 }
