@@ -132,28 +132,28 @@ Shape {
 
     \sa radius
 */
-    property int topLeftRadius: radius
+    property int topLeftRadius: root.radius
 
 /*!
     The radius of the bottom left border corner.
 
     \sa radius
 */
-    property int bottomLeftRadius: radius
+    property int bottomLeftRadius: root.radius
 
 /*!
     The radius of the top right border corner.
 
     \sa radius
 */
-    property int topRightRadius: radius
+    property int topRightRadius: root.radius
 
 /*!
     The radius of the bottom right border corner.
 
     \sa radius
 */
-    property int bottomRightRadius: radius
+    property int bottomRightRadius: root.radius
 
 /*!
     Whether the border corner is beveled.
@@ -165,30 +165,28 @@ Shape {
 
     \sa bevel
 */
-    property bool topLeftBevel: bevel
+    property bool topLeftBevel: root.bevel
 
 /*!
     The bevel of the top right border corner.
 
     \sa bevel
 */
-    property bool topRightBevel: bevel
+    property bool topRightBevel: root.bevel
 
 /*!
     The bevel of the bottom right border corner.
 
     \sa bevel
 */
-    property bool bottomRightBevel: bevel
+    property bool bottomRightBevel: root.bevel
 
 /*!
     The bevel of the bottom left border corner.
 
     \sa bevel
 */
-    property bool bottomLeftBevel: bevel
-
-    //property alias gradient: path.fillGradient
+    property bool bottomLeftBevel: root.bevel
 
 /*!
     The style of the border line.
@@ -322,9 +320,9 @@ Shape {
 */
     property bool drawLeft: true
 
-    layer.enabled: antialiasing
-    layer.smooth: antialiasing
-    layer.textureSize: Qt.size(width * 2, height * 2)
+    layer.enabled: root.antialiasing
+    layer.smooth: root.antialiasing
+    layer.textureSize: Qt.size(root.width * 2, root.height * 2)
 
 /*!
     Where the border is drawn.
@@ -346,11 +344,11 @@ Shape {
 
     property real borderOffset: {
         if (root.borderMode === 0)
-            return path.strokeWidth * 10.0 / 20.0
+            return root.strokeWidth * 0.5
         if (root.borderMode === 1)
             return 0
 
-        return -path.strokeWidth * 10.0 / 20.0
+        return -root.strokeWidth * 0.5
     }
 
     Item {
@@ -359,7 +357,7 @@ Shape {
             if (root.borderMode === 0)
                 return 0
             if (root.borderMode === 1)
-                return -root.strokeWidth / 2.0
+                return -root.strokeWidth * 0.5
 
             return -root.strokeWidth
         }
@@ -384,99 +382,109 @@ Shape {
         startY: root.borderOffset
     }
 
-    Item {
-        id: shapes
+    onDrawTopChanged: root.constructBorderItem()
+    onDrawRightChanged: root.constructBorderItem()
+    onDrawBottomChanged: root.constructBorderItem()
+    onDrawLeftChanged: root.constructBorderItem()
 
-        PathLine {
-            x: root.width - path.__topRightRadius - root.borderOffset
-            y: root.borderOffset
-            property bool add: root.drawTop
+    function constructBorderItem() {
+        root.clearPathElements()
+
+        // Top line
+        if (root.drawTop) {
+            let pathLine = Qt.createQmlObject('import QtQuick 2.15; PathLine {}', path)
+            pathLine.x = Qt.binding(function() { return root.width - path.__topRightRadius - root.borderOffset })
+            pathLine.y = Qt.binding(function() { return root.borderOffset })
+            path.pathElements.push(pathLine)
+        } else {
+            let pathMove = Qt.createQmlObject('import QtQuick 2.15; PathMove {}', path)
+            pathMove.x = Qt.binding(function() { return root.width - root.borderOffset })
+            pathMove.y = Qt.binding(function() { return path.__topRightRadius + root.borderOffset })
+            path.pathElements.push(pathMove)
         }
 
-        PathArc {
-            x: root.width - root.borderOffset
-            y: path.__topRightRadius + root.borderOffset
-            radiusX: topRightBevel ? 50000 : path.__topRightRadius
-            radiusY: topRightBevel ? 50000 : path.__topRightRadius
-            property bool add: root.drawTop && root.drawRight
+        // Top right corner
+        if (root.drawTop && root.drawRight) {
+            let pathArc = Qt.createQmlObject('import QtQuick 2.15; PathArc {}', path)
+            pathArc.x = Qt.binding(function() { return root.width - root.borderOffset })
+            pathArc.y = Qt.binding(function() { return path.__topRightRadius + root.borderOffset })
+            pathArc.radiusX = Qt.binding(function() { return root.topRightBevel ? 50000 : path.__topRightRadius })
+            pathArc.radiusY = Qt.binding(function() { return root.topRightBevel ? 50000 : path.__topRightRadius })
+            path.pathElements.push(pathArc)
         }
 
-        PathMove {
-            x: root.width - root.borderOffset
-            y: path.__topRightRadius + root.borderOffset
-            property bool add: !root.drawTop
+        // Right line
+        if (root.drawRight) {
+            let pathLine = Qt.createQmlObject('import QtQuick 2.15; PathLine {}', path)
+            pathLine.x = Qt.binding(function() { return root.width - root.borderOffset })
+            pathLine.y = Qt.binding(function() { return root.height - path.__bottomRightRadius - root.borderOffset })
+            path.pathElements.push(pathLine)
+        } else {
+            let pathMove = Qt.createQmlObject('import QtQuick 2.15; PathMove {}', path)
+            pathMove.x = Qt.binding(function() { return root.width - path.__bottomRightRadius - root.borderOffset })
+            pathMove.y = Qt.binding(function() { return root.height - root.borderOffset })
+            path.pathElements.push(pathMove)
         }
 
-        PathLine {
-            x: root.width - root.borderOffset
-            y: root.height - path.__bottomRightRadius - root.borderOffset
-            property bool add: root.drawRight
+        // Bottom right corner
+        if (root.drawBottom && root.drawRight) {
+            let pathArc = Qt.createQmlObject('import QtQuick 2.15; PathArc {}', path)
+            pathArc.x = Qt.binding(function() { return root.width - path.__bottomRightRadius - root.borderOffset })
+            pathArc.y = Qt.binding(function() { return root.height - root.borderOffset })
+            pathArc.radiusX = Qt.binding(function() { return root.bottomRightBevel ? 50000 : path.__bottomRightRadius })
+            pathArc.radiusY = Qt.binding(function() { return root.bottomRightBevel ? 50000 : path.__bottomRightRadius })
+            path.pathElements.push(pathArc)
         }
 
-        PathArc {
-            x: root.width - path.__bottomRightRadius - root.borderOffset
-            y: root.height - root.borderOffset
-            radiusX: bottomRightBevel ? 50000 : path.__bottomRightRadius
-            radiusY: bottomRightBevel ? 50000 : path.__bottomRightRadius
-            property bool add: root.drawRight && root.drawBottom
+        // Bottom line
+        if (root.drawBottom) {
+            let pathLine = Qt.createQmlObject('import QtQuick 2.15; PathLine {}', path)
+            pathLine.x = Qt.binding(function() { return path.__bottomLeftRadius + root.borderOffset })
+            pathLine.y = Qt.binding(function() { return root.height - root.borderOffset })
+            path.pathElements.push(pathLine)
+        } else {
+            let pathMove = Qt.createQmlObject('import QtQuick 2.15; PathMove {}', path)
+            pathMove.x = Qt.binding(function() { return root.borderOffset })
+            pathMove.y = Qt.binding(function() { return root.height - path.__bottomLeftRadius - root.borderOffset })
+            path.pathElements.push(pathMove)
         }
 
-        PathMove {
-            x: root.width - path.__bottomRightRadius - root.borderOffset
-            y: root.height - root.borderOffset
-            property bool add: !root.drawRight
+        // Bottom left corner
+        if (root.drawBottom && root.drawLeft) {
+            let pathArc = Qt.createQmlObject('import QtQuick 2.15; PathArc {}', path)
+            pathArc.x = Qt.binding(function() { return root.borderOffset })
+            pathArc.y = Qt.binding(function() { return root.height - path.__bottomLeftRadius - root.borderOffset })
+            pathArc.radiusX = Qt.binding(function() { return root.bottomLeftBevel ? 50000 : path.__bottomLeftRadius })
+            pathArc.radiusY = Qt.binding(function() { return root.bottomLeftBevel ? 50000 : path.__bottomLeftRadius })
+            path.pathElements.push(pathArc)
         }
 
-        PathLine {
-            x: path.__bottomLeftRadius + root.borderOffset
-            y: root.height - root.borderOffset
-            property bool add: root.drawBottom
+        // Left line
+        if (root.drawLeft) {
+            let pathLine = Qt.createQmlObject('import QtQuick 2.15; PathLine {}', path)
+            pathLine.x = Qt.binding(function() { return root.borderOffset })
+            pathLine.y = Qt.binding(function() { return path.__topLeftRadius + root.borderOffset })
+            path.pathElements.push(pathLine)
         }
+        // No need to use PathMove, if left line shouldn't be drawn we just leave the shape open.
 
-        PathArc {
-            x: root.borderOffset
-            y: root.height - path.__bottomLeftRadius - root.borderOffset
-            radiusX: bottomLeftBevel ? 50000 : path.__bottomLeftRadius
-            radiusY: bottomLeftBevel ? 50000 : path.__bottomLeftRadius
-            property bool add: root.drawBottom && root.drawLeft
-        }
-
-        PathMove {
-            x: root.borderOffset
-            y: root.height - path.__bottomLeftRadius - root.borderOffset
-            property bool add: !root.drawBottom
-        }
-
-        PathLine {
-            x: root.borderOffset
-            y: path.__topLeftRadius + root.borderOffset
-            property bool add: root.drawLeft
-        }
-
-        PathArc {
-            x: path.__topLeftRadius + root.borderOffset
-            y: root.borderOffset
-            radiusX: topLeftBevel ? 50000 : path.__topLeftRadius
-            radiusY: topLeftBevel ? 50000 : path.__topLeftRadius
-            property bool add: root.drawTop && root.drawLeft
+        // Top left corner
+        if (root.drawTop && root.drawLeft) {
+            let pathArc = Qt.createQmlObject('import QtQuick 2.15; PathArc {}', path)
+            pathArc.x = Qt.binding(function() { return path.__topLeftRadius + root.borderOffset })
+            pathArc.y = Qt.binding(function() { return root.borderOffset })
+            pathArc.radiusX = Qt.binding(function() { return root.topLeftBevel ? 50000 : path.__topLeftRadius })
+            pathArc.radiusY = Qt.binding(function() { return root.topLeftBevel ? 50000 : path.__topLeftRadius })
+            path.pathElements.push(pathArc)
         }
     }
 
-    function invalidatePaths() {
-        if (!root.__completed)
-            return
+    function clearPathElements() {
+        for (var i = 0; i !== path.pathElements.length; ++i)
+            path.pathElements[i].destroy()
 
-        for (var i = 0; i < shapes.resources.length; i++) {
-            var s = shapes.resources[i];
-            if (s.add)
-                path.pathElements.push(s)
-        }
+        path.pathElements = []
     }
 
-    property bool __completed: false
-
-    Component.onCompleted: {
-        root.__completed = true
-        root.invalidatePaths()
-    }
+    Component.onCompleted: root.constructBorderItem()
 }
