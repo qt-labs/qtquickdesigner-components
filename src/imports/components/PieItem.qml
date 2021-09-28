@@ -242,70 +242,68 @@ Shape {
 /*!
     The area between \l begin and \l end.
 */
-    property real alpha: clamp(end - begin,0, 359.9)
+    property real alpha: root.clamp(root.end - root.begin, 0, 359.9)
 
-    layer.enabled: antialiasing
-    layer.smooth: antialiasing
-    layer.textureSize: Qt.size(width * 2, height * 2)
+    layer.enabled: root.antialiasing
+    layer.smooth: root.antialiasing
+    layer.textureSize: Qt.size(root.width * 2, root.height * 2)
 
     function clamp(num, min, max) {
-        return num <= min ? min : num >= max ? max : num;
+        return Math.max(min, Math.min(num, max))
     }
 
 /*!
     Whether to draw a pie slice or just the pie rind (similar to an \l ArcItem).
 */
     property bool hideLine: {
-        if (alpha <= 0)
+        if (root.alpha <= 0)
             return true
-        if (alpha >= 359)
+        if (root.alpha >= 359)
             return true
         return false
     }
 
+    function toRadians(degrees) {
+        return degrees * (Math.PI / 180.0)
+    }
+
     function polarToCartesianX(centerX, centerY, radius, angleInDegrees) {
-        var angleInRadians = angleInDegrees * Math.PI / 180.0;
-        var x = centerX + radius * Math.cos(angleInRadians)
-        return x
+        return centerX + radius * Math.cos(root.toRadians(angleInDegrees))
     }
 
     function polarToCartesianY(centerX, centerY, radius, angleInDegrees) {
-        var angleInRadians = angleInDegrees * Math.PI / 180.0;
-        var y = centerY + radius * Math.sin(angleInRadians);
-        return y
+        return centerY + radius * Math.sin(root.toRadians(angleInDegrees))
     }
 
     ShapePath {
         id: path
 
-        property real __xRadius: width / 2 - strokeWidth / 2
-        property real __yRadius: height / 2 - strokeWidth / 2
+        property real __xRadius: root.width / 2 - root.strokeWidth / 2
+        property real __yRadius: root.height / 2 - root.strokeWidth / 2
 
-        property real __Xcenter: width / 2
-        property real __Ycenter: height / 2
+        property real __xCenter: root.width / 2
+        property real __yCenter: root.height / 2
 
         strokeColor: "red"
         capStyle: ShapePath.FlatCap
 
         strokeWidth: 4
 
-        startX: root.hideLine ? root.polarToCartesianX(path.__Xcenter, path.__Ycenter, path.__xRadius, root.begin - 90)
-                              : __Xcenter
-        startY: root.hideLine ? root.polarToCartesianY(path.__Xcenter, path.__Ycenter, path.__yRadius, root.begin - 90)
-                              : __Ycenter
-        //startX: __Xcenter
-        //startY: __Ycenter
+        startX: root.hideLine ? root.polarToCartesianX(path.__xCenter, path.__yCenter, path.__xRadius, root.begin - 90)
+                              : path.__xCenter
+        startY: root.hideLine ? root.polarToCartesianY(path.__xCenter, path.__yCenter, path.__yRadius, root.begin - 90)
+                              : path.__yCenter
 
         PathLine {
-            x: root.polarToCartesianX(path.__Xcenter, path.__Ycenter, path.__xRadius, root.begin - 90)
-            y: root.polarToCartesianY(path.__Xcenter, path.__Ycenter, path.__yRadius, root.begin - 90)
+            x: root.polarToCartesianX(path.__xCenter, path.__yCenter, path.__xRadius, root.begin - 90)
+            y: root.polarToCartesianY(path.__xCenter, path.__yCenter, path.__yRadius, root.begin - 90)
         }
 
         PathArc {
             id: arc
 
-            x: root.polarToCartesianX(path.__Xcenter, path.__Ycenter, path.__xRadius, root.begin + root.alpha - 90)
-            y: root.polarToCartesianY(path.__Xcenter, path.__Ycenter,  path.__yRadius, root.begin + root.alpha - 90)
+            x: root.polarToCartesianX(path.__xCenter, path.__yCenter, path.__xRadius, root.begin + root.alpha - 90)
+            y: root.polarToCartesianY(path.__xCenter, path.__yCenter,  path.__yRadius, root.begin + root.alpha - 90)
 
             radiusY: path.__yRadius;
             radiusX: path.__xRadius;
@@ -314,10 +312,10 @@ Shape {
         }
 
         PathLine {
-            x: root.hideLine ? root.polarToCartesianX(path.__Xcenter, path.__Ycenter, path.__xRadius, root.begin + root.alpha - 90)
-                             : path.__Xcenter
-            y: root.hideLine ? root.polarToCartesianY(path.__Xcenter, path.__Ycenter,  path.__yRadius, root.begin + root.alpha - 90)
-                             : path.__Ycenter
+            x: root.hideLine ? root.polarToCartesianX(path.__xCenter, path.__yCenter, path.__xRadius, root.begin + root.alpha - 90)
+                             : path.__xCenter
+            y: root.hideLine ? root.polarToCartesianY(path.__xCenter, path.__yCenter,  path.__yRadius, root.begin + root.alpha - 90)
+                             : path.__yCenter
         }
     }
 }
