@@ -155,7 +155,7 @@ Column {
                     backendValue: backendValues.arcWidth
                     decimals: 1
                     minimumValue: 0
-                    maximumValue: 1000
+                    maximumValue: backendValues.maxArcWidth.value
                     stepSize: 1
                 }
 

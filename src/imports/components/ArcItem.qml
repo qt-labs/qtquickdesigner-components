@@ -278,11 +278,11 @@ Shape {
 /*!
     The area between the \l begin and \l end points of the arc.
 */
-    property real alpha: clamp(sortedEnd() - sortedBegin(),0, 359.9)
+    property real alpha: root.clamp(root.sortedEnd() - root.sortedBegin(), 0, 359.9)
 
-    layer.enabled: antialiasing
-    layer.smooth: antialiasing
-    layer.textureSize: Qt.size(width * 2, height * 2)
+    layer.enabled: root.antialiasing
+    layer.smooth: root.antialiasing
+    layer.textureSize: Qt.size(root.width * 2, root.height * 2)
 
 /*!
     Whether the arc has an outline.
@@ -304,185 +304,191 @@ Shape {
 
     \sa Qt::PenCapStyle, round, roundBegin
 */
-    property bool roundEnd: round
+    property bool roundEnd: root.round
 
 /*!
     Whether the arc outline begins with a round cap.
 
     \sa Qt::PenCapStyle, round, roundEnd
 */
-    property bool roundBegin: round
+    property bool roundBegin: root.round
 
     function clamp(num, min, max) {
-        return num <= min ? min : num >= max ? max : num;
+        return Math.max(min, Math.min(num, max))
+    }
+
+    function toRadians(degrees) {
+        return degrees * (Math.PI / 180.0)
     }
 
     function myCos(angleInDegrees) {
-        var angleInRadians = angleInDegrees * Math.PI / 180.0;
-        return Math.cos(angleInRadians)
+        return Math.cos(root.toRadians(angleInDegrees))
     }
 
     function mySin(angleInDegrees) {
-        var angleInRadians = angleInDegrees * Math.PI / 180.0;
-        return Math.sin(angleInRadians)
+        return Math.sin(root.toRadians(angleInDegrees))
     }
 
     function polarToCartesianX(centerX, centerY, radius, angleInDegrees) {
-        var angleInRadians = angleInDegrees * Math.PI / 180.0;
-        var x = centerX + radius * Math.cos(angleInRadians)
-        return x
+        return centerX + radius * Math.cos(root.toRadians(angleInDegrees))
     }
 
     function polarToCartesianY(centerX, centerY, radius, angleInDegrees) {
-        var angleInRadians = angleInDegrees * Math.PI / 180.0;
-        var y = centerY + radius * Math.sin(angleInRadians);
-        return y
+        return centerY + radius * Math.sin(root.toRadians(angleInDegrees))
     }
 
-    function calc()
-    {
-        path.__xRadius = root.width / 2 - root.strokeWidth / 2
-        path.__yRadius = root.height / 2 - root.strokeWidth / 2
-
-        path.__Xcenter = root.width / 2
-        path.__Ycenter = root.height / 2
-
-        path.startX = root.polarToCartesianX(path.__Xcenter, path.__Ycenter, path.__xRadius, root.sortedBegin() - 90)
-        path.startY = root.polarToCartesianY(path.__Xcenter, path.__Ycenter, path.__yRadius, root.sortedBegin() - 90)
-
-        arc1.x = root.polarToCartesianX(path.__Xcenter, path.__Ycenter, path.__xRadius, root.sortedEnd() - 90)
-        arc1.y = root.polarToCartesianY(path.__Xcenter, path.__Ycenter,  path.__yRadius, root.sortedEnd() - 90)
-
-        arc1.radiusX =  path.__xRadius
-        arc1.radiusY =  path.__yRadius
-
-        arc1.useLargeArc = root.alpha > 180
-
-        arc2.x = path.startX - root.arcWidth * myCos(root.sortedBegin() - 90)
-        arc2.y = path.startY - root.arcWidth * mySin(root.sortedBegin() - 90)
-
-        arc2.radiusX = path.__xRadius - root.arcWidth
-        arc2.radiusY = path.__yRadius - root.arcWidth
-
-        arc2.useLargeArc = arc1.useLargeArc
-    }
-
-    function sortedBegin()
-    {
+    function sortedBegin() {
         return Math.min(root.begin, root.end)
     }
 
-    function sortedEnd()
-    {
-        return Math.min(Math.max(root.begin, root.end), sortedBegin() + 359.9)
+    function sortedEnd() {
+        return Math.min(Math.max(root.begin, root.end), root.sortedBegin() + 359.9)
     }
 
-    onWidthChanged: calc()
-    onHeightChanged: calc()
-    onBeginChanged: calc()
-    onEndChanged: calc()
-    onAlphaChanged: calc()
-    onArcWidthChanged: calc()
+    function isArcFull() {
+        return root.alpha > 359.5
+    }
+
+    onAlphaChanged: {
+        if (root.__wasFull !== root.isArcFull())
+            root.constructArcItem()
+
+        root.__wasFull = root.isArcFull()
+    }
+    onOutlineArcChanged: root.constructArcItem()
+    onRoundChanged: root.constructArcItem()
+    onRoundBeginChanged: root.constructArcItem()
+    onRoundEndChanged: root.constructArcItem()
+
+    property bool __wasFull: false
+
+    property real maxArcWidth: Math.min(path.__xRadius, path.__yRadius)
 
     ShapePath {
         id: path
 
-        property real __xRadius
-        property real __yRadius
+        property real __xRadius: root.width / 2 - root.strokeWidth / 2
+        property real __yRadius: root.height / 2 - root.strokeWidth / 2
 
-        property real __Xcenter
-        property real __Ycenter
+        property real __arcWidth: Math.min(Math.min(path.__xRadius, path.__yRadius), root.arcWidth)
+
+        property real __xCenter: root.width / 2
+        property real __yCenter: root.height / 2
 
         strokeColor: "red"
         strokeWidth: 4
         capStyle: ShapePath.FlatCap
+
+        startX: root.polarToCartesianX(path.__xCenter, path.__yCenter, path.__xRadius, root.sortedBegin() - 90)
+        startY: root.polarToCartesianY(path.__xCenter, path.__yCenter, path.__yRadius, root.sortedBegin() - 90)
     }
 
-    property real __beginOff: {
-        return 0;
+    function constructArcItem() {
+        root.clearPathElements()
+
+        // Outer arc
+        let outerArc = Qt.createQmlObject('import QtQuick 2.15; PathArc {}', path)
+        outerArc.x = Qt.binding(function() {
+            return root.polarToCartesianX(path.__xCenter, path.__yCenter, path.__xRadius, root.sortedEnd() - 90)
+        })
+        outerArc.y = Qt.binding(function() {
+            return root.polarToCartesianY(path.__xCenter, path.__yCenter, path.__yRadius, root.sortedEnd() - 90)
+        })
+        outerArc.radiusX = Qt.binding(function() { return path.__xRadius })
+        outerArc.radiusY = Qt.binding(function() { return path.__yRadius })
+        outerArc.useLargeArc = Qt.binding(function() { return root.alpha > 180 })
+        path.pathElements.push(outerArc)
+
+        // Straight end
+        if (!root.roundEnd && root.outlineArc && !root.isArcFull()) {
+            let pathLine = Qt.createQmlObject('import QtQuick 2.15; PathLine {}', path)
+            pathLine.relativeX = Qt.binding(function() {
+                return -path.__arcWidth * root.myCos(root.sortedEnd() - 90)
+            })
+            pathLine.relativeY = Qt.binding(function() {
+                return -path.__arcWidth * root.mySin(root.sortedEnd() - 90)
+            })
+            path.pathElements.push(pathLine)
+        }
+
+        // Round end
+        if (root.roundEnd && root.outlineArc && !root.isArcFull()) {
+            let pathArc = Qt.createQmlObject('import QtQuick 2.15; PathArc {}', path)
+            pathArc.relativeX = Qt.binding(function() {
+                return -path.__arcWidth * root.myCos(root.sortedEnd() - 90)
+            })
+            pathArc.relativeY = Qt.binding(function() {
+                return -path.__arcWidth * root.mySin(root.sortedEnd() - 90)
+            })
+            pathArc.radiusX = Qt.binding(function() { return path.__arcWidth / 2 })
+            pathArc.radiusY = Qt.binding(function() { return path.__arcWidth / 2 })
+            path.pathElements.push(pathArc)
+        }
+
+        // Open end
+        if (root.outlineArc && root.isArcFull()) {
+            let pathMove = Qt.createQmlObject('import QtQuick 2.15; PathMove {}', path)
+            pathMove.relativeX = Qt.binding(function() {
+                return -path.__arcWidth * root.myCos(root.sortedEnd() - 90)
+            })
+            pathMove.relativeY = Qt.binding(function() {
+                return -path.__arcWidth * root.mySin(root.sortedEnd() - 90)
+            })
+            path.pathElements.push(pathMove)
+        }
+
+        // Inner arc
+        if (root.outlineArc) {
+            let innerArc = Qt.createQmlObject('import QtQuick 2.15; PathArc {}', path)
+            innerArc.x = Qt.binding(function() {
+                return path.startX - path.__arcWidth * root.myCos(root.sortedBegin() - 90)
+            })
+            innerArc.y = Qt.binding(function() {
+                return path.startY - path.__arcWidth * root.mySin(root.sortedBegin() - 90)
+            })
+            innerArc.radiusX = Qt.binding(function() { return path.__xRadius - path.__arcWidth })
+            innerArc.radiusY = Qt.binding(function() { return path.__yRadius - path.__arcWidth })
+            innerArc.useLargeArc = Qt.binding(function() { return root.alpha > 180 })
+            innerArc.direction = PathArc.Counterclockwise
+            path.pathElements.push(innerArc)
+        }
+
+        // Straight begin
+        if (!root.roundBegin && root.outlineArc && !root.isArcFull()) {
+            let pathLine = Qt.createQmlObject('import QtQuick 2.15; PathLine {}', path)
+            pathLine.x = Qt.binding(function() { return path.startX })
+            pathLine.y = Qt.binding(function() { return path.startY })
+            path.pathElements.push(pathLine)
+        }
+
+        // Round begin
+        if (root.roundBegin && root.outlineArc && !root.isArcFull()) {
+            let pathArc = Qt.createQmlObject('import QtQuick 2.15; PathArc {}', path)
+            pathArc.x = Qt.binding(function() { return path.startX })
+            pathArc.y = Qt.binding(function() { return path.startY })
+            pathArc.radiusX = Qt.binding(function() { return path.__arcWidth / 2 })
+            pathArc.radiusY = Qt.binding(function() { return path.__arcWidth / 2 })
+            path.pathElements.push(pathArc)
+        }
+
+        // Open begin
+        if (root.outlineArc && root.isArcFull()) {
+            let pathMove = Qt.createQmlObject('import QtQuick 2.15; PathMove {}', path)
+            pathMove.x = Qt.binding(function() { return path.startX })
+            pathMove.y = Qt.binding(function() { return path.startY })
+            path.pathElements.push(pathMove)
+        }
     }
 
-    property real __endOff: {
-        return 0;
+    function clearPathElements() {
+        for (var i = 0; i !== path.pathElements.length; ++i)
+            path.pathElements[i].destroy()
 
+        path.pathElements = []
     }
-
-    property real __startP: root.arcWidthBegin + __beginOff
-    property real __endP: root.arcWidthEnd + __endOff
-
-    Item {
-        id: shapes
-        PathArc {
-            id: arc1
-            property bool add: true
-        }
-
-        PathLine {
-            relativeX: -root.arcWidth * myCos(root.sortedEnd() - 90)
-            relativeY: -root.arcWidth * mySin(root.sortedEnd() - 90)
-            property bool add: !root.roundEnd && root.outlineArc && (root.alpha < 359.5)
-        }
-
-        PathArc {
-            relativeX: -root.arcWidth * myCos(root.sortedEnd() - 90)
-            relativeY: -root.arcWidth * mySin(root.sortedEnd() - 90)
-            radiusX: root.arcWidth /2
-            radiusY: root.arcWidth /2
-            property bool add: root.roundEnd && root.outlineArc && (root.alpha < 359.5)
-        }
-
-        PathMove {
-            relativeX: -root.arcWidth * myCos(root.sortedEnd() - 90)
-            relativeY: -root.arcWidth * mySin(root.sortedEnd() - 90)
-            property bool add: root.outlineArc && (root.alpha > 359.7)
-        }
-
-        PathArc {
-            id: arc2
-            useLargeArc: arc1.useLargeArc
-
-            direction: PathArc.Counterclockwise
-
-            property bool add: root.outlineArc
-        }
-
-        PathLine {
-            x: path.startX
-            y: path.startY
-            property bool add: !root.roundBegin && root.outlineArc && (root.alpha < 359.5)
-        }
-
-        PathArc {
-            x: path.startX
-            y: path.startY
-            radiusX: root.arcWidth /2
-            radiusY: root.arcWidth /2
-            property bool add: root.roundBegin && root.outlineArc && (root.alpha < 359.5)
-        }
-
-        PathMove {
-            x: path.startX
-            y: path.startY
-            property bool add: root.outlineArc && (root.alpha > 359.7)
-        }
-    }
-
-    function invalidatePaths() {
-        if (!root.__completed)
-            return
-
-        for (var i = 0; i < shapes.resources.length; i++) {
-            var s = shapes.resources[i];
-            if (s.add)
-                path.pathElements.push(s)
-        }
-    }
-
-    property bool __completed: false
 
     Component.onCompleted: {
-        root.__completed = true
-        invalidatePaths()
-        calc()
+        root.__wasFull = root.isArcFull()
+        root.constructArcItem()
     }
 }
