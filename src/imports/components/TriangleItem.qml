@@ -256,7 +256,7 @@ Shape {
     This property can be used together with the \l radius property to
     determine the shape of the triangle.
 */
-    property real arcRadius: radius
+    property real arcRadius: root.radius
 
 /*!
     The left margin between the triangle and the bounding rectangle.
@@ -302,17 +302,29 @@ Shape {
 
     property int maxRadius: 0
 
-    layer.enabled: antialiasing
-    layer.smooth: antialiasing
-    layer.textureSize: Qt.size(width * 2, height * 2)
+    layer.enabled: root.antialiasing
+    layer.smooth: root.antialiasing
+    layer.textureSize: Qt.size(root.width * 2, root.height * 2)
+
+    // This is used to make the bounding box of the item a bit bigger so it will draw sharp edges
+    // in case of large stroke width instead of cutting it off.
+    Item {
+        anchors.fill: parent
+        anchors.margins: -root.strokeWidth
+    }
 
     ShapePath {
         id: path
 
-        property real __width: root.width - root.strokeWidth - root.leftMargin - root.rightMargin
-        property real __height: root.height - root.strokeWidth - root.topMargin - root.bottomMargin
-        property real xOffset: root.strokeWidth / 2 + root.leftMargin
-        property real yOffset: root.strokeWidth / 2 + root.topMargin
+        //property real __width: root.width - root.strokeWidth - root.leftMargin - root.rightMargin
+        //property real __height: root.height - root.strokeWidth - root.topMargin - root.bottomMargin
+        //property real xOffset: root.strokeWidth / 2 + root.leftMargin
+        //property real yOffset: root.strokeWidth / 2 + root.topMargin
+
+        property real __width: root.width - root.leftMargin - root.rightMargin
+        property real __height: root.height - root.topMargin - root.bottomMargin
+        property real xOffset: root.leftMargin
+        property real yOffset: root.topMargin
 
         strokeWidth: 4
         strokeColor: "red"
@@ -432,38 +444,51 @@ Shape {
         var movedLine2 = moveLine(path.__width, path.__height, path.__width / 2, 0)
         var movedLine3 = moveLine(0, path.__height, path.__width, path.__height)
 
-        var lengthLine1 = Math.floor(length(movedLine1.endX - movedLine1.startX, movedLine1.endY - movedLine1.startY))
-        var lengthLine2 = Math.floor(length(movedLine2.endX - movedLine2.startX, movedLine2.endY - movedLine2.startY))
-        var lengthLine3 = Math.floor(length(movedLine3.endX - movedLine3.startX, movedLine3.endY - movedLine3.startY))
+        var lengthLine1 = Math.floor(root.length(movedLine1.endX - movedLine1.startX,
+                                                 movedLine1.endY - movedLine1.startY))
+        var lengthLine2 = Math.floor(root.length(movedLine2.endX - movedLine2.startX,
+                                                 movedLine2.endY - movedLine2.startY))
+        var lengthLine3 = Math.floor(root.length(movedLine3.endX - movedLine3.startX,
+                                                 movedLine3.endY - movedLine3.startY))
 
         var perimeter = lengthLine1 + lengthLine2 + lengthLine3
         var area = (path.__height) * (path.__width) * 0.5
 
         root.maxRadius = area * 2 / perimeter
 
-        var intersectionTop = intersect(movedLine1.startX, movedLine1.startY, movedLine1.endX, movedLine1.endY,
-                                        movedLine2.startX, movedLine2.startY, movedLine2.endX, movedLine2.endY)
-        var intersectionLeft = intersect(movedLine1.startX, movedLine1.startY, movedLine1.endX, movedLine1.endY,
-                                         movedLine3.startX, movedLine3.startY, movedLine3.endX, movedLine3.endY)
-        var intersectionRight = intersect(movedLine2.startX, movedLine2.startY, movedLine2.endX, movedLine2.endY,
-                                          movedLine3.startX, movedLine3.startY, movedLine3.endX, movedLine3.endY)
+        var intersectionTop = root.intersect(movedLine1.startX, movedLine1.startY,
+                                             movedLine1.endX, movedLine1.endY,
+                                             movedLine2.startX, movedLine2.startY,
+                                             movedLine2.endX, movedLine2.endY)
+        var intersectionLeft = root.intersect(movedLine1.startX, movedLine1.startY,
+                                              movedLine1.endX, movedLine1.endY,
+                                              movedLine3.startX, movedLine3.startY,
+                                              movedLine3.endX, movedLine3.endY)
+        var intersectionRight = root.intersect(movedLine2.startX, movedLine2.startY,
+                                               movedLine2.endX, movedLine2.endY,
+                                               movedLine3.startX, movedLine3.startY,
+                                               movedLine3.endX, movedLine3.endY)
 
-        var leftBottom = project(1, 0, intersectionLeft.x, intersectionLeft.y)
-        var rightBottom = project(1, 0, intersectionRight.x, intersectionRight.y)
+        var leftBottom = root.project(1, 0, intersectionLeft.x, intersectionLeft.y)
+        var rightBottom = root.project(1, 0, intersectionRight.x, intersectionRight.y)
 
         root.leftIntersection1 = Qt.point(leftBottom.x, leftBottom.y + path.__height)
         root.rightIntersection2 = Qt.point(rightBottom.x, rightBottom.y + path.__height)
 
-        var leftTop = project(-path.__width / 2 , path.__height, intersectionTop.x - path.__width / 2, intersectionTop.y)
+        var leftTop = root.project(-path.__width / 2 , path.__height,
+                                   intersectionTop.x - path.__width / 2, intersectionTop.y)
 
-        leftBottom = project(-path.__width / 2 , path.__height, intersectionLeft.x - path.__width / 2, intersectionLeft.y)
+        leftBottom = root.project(-path.__width / 2 , path.__height,
+                                  intersectionLeft.x - path.__width / 2, intersectionLeft.y)
 
         root.leftIntersection2 = Qt.point(leftBottom.x + path.__width / 2, leftBottom.y)
         root.topIntersection1 = Qt.point(leftTop.x + path.__width / 2, leftTop.y)
 
-        var rightTop = project(path.__width / 2 , path.__height, intersectionTop.x - path.__width / 2, intersectionTop.y)
+        var rightTop = root.project(path.__width / 2 , path.__height,
+                                    intersectionTop.x - path.__width / 2, intersectionTop.y)
 
-        rightBottom = project(path.__width / 2 , path.__height, intersectionRight.x - path.__width / 2, intersectionRight.y)
+        rightBottom = root.project(path.__width / 2 , path.__height,
+                                   intersectionRight.x - path.__width / 2, intersectionRight.y)
 
         root.topIntersection2 = Qt.point(rightTop.x + path.__width / 2, rightTop.y)
         root.rightIntersection1 = Qt.point(rightBottom.x + path.__width / 2, rightBottom.y)
