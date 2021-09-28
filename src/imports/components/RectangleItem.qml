@@ -165,22 +165,22 @@ Shape {
 /*!
     The radius of the top left rectangle corner.
 */
-    property int topLeftRadius: radius
+    property int topLeftRadius: root.radius
 
 /*!
     The radius of the bottom left rectangle corner.
 */
-    property int bottomLeftRadius: radius
+    property int bottomLeftRadius: root.radius
 
 /*!
     The radius of the top right rectangle corner.
 */
-    property int topRightRadius: radius
+    property int topRightRadius: root.radius
 
 /*!
     The radius of the bottom right rectangle corner.
 */
-    property int bottomRightRadius: radius
+    property int bottomRightRadius: root.radius
 
 /*!
     The gradient of the rectangle fill color.
@@ -292,32 +292,32 @@ Shape {
 
     \sa bevel
 */
-    property bool topLeftBevel: bevel
+    property bool topLeftBevel: root.bevel
 
 /*!
     The bevel of the top right border corner.
 
     \sa bevel
 */
-    property bool topRightBevel: bevel
+    property bool topRightBevel: root.bevel
 
 /*!
     The bevel of the bottom right border corner.
 
     \sa bevel
 */
-    property bool bottomRightBevel: bevel
+    property bool bottomRightBevel: root.bevel
 
 /*!
     The bevel of the bottom left border corner.
 
     \sa bevel
 */
-    property bool bottomLeftBevel: bevel
+    property bool bottomLeftBevel: root.bevel
 
-    layer.enabled: antialiasing
-    layer.smooth: antialiasing
-    layer.textureSize: Qt.size(width * 2, height * 2)
+    layer.enabled: root.antialiasing
+    layer.smooth: root.antialiasing
+    layer.textureSize: Qt.size(root.width * 2, root.height * 2)
 
 /*!
     The border is rendered within the rectangle's boundaries, outside of them,
@@ -327,11 +327,11 @@ Shape {
 
     property real borderOffset: {
         if (root.borderMode === 0)
-            return path.strokeWidth * 10.0 / 20.0
+            return root.strokeWidth * 0.5
         if (root.borderMode === 1)
             return 0
 
-        return -path.strokeWidth * 10.0 / 20.0
+        return -root.strokeWidth * 0.5
     }
 
     Item {
@@ -340,7 +340,7 @@ Shape {
             if (root.borderMode === 0)
                 return 0
             if (root.borderMode === 1)
-                return -root.strokeWidth / 2.0
+                return -root.strokeWidth * 0.5
 
             return -root.strokeWidth
         }
@@ -360,7 +360,7 @@ Shape {
         strokeWidth: 4
         strokeColor: "red"
 
-        startX: path.__topLeftRadius + borderOffset
+        startX: path.__topLeftRadius + root.borderOffset
         startY: root.borderOffset
 
         PathLine {
@@ -403,7 +403,7 @@ Shape {
         }
 
         PathLine {
-            x: borderOffset
+            x: root.borderOffset
             y: path.__topLeftRadius + root.borderOffset
         }
 
