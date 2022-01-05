@@ -2,6 +2,7 @@ AUX_QML_FILES += \
     $$PWD/components.metainfo
 
 AUX_QML_FILES += \
+    $$PWD/ArcArrowSpecifics.qml \
     $$PWD/ArcItemSpecifics.qml \
     $$PWD/BevelSection.qml \
     $$PWD/BorderItemSpecifics.qml \
@@ -16,6 +17,7 @@ AUX_QML_FILES += \
     $$PWD/PieItemSpecifics.qml \
     $$PWD/RectangleItemSpecifics.qml \
     $$PWD/RegularPolygonItemSpecifics.qml \
+    $$PWD/StraightArrowSpecifics.qml \
     $$PWD/StrokeDetailsSection.qml \
     $$PWD/SvgPathItemSpecifics.qml \
     $$PWD/TriangleItemSpecifics.qml
