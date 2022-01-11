@@ -163,7 +163,7 @@ Shape {
 
     layer.enabled: root.antialiasing
     layer.smooth: root.antialiasing
-    layer.textureSize: Qt.size(root.width * 2, root.height * 2)
+    layer.samples: root.antialiasing ? 4 : 0
 
     // This is used to make the bounding box of the item a bit bigger so it will draw sharp edges
     // in case of large stroke width instead of cutting it off.

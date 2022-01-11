@@ -143,7 +143,7 @@ Shape {
 
     layer.enabled: root.antialiasing
     layer.smooth: root.antialiasing
-    layer.textureSize: Qt.size(root.width * 2, root.height * 2)
+    layer.samples: root.antialiasing ? 4 : 0
 
 /*!
     The border is rendered within the rectangle's boundaries, outside of them,

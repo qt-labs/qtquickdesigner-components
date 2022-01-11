@@ -60,6 +60,7 @@ import QtQuick.Shapes 1.0
 */
 
 Shape {
+    id: root
     width: 200
     height: 200
 
@@ -201,11 +202,9 @@ Shape {
 */
     property alias capStyle: shape.capStyle
 
-    layer.enabled: antialiasing
-    layer.smooth: antialiasing
-    layer.textureSize: Qt.size(width * 2, height * 2)
-
-    id: svgPathItem
+    layer.enabled: root.antialiasing
+    layer.smooth: root.antialiasing
+    layer.samples: root.antialiasing ? 4 : 0
 
     ShapePath {
         id: shape

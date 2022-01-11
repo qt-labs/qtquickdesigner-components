@@ -282,7 +282,7 @@ Shape {
 
     layer.enabled: root.antialiasing
     layer.smooth: root.antialiasing
-    layer.textureSize: Qt.size(root.width * 2, root.height * 2)
+    layer.samples: root.antialiasing ? 4 : 0
 
 /*!
     Whether the arc has an outline.
