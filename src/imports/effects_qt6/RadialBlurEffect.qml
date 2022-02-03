@@ -35,7 +35,6 @@ FastBlur {
     property int samples: 0
     property real verticalOffset: 0
     property real horizontalOffset: 0
-    property real transparentBorder: 0
     property real angle: 0
 
     id: radialBlur
