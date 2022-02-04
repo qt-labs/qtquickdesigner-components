@@ -8,7 +8,6 @@ QML_FILES += \
     $$PWD/FastBlurItem.qml \
     $$PWD/GaussianBlurItem.qml \
     $$PWD/GlowItem.qml \
-    $$PWD/GaussianBlurItem.qml \
     $$PWD/GammaAdjustItem.qml \
     $$PWD/RecursiveBlurItem.qml \
     $$PWD/ThresholdMaskItem.qml \
