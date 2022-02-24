@@ -1,0 +1,23 @@
+
+MetaInfo {
+
+   Type {
+        name: "QtAndroidAutomotive.ActivityView.ActivityView"
+        icon: "images/qtaa-av-icon.png"
+
+        Hints {
+            visibleInNavigator: true
+            canBeDroppedInNavigator: true
+            canBeDroppedInFormEditor: true
+        }
+
+        ItemLibraryEntry {
+            name: "ActivityView"
+            category: "ActivityView"
+            version: "1.0"
+            requiredImport: "QtAndroidAutomotive.ActivityView"
+            libraryIcon: "images/qtaa-av-icon@2x.png"
+        }
+    }
+
+}
