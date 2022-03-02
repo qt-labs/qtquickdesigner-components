@@ -1,3 +1,9 @@
+module QtQuick.Studio.LogicHelper
+linktarget QtQuickStudioLogicHelperplugin
+optional plugin QtQuickStudioLogicHelperplugin
+classname QtQuick_Studio_LogicHelperPlugin
+typeinfo QtQuickStudioLogicHelper.qmltypes
+prefer :/QtQuick/Studio/LogicHelper/
 BidirectionalBinding 1.0 BidirectionalBinding.qml
 RangeMapper 1.0 RangeMapper.qml
 MinMaxMapper 1.0 MinMaxMapper.qml
@@ -5,3 +11,4 @@ StringMapper 1.0 StringMapper.qml
 OrOperator 1.0 OrOperator.qml
 AndOperator 1.0 AndOperator.qml
 NotOperator 1.0 NotOperator.qml
+

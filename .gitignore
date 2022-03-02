@@ -85,8 +85,20 @@ qt.conf
 *.qmlc
 .qmlcache
 codeattributions.qdoc
+CMakeCache.txt
+*.cmake
+*Plugin.cpp
+*qmltyperegistrations.cpp
+install_manifest.txt
 
 # Directories to ignore
 # ---------------------
 
 /doc
+.generated
+meta_types
+CMakeFiles
+/config.summary
+/config.tests
+qmltypes
+*_autogen

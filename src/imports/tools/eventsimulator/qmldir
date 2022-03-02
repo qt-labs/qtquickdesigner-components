@@ -1,2 +1,8 @@
 module QtQuick.Studio.EventSimulator
+linktarget QtQuickStudioEventSimulatorplugin
+optional plugin QtQuickStudioEventSimulatorplugin
+classname QtQuick_Studio_EventSimulatorPlugin
+typeinfo QtQuickStudioEventSimulator.qmltypes
+prefer :/QtQuick/Studio/EventSimulator/
 singleton EventSimulator 1.0 EventSimulator.qml
+

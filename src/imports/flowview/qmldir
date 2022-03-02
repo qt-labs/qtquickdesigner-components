@@ -1,4 +1,9 @@
 module FlowView
+linktarget flowviewplugin
+optional plugin flowviewplugin
+classname FlowViewPlugin
+typeinfo flowview.qmltypes
+prefer :/FlowView/
 DefaultFlowEffect 1.0 DefaultFlowEffect.qml
 SwipeInteraction 1.0 SwipeInteraction.qml
 FlowEffect 1.0 FlowEffect.qml
@@ -20,3 +25,4 @@ FlowDecision 1.0 FlowDecision.qml
 FlowWildcard 1.0 FlowWildcard.qml
 FlowActionArea 1.0 FlowActionArea.qml
 singleton FlowState 1.0 FlowState.qml
+

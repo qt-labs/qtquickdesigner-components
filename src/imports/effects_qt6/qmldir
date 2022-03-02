@@ -1,3 +1,9 @@
+module QtQuick.Studio.Effects
+linktarget QtQuickStudioEffectsplugin
+optional plugin QtQuickStudioEffectsplugin
+classname QtQuick_Studio_EffectsPlugin
+typeinfo QtQuickStudioEffects.qmltypes
+prefer :/QtQuick/Studio/Effects/
 FastBlurItem 1.0 FastBlurItem.qml
 GlowItem 1.0 GlowItem.qml
 ZoomBlurItem 1.0 ZoomBlurItem.qml
@@ -43,3 +49,4 @@ RadialBlurEffect 1.0 RadialBlurEffect.qml
 RecursiveBlurEffect 1.0 RecursiveBlurEffect.qml
 ThresholdMaskEffect 1.0 ThresholdMaskEffect.qml
 ZoomBlurEffect 1.0 ZoomBlurEffect.qml
+
