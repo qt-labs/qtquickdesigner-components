@@ -27,8 +27,6 @@
 **
 ****************************************************************************/
 
-#include "imagechecker.h"
-
 #include <QQmlEngine>
 #include <QQmlContext>
 #include <QtQml/qqmlextensionplugin.h>
@@ -50,14 +48,8 @@ StudioCompatibilityQULExtras::StudioCompatibilityQULExtras(QObject *parent)
 {
 }
 
-static QObject *imageCheckerSingletonTypeProvider(QQmlEngine *, QJSEngine *)
+void StudioCompatibilityQULExtras::registerTypes(const char *)
 {
-    return ImageChecker::getInstance();
-}
-
-void StudioCompatibilityQULExtras::registerTypes(const char *uri)
-{
-    qmlRegisterSingletonType<ImageChecker>(uri, 1, 0, "ImageChecker", imageCheckerSingletonTypeProvider);
 }
 
 QT_END_NAMESPACE

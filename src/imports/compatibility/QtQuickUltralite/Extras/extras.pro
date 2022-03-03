@@ -12,11 +12,7 @@ OTHER_FILES += \
     $$QML_FILES
 
 SOURCES += \
-    $$PWD/studiocompatibilityqulextras.cpp \
-    $$PWD/imagechecker.cpp
-
-HEADERS += \
-    $$PWD/imagechecker.h
+    $$PWD/studiocompatibilityqulextras.cpp
 
 !static: qtConfig(quick-designer): include(designer/designer.pri)
 ## include(doc/doc.pri)
