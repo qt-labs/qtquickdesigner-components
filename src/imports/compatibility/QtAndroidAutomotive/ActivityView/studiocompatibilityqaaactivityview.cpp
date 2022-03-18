@@ -3,7 +3,7 @@
 ** Copyright (C) 2022 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
-** This file is part of Qt Quick Ultralite compatibility.
+** This file is part of Qt Android Automotive compatibility.
 **
 ** $QT_BEGIN_LICENSE:GPL$
 ** Commercial License Usage
