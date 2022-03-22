@@ -5,4 +5,5 @@ add_subdirectory(flowview)
 add_subdirectory(logichelper)
 add_subdirectory(multitext)
 add_subdirectory(tools)
+add_subdirectory(application)
 
