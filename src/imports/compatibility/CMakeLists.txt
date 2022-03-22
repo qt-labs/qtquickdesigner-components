@@ -1,1 +1,2 @@
+add_subdirectory(QtAndroidAutomotive)
 add_subdirectory(QtQuickUltralite)
