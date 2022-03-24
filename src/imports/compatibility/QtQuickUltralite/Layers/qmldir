@@ -1,4 +1,3 @@
-module QtQuickUltralite.Layers
 Application 1.9 Application.qml
 Screen 1.9 Screen.qml
 ImageLayer 1.9 ImageLayer.qml
