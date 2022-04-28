@@ -31,6 +31,7 @@ import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import HelperWidgets 2.0
 import StudioTheme 1.0 as StudioTheme
+import StudioControls 1.0 as StudioControls
 
 Column {
     anchors.left: parent.left
@@ -75,19 +76,14 @@ Column {
                                    + StudioTheme.Values.actionIndicatorWidth
                 }
 
-                CheckBox {
+                StudioControls.CheckBox {
                     id: strokeWidthCheck
                     text: qsTr("Hide")
-                    checked: (backendValues.strokeWidth.value >= 0 ? false : true)
+                    checked: backendValues.strokeWidth.value < 0
                     actionIndicator.visible: false
                     implicitWidth: StudioTheme.Values.twoControlColumnWidth
 
-                    onCheckedChanged: {
-                        if (strokeWidthCheck.checked === true)
-                            backendValues.strokeWidth.value = -1
-                        else
-                            backendValues.strokeWidth.value = ((backendValues.strokeWidth.value < 0) ? 4 : backendValues.strokeWidth.value)
-                    }
+                    onClicked: backendValues.strokeWidth.value = strokeWidthCheck.checked ? -1 : 4
                 }
 
                 ExpandingSpacer {}
