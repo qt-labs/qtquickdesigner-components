@@ -9,6 +9,7 @@ qt_internal_add_qml_module(FlowView
     DESIGNER_SUPPORTED
     NO_SYNC_QT
     PAST_MAJOR_VERSIONS 1
+    NO_GENERATE_QMLDIR
     QML_FILES
         DefaultFlowEffect.qml
         SwipeInteraction.qml
