@@ -34,6 +34,8 @@ qt_internal_add_qml_module(FlowView
         FlowState.qml
         +DesignMode/FlowItem.qml
         +DesignMode/FlowView.qml
+    RESOURCES
+        qmldir
 )
 
 if(QT_FEATURE_quick_designer AND QT_BUILD_SHARED_LIBS)
