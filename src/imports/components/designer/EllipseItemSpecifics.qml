@@ -39,7 +39,7 @@ Column {
     Section {
         anchors.left: parent.left
         anchors.right: parent.right
-        caption: qsTr("Rectangle Item")
+        caption: qsTr("Ellipse Item")
 
         SectionLayout {
             PropertyLabel { text: qsTr("Fill color") }
