@@ -62,6 +62,7 @@ Column {
 
             SecondColumnLayout {
                 SpinBox {
+                    id: strokeWidthSpinBox
                     implicitWidth: StudioTheme.Values.twoControlColumnWidth
                                    + StudioTheme.Values.actionIndicatorWidth
                     backendValue: backendValues.strokeWidth
@@ -69,6 +70,16 @@ Column {
                     minimumValue: -1
                     maximumValue: 200
                     stepSize: 1
+
+                    property real previousValue: 0
+
+                    onValueChanged: {
+                        if (strokeWidthSpinBox.value > 0)
+                            strokeWidthSpinBox.previousValue = strokeWidthSpinBox.value
+                    }
+
+                    Component.onCompleted: strokeWidthSpinBox.previousValue
+                                           = Math.max(1, backendValues.strokeWidth.value)
                 }
 
                 Spacer {
@@ -77,13 +88,14 @@ Column {
                 }
 
                 StudioControls.CheckBox {
-                    id: strokeWidthCheck
+                    id: strokeWidthCheckBox
                     text: qsTr("Hide")
-                    checked: backendValues.strokeWidth.value < 0
-                    actionIndicator.visible: false
                     implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                    checked: (backendValues.strokeWidth.value < 0)
+                    actionIndicator.visible: false
 
-                    onClicked: backendValues.strokeWidth.value = strokeWidthCheck.checked ? -1 : 4
+                    onClicked: backendValues.strokeWidth.value
+                               = (strokeWidthCheckBox.checked ? -1 : strokeWidthSpinBox.previousValue)
                 }
 
                 ExpandingSpacer {}

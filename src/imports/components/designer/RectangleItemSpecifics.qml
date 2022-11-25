@@ -61,7 +61,7 @@ Column {
 
             SecondColumnLayout {
                 SpinBox {
-                    id: strokeWidthSpin
+                    id: strokeWidthSpinBox
                     implicitWidth: StudioTheme.Values.twoControlColumnWidth
                                    + StudioTheme.Values.actionIndicatorWidth
                     backendValue: backendValues.strokeWidth
@@ -69,6 +69,16 @@ Column {
                     minimumValue: -1
                     maximumValue: 200
                     stepSize: 1
+
+                    property real previousValue: 0
+
+                    onValueChanged: {
+                        if (strokeWidthSpinBox.value > 0)
+                            strokeWidthSpinBox.previousValue = strokeWidthSpinBox.value
+                    }
+
+                    Component.onCompleted: strokeWidthSpinBox.previousValue
+                                           = Math.max(1, backendValues.strokeWidth.value)
                 }
 
                 Spacer {
@@ -77,18 +87,14 @@ Column {
                 }
 
                 CheckBox {
-                    id: strokeWidthCheck
+                    id: strokeWidthCheckBox
                     text: qsTr("Hide")
-                    checked: (backendValues.strokeWidth.value >= 0 ? false : true)
-                    actionIndicator.visible: false
                     implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                    checked: (backendValues.strokeWidth.value < 0)
+                    actionIndicator.visible: false
 
-                    onCheckedChanged: {
-                        if (strokeWidthCheck.checked === true)
-                            backendValues.strokeWidth.value = -1
-                        else
-                            backendValues.strokeWidth.value = ((backendValues.strokeWidth.value < 0) ? 4 : backendValues.strokeWidth.value)
-                    }
+                    onCheckedChanged: backendValues.strokeWidth.value
+                                      = (strokeWidthCheckBox.checked ? -1 : strokeWidthSpinBox.previousValue)
                 }
 
                 ExpandingSpacer {}
