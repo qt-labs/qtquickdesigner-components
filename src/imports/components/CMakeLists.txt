@@ -1,3 +1,4 @@
+qt_add_library(QuickStudioComponents STATIC)
 qt6_add_qml_module(QuickStudioComponents
     URI "QtQuick.Studio.Components"
     VERSION "${PROJECT_VERSION}"
@@ -17,6 +18,10 @@ qt6_add_qml_module(QuickStudioComponents
         GroupItem.qml
         ArcArrow.qml
         StraightArrow.qml
+)
+
+set_target_properties(QuickStudioComponents PROPERTIES
+QT_QMLCACHEGEN_EXECUTABLE qmlcachegen
 )
 
 

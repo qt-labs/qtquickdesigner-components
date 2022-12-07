@@ -1,3 +1,4 @@
+qt_add_library(QuickStudioLogicHelper STATIC)
 qt6_add_qml_module(QuickStudioLogicHelper
     URI "QtQuick.Studio.LogicHelper"
     VERSION "${PROJECT_VERSION}"

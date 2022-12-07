@@ -1,3 +1,4 @@
+qt_add_library(QuickStudioEffects STATIC)
 qt6_add_qml_module(QuickStudioEffects
     URI "QtQuick.Studio.Effects"
     VERSION "${PROJECT_VERSION}"
@@ -50,5 +51,10 @@ qt6_add_qml_module(QuickStudioEffects
         ThresholdMaskEffect.qml
         ZoomBlurEffect.qml
 )
+
+set_target_properties(QuickStudioEffects PROPERTIES
+QT_QMLCACHEGEN_EXECUTABLE qmlcachegen
+)
+
 
 

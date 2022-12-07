@@ -2,7 +2,7 @@ set_source_files_properties(FlowState.qml
     PROPERTIES
         QT_QML_SINGLETON_TYPE true
 )
-
+qt_add_library(FlowView STATIC)
 qt6_add_qml_module(FlowView
     URI "FlowView"
     VERSION "${PROJECT_VERSION}"

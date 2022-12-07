@@ -1,3 +1,4 @@
+qt_add_library(QuickStudioMultiText STATIC)
 qt6_add_qml_module(QuickStudioMultiText
     URI "QtQuick.Studio.MultiText"
     VERSION "${PROJECT_VERSION}"

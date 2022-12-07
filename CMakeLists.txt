@@ -1,14 +1,19 @@
 cmake_minimum_required(VERSION 3.16)
 
 ##PROJECT_VERSION_MAJOR = 6
-project(QtQuickDesignerComponents
-    DESCRIPTION "QtQuick Designer Components"
-    HOMEPAGE_URL "https://qt.io/"
-    VERSION "6.4.0"
-    LANGUAGES CXX C
-)
+
+## project(QtQuickDesignerComponents
+##    DESCRIPTION "QtQuick Designer Components"
+##    HOMEPAGE_URL "https://qt.io/"
+##    VERSION "6.4.0"
+##   LANGUAGES CXX C
+##)
 
 include(CMakePrintHelpers)
+
+set(PROJECT_VERSION_MAJOR 6)
+set(PROJECT_VERSION_MINOR 4)
+set(PROJECT_VERSION 6.4.1)
 
 cmake_print_variables(PROJECT_SOURCE_DIR)
 cmake_print_variables(PROJECT_VERSION_MAJOR)
@@ -28,6 +33,6 @@ find_package(Qt6
         Gui
 )
 
-qt_standard_project_setup()
+### qt_standard_project_setup()
 add_subdirectory(src)
 
