@@ -3,11 +3,10 @@ set_source_files_properties(FlowState.qml
         QT_QML_SINGLETON_TYPE true
 )
 
-qt_internal_add_qml_module(FlowView
+qt6_add_qml_module(FlowView
     URI "FlowView"
     VERSION "${PROJECT_VERSION}"
     DESIGNER_SUPPORTED
-    NO_SYNC_QT
     PAST_MAJOR_VERSIONS 1
     NO_GENERATE_QMLDIR
     QML_FILES
@@ -37,8 +36,4 @@ qt_internal_add_qml_module(FlowView
     RESOURCES
         qmldir
 )
-
-if(QT_FEATURE_quick_designer AND QT_BUILD_SHARED_LIBS)
-    add_subdirectory(designer)
-endif()
 

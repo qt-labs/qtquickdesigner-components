@@ -1,8 +1,7 @@
-qt_internal_add_qml_module(QuickStudioLogicHelper
+qt6_add_qml_module(QuickStudioLogicHelper
     URI "QtQuick.Studio.LogicHelper"
     VERSION "${PROJECT_VERSION}"
     DESIGNER_SUPPORTED
-    NO_SYNC_QT
     PAST_MAJOR_VERSIONS 1
     QML_FILES
         BidirectionalBinding.qml
@@ -14,11 +13,4 @@ qt_internal_add_qml_module(QuickStudioLogicHelper
         NotOperator.qml
 )
 
-qt_internal_add_docs(QuickStudioLogicHelper
-    doc/qtquickstudiologichelper.qdocconf
-)
-
-if(QT_FEATURE_quick_designer AND QT_BUILD_SHARED_LIBS)
-    add_subdirectory(designer)
-endif()
 

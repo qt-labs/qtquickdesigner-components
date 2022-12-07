@@ -1,8 +1,7 @@
-qt_internal_add_qml_module(QuickStudioComponents
+qt6_add_qml_module(QuickStudioComponents
     URI "QtQuick.Studio.Components"
     VERSION "${PROJECT_VERSION}"
     DESIGNER_SUPPORTED
-    NO_SYNC_QT
     PAST_MAJOR_VERSIONS 1
         QML_FILES
         ArcItem.qml
@@ -20,11 +19,4 @@ qt_internal_add_qml_module(QuickStudioComponents
         StraightArrow.qml
 )
 
-qt_internal_add_docs(QuickStudioComponents
-    doc/qtquickstudiocomponents.qdocconf
-)
-
-if(QT_FEATURE_quick_designer AND QT_BUILD_SHARED_LIBS)
-    add_subdirectory(designer)
-endif()
 

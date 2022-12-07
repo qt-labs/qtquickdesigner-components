@@ -1,4 +1,3 @@
-add_subdirectory(compatibility)
 add_subdirectory(components)
 add_subdirectory(effects_qt6)
 add_subdirectory(flowview)
