@@ -43,11 +43,3 @@ FlowItem {
         anchors.fill: parent
     }
 }
-
-
-/*##^##
-Designer {
-    D{i:0;height:415;width:478}
-}
-##^##*/
-

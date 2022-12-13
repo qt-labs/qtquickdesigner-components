@@ -325,8 +325,3 @@ Item {
         }
     ]
 }
-
-/*##^## Designer {
-    D{i:0;height:249;width:480}D{i:7;anchors_height:200;anchors_width:200;anchors_x:-1;anchors_y:58;timeline_expanded:true}
-}
- ##^##*/

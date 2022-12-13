@@ -94,10 +94,3 @@ Item {
         }
     }
 }
-
-/*##^##
-Designer {
-    D{i:0;height:480;width:640}D{i:2;anchors_width:200}D{i:6;anchors_width:200}D{i:1;anchors_height:200;anchors_width:200}
-}
-##^##*/
-

@@ -126,10 +126,3 @@ FlowItem {
         }
     }
 }
-
-/*##^##
-Designer {
-    D{i:0;height:480;width:640}
-}
-##^##*/
-
