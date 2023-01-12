@@ -10,7 +10,7 @@ project(QtQuickDesignerComponents
 set(CMAKE_AUTOMOC ON)
 
 # Enable reconfiguration of already installed version via
-# pretend we are inside a qtdeclarative build.
+# pretend that we do a Qt repository build that depends on qtdeclarative.
 # this activates an early bail out (already existing hack)
 # This needs to be called before any find(Qt* is called.
 set(QT_REPO_DEPENDENCIES "qtdeclarative")
