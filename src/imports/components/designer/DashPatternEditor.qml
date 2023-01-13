@@ -96,11 +96,6 @@ GridLayout {
         function onSelectionChanged() { parseExpression() }
     }
 
-    ExtendedFunctionLogic {
-        id: extFuncLogic
-        backendValue: root.backendValue
-    }
-
     ActionIndicator {
         id: actionIndicator
         myControl: dash01
@@ -109,6 +104,11 @@ GridLayout {
         icon.text: extFuncLogic.glyph
         enabled: root.enableEditors
         onClicked: extFuncLogic.show()
+
+        ExtendedFunctionLogic {
+            id: extFuncLogic
+            backendValue: root.backendValue
+        }
     }
 
     DoubleSpinBox {
