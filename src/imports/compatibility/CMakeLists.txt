@@ -1,2 +1,3 @@
-add_subdirectory(QtAndroidAutomotive)
-add_subdirectory(QtQuickUltralite)
+add_subdirectory(Extras)
+add_subdirectory(Layers)
+
