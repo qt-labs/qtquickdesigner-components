@@ -98,7 +98,7 @@ GridLayout {
 
     ActionIndicator {
         id: actionIndicator
-        myControl: dash01
+        __parentControl: dash01
         icon.visible: dash01.hover || gap01.hover || dash02.hover || gap02.hover
         icon.color: extFuncLogic.color
         icon.text: extFuncLogic.glyph
