@@ -88,6 +88,7 @@ MetaInfo {
             libraryIcon: "images/custom-rectangle-24px.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
+            Property { name: "adjustBorderRadius"; type: "bool"; value: "true"; }
         }
     }
 
@@ -127,6 +128,7 @@ MetaInfo {
             libraryIcon: "images/custom-border-24px.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
+            Property { name: "adjustBorderRadius"; type: "bool"; value: "true"; }
         }
     }
 
