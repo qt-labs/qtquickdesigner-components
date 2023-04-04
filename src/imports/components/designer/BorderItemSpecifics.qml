@@ -179,6 +179,7 @@ Column {
 
     StrokeDetailsSection {
         showBorderMode: true
+        showRadiusAdjustmentment: true
         showJoinStyle: true
     }
 }

@@ -334,6 +334,12 @@ Shape {
         return -root.strokeWidth * 0.5
     }
 
+/*!
+    The property changes the way border radius is calculated.
+    Deactivated by default.
+*/
+    property bool adjustBorderRadius: false
+
     Item {
         anchors.fill: parent
         anchors.margins: {
@@ -355,64 +361,74 @@ Shape {
         property int __bottomRightRadius: Math.min(root.bottomRightRadius, path.__maxRadius)
         property int __bottomLeftRadius: Math.min(root.bottomLeftRadius, path.__maxRadius)
 
+        readonly property real __borderRadiusAdjustment: {
+            if (root.adjustBorderRadius) {
+                if (root.borderMode === 1)
+                    return (root.strokeWidth * 0.5)
+                if (root.borderMode === 2)
+                    return root.strokeWidth
+            }
+            return 0
+        }
+
         joinStyle: ShapePath.MiterJoin
 
         strokeWidth: 4
         strokeColor: "red"
 
-        startX: path.__topLeftRadius + root.borderOffset
+        startX: path.__topLeftRadius + root.borderOffset + path.__borderRadiusAdjustment
         startY: root.borderOffset
 
         PathLine {
-            x: root.width - path.__topRightRadius - root.borderOffset
+            x: root.width - path.__topRightRadius - root.borderOffset - path.__borderRadiusAdjustment
             y: root.borderOffset
         }
 
         PathArc {
             x: root.width - root.borderOffset
-            y: path.__topRightRadius + root.borderOffset
+            y: path.__topRightRadius + root.borderOffset + path.__borderRadiusAdjustment
 
-            radiusX: root.topRightBevel ? 50000 : path.__topRightRadius
-            radiusY: root.topRightBevel ? 50000 : path.__topRightRadius
+            radiusX: root.topRightBevel ? 50000 : path.__topRightRadius + path.__borderRadiusAdjustment
+            radiusY: root.topRightBevel ? 50000 : path.__topRightRadius + path.__borderRadiusAdjustment
         }
 
         PathLine {
             x: root.width - root.borderOffset
-            y: root.height - path.__bottomRightRadius - root.borderOffset
+            y: root.height - path.__bottomRightRadius - root.borderOffset - path.__borderRadiusAdjustment
         }
 
         PathArc {
-            x: root.width - path.__bottomRightRadius - root.borderOffset
+            x: root.width - path.__bottomRightRadius - root.borderOffset - path.__borderRadiusAdjustment
             y: root.height - root.borderOffset
 
-            radiusX: root.bottomRightBevel ? 50000 : path.__bottomRightRadius
-            radiusY: root.bottomRightBevel ? 50000 : path.__bottomRightRadius
+            radiusX: root.bottomRightBevel ? 50000 : path.__bottomRightRadius + path.__borderRadiusAdjustment
+            radiusY: root.bottomRightBevel ? 50000 : path.__bottomRightRadius + path.__borderRadiusAdjustment
         }
 
         PathLine {
-            x: path.__bottomLeftRadius + root.borderOffset
+            x: path.__bottomLeftRadius + root.borderOffset + path.__borderRadiusAdjustment
             y: root.height - root.borderOffset
         }
 
         PathArc {
             x: root.borderOffset
-            y: root.height - path.__bottomLeftRadius - root.borderOffset
+            y: root.height - path.__bottomLeftRadius - root.borderOffset - path.__borderRadiusAdjustment
 
-            radiusX: root.bottomLeftBevel ? 50000 : path.__bottomLeftRadius
-            radiusY: root.bottomLeftBevel ? 50000 : path.__bottomLeftRadius
+            radiusX: root.bottomLeftBevel ? 50000 : path.__bottomLeftRadius + path.__borderRadiusAdjustment
+            radiusY: root.bottomLeftBevel ? 50000 : path.__bottomLeftRadius + path.__borderRadiusAdjustment
         }
 
         PathLine {
             x: root.borderOffset
-            y: path.__topLeftRadius + root.borderOffset
+            y: path.__topLeftRadius + root.borderOffset + path.__borderRadiusAdjustment
         }
 
         PathArc {
-            x: path.__topLeftRadius + root.borderOffset
+            x: path.__topLeftRadius + root.borderOffset + path.__borderRadiusAdjustment
             y: root.borderOffset
 
-            radiusX: root.topLeftBevel ? 50000 : path.__topLeftRadius
-            radiusY: root.topLeftBevel ? 50000 : path.__topLeftRadius
+            radiusX: root.topLeftBevel ? 50000 : path.__topLeftRadius + path.__borderRadiusAdjustment
+            radiusY: root.topLeftBevel ? 50000 : path.__topLeftRadius + path.__borderRadiusAdjustment
         }
     }
 }

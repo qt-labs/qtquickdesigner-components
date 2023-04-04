@@ -40,6 +40,7 @@ Section {
     property bool showCapStyle: true
 
     property bool showBorderMode: false
+    property bool showRadiusAdjustmentment: false
     property bool showJoinStyle: false
     property bool showHideLine: false
 
@@ -54,6 +55,21 @@ Section {
             BorderModeComboBox {}
 
             ExpandingSpacer {}
+        }
+
+        PropertyLabel {
+            text: qsTr("Adjust radius")
+            visible: showRadiusAdjustmentment
+        }
+
+        SecondColumnLayout {
+            visible: showRadiusAdjustmentment
+            CheckBox {
+                id: adjustRadiusBox
+                text: qsTr("Adjust border radius")
+                implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                backendValue: backendValues.adjustBorderRadius
+            }
         }
 
         PropertyLabel { text: qsTr("Stroke style") }
