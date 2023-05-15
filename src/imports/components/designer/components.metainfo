@@ -9,6 +9,7 @@ MetaInfo {
             libraryIcon: "images/group-24px.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
+            toolTip: qsTr("Groups several Studio Components.")
         }
     }
 
@@ -23,6 +24,7 @@ MetaInfo {
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
             Property { name: "fillColor"; type: "QColor"; value: "transparent"; }
+            toolTip: qsTr("An arc that begins and ends at given positions.")
         }
     }
 
@@ -36,6 +38,7 @@ MetaInfo {
             libraryIcon: "images/item-pie-24px.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
+            toolTip: qsTr("A pie slice or a pie with a slice missing from it.")
         }
     }
 
@@ -49,6 +52,7 @@ MetaInfo {
             libraryIcon: "images/item-triangle-24px.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
+            toolTip: qsTr("A triangle with different dimensions and shapes is enclosed in an invisible rectangle.")
         }
     }
 
@@ -62,6 +66,7 @@ MetaInfo {
             libraryIcon: "images/item-svg-24px.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
+            toolTip: qsTr("Allows to implement vector shape paths from another design tool such as Adobe Illustrator or Figma.")
         }
     }
 
@@ -75,6 +80,7 @@ MetaInfo {
             libraryIcon: "images/item-flippable-24px.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
+            toolTip: qsTr("A component that can be visibly flipped between its front and back sides, like a card.")
         }
     }
 
@@ -89,6 +95,7 @@ MetaInfo {
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
             Property { name: "adjustBorderRadius"; type: "bool"; value: "true"; }
+            toolTip: qsTr("An extended rectangle painted with a solid fill color or linear, conical, or radial gradients and corners that you can shape independently of each other.")
         }
     }
 
@@ -102,6 +109,7 @@ MetaInfo {
             libraryIcon: "images/polygon-24px.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
+            toolTip: qsTr("A regular polygon with a variable amount of edges painted with a solid fill color or linear gradient and an optional border.")
         }
     }
 
@@ -115,6 +123,7 @@ MetaInfo {
             libraryIcon: "images/ellipse-24px.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
+            toolTip: qsTr("An ellipse painted with a solid fill color or linear gradient and an optional border.")
         }
     }
 
@@ -129,6 +138,7 @@ MetaInfo {
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
             Property { name: "adjustBorderRadius"; type: "bool"; value: "true"; }
+            toolTip: qsTr("An extended border painted without solid fill color, having corners that you can shape independently of each other.")
         }
     }
 
