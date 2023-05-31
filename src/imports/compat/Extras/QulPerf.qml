@@ -26,10 +26,25 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
+pragma Singleton
 
-import QtQuick 2.15
-//! [StaticText compatibility]
-//  Enables optimized drawing of text.
-Text {
+import QtQuick 2.12
+//! [QulPerf compatibility]
+//  Holds information about application performance.
+//  This data is only available if Qt Quick Ultralite is compiled with QUL_ENABLE_PERFORMANCE_LOGGING.
+//  Properties will be updated every two seconds.
+//  All properties are read-only.
+QtObject {
+    readonly property bool enabled: false
+    readonly property real fps: 0
+    readonly property real imageBlend: 0
+    readonly property real imageTransform: 0
+    readonly property int maxDirtyNodes: 0
+    readonly property real rectBlend: 0
+    readonly property real rectFill: 0
+    readonly property real rectRounded: 0
+    readonly property real repaint: 0
+    readonly property real textBlend: 0
+    readonly property real textLayout: 0
 }
-//! [StaticText compatibility]
+//! [QulPerf compatibility]

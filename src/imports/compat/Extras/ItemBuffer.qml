@@ -27,9 +27,11 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.15
-//! [StaticText compatibility]
-//  Enables optimized drawing of text.
-Text {
+import QtQuick 2.12
+//! [ItemBuffer compatibility]
+Item {
+    enum ExtraFlag { RedrawItemBufferFlag = 1 }
+//    property Transform transform; //in regular QML this property is already provided by QtQuick.Item
+    property bool useAlphaChannel;
 }
-//! [StaticText compatibility]
+//! [ItemBuffer compatibility]

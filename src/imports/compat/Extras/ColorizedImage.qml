@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2021 The Qt Company Ltd.
+** Copyright (C) 2023 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Ultralite compatibility.
@@ -29,27 +29,17 @@
 
 import QtQuick 2.12
 import Qt5Compat.GraphicalEffects
-import QtQuickUltralite.Extras 1.9
-
-Item {
+//! [ColorizedImage compatibility]
+//  Displays a colorized image.
+Image {
     id: colorizedRoot
     property var color: "transparent"
-    property alias source: internalImg.source
-    property alias fillMode: internalImg.fillMode
-    property alias horizontalAlignment: internalImg.horizontalAlignment
-    property alias verticalAlignment: internalImg.verticalAlignment
 
-    implicitWidth: internalImg.sourceSize.width
-    implicitHeight: internalImg.sourceSize.height
-
-    Image {
-        id: internalImg
-
-        layer.enabled: true
-        layer.effect: ColorOverlay {
-            anchors.fill: internalImg
-            source: internalImg
-            color: colorizedRoot.color
-        }
+    layer.enabled: true
+    layer.effect: ColorOverlay {
+        anchors.fill: colorizedRoot
+        source: colorizedRoot
+        color: colorizedRoot.color
     }
 }
+//! [ColorizedImage compatibility]

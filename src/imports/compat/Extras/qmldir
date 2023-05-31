@@ -4,6 +4,8 @@ optional plugin studioqtquickultraliteextrasplugin
 classname QtQuickUltralite_ExtrasPlugin
 typeinfo studioqtquickultraliteextras.qmltypes
 prefer :/QtQuickUltralite/Extras/
+AnimatedSpriteDirectory 1.0 AnimatedSpriteDirectory.qml
 ColorizedImage 1.0 ColorizedImage.qml
+ItemBuffer 1.0 ItemBuffer.qml
 StaticText 1.0 StaticText.qml
-
+singleton QulPerf 1.0 QulPerf.qml

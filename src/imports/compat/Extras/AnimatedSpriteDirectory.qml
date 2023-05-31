@@ -28,8 +28,20 @@
 ****************************************************************************/
 
 import QtQuick 2.15
-//! [StaticText compatibility]
-//  Enables optimized drawing of text.
-Text {
+//! [AnimatedSpriteDirectory compatibility]
+//  Draws a sprite animation stored in a directory.
+Item {
+    property int currentFrame: 0
+    property int frameDuration: -2
+    property int loops: -1 //-1 = AnimatedSpriteDirectory.Infinite
+    property bool running: true
+    property string sourcePath
+
+    signal finished
+
+    function advance() {}
+    function restart() {}
+    function start() {}
+    function stop() {}
 }
-//! [StaticText compatibility]
+//! [AnimatedSpriteDirectory compatibility]
