@@ -7,9 +7,14 @@ MetaInfo {
             name: "Colorized Image"
             category: "QtQuickUltralite - Extras"
             libraryIcon: "images/image-icon@2x.png"
-            version: "1.9"
+            version: "1.0"
             requiredImport: "QtQuickUltralite.Extras"
-            Property { name: "source"; type: "binding"; value: "\"source/text\""; }
+
+            Property { name: "width"; type: "int"; value: 100; }
+            Property { name: "height"; type: "int"; value: 100; }
+            Property { name: "source"; type: "QUrl"; value:"qrc:/qtquickplugin/images/template_image.png"; }
+
+            toolTip: qsTr("Displays a colorized image.")
         }
     }
     Type {
@@ -20,9 +25,13 @@ MetaInfo {
             name: "Static Text"
             category: "QtQuickUltralite - Extras"
             libraryIcon: "images/text-icon@2x.png"
-            version: "1.9"
+            version: "1.0"
             requiredImport: "QtQuickUltralite.Extras"
+
+            Property { name: "font.pixelSize"; type: "int"; value: 12; }
             Property { name: "text"; type: "binding"; value: "qsTr(\"Static Text\")"; }
+
+            toolTip: qsTr("Enables optimized drawing of text.")
         }
     }
 }
