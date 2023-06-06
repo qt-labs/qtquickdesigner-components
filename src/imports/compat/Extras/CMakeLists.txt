@@ -3,7 +3,9 @@ qt_internal_add_qml_module(QuickUltraLiteStudioExtras
     VERSION "${PROJECT_VERSION}"
     DESIGNER_SUPPORTED
     NO_SYNC_QT
-    PAST_MAJOR_VERSIONS 1
+    PAST_MAJOR_VERSIONS
+        1
+        2
     QML_FILES
         AnimatedSpriteDirectory.qml
         ColorizedImage.qml
