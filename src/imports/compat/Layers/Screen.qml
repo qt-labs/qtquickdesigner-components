@@ -34,15 +34,49 @@ import QtQuick.Window 2.2
 Item {
     id: root
 
-    property var outputDevice: "device"
+    property string outputDevice: "device"
     property alias backgroundColor: wnd.color
 
-    property alias defaultApplicationWidth: wnd.width
-    property alias defaultApplicationHeight: wnd.height
+    property real defaultApplicationWidth: 0
+    property real defaultApplicationHeight: 0
+
+    onChildrenChanged: {
+        if (wnd.isAvailable)
+            wnd.reparenting()
+    }
 
     Window {
         id: wnd
         visible: true
+
+        width: root.width
+        height: root.height
+
+        property bool reparentingBlock: false
+        property bool isAvailable: false
+
+        Component.onCompleted: {
+            reparenting()
+            isAvailable = true
+        }
+
+        function reparenting() {
+            if (reparentingBlock)
+                return;
+
+            reparentingBlock = true;
+
+            var result = [];
+            var rootChildren = root.children;
+            for (var i = 0; i < rootChildren.length; i++) {
+                if (rootChildren[i] !== wnd) {
+                    result.push(rootChildren[i]);
+                }
+            }
+            wnd.data = result;
+
+            reparentingBlock = false;
+        }
     }
 }
 //! [Screen compatibility]

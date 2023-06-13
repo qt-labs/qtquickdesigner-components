@@ -1,3 +1,8 @@
+set_source_files_properties(QulPerf.qml
+    PROPERTIES
+        QT_QML_SINGLETON_TYPE true
+)
+
 qt_internal_add_qml_module(QuickUltraLiteStudioExtras
     URI "QtQuickUltralite.Extras"
     VERSION "${PROJECT_VERSION}"

@@ -12,6 +12,7 @@ qt_internal_add_qml_module(QuickUltraLiteStudioLayers
         ItemLayer.qml
         Screen.qml
         SpriteLayer.qml
+        +DesignMode/Screen.qml
 )
 
 if(QT_FEATURE_quick_designer AND QT_BUILD_SHARED_LIBS)

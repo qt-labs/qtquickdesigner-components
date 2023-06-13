@@ -32,11 +32,11 @@ import QtQuick 2.15
 //! [Screen compatibility]
 Rectangle {
     id: wnd
-    property var outputDevice: "device"
-    property alias backgroundColor: color
+    property string outputDevice: "device"
+    property alias backgroundColor: wnd.color
 
-    property int defaultApplicationWidth: width
-    property int defaultApplicationHeight: height
+    property real defaultApplicationWidth: 0
+    property real defaultApplicationHeight: 0
 
     visible: true
 }
