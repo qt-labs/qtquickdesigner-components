@@ -1,6 +1,7 @@
 qt_internal_add_qml_module(QuickStudioComponents
     URI "QtQuick.Studio.Components"
     VERSION "${PROJECT_VERSION}"
+    RESOURCE_PREFIX "/qt-project.org/imports"
     DESIGNER_SUPPORTED
     NO_SYNC_QT
     PAST_MAJOR_VERSIONS 1
