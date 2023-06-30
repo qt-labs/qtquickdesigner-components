@@ -42,7 +42,10 @@ Column {
         caption: qsTr("Regular Polygon Item")
 
         SectionLayout {
-            PropertyLabel { text: qsTr("Fill color") }
+            PropertyLabel {
+                text: qsTr("Fill color")
+                tooltip: qsTr("Sets the color to fill the enclosed Regular Polygon.")
+            }
 
             ColorEditor {
                 backendValue: backendValues.fillColor
@@ -50,14 +53,20 @@ Column {
                 shapeGradients: true
             }
 
-            PropertyLabel { text: qsTr("Stroke color") }
+            PropertyLabel {
+                text: qsTr("Stroke color")
+                tooltip: qsTr("Sets the stroke color of the boundary.")
+            }
 
             ColorEditor {
                 backendValue: backendValues.strokeColor
                 supportGradient: false
             }
 
-            PropertyLabel { text: qsTr("Stroke width") }
+            PropertyLabel {
+                text: qsTr("Stroke width")
+                tooltip: qsTr("Sets the stroke thickness of the boundary.")
+            }
 
             SecondColumnLayout {
                 SpinBox {
@@ -100,7 +109,10 @@ Column {
                 ExpandingSpacer {}
             }
 
-            PropertyLabel { text: qsTr("Side count") }
+            PropertyLabel {
+                text: qsTr("Side count")
+                tooltip: qsTr("Sets the number of edges for the Regular Polygon.")
+            }
 
             SecondColumnLayout {
                 SpinBox {
@@ -130,7 +142,10 @@ Column {
         caption: qsTr("Radiuses")
 
         SectionLayout {
-            PropertyLabel { text: qsTr("Radius") }
+            PropertyLabel {
+                text: qsTr("Radius")
+                tooltip: qsTr("Sets the radius of the corners in the Regular Polygon.")
+            }
 
             SecondColumnLayout {
                 SpinBox {

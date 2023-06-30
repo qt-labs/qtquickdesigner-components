@@ -46,7 +46,10 @@ Column {
         caption: qsTr("Triangle Item")
 
         SectionLayout {
-            PropertyLabel { text: qsTr("Fill color") }
+            PropertyLabel {
+                text: qsTr("Fill color")
+                tooltip: qsTr("Sets the color to fill the Triangle.")
+                }
 
             ColorEditor {
                 backendValue: backendValues.fillColor
@@ -54,14 +57,20 @@ Column {
                 shapeGradients: true
             }
 
-            PropertyLabel { text: qsTr("Stroke color") }
+            PropertyLabel {
+                text: qsTr("Stroke color")
+                tooltip: qsTr("Sets the stroke color of the boundary.")
+                }
 
             ColorEditor {
                 backendValue: backendValues.strokeColor
                 supportGradient: false
             }
 
-            PropertyLabel { text: qsTr("Stroke width") }
+            PropertyLabel {
+                text: qsTr("Stroke width")
+                tooltip: qsTr("Sets the stroke thickness of the boundary.")
+                }
 
             SecondColumnLayout {
                 SpinBox {
@@ -117,7 +126,10 @@ Column {
         caption: qsTr("Radiuses")
 
         SectionLayout {
-            PropertyLabel { text: qsTr("Radius") }
+            PropertyLabel {
+                text: qsTr("Radius")
+                tooltip: qsTr("Sets the radius of the corners and the radius for the edges of the intersections in the Triangle.")
+                }
 
             SecondColumnLayout {
                 SpinBox {
@@ -174,7 +186,10 @@ Column {
         anchors.right: parent.right
 
         SectionLayout {
-            PropertyLabel { text: qsTr("Vertical") }
+            PropertyLabel {
+                text: qsTr("Vertical")
+                tooltip: qsTr("Sets the top and bottom margins for the Triangle component.")
+                }
 
             SecondColumnLayout {
                 SpinBox {
@@ -222,7 +237,10 @@ Column {
                 ExpandingSpacer {}
             }
 
-            PropertyLabel { text: qsTr("Horizontal") }
+            PropertyLabel {
+                text: qsTr("Horizontal")
+                tooltip: qsTr("Sets the left and right margins for the Triangle component.")
+                }
 
             SecondColumnLayout {
                 SpinBox {

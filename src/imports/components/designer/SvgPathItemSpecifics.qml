@@ -43,7 +43,10 @@ Column {
         caption: qsTr("SVG Path Item")
 
         SectionLayout {
-            PropertyLabel { text: qsTr("Fill color") }
+            PropertyLabel {
+                text: qsTr("Fill color")
+                tooltip: qsTr("Sets the color to fill the SVG Path Item.")
+            }
 
             ColorEditor {
                 backendValue: backendValues.fillColor
@@ -51,14 +54,20 @@ Column {
                 shapeGradients: true
             }
 
-            PropertyLabel { text: qsTr("Stroke color") }
+            PropertyLabel {
+                text: qsTr("Stroke color")
+                tooltip: qsTr("Sets the stroke color of the boundary.")
+            }
 
             ColorEditor {
                 backendValue: backendValues.strokeColor
                 supportGradient: false
             }
 
-            PropertyLabel { text: qsTr("Stroke width") }
+            PropertyLabel {
+                text: qsTr("Stroke width")
+                tooltip: qsTr("Sets the stroke thickness of the boundary.")
+            }
 
             SecondColumnLayout {
                 SpinBox {
@@ -113,7 +122,10 @@ Column {
         caption: qsTr("Path Info")
 
         SectionLayout {
-            PropertyLabel { text: qsTr("Path data") }
+            PropertyLabel {
+                text: qsTr("Path data")
+                tooltip: qsTr("Sets a data string that specifies the SVG Path.")
+            }
 
             SecondColumnLayout{
                 LineEdit {

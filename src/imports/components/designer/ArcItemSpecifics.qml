@@ -43,7 +43,10 @@ Column {
         anchors.right: parent.right
 
         SectionLayout {
-            PropertyLabel { text: qsTr("Fill color") }
+            PropertyLabel {
+                text: qsTr("Fill color")
+                tooltip: qsTr("Sets the color inside the Arc stroke. This only works if the <b>Full outline</b> option is selected and the Arc stroke is not thick enough to fill the space.")
+            }
 
             ColorEditor {
                 backendValue: backendValues.fillColor
@@ -51,14 +54,20 @@ Column {
                 shapeGradients: true
             }
 
-            PropertyLabel { text: qsTr("Stroke color") }
+            PropertyLabel {
+                text: qsTr("Stroke color")
+                tooltip: qsTr("Sets the color of the Arc.")
+            }
 
             ColorEditor {
                 backendValue: backendValues.strokeColor
                 supportGradient: false
             }
 
-            PropertyLabel { text: qsTr("Stroke width") }
+            PropertyLabel {
+                text: qsTr("Stroke width")
+                tooltip: qsTr("Sets the thickness of the Arc.")
+            }
 
             SecondColumnLayout {
                 SpinBox {
@@ -101,7 +110,10 @@ Column {
                 ExpandingSpacer {}
             }
 
-            PropertyLabel { text: qsTr("Arc start") }
+            PropertyLabel {
+                text: qsTr("Arc start")
+                tooltip: qsTr("Sets the start angle of the Arc.")
+            }
 
             SecondColumnLayout {
                 SpinBox {
@@ -121,7 +133,10 @@ Column {
                 ExpandingSpacer {}
             }
 
-            PropertyLabel { text: qsTr("Arc end") }
+            PropertyLabel {
+                text: qsTr("Arc end")
+                tooltip: qsTr("Sets the end angle of the Arc.")
+            }
 
             SecondColumnLayout {
                 SpinBox {
@@ -152,7 +167,10 @@ Column {
         anchors.right: parent.right
 
         SectionLayout {
-            PropertyLabel { text: qsTr("Outline width") }
+            PropertyLabel {
+                text: qsTr("Outline width")
+                tooltip: qsTr("Sets the width of the outline that follows the Arc.")
+            }
 
             SecondColumnLayout {
                 SpinBox {
@@ -177,7 +195,10 @@ Column {
                 ExpandingSpacer {}
             }
 
-            PropertyLabel { text: qsTr("Round outline") }
+            PropertyLabel {
+                text: qsTr("Round outline")
+                tooltip: qsTr("Toggles the <b>Full outline</b> to have rounded edges.")
+            }
 
             SecondColumnLayout {
                 CheckBox {
@@ -190,7 +211,10 @@ Column {
                 ExpandingSpacer {}
             }
 
-            PropertyLabel { text: qsTr("Round start") }
+            PropertyLabel {
+                text: qsTr("Round start")
+                tooltip: qsTr("Toggles the starting edge of the <b>Full outline</b> to be rounded.")
+            }
 
             SecondColumnLayout {
                 CheckBox {
@@ -203,7 +227,10 @@ Column {
                 ExpandingSpacer {}
             }
 
-            PropertyLabel { text: qsTr("Round end") }
+            PropertyLabel {
+                text: qsTr("Round end")
+                tooltip: qsTr("Toggles the end edge of the <b>Full outline</b> to be rounded.")
+            }
 
             SecondColumnLayout {
                 CheckBox {

@@ -37,7 +37,10 @@ Section {
     caption: qsTr("Corner Bevel")
 
     SectionLayout {
-        PropertyLabel { text: qsTr("Top") }
+        PropertyLabel {
+            text: qsTr("Top")
+            tooltip: qsTr("Sets a flat cut on the top left or right corners.")
+        }
 
         SecondColumnLayout {
             CheckBox {
@@ -72,7 +75,10 @@ Section {
             ExpandingSpacer {}
         }
 
-        PropertyLabel { text: qsTr("Bottom") }
+        PropertyLabel {
+            text: qsTr("Bottom")
+            tooltip: qsTr("Sets a flat cut on the bottom left or right corners.")
+        }
 
         SecondColumnLayout {
             CheckBox {
@@ -108,7 +114,10 @@ Section {
             ExpandingSpacer {}
         }
 
-        PropertyLabel { text: qsTr("Global") }
+        PropertyLabel {
+            text: qsTr("Global")
+            tooltip: qsTr("Sets a flat cut on all of the corners.")
+        }
 
         SecondColumnLayout {
             CheckBox {

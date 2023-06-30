@@ -37,7 +37,10 @@ Section {
     caption: qsTr("Corner Radiuses")
 
     SectionLayout {
-        PropertyLabel { text: qsTr("Top") }
+        PropertyLabel {
+            text: qsTr("Top")
+            tooltip: qsTr("Toggles the top left or right corner to a rounded shape.")
+        }
 
         SecondColumnLayout {
             SpinBox {
@@ -82,7 +85,10 @@ Section {
             ExpandingSpacer {}
         }
 
-        PropertyLabel { text: qsTr("Bottom") }
+        PropertyLabel {
+            text: qsTr("Bottom")
+            tooltip: qsTr("Toggles the bottom left or right corner to a rounded shape.")
+        }
 
         SecondColumnLayout {
             SpinBox {
@@ -128,7 +134,10 @@ Section {
             ExpandingSpacer {}
         }
 
-        PropertyLabel { text: qsTr("Global") }
+        PropertyLabel {
+            text: qsTr("Global")
+            tooltip: qsTr("Toggles all the corners into a rounded shape.")
+        }
 
         SecondColumnLayout {
             SpinBox {
