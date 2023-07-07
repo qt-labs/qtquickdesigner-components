@@ -248,7 +248,7 @@ Shape {
     layer.smooth: root.antialiasing
     layer.samples: root.antialiasing ? 4 : 0
 
-    function clamp(num, min, max) {
+    function clamp(num: double, min: double, max: double): double {
         return Math.max(min, Math.min(num, max))
     }
 
@@ -263,15 +263,17 @@ Shape {
         return false
     }
 
-    function toRadians(degrees) {
-        return degrees * (Math.PI / 180.0)
+    // qmllint disable compiler
+    function toRadians(degrees: double): double {
+        return degrees * (Math.PI / 180.0) //Math.PI creates warning
     }
+    // qmllint enable compiler
 
-    function polarToCartesianX(centerX, centerY, radius, angleInDegrees) {
+    function polarToCartesianX(centerX: double, centerY: double, radius: double, angleInDegrees: double): double {
         return centerX + radius * Math.cos(root.toRadians(angleInDegrees))
     }
 
-    function polarToCartesianY(centerX, centerY, radius, angleInDegrees) {
+    function polarToCartesianY(centerX: double, centerY: double, radius: double, angleInDegrees: double): double {
         return centerY + radius * Math.sin(root.toRadians(angleInDegrees))
     }
 

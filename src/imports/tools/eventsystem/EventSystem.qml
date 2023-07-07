@@ -31,26 +31,31 @@ import QtQuick 2.10
 import QtQuick.Window 2.2
 
 Item {
+    id: root
     signal eventTriggered(string eventID, string parameters)
     property ListModel model
+
+// qmllint disable compiler
 
     function __modelLoaded()
     {
         model = eventListLoader.item
     }
 
-    function init(modelURI) {
-        eventListLoader.loaded.connect(__modelLoaded)
+    function init(modelURI: string) {
+        eventListLoader.loaded.connect(root.__modelLoaded)
         eventListLoader.source = modelURI
     }
 
-    function triggerEvent(eventId) {
-        for (var i = 0; i < model.count; i++) {
-            if (model.get(i).eventId === eventId) {
-                eventTriggered(eventId, model.get(i).parameters)
+    function triggerEvent(eventId :int) {
+        for (var i = 0; i < root.model.count; i++) {
+            if (root.model.get(i).eventId === eventId) {
+                root.eventTriggered(eventId, root.model.get(i).parameters)
             }
         }
     }
+
+// qmllint enable compiler
 
     Loader {
         id: eventListLoader

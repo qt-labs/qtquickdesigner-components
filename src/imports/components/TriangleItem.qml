@@ -387,46 +387,39 @@ Shape {
 
     Component.onCompleted: root.calc()
 
-    function length(x, y) {
+    function length(x: double, y: double): double {
         return Math.sqrt(x * x + y * y)
     }
 
-    function normalize(x, y) {
+    function normalize(x: double, y: double) : vector2d {
         var l = length(x, y)
 
-        return {
-            x: x / l,
-            y: y / l
-        }
+        return Qt.vector2d(x / l, y / l)
     }
 
-    function dotProduct(x1, y1, x2, y2) {
+    function dotProduct(x1: double, y1: double, x2: double, y2: double): double {
         return x1 * x2 + y1 * y2;
     }
 
-    function project(x1, y1, x2, y2) {
+    function project(x1: double, y1: double, x2: double, y2: double) : vector2d {
         var normalized = normalize(x1, y1)
 
         var dot = dotProduct(normalized.x, normalized.y, x2, y2)
 
-        return {
-            x: normalized.x * dot,
-            y: normalized.y * dot
-        }
+        return Qt.vector2d(normalized.x * dot, normalized.y * dot)
     }
 
-    function intersect(x1, y1, x2, y2, x3, y3, x4, y4) {
+    function intersect(x1: double, y1: double, x2: double, y2: double, x3: double, y3: double, x4: double, y4: double) : vector2d {
         var denom = (y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1)
 
         var ua = ((x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)) / denom
         var ub = ((x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)) / denom
-        return {
-            x: x1 + ua * (x2 - x1),
-            y: y1 + ua * (y2 - y1)
-        };
+
+        return Qt.vector2d(x1 + ua * (x2 - x1), y1 + ua * (y2 - y1))
     }
 
-    function moveLine(startX, startY, endX, endY) {
+    // qmllint disable compiler
+    function moveLine(startX: double, startY: double, endX: double, endY: double) : var {
         var angle = Math.atan2(endY - startY, endX - startX)
         var xOffset = Math.sin(angle) * Math.min(root.radius, root.maxRadius)
         var yOffset = -Math.cos(angle) * Math.min(root.radius, root.maxRadius)
@@ -438,11 +431,14 @@ Shape {
             endY: endY + yOffset
         };
     }
+    // qmllint enable compiler
 
     function calc() {
         var movedLine1 = moveLine(path.__width / 2, 0, 0, path.__height)
         var movedLine2 = moveLine(path.__width, path.__height, path.__width / 2, 0)
         var movedLine3 = moveLine(0, path.__height, path.__width, path.__height)
+
+        // qmllint disable compiler
 
         var lengthLine1 = Math.floor(root.length(movedLine1.endX - movedLine1.startX,
                                                  movedLine1.endY - movedLine1.startY))
@@ -450,6 +446,7 @@ Shape {
                                                  movedLine2.endY - movedLine2.startY))
         var lengthLine3 = Math.floor(root.length(movedLine3.endX - movedLine3.startX,
                                                  movedLine3.endY - movedLine3.startY))
+        // qmllint enable compiler
 
         var perimeter = lengthLine1 + lengthLine2 + lengthLine3
         var area = (path.__height) * (path.__width) * 0.5

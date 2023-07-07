@@ -98,7 +98,7 @@ QtObject {
 
     property EventListener eventListener: EventListener {
         id: eventListener
-        onTriggered: root.__receiveEvent(parameters)
+        onTriggered: root.__receiveEvent(eventListener.parameters)
     }
 
     function trigger() {

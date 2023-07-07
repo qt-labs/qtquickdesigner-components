@@ -5,6 +5,8 @@ qt6_add_qml_module(QuickStudioMultiText
     RESOURCE_PREFIX "/qt-project.org/imports"
     DESIGNER_SUPPORTED
     PAST_MAJOR_VERSIONS 1
+    NO_LINT
+    NO_CACHEGEN
     QML_FILES
         MultiTextElement.qml
         MultiTextItem.qml

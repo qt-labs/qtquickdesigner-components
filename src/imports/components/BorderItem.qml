@@ -403,6 +403,7 @@ Shape {
     onDrawBottomChanged: root.constructBorderItem()
     onDrawLeftChanged: root.constructBorderItem()
 
+// qmllint disable compiler
     function constructBorderItem() {
         root.clearPathElements()
 
@@ -494,13 +495,16 @@ Shape {
             path.pathElements.push(pathArc)
         }
     }
+// qmllint enable compiler
 
+// qmllint disable compiler
     function clearPathElements() {
         for (var i = 0; i !== path.pathElements.length; ++i)
             path.pathElements[i].destroy()
 
         path.pathElements = []
     }
+// qmllint enable compiler
 
     Component.onCompleted: root.constructBorderItem()
 }

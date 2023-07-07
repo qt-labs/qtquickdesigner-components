@@ -10,6 +10,8 @@ qt6_add_qml_module(FlowView
     DESIGNER_SUPPORTED
     PAST_MAJOR_VERSIONS 1
     NO_GENERATE_QMLDIR
+    NO_LINT
+    NO_CACHEGEN
     QML_FILES
         DefaultFlowEffect.qml
         SwipeInteraction.qml

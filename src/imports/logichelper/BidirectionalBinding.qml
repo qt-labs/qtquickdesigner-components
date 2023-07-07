@@ -110,40 +110,40 @@ QtObject {
         property bool block: false
 
         onValue01Changed: {
-            if (__internal.block)
+            if (object.__internal.block)
                 return;
 
-            __internal.block = true;
+            object.__internal.block = true;
             try {
-                object.target02[property02] =  __internal.value01
+                object.target02[property02] =  object.__internal.value01
             } catch(error) {
             }
-            __internal.block = false;
+            object.__internal.block = false;
         }
 
         onValue02Changed: {
-            if (__internal.block)
+            if (object.__internal.block)
                 return;
 
-            __internal.block = true;
+            object.__internal.block = true;
             try {
-                object.target01[property01] =  __internal.value02
+                object.target01[property01] =  object.__internal.value02
             } catch(error) {
             }
-            __internal.block = false;
+            object.__internal.block = false;
         }
     }
 
     property Binding __b01: Binding {
-        target: __internal
+        target: object.__internal
         property: "value01"
-        value: target01[property01]
+        value: object.target01[object.property01]
     }
 
     property Binding __b02: Binding {
-        target: __internal
+        target: object.__internal
         property: "value02"
-        value: target02[property02]
+        value: object.target02[object.property02]
     }
 
 

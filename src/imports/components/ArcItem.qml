@@ -313,39 +313,41 @@ Shape {
 */
     property bool roundBegin: root.round
 
-    function clamp(num, min, max) {
+    function clamp(num: double, min: double, max: double): double {
         return Math.max(min, Math.min(num, max))
     }
 
-    function toRadians(degrees) {
+// qmllint disable compiler
+    function toRadians(degrees: double): double {
         return degrees * (Math.PI / 180.0)
     }
+// qmllint enable compiler
 
-    function myCos(angleInDegrees) {
+    function myCos(angleInDegrees: double): double {
         return Math.cos(root.toRadians(angleInDegrees))
     }
 
-    function mySin(angleInDegrees) {
+    function mySin(angleInDegrees: double): double {
         return Math.sin(root.toRadians(angleInDegrees))
     }
 
-    function polarToCartesianX(centerX, centerY, radius, angleInDegrees) {
+    function polarToCartesianX(centerX: double, centerY: double, radius: double, angleInDegrees: double): double {
         return centerX + radius * Math.cos(root.toRadians(angleInDegrees))
     }
 
-    function polarToCartesianY(centerX, centerY, radius, angleInDegrees) {
+    function polarToCartesianY(centerX: double, centerY: double, radius: double, angleInDegrees: double): double {
         return centerY + radius * Math.sin(root.toRadians(angleInDegrees))
     }
 
-    function sortedBegin() {
+    function sortedBegin(): double {
         return Math.min(root.begin, root.end)
     }
 
-    function sortedEnd() {
+    function sortedEnd(): double {
         return Math.min(Math.max(root.begin, root.end), root.sortedBegin() + 359.9)
     }
 
-    function isArcFull() {
+    function isArcFull(): bool {
         return root.alpha > 359.5
     }
 
@@ -383,6 +385,7 @@ Shape {
         startY: root.polarToCartesianY(path.__xCenter, path.__yCenter, path.__yRadius, root.sortedBegin() - 90)
     }
 
+// qmllint disable compiler
     function constructArcItem() {
         root.clearPathElements()
 
@@ -479,13 +482,16 @@ Shape {
             path.pathElements.push(pathMove)
         }
     }
+    // qmllint enable compiler
 
+    // qmllint disable compiler
     function clearPathElements() {
         for (var i = 0; i !== path.pathElements.length; ++i)
             path.pathElements[i].destroy()
 
         path.pathElements = []
     }
+    // qmllint enable compiler
 
     Component.onCompleted: {
         root.__wasFull = root.isArcFull()

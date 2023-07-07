@@ -31,6 +31,9 @@ import QtQuick 2.10
 import QtQuick.Studio.EventSystem 1.0
 
 Rectangle {
+    // qmllint disable unqualified
+    // qmllint disable compiler
+
     id: delegateItem
     width: 190
     height: 60
@@ -76,4 +79,6 @@ Rectangle {
             EventSystem.triggerEvent(eventId)
         }
     }
+    // qmllint enable unqualified
+    // qmllint enable compiler
 }

@@ -35,6 +35,8 @@ import QtQuick.Studio.EventSystem 1.0
 QtObject {
     id: root
 
+// qmllint disable compiler
+
     property ListModel __filteredModel: ListModel{}
     property font font: {
         family: "Verdana"
@@ -162,4 +164,6 @@ QtObject {
 
         }
     }
+
+// qmllint enable compiler
 }

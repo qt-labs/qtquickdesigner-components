@@ -37,7 +37,7 @@ Item {
     id: root
     property var transitionView
     property var list
-    parent: transitionView
+    parent: root.transitionView
     anchors.fill: parent
     z: -1
 
@@ -55,13 +55,13 @@ Item {
     }
 
     Connections {
-        target: transitionView
+        target: root.transitionView
         function onTransitionFinished() {
             if (!root.__reactToTransition)
                 return
             /* This is a tricky one. We have to also update the list.
                The connection could be also done the other way around */
-            list.currentItem = root.__activeItem
+            root.list.currentItem = root.__activeItem
             root.__reactToTransition = false
         }
     }
@@ -75,29 +75,29 @@ Item {
 
         function distance() {
             if (root.horizontal)
-                return (centroid.position.x - centroid.pressPosition.x) / transitionView.width
-            return -(centroid.position.y - centroid.pressPosition.y) / transitionView.height
+                return (centroid.position.x - centroid.pressPosition.x) / root.transitionView.width
+            return -(centroid.position.y - centroid.pressPosition.y) / root.transitionView.height
         }
 
         onActiveChanged: {
             if (handler.active) {
                 if (distance() < 0)
-                    transitionView.nextItem = list.nextItem
+                    root.transitionView.nextItem = root.list.nextItem
                 else
-                    transitionView.nextItem = list.prevItem
+                    root.transitionView.nextItem = root.list.prevItem
 
-                transitionView.scheduleTransition()
-                if (transitionView.currentTransition)
-                    transitionView.currentTransition.effect.enable()
+                root.transitionView.scheduleTransition()
+                if (root.transitionView.currentTransition)
+                    root.transitionView.currentTransition.effect.enable()
             } else {
                 var p = Math.abs(distance()) * 100
-                if (transitionView.currentTransition && transitionView.currentTransition.effect.progress > root.threshold) {
-                    root.__activeItem = transitionView.nextItem
+                if (root.transitionView.currentTransition && root.transitionView.currentTransition.effect.progress > root.threshold) {
+                    root.__activeItem = root.transitionView.nextItem
                     root.__reactToTransition = true
-                    transitionView.currentTransition.__start()
+                    root.transitionView.currentTransition.__start()
                 } else { /* Drag was released, but threshold was not passed */
-                    if (transitionView.currentTransition)
-                        transitionView.currentTransition.effect.abort()
+                    if (root.transitionView.currentTransition)
+                        root.transitionView.currentTransition.effect.abort()
                 }
                 /* Block for 100ms */
                 handler.enabled = false
@@ -111,8 +111,8 @@ Item {
 
             var p = Math.abs(distance()) * 100
 
-            if (transitionView.currentTransition)
-                transitionView.currentTransition.effect.progress = p * 2
+            if (root.transitionView.currentTransition)
+                root.transitionView.currentTransition.effect.progress = p * 2
         }
     }
 }

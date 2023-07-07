@@ -212,10 +212,14 @@ Shape {
             root.constructRoundedPolygonPath()
     }
 
-    function toRadians(degrees) {
+// qmllint disable compiler
+    function toRadians(degrees: double): double {
         return degrees * (Math.PI / 180.0)
     }
+// qmllint enable compiler
 
+
+// qmllint disable compiler
     function constructNonRoundedPolygonPath() {
         for (var cornerNumber = 0; cornerNumber < root.sideCount; cornerNumber++) {
             let angleToCorner = root.toRadians(cornerNumber * (360.0 / root.sideCount))
@@ -245,13 +249,15 @@ Shape {
         pathLineClose.y = Qt.binding(function() { return path.startY } )
         path.pathElements.push(pathLineClose)
     }
+// qmllint enable compiler
 
     property real __halfInteriorCornerAngle: 90 - (180.0 / root.sideCount)
     property real __halfCornerArcSweepAngle: 90 - root.__halfInteriorCornerAngle
     property real __distanceToCornerArcCenter: root.__radius - root.__actualRadius /
                                                Math.sin(root.toRadians(root.__halfInteriorCornerAngle))
 
-    function constructRoundedPolygonPath() {
+    function constructRoundedPolygonPath(): double {
+        // qmllint disable compiler
         for (var cornerNumber = 0; cornerNumber < root.sideCount; cornerNumber++) {
             let angleToCorner = cornerNumber * (360.0 / root.sideCount)
 
@@ -300,6 +306,7 @@ Shape {
             }
 
             path.pathElements.push(pathArc)
+            // qmllint enable compiler
         }
 
         // Close the polygon
@@ -309,10 +316,12 @@ Shape {
         path.pathElements.push(pathLineClose)
     }
 
+// qmllint disable compiler
     function clearPathElements() {
         for (var i = 0; i !== path.pathElements.length; ++i)
             path.pathElements[i].destroy()
 
         path.pathElements = []
     }
+// qmllint enable compiler
 }

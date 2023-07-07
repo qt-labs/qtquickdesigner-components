@@ -4,6 +4,7 @@ qt6_add_qml_module(QuickStudioComponents
     VERSION "${PROJECT_VERSION}"
     RESOURCE_PREFIX "/qt-project.org/imports"
     DESIGNER_SUPPORTED
+    CLASS_NAME Std_Cmpt
     PAST_MAJOR_VERSIONS 1
         QML_FILES
         ArcItem.qml

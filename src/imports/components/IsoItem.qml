@@ -27,9 +27,9 @@
 **
 ****************************************************************************/
 
+// qmllint disable import
 import QtQuick 2.0
 import QtQuick 2.9
-import QtQuick.Extras 1.4
 
 /*!
     \qmltype IsoItem
@@ -53,7 +53,7 @@ import QtQuick.Extras 1.4
     The QML code looks as follows:
 
     \code
-    IsoItem {
+    Item {
         id: arrowIsoIcon
         color: "#808080"
         anchors.fill: parent
@@ -62,6 +62,10 @@ import QtQuick.Extras 1.4
     \endcode
 */
 
-Picture {
+Item {
+    property color color: "#808080"
+    property url source: "./iso-icons/iso_grs_7000_4_0251.dat"
 
 }
+
+// qmllint enable import

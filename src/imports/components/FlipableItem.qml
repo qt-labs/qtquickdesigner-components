@@ -115,19 +115,21 @@ Flipable {
 */
     property int rotationalAxis: 1 // 0: x-axis, 1: y-axis
 
+ // qmllint disable compiler
     Binding {
         target: flipable.front
-        value: opacityFront
+        value: flipable.opacityFront
         property: "opacity"
         when: flipable.front !== undefined
     }
 
     Binding {
         target: flipable.back
-        value: opacityBack
+        value: flipable.opacityBack
         property: "opacity"
         when: flipable.back !== undefined
     }
+// qmllint enable compiler
 
 /*!
     Whether the type has been flipped.

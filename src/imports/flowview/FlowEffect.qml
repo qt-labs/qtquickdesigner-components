@@ -57,7 +57,7 @@ QtObject {
     property bool __aborted: false
 
     function enable() {
-        timeline.enabled = true
+        root.timeline.enabled = true
         root.started()
     }
 
@@ -104,7 +104,7 @@ QtObject {
     property bool backwards: false
 
     property Binding timelineBinding: Binding {
-        target: timeline
+        target: root.timeline
         property: "currentFrame"
         value: root.progress * 10
     }
@@ -130,7 +130,7 @@ QtObject {
         target: root
         property: "progress"
         onStopped: {
-            timeline.enabled = false
+            root.timeline.enabled = false
             /* reset all typical properties */
 
             resetProperties()
