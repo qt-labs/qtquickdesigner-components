@@ -27,24 +27,31 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.15
-//! [AnimatedSpriteDirectory compatibility]
-//  Draws a sprite animation stored in a directory.
-Item {
-    property int currentFrame: 0
-    property int frameDuration: 0
-    property int loops: -1 //-1 = AnimatedSpriteDirectory.Infinite
-    property bool running: true
-    property bool paused: false
-    property string sourcePath
+#include <QQmlEngine>
+#include <QQmlContext>
+#include <QtQml/qqmlextensionplugin.h>
 
-    signal finished
+QT_BEGIN_NAMESPACE
 
-    function advance() {}
-    function pause() {}
-    function restart() {}
-    function resume() {}
-    function start() {}
-    function stop() {}
+class StudioCompatibilityQULProfiling: public QQmlExtensionPlugin
+{
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID QQmlExtensionInterface_iid)
+
+public:
+    StudioCompatibilityQULProfiling(QObject *parent = nullptr);
+    void registerTypes(const char *uri) override;
+};
+
+StudioCompatibilityQULProfiling::StudioCompatibilityQULProfiling(QObject *parent)
+    : QQmlExtensionPlugin(parent)
+{
 }
-//! [AnimatedSpriteDirectory compatibility]
+
+void StudioCompatibilityQULProfiling::registerTypes(const char *)
+{
+}
+
+QT_END_NAMESPACE
+
+#include "studiocompatibilityqulprofiling.moc"

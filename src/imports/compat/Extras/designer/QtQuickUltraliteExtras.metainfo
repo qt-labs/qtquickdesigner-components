@@ -34,4 +34,28 @@ MetaInfo {
             toolTip: qsTr("Enables optimized drawing of text.")
         }
     }
+
+    Type {
+        name: "QtQuickUltralite.Extras.AnimatedSpriteDirectory"
+        icon: "images/animated-image-icon.png"
+
+        ItemLibraryEntry {
+            name: "AnimatedSprite Directory"
+            category: "QtQuickUltralite - Extras"
+            libraryIcon: "images/animated-image-icon@2x.png"
+            version: "1.0"
+            requiredImport: "QtQuickUltralite.Extras"
+
+            Property { name: "width"; type: "int"; value: 100; }
+            Property { name: "height"; type: "int"; value: 100; }
+            Property { name: "currentFrame"; type: "int"; value: 0; }
+            Property { name: "frameDuration"; type: "int"; value: 30; }
+            Property { name: "loops"; type: "int"; value: -1; }
+            Property { name: "running"; type: "bool"; value: true; }
+            Property { name: "paused"; type: "bool"; value: false; }
+            Property { name: "sourcePath"; type: "string"; value: ""; }
+
+            toolTip: qsTr("Draws a sprite animation stored in a directory.")
+        }
+    }
 }

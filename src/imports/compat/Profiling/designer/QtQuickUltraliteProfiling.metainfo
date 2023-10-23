@@ -1,0 +1,19 @@
+MetaInfo {
+    Type {
+        name: "QtQuickUltralite.Profiling.QulPerfOverlay"
+        icon: "images/levels-icon.png"
+
+        ItemLibraryEntry {
+            name: "QulPerf Overlay"
+            category: "QtQuickUltralite - Profiling"
+            libraryIcon: "images/levels-icon@2x.png"
+            version: "1.0"
+            requiredImport: "QtQuickUltralite.Profiling"
+
+            Property { name: "width"; type: "int"; value: 100; }
+            Property { name: "height"; type: "int"; value: 100; }
+
+            toolTip: qsTr("Logs and displays Qul application performance metrics.")
+        }
+    }
+}

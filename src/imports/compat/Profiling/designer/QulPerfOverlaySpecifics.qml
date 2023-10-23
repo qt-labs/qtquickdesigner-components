@@ -27,24 +27,21 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.15
-//! [AnimatedSpriteDirectory compatibility]
-//  Draws a sprite animation stored in a directory.
-Item {
-    property int currentFrame: 0
-    property int frameDuration: 0
-    property int loops: -1 //-1 = AnimatedSpriteDirectory.Infinite
-    property bool running: true
-    property bool paused: false
-    property string sourcePath
+import QtQuick 
+import QtQuick.Layouts
+import HelperWidgets
+import StudioTheme
 
-    signal finished
+//! [QulPerfOverlay compatibility]
+Column {
+    anchors.left: parent.left
+    anchors.right: parent.right
 
-    function advance() {}
-    function pause() {}
-    function restart() {}
-    function resume() {}
-    function start() {}
-    function stop() {}
+    Section {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        caption: qsTr("QulPerf Overlay")
+    }
+
 }
-//! [AnimatedSpriteDirectory compatibility]
+//! [QulPerfOverlay compatibility]
