@@ -10,6 +10,7 @@ qt_internal_add_qml_module(QuickStudioUtils
  INCLUDE_DIRECTORIES
     ${CMAKE_CURRENT_SOURCE_DIR}
     SOURCES
+        quickstudiocsvtablemodel.cpp quickstudiocsvtablemodel_p.h
         quickstudiofilereader.cpp quickstudiofilereader_p.h
     QML_FILES
         JSONListModel.qml JSONBackend.qml
