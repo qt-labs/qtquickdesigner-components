@@ -39,41 +39,38 @@ import QtQuick.Studio.Utils
 
 QtObject {
     id: server
-    property url source: Qt.resolvedUrl("server.json")
-    property string __json: fileReader.content
+    property url source
 
     property FileReader fileReader: FileReader {
         id: fileReader
-        filePath: listModel.source
+        filePath: server.source
+        onContentChanged: server.updateJSON()
+        property string query
     }
-
-    on__JsonChanged: server.updateJSON()
 
     function updateJSON() {
 
-        if (server.__json === "" )
-            return;
+        if (fileReader.content === "")
+            return
 
-        var objectArray = parseJSONString(server.__json, server.__query);
-        for ( var key in objectArray ) {
-            var jo = objectArray[key];
-            if (server[key] !== undefined) {
+        var objectArray = parseJSONString(fileReader.content, fileReader.query)
+        for (var key in objectArray) {
+            var jo = objectArray[key]
+            if (server[key] !== undefined)
                 server[key] = jo
-            } else {
+            else
                 console.warn(key, "undefined")
-            }
+
         }
     }
 
     function parseJSONString(jsonString, jsonPathQuery) {
-        var objectArray = JSON.parse(jsonString);
-        if ( jsonPathQuery !== "" )
-            objectArray = JSONPath.jsonPath(objectArray, jsonPathQuery);
-        else {
+        var objectArray = JSON.parse(jsonString)
+        if (jsonPathQuery !== "")
+            objectArray = JSONPath.jsonPath(objectArray, jsonPathQuery)
+        else
             console.error("JSON parsing failed")
-        }
 
-        return objectArray;
+        return objectArray
     }
-
 }
