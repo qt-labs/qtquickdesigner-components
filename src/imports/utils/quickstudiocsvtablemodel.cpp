@@ -59,13 +59,13 @@ static QVariant stringToVariant(const QString &value)
     if (!match.hasMatch())
         return value;
 
-    if (match.hasCaptured(u"boolean"))
+    if (!match.captured(u"boolean").isEmpty())
         return QVariant::fromValue<bool>(trimmedValue.at(0).toLower() == u't');
 
-    if (match.hasCaptured(u"number"))
+    if (!match.captured(u"number").isEmpty())
         return trimmedValue.toDouble();
 
-    if (match.hasCaptured(u"color"))
+    if (!match.captured(u"color").isEmpty())
         return QColor::fromString(trimmedValue);
 
     return value;
