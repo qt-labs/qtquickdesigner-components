@@ -44,6 +44,15 @@
 #include <QRegularExpression>
 #include <QTextStream>
 
+static inline QColor fromString(const QString &colorName)
+{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 4, 0)
+    return QColor::fromString(colorName);
+#else
+    return colorName;
+#endif // >= Qt 6.4
+}
+
 static inline bool isValidColorName(const QString &colorName)
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 4, 0)
@@ -78,7 +87,7 @@ static QVariant stringToVariant(const QString &value)
         return trimmedValue.toDouble();
 
     if (!match.captured(u"color").isEmpty())
-        return QColor::fromString(trimmedValue);
+        return ::fromString(trimmedValue);
 
     return value;
 }
@@ -120,7 +129,7 @@ static QVariant stringToVariant(const QString &value, QMetaType::Type type, bool
             *ok = conversionOk;
 
         if (conversionOk)
-            return QColor::fromString(value);
+            return ::fromString(value);
     }
 
     if (type == QMetaType::QString) {
