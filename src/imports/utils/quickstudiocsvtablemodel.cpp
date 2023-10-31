@@ -44,6 +44,18 @@
 #include <QRegularExpression>
 #include <QTextStream>
 
+static inline bool isValidColorName(const QString &colorName)
+{
+#if QT_VERSION >= QT_VERSION_CHECK(6, 4, 0)
+    return QColor::isValidColorName(colorName);
+#else
+    constexpr QStringView colorPattern(
+        u"(?<color>^(?:#(?:(?:[0-9a-fA-F]{2}){3,4}|(?:[0-9a-fA-F]){3,4}))$)");
+    static QRegularExpression colorRegex(colorPattern.toString());
+    return colorRegex.match(colorName).hasMatch();
+#endif // >= Qt 6.4
+}
+
 static QVariant stringToVariant(const QString &value)
 {
     constexpr QStringView typesPattern{u"(?<boolean>^(?:true|false)$)|"
@@ -103,7 +115,7 @@ static QVariant stringToVariant(const QString &value, QMetaType::Type type, bool
     }
 
     if (type == QMetaType::QColor) {
-        bool conversionOk = QColor::isValidColorName(value);
+        bool conversionOk = ::isValidColorName(value);
         if (ok)
             *ok = conversionOk;
 
