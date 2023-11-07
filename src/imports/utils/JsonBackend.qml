@@ -48,6 +48,7 @@ QtObject {
         property string query
     }
 
+// qmllint disable compiler
     function updateJSON() {
 
         if (fileReader.content === "")
@@ -73,4 +74,5 @@ QtObject {
 
         return objectArray
     }
+// qmllint enable compiler
 }

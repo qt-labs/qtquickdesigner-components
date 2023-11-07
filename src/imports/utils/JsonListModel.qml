@@ -47,7 +47,7 @@ ListModel {
         onContentChanged: listModel.updateJSON()
         property string query
     }
-
+// qmllint disable compiler
     function updateJSON() {
         listModel.clear()
         if (fileReader.content === "")
@@ -69,4 +69,5 @@ ListModel {
 
         return objectArray
     }
+// qmllint enable compiler
 }
