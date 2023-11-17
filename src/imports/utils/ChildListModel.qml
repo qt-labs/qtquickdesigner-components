@@ -36,58 +36,26 @@
 
 import QtQuick
 import QtQuick.Studio.Utils
-//import "jsonpath.js" as JSONPath
 
 ListModel {
     id: listModel
 
-    property url source
-    property var jsonObject
+    property string modelName
+    property var jsonObject: null
+
     dynamicRoles: true
 
-    property FileReader fileReader: FileReader {
-        id: fileReader
-        filePath: listModel.source
-        onContentChanged: listModel.updateJSON()
-    }
-
 // qmllint disable compiler
+
     onJsonObjectChanged: {
         listModel.clear()
         var objectArray = listModel.jsonObject
-
+        if (modelName.modelName !== "")
+            objectArray = objectArray[listModel.modelName]
         for (var key in objectArray) {
             var jo = objectArray[key]
             listModel.append(jo)
         }
-    }
-
-    function updateJSON() {
-        if (fileReader.content === "")
-            return
-
-        var objectArray = parseJSONString(fileReader.content)
-        listModel.jsonObject = objectArray
-        invalidateChildModels()
-    }
-
-    function parseJSONString(jsonString, object) {
-        var objectArray = JSON.parse(jsonString)
-
-        return objectArray
-    }
-
-    function invalidateChildModels() {
-        for(var property in listModel) {
-            if (listModel[property].jsonObject !== undefined) {
-                listModel[property].jsonObject = listModel.jsonObject
-            }
-        }
-
-    }
-
-    Component.onCompleted: {
-        invalidateChildModels()
     }
 // qmllint enable compiler
 }
