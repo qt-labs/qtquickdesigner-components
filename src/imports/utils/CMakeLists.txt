@@ -13,7 +13,7 @@ qt_internal_add_qml_module(QuickStudioUtils
         quickstudiocsvtablemodel.cpp quickstudiocsvtablemodel_p.h
         quickstudiofilereader.cpp quickstudiofilereader_p.h
     QML_FILES
-        JsonListModel.qml JsonBackend.qml
+        JsonListModel.qml JsonBackend.qml ChildListModel.qml
     PUBLIC_LIBRARIES
         Qt::Qml
         Qt::Quick
