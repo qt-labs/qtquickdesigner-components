@@ -1,0 +1,6 @@
+*.egg-info
+build
+dist
+pyproject.toml
+__pycache__
+PySide6
