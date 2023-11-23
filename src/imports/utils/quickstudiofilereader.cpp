@@ -68,7 +68,7 @@ QString QuickStudioFileReader::loadFile(const QString &path)
 
     connect(m_watcher, &QFileSystemWatcher::fileChanged, this, &QuickStudioFileReader::reload);
 
-    return file.readAll();
+    return QString::fromUtf8(file.readAll());
 }
 
 void QuickStudioFileReader::reload()
