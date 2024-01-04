@@ -29,7 +29,7 @@
 
 import QtQuick 2.15
 
-//! [Application compatibility]
+//! [ApplicationScreens compatibility]
 Item {
 }
-//! [Application compatibility]
+//! [ApplicationScreens compatibility]

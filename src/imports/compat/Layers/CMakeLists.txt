@@ -7,7 +7,7 @@ qt_internal_add_qml_module(QuickUltraLiteStudioLayers
         1
         2
     QML_FILES
-        Application.qml
+        ApplicationScreens.qml
         ImageLayer.qml
         ItemLayer.qml
         Screen.qml

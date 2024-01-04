@@ -32,12 +32,12 @@ import QtQuick 2.15
 import HelperWidgets 2.0
 import QtQuick.Layouts 1.0
 
-//! [Application compatibility]
+//! [ApplicationScreens compatibility]
 Section {
     anchors.left: parent.left
     anchors.right: parent.right
-    caption: qsTr("Application")
+    caption: qsTr("Application Screens")
 
-    //Application type has no properties
+    //ApplicationScreens type has no properties
 }
-//! [Application compatibility]
+//! [ApplicationScreens compatibility]

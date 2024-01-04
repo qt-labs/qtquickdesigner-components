@@ -5,9 +5,9 @@ optional plugin studioqtquickultralitelayersplugin
 classname QtQuickUltralite_LayersPlugin
 typeinfo studioqtquickultralitelayers.qmltypes
 prefer :/QtQuickUltralite/Layers/
-Application 1.0 Application.qml
-Application 2.0 Application.qml
-Application 6.0 Application.qml
+ApplicationScreens 1.0 ApplicationScreens.qml
+ApplicationScreens 2.0 ApplicationScreens.qml
+ApplicationScreens 6.0 ApplicationScreens.qml
 ImageLayer 1.0 ImageLayer.qml
 ImageLayer 2.0 ImageLayer.qml
 ImageLayer 6.0 ImageLayer.qml

@@ -1,10 +1,10 @@
 MetaInfo {
     Type {
-        name: "QtQuickUltralite.Layers.Application"
+        name: "QtQuickUltralite.Layers.ApplicationScreens"
         icon: "images/item-icon.png"
 
         ItemLibraryEntry {
-            name: "Application"
+            name: "Application Screens"
             category: "QtQuickUltralite - Layers"
             libraryIcon: "images/item-icon@2x.png"
             version: "1.0"
