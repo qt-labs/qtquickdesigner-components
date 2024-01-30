@@ -89,7 +89,12 @@ Shape {
 
     \sa Qt::PenStyle
 */
-    property alias strokeStyle: shape.strokeStyle
+    //property alias joinStyle: path.joinStyle
+    property int joinStyle: ShapePath.MiterJoin //workaround for regression in Qt 6.6.1 (QDS-11845)
+    //property alias capStyle: path.capStyle
+    property int capStyle: ShapePath.SquareCap //workaround for regression in Qt 6.6.1 (QDS-11845)
+    //property alias strokeStyle: path.strokeStyle
+    property int strokeStyle: ShapePath.SolidLine //workaround for regression in Qt 6.6.1 (QDS-11845)
 
 /*!
     The width of the line.
@@ -146,7 +151,6 @@ Shape {
 
     \sa Qt::PenJoinStyle
 */
-    property alias joinStyle: shape.joinStyle
 
 /*!
     The fill color of enclosed path segments.
@@ -200,7 +204,6 @@ Shape {
 
     \sa Qt::PenCapStyle
 */
-    property alias capStyle: shape.capStyle
 
     layer.enabled: root.antialiasing
     layer.smooth: root.antialiasing
@@ -210,7 +213,10 @@ Shape {
         id: shape
         strokeWidth: 4
         strokeColor: "red"
-        joinStyle: ShapePath.MiterJoin
+        capStyle: root.capStyle
+        strokeStyle: root.strokeStyle
+        joinStyle: root.joinStyle
+
 
         PathSvg {
             id: pathSvg
