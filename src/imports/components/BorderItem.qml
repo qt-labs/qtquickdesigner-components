@@ -199,7 +199,6 @@ Shape {
 
     \sa Qt::PenStyle
 */
-    property alias strokeStyle: path.strokeStyle
 
 /*!
     The width of the border line.
@@ -256,7 +255,13 @@ Shape {
 
     \sa Qt::PenJoinStyle
 */
-    property alias joinStyle: path.joinStyle
+
+    //property alias joinStyle: path.joinStyle
+    property int joinStyle: ShapePath.MiterJoin //workaround for regression in Qt 6.6.1 (QDS-11845)
+    //property alias capStyle: path.capStyle
+    property int capStyle: ShapePath.SquareCap //workaround for regression in Qt 6.6.1 (QDS-11845)
+    //property alias strokeStyle: path.strokeStyle
+    property int strokeStyle: ShapePath.SolidLine //workaround for regression in Qt 6.6.1 (QDS-11845)
 
 /*!
     The starting point of the dash pattern for the border line.
@@ -288,7 +293,6 @@ Shape {
 
     \sa Qt::PenCapStyle
 */
-    property alias capStyle: path.capStyle
 
     //property alias fillColor: path.fillColor
 
@@ -388,7 +392,9 @@ Shape {
             return 0
         }
 
-        joinStyle: ShapePath.MiterJoin
+        capStyle: root.capStyle
+        strokeStyle: root.strokeStyle
+        joinStyle: root.joinStyle
 
         strokeWidth: 4
         strokeColor: "red"
