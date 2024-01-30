@@ -125,7 +125,13 @@ Shape {
 
     \sa Qt::PenStyle
 */
-    property alias strokeStyle: path.strokeStyle
+
+    //property alias joinStyle: path.joinStyle
+    property int joinStyle: ShapePath.BevelJoin //workaround for regression in Qt 6.6.1 (QDS-11845)
+    //property alias capStyle: path.capStyle
+    property int capStyle: ShapePath.FlatCap //workaround for regression in Qt 6.6.1 (QDS-11845)
+    //property alias strokeStyle: path.strokeStyle
+    property int strokeStyle: ShapePath.SolidLine //workaround for regression in Qt 6.6.1 (QDS-11845)
 
 /*!
     The width of the line.
@@ -167,7 +173,6 @@ Shape {
     \sa QPen::setDashPattern()
 */
     property alias dashPattern: path.dashPattern
-    property alias joinStyle: path.joinStyle
 
 /*!
     The pie fill color.
@@ -217,7 +222,6 @@ Shape {
 
     \sa Qt::PenCapStyle
 */
-    property alias capStyle: path.capStyle
 
 /*!
     The position in degrees where the pie begins.
@@ -287,7 +291,9 @@ Shape {
         property real __yCenter: root.height / 2
 
         strokeColor: "red"
-        capStyle: ShapePath.FlatCap
+        capStyle: root.capStyle
+        strokeStyle: root.strokeStyle
+        joinStyle: root.joinStyle
 
         strokeWidth: 4
 
