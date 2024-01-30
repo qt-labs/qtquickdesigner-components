@@ -148,7 +148,6 @@ Shape {
 
     \sa Qt::PenStyle
 */
-    property alias strokeStyle: path.strokeStyle
 
 /*!
     The width of the arc line or outline.
@@ -194,7 +193,12 @@ Shape {
 */
     property alias dashPattern: path.dashPattern
 
-    property alias joinStyle: path.joinStyle
+    //property alias joinStyle: path.joinStyle
+    property int joinStyle: ShapePath.BevelJoin //workaround for regression in Qt 6.6.1 (QDS-11845)
+    //property alias capStyle: path.capStyle
+    property int capStyle: ShapePath.FlatCap //workaround for regression in Qt 6.6.1 (QDS-11845)
+    //property alias strokeStyle: path.strokeStyle
+    property int strokeStyle: ShapePath.SolidLine //workaround for regression in Qt 6.6.1 (QDS-11845)
 
 /*!
     The arc fill color.
@@ -226,7 +230,7 @@ Shape {
 
     \sa round, roundBegin, roundEnd, Qt::PenCapStyle
 */
-    property alias capStyle: path.capStyle
+
 
 /*!
     The starting point of the dash pattern for the arc or arc outline.
@@ -377,7 +381,9 @@ Shape {
 
         strokeColor: "red"
         strokeWidth: 4
-        capStyle: ShapePath.FlatCap
+        capStyle: root.capStyle
+        strokeStyle: root.strokeStyle
+        joinStyle: root.joinStyle
 
         startX: root.polarToCartesianX(path.__xCenter, path.__yCenter, path.__xRadius, root.sortedBegin() - 90)
         startY: root.polarToCartesianY(path.__xCenter, path.__yCenter, path.__yRadius, root.sortedBegin() - 90)
