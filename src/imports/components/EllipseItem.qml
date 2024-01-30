@@ -69,7 +69,9 @@ Shape {
 
     \sa Qt::PenStyle
 */
-    property alias strokeStyle: path.strokeStyle
+
+    //property alias strokeStyle: path.strokeStyle
+    property int strokeStyle: ShapePath.SolidLine //workaround for regression in Qt 6.6.1 (QDS-11845)
 
 /*!
     The width of the border of the rectangle.
@@ -180,6 +182,8 @@ Shape {
         strokeColor: "red"
         startX: root.width * 0.5
         startY: root.borderOffset
+
+        strokeStyle: root.strokeStyle
 
         PathArc {
             x: path.startX
