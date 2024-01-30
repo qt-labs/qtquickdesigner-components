@@ -129,7 +129,6 @@ Shape {
 
     \sa Qt::PenStyle
 */
-    property alias strokeStyle: path.strokeStyle
 
 /*!
     The width of the border of the rectangle.
@@ -187,7 +186,12 @@ Shape {
 
     \sa Qt::PenJoinStyle
 */
-    property alias joinStyle: path.joinStyle
+    //property alias joinStyle: path.joinStyle
+    property int joinStyle: ShapePath.MiterJoin //workaround for regression in Qt 6.6.1 (QDS-11845)
+    //property alias capStyle: path.capStyle
+    property int capStyle: ShapePath.FlatCap //workaround for regression in Qt 6.6.1 (QDS-11845)
+    //property alias strokeStyle: path.strokeStyle
+    property int strokeStyle: ShapePath.SolidLine //workaround for regression in Qt 6.6.1 (QDS-11845)
 
 /*!
     The triangle fill color.
@@ -328,8 +332,9 @@ Shape {
 
         strokeWidth: 4
         strokeColor: "red"
-        capStyle: ShapePath.FlatCap
-        joinStyle: ShapePath.MiterJoin
+        capStyle: root.capStyle
+        strokeStyle: root.strokeStyle
+        joinStyle: root.joinStyle
 
         startX: root.topIntersection1.x + path.xOffset
         startY: root.topIntersection1.y + path.yOffset
