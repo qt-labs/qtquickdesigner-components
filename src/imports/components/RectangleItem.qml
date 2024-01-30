@@ -207,7 +207,12 @@ Shape {
 
     \sa Qt::PenStyle
 */
-    property alias strokeStyle: path.strokeStyle
+    //property alias joinStyle: path.joinStyle
+    property int joinStyle: ShapePath.MiterJoin //workaround for regression in Qt 6.6.1 (QDS-11845)
+    //property alias capStyle: path.capStyle
+    property int capStyle: ShapePath.SquareCap //workaround for regression in Qt 6.6.1 (QDS-11845)
+    //property alias strokeStyle: path.strokeStyle
+    property int strokeStyle: ShapePath.SolidLine //workaround for regression in Qt 6.6.1 (QDS-11845)
 
 /*!
     The width of the border of the rectangle.
@@ -250,8 +255,6 @@ Shape {
 */
     property alias dashPattern: path.dashPattern
 
-
-    property alias joinStyle: path.joinStyle
 
 /*!
     The rectangle fill color.
@@ -371,7 +374,9 @@ Shape {
             return 0
         }
 
-        joinStyle: ShapePath.MiterJoin
+        capStyle: root.capStyle
+        strokeStyle: root.strokeStyle
+        joinStyle: root.joinStyle
 
         strokeWidth: 4
         strokeColor: "red"
