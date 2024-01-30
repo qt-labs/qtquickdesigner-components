@@ -45,7 +45,6 @@ QtObject {
         id: fileReader
         filePath: server.source
         onContentChanged: server.updateJSON()
-        property string query
     }
 
 // qmllint disable compiler
@@ -54,7 +53,7 @@ QtObject {
         if (fileReader.content === "")
             return
 
-        var objectArray = parseJSONString(fileReader.content, fileReader.query)
+        var objectArray = parseJSONString(fileReader.content)
         for (var key in objectArray) {
             var jo = objectArray[key]
             if (server[key] !== undefined)
@@ -65,9 +64,8 @@ QtObject {
         }
     }
 
-    function parseJSONString(jsonString, jsonPathQuery) {
+    function parseJSONString(jsonStringy) {
         var objectArray = JSON.parse(jsonString)
-
         if (!objectArray)
             console.error("JSON parsing failed")
 
