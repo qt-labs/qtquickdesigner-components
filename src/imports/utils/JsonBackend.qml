@@ -67,9 +67,8 @@ QtObject {
 
     function parseJSONString(jsonString, jsonPathQuery) {
         var objectArray = JSON.parse(jsonString)
-        if (jsonPathQuery !== "")
-            objectArray = JSONPath.jsonPath(objectArray, jsonPathQuery)
-        else
+
+        if (!objectArray)
             console.error("JSON parsing failed")
 
         return objectArray
