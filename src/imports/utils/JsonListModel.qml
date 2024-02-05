@@ -67,7 +67,7 @@ ListModel {
             return
 
         var objectArray = parseJSONString(fileReader.content)
-        listModel.jsonObject = objectArray
+        listModel.jsonObject = fromLocalJson(objectArray)
         invalidateChildModels()
     }
 
@@ -75,6 +75,50 @@ ListModel {
         var objectArray = JSON.parse(jsonString)
 
         return objectArray
+    }
+
+    function isObject(obj) {
+        return obj && obj.constructor === Object
+    }
+
+    function fromLocalJson(localJson) {
+        if (!isObject(localJson))
+            return {}
+
+        var parsedModel = {}
+        for (let collectionName in localJson) {
+            let collection = localJson[collectionName]
+            if (isObject(collection)) {
+                if (Array.isArray(collection.columns) && Array.isArray(collection.data)) {
+                    let propertyNames = []
+                    let extractedCollection = []
+
+                    for (let columnId in collection.columns) {
+                        let column = collection.columns[columnId]
+                        propertyNames.push(isObject(column) ? column.name : null)
+                    }
+
+                    for (let rowId in collection.data) {
+                        let extractedElement = {}
+                        let row = collection.data[rowId]
+                        if (Array.isArray(row)) {
+                            let maxIdx = Math.min(row.length, propertyNames.length)
+                            for (let idx = 0; idx < maxIdx; ++idx) {
+                                let propertyName = propertyNames[idx]
+                                if (propertyName !== "") {
+                                    let value = row[idx]
+                                    if (value !== undefined && value !== null)
+                                        extractedElement[propertyName] = value
+                                }
+                            }
+                        }
+                        extractedCollection.push(extractedElement)
+                    }
+                    parsedModel[collectionName] = extractedCollection
+                }
+            }
+        }
+        return parsedModel
     }
 
     function invalidateChildModels() {
