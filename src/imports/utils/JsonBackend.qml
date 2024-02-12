@@ -64,7 +64,7 @@ QtObject {
         }
     }
 
-    function parseJSONString(jsonStringy) {
+    function parseJSONString(jsonString) {
         var objectArray = JSON.parse(jsonString)
         if (!objectArray)
             console.error("JSON parsing failed")
