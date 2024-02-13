@@ -138,9 +138,14 @@ Flipable {
 */
     property bool flipped: false
 
-    Component.onCompleted: {
-        flipable.front = flipable.children[0]
-        flipable.back = flipable.children[1]
+    onChildrenChanged: {
+        if (flipable.children[0] !== undefined && !flipable.front) {
+            flipable.front = flipable.children[0]
+        }
+
+        if (flipable.children[1] !== undefined && !flipable.back){
+            flipable.back = flipable.children[1]
+        }
     }
 
     transform: Rotation {
