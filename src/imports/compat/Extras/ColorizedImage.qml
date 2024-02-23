@@ -31,15 +31,28 @@ import QtQuick 2.12
 import Qt5Compat.GraphicalEffects
 //! [ColorizedImage compatibility]
 //  Displays a colorized image.
-Image {
+Item {
     id: colorizedRoot
-    property var color: "transparent"
+    implicitHeight: img.implicitHeight
+    implicitWidth: img.implicitWidth
 
-    layer.enabled: true
-    layer.effect: ColorOverlay {
-        anchors.fill: colorizedRoot
-        source: colorizedRoot
-        color: colorizedRoot.color
+    property alias color: colorize.color
+    property alias source: img.source
+    property alias fillMode: img.fillMode
+    property alias horizontalAlignment: img.horizontalAlignment
+    property alias verticalAlignment: img.verticalAlignment
+
+    Image {
+        id: img
+        anchors.fill: parent
+        visible: false
+    }
+
+    ColorOverlay {
+        id: colorize
+        anchors.fill: img
+        color: "transparent"
+        source: img
     }
 }
 //! [ColorizedImage compatibility]
