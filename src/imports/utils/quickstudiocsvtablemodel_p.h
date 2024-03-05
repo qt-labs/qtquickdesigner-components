@@ -34,7 +34,8 @@
 **
 ****************************************************************************/
 
-#pragma once
+#ifndef QUICKSTUDIOCSVTABLEMODEL_P_H
+#define QUICKSTUDIOCSVTABLEMODEL_P_H
 
 //
 //  W A R N I N G
@@ -98,3 +99,5 @@ private:
 QT_END_NAMESPACE
 
 QML_DECLARE_TYPE(QuickStudioCsvTableModel)
+
+#endif // QUICKSTUDIOCSVTABLEMODEL_P_H
