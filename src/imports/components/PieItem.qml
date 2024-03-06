@@ -97,8 +97,8 @@ import QtQuick.Shapes 1.12
 Shape {
     id: root
 
-    implicitWidth: 100
-    implicitHeight: 100
+    width: 100
+    height: 100
 
 /*!
     The gradient of the pie fill color.
