@@ -3,8 +3,10 @@ cmake_minimum_required(VERSION 3.16)
 project(QtQuickDesignerComponents
     DESCRIPTION "QtQuick Designer Components"
     HOMEPAGE_URL "https://qt.io/"
-    VERSION "6.2.4"
     LANGUAGES CXX C
+    # we do not know the Qt version here, but it is necessary to have one
+    # version is set after we know the current Qt version again
+    VERSION "6.2.4"
 )
 
 set(CMAKE_AUTOMOC ON)
@@ -24,5 +26,6 @@ find_package(Qt6
         Core
         Qml
 )
+set(PROJECT_VERSION ${Qt6_VERSION})
 
 qt_build_repo()
