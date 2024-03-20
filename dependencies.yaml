@@ -1,0 +1,7 @@
+product_dependency:
+  ../../qt/tqtc-qt5:
+    ref: "tqtc/lts-6.5"
+dependency_source: supermodule
+dependencies: [
+      "../../qt/qtdeclarative"
+      ]

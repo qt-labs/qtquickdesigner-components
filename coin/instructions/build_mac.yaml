@@ -1,0 +1,32 @@
+type: Group
+enable_if:
+  condition: property
+  property: host.os
+  equals_value: MacOS
+instructions:
+    - type: PrependToEnvironmentVariable
+      variableName: PATH
+      variableValue: "{{.Env.PYTHON3_PATH}}:"
+    - type: ExecuteCommand
+      command: "cmake -GNinja -Bbuild -DCMAKE_INSTALL_PREFIX=install -DCMAKE_OSX_ARCHITECTURES=x86_64;arm64"
+      executeCommandArgumentSplitingBehavior: SplitAfterVariableSubstitution
+      maxTimeInSeconds: 1800
+      maxTimeBetweenOutput: 1800
+      ignoreExitCode: true
+      userMessageOnFailure: >
+        Could not cmake.
+    - type: ExecuteCommand
+      command: "cmake --build build"
+      maxTimeInSeconds: 1800
+      maxTimeBetweenOutput: 1800
+      ignoreExitCode: true
+      userMessageOnFailure: >
+        Could not build.
+    - type: ExecuteCommand
+      command: "cmake --install build"
+      maxTimeInSeconds: 1800
+      maxTimeBetweenOutput: 1800
+      ignoreExitCode: true
+      userMessageOnFailure: >
+        Could not install.
+

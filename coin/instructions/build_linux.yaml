@@ -1,0 +1,55 @@
+type: Group
+enable_if:
+  condition: property
+  property: host.os
+  equals_value: Linux
+instructions:
+    - type: ExecuteCommand
+      command: "cmake -GNinja -Bbuild -DCMAKE_INSTALL_PREFIX=install"
+      executeCommandArgumentSplitingBehavior: SplitAfterVariableSubstitution
+      ignoreExitCode: true
+      maxTimeInSeconds: 1800
+      maxTimeBetweenOutput: 1800
+      userMessageOnFailure: >
+        Could not cmake.
+    - type: ExecuteCommand
+      command: "cmake --build build"
+      maxTimeInSeconds: 1800
+      maxTimeBetweenOutput: 1800
+      ignoreExitCode: true
+      userMessageOnFailure: >
+        Could not build.
+    - type: ExecuteCommand
+      command: "cmake --install build"
+      maxTimeInSeconds: 1800
+      maxTimeBetweenOutput: 1800
+      ignoreExitCode: true
+      userMessageOnFailure: >
+        Could not install.
+    - type: WriteFile
+      fileContents: |
+          #!/bin/bash
+          sudo dnf install -y readline-devel tk-devel
+          cd /home/qt/
+          git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+          export PYENV_ROOT="$HOME/.pyenv"
+          export PATH="$PYENV_ROOT/bin:$PATH"
+          pyenv install 3.9.19
+      filename: "{{.AgentWorkingDir}}/install_pyenv.sh"
+      fileMode: 493
+    - type: ExecuteCommand
+      command: "{{.AgentWorkingDir}}/install_pyenv.sh"
+      maxTimeInSeconds: 30000
+      maxTimeBetweenOutput: 30000
+      ignoreExitCode: true
+      userMessageOnFailure: >
+        Failed to install pyenv.
+    - type: ChangeDirectory
+      directory: "{{.SourceDir}}/python"
+    - type: ExecuteCommand
+      command: "/home/qt/.pyenv/versions/3.9.19/bin/python3 -m venv env"
+      maxTimeInSeconds: 30000
+      maxTimeBetweenOutput: 30000
+      ignoreExitCode: true
+      userMessageOnFailure: >
+        Failed to create venv.

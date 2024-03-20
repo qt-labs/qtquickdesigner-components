@@ -1,0 +1,78 @@
+type: Group
+instructions:
+    - type: ChangeDirectory
+      directory: "{{.SourceDir}}/python"
+    - type: ExecuteCommand
+      command: "python3 -m venv env"
+      maxTimeInSeconds: 1800
+      maxTimeBetweenOutput: 1800
+      ignoreExitCode: true
+      userMessageOnFailure: >
+        Could not crete venv.
+      enable_if:
+        condition: property
+        property: target.os
+        equals_value: MacOS
+    - type: ExecuteCommand
+      command: "python.exe -m venv env"
+      maxTimeInSeconds: 1800
+      maxTimeBetweenOutput: 1800
+      ignoreExitCode: true
+      userMessageOnFailure: >
+        Could not create venv.
+      enable_if:
+        condition: property
+        property: target.os
+        equals_value: Windows
+    - type: EnvironmentVariable
+      variableName: Interpreter
+      variableValue: "env/bin/python3"
+      disable_if:
+        condition: property
+        property: target.os
+        equals_value: Windows
+    - type: EnvironmentVariable
+      variableName: Interpreter
+      variableValue: "env\\Scripts\\python.exe"
+      enable_if:
+        condition: property
+        property: target.os
+        equals_value: Windows
+    - type: ExecuteCommand
+      command: "env/bin/pip install --upgrade pip"
+      maxTimeInSeconds: 1800
+      maxTimeBetweenOutput: 1800
+      ignoreExitCode: true
+      userMessageOnFailure: >
+        Could not update pip.
+      enable_if:
+        condition: property
+        property: host.os
+        equals_value: Linux
+    - type: ExecuteCommand
+      command: "{{.Env.Interpreter}} -m pip install -r requirements.txt"
+      maxTimeInSeconds: 1800
+      maxTimeBetweenOutput: 1800
+      ignoreExitCode: true
+      userMessageOnFailure: >
+        Could not install requirements.
+    - type: ExecuteCommand
+      command: "{{.Env.Interpreter}} configure.py"
+      maxTimeInSeconds: 1800
+      maxTimeBetweenOutput: 1800
+      ignoreExitCode: true
+      userMessageOnFailure: >
+        Could not run configure.py.
+    - type: ExecuteCommand
+      command: "{{.Env.Interpreter}} -m build -w"
+      maxTimeInSeconds: 1800
+      maxTimeBetweenOutput: 1800
+      ignoreExitCode: true
+      userMessageOnFailure: >
+        Could not run configure.py.
+    - type: UploadArtifact
+      archiveDirectory: "{{.SourceDir}}"
+      transferType: UploadModuleBuildArtifact
+      maxTimeInSeconds: 1200
+      maxTimeBetweenOutput: 1200
+

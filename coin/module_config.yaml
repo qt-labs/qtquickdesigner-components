@@ -1,0 +1,14 @@
+version: 2
+accept_configuration:
+  condition: property
+  property: features
+  not_contains_value: Disable
+instructions:
+  Build:
+    - !include "{{qt-labs/qtquickdesigner-components}}/common_settings.yaml"
+    - !include "{{qt-labs/qtquickdesigner-components}}/find_path_to_msvc_compiler.yaml"
+    - !include "{{qt-labs/qtquickdesigner-components}}/build_win.yaml"
+    - !include "{{qt-labs/qtquickdesigner-components}}/build_mac.yaml"
+    - !include "{{qt-labs/qtquickdesigner-components}}/build_linux.yaml"
+    - !include "{{qt-labs/qtquickdesigner-components}}/run_python.yaml"
+  Test: []  # To be enabled
