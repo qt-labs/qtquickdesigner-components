@@ -48,6 +48,7 @@ find_package(Qt6
         Quick
         Core
         Qml
+        ShaderTools
 )
 set(PROJECT_VERSION ${Qt6_VERSION})
 
