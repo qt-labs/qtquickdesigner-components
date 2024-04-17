@@ -3,6 +3,7 @@ qt_internal_add_qml_module(AndroidAutomotiveActivityView
     VERSION "${PROJECT_VERSION}"
     DESIGNER_SUPPORTED
     NO_SYNC_QT
+    ${qds_qml_extra_args}
     PAST_MAJOR_VERSIONS 1
     QML_FILES
         ActivityView.qml

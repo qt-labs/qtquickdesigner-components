@@ -7,6 +7,7 @@ qt_internal_add_qml_module(FlowView
     URI "FlowView"
     VERSION "${PROJECT_VERSION}"
     DESIGNER_SUPPORTED
+    ${qds_qml_extra_args}
     NO_SYNC_QT
     PAST_MAJOR_VERSIONS 1
     NO_GENERATE_QMLDIR

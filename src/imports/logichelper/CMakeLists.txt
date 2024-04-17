@@ -1,6 +1,7 @@
 qt_internal_add_qml_module(QuickStudioLogicHelper
     URI "QtQuick.Studio.LogicHelper"
     VERSION "${PROJECT_VERSION}"
+    ${qds_qml_extra_args}
     DESIGNER_SUPPORTED
     NO_SYNC_QT
     PAST_MAJOR_VERSIONS 1

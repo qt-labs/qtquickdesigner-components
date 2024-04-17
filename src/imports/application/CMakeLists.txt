@@ -7,6 +7,7 @@ qt_internal_add_qml_module(QuickStudioApplication
     VERSION "${PROJECT_VERSION}"
     DESIGNER_SUPPORTED
     PAST_MAJOR_VERSIONS 1
+    ${qds_qml_extra_args}
  INCLUDE_DIRECTORIES
     ${CMAKE_CURRENT_SOURCE_DIR}
     SOURCES
