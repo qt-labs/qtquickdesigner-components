@@ -51,6 +51,14 @@ Item {
 
     Component.onCompleted: root.calculateBoundingBox()
 
+    function clamp(input : real, min : real, max : real) {
+
+        if (isNaN(input))
+            return 0
+
+        return Math.max(min, Math.min(input, max))
+    }
+
     property rect effectBoundingBox: Qt.rect(0, 0, 0, 0)
 
     function calculateBoundingBox() {
@@ -81,7 +89,7 @@ Item {
     DesignLayerBlurPrivate {
         id: layerBlur
         visible: root.layerBlurVisible
-        radius: root.layerBlurRadius
+        radius: root.clamp(root.layerBlurRadius, 0, 250)
 
         source: layerBlurSource
 
@@ -114,7 +122,7 @@ Item {
             source: root.source
 
             background: root.background
-            radius: root.backgroundBlurRadius
+            radius: root.clamp(root.backgroundBlurRadius, 0, 250)
         }
 
         ShaderEffectSource {
@@ -142,11 +150,11 @@ Item {
 
                         source: root.source
 
-                        horizontalOffset: modelData.offsetX
-                        verticalOffset: modelData.offsetY
-                        spread: modelData.spread
+                        horizontalOffset: root.clamp(modelData.offsetX, -0xffff, 0xffff)
+                        verticalOffset: root.clamp(modelData.offsetY, -0xffff, 0xffff)
+                        spread: root.clamp(modelData.spread, -2048, 2048)
                         color: modelData.color
-                        radius: modelData.blur
+                        radius: root.clamp(modelData.blur, 0, 250)
                         visible: modelData.visible
 
                         onGeometryChanged: root.calculateBoundingBox()
@@ -160,11 +168,11 @@ Item {
 
                         source: root.source
 
-                        horizontalOffset: modelData.offsetX
-                        verticalOffset: modelData.offsetY
-                        spread: modelData.spread
+                        horizontalOffset: root.clamp(modelData.offsetX, -0xffff, 0xffff)
+                        verticalOffset: root.clamp(modelData.offsetY, -0xffff, 0xffff)
+                        spread: repeater.clamp(modelData.spread, -2048, 2048)
                         color: modelData.color
-                        radius: modelData.blur
+                        radius: root.clamp(modelData.blur, 0, 250)
                         visible: modelData.visible
 
                         z: 10
