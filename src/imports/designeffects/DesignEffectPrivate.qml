@@ -51,7 +51,7 @@ Item {
 
     Component.onCompleted: root.calculateBoundingBox()
 
-    function clamp(input : real, min : real, max : real) {
+    function clamp(input: real, min: real, max: real): real {
 
         if (isNaN(input))
             return 0
