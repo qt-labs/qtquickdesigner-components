@@ -27,8 +27,8 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.10
-import QtQuick.Shapes 1.12
+import QtQuick
+import QtQuick.Shapes
 
 /*!
     \qmltype EllipseItem
