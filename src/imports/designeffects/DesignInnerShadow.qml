@@ -36,6 +36,7 @@ QtObject {
     property int offsetY: 4
     property int spread: 0
     property color color: "#3f000000" // black 25%
+    property bool showBehind: false // This is a dummy property mirroring DropShadow
     property bool visible: true
 
     property string type: "InnerShadow"

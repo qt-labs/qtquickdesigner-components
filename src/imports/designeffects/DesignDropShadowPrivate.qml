@@ -38,6 +38,8 @@ Item {
     property color color: "black"
     property real radius: 10
 
+    property bool showBehind: false
+
     required property Item source
 
     readonly property real sourceRotation: root.source.rotation
@@ -149,12 +151,15 @@ Item {
         property bool useOffscreenColor: false
         property color offscreenColor: "transparent"
 
-        visible: false
+        visible: root.showBehind
+
+        x: root.showBehind ? root.__offset.x : 0
+        y: root.showBehind ? root.__offset.y : 0
 
         width: root.bluredTextureSize.width
         height: root.bluredTextureSize.height
 
-        layer.enabled: true
+        layer.enabled: !root.showBehind
         layer.sourceRect: Qt.rect(Math.min(0, -root.__offset.x),
                                   Math.min(0, -root.__offset.y),
                                   root.offsetTextureSize.width,
@@ -183,7 +188,7 @@ Item {
         property var shadow: blurVertical
         property var original: originalSource
 
-        visible: true
+        visible: !root.showBehind
 
         x: -Math.max(0, -root.__offset.x)
         y: -Math.max(0, -root.__offset.y)

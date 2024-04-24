@@ -155,6 +155,7 @@ Item {
                         spread: root.clamp(modelData.spread, -2048, 2048)
                         color: modelData.color
                         radius: root.clamp(modelData.blur, 0, 250)
+                        showBehind: modelData.showBehind
                         visible: modelData.visible
 
                         onGeometryChanged: root.calculateBoundingBox()

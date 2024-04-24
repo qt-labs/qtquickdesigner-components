@@ -50,7 +50,7 @@ Item {
 
     property Item backgroundLayer: null
 
-    property var _isEffectItem: true
+    property bool _isEffectItem: true
 
     onParentChanged: {
         if (root.__oldParent && root.__oldParent !== root.parent) {
