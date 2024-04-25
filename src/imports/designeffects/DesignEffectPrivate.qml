@@ -171,7 +171,7 @@ Item {
 
                         horizontalOffset: root.clamp(modelData.offsetX, -0xffff, 0xffff)
                         verticalOffset: root.clamp(modelData.offsetY, -0xffff, 0xffff)
-                        spread: repeater.clamp(modelData.spread, -2048, 2048)
+                        spread: root.clamp(modelData.spread, -2048, 2048)
                         color: modelData.color
                         radius: root.clamp(modelData.blur, 0, 250)
                         visible: modelData.visible
