@@ -34,18 +34,18 @@
 **
 ****************************************************************************/
 
-import QtQuick
-import QtQuick.Studio.Utils
-//import "jsonpath.js" as JSONPath
+import QtQml
+import QtQml.Models as M
+import QtQuick.Studio.Utils as U
 
-ListModel {
+M.ListModel {
     id: listModel
 
     property url source
     property var jsonObject
     dynamicRoles: true
 
-    property FileReader fileReader: FileReader {
+    property U.FileReader fileReader: U.FileReader {
         id: fileReader
         filePath: listModel.source
         onContentChanged: listModel.updateJSON()
@@ -63,18 +63,9 @@ ListModel {
     }
 
     function updateJSON() {
-        if (fileReader.content === "")
-            return
-
-        var objectArray = parseJSONString(fileReader.content)
+        var objectArray = JSON.parse(fileReader.content)
         listModel.jsonObject = fromLocalJson(objectArray)
         invalidateChildModels()
-    }
-
-    function parseJSONString(jsonString, object) {
-        var objectArray = JSON.parse(jsonString)
-
-        return objectArray
     }
 
     function isObject(obj) {
@@ -122,16 +113,18 @@ ListModel {
     }
 
     function invalidateChildModels() {
-        for(var property in listModel) {
-            if (listModel[property].jsonObject !== undefined) {
-                listModel[property].jsonObject = listModel.jsonObject
-            }
-        }
+        for (let property in listModel) {
+            let propertyValue = listModel[property]
+            let propertyValueIsObject = propertyValue && typeof(propertyValue) === "object"
 
+            if (propertyValueIsObject && propertyValue.jsonObject !== undefined)
+                propertyValue.jsonObject = listModel.jsonObject
+        }
     }
 
     Component.onCompleted: {
-        invalidateChildModels()
+        updateJSON()
     }
+
 // qmllint enable compiler
 }

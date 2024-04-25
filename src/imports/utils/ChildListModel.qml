@@ -34,10 +34,10 @@
 **
 ****************************************************************************/
 
-import QtQuick
+import QtQml.Models as M
 import QtQuick.Studio.Utils
 
-ListModel {
+M.ListModel {
     id: listModel
 
     property string modelName
