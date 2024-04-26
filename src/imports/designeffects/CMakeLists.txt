@@ -35,6 +35,6 @@ qt_internal_add_shaders(QuickStudioDesignEffects "designeffectsshaders"
 #    doc/qtquickstudiodesigneffects.qdocconf
 #)
 
-#if(QT_FEATURE_quick_designer AND QT_BUILD_SHARED_LIBS)
-#    add_subdirectory(designer)
-#endif()
+if(QT_FEATURE_quick_designer AND QT_BUILD_SHARED_LIBS)
+    add_subdirectory(designer)
+endif()
