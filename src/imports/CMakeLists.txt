@@ -1,5 +1,6 @@
 add_subdirectory(components)
 add_subdirectory(effects_qt6)
+add_subdirectory(designeffects)
 add_subdirectory(flowview)
 add_subdirectory(logichelper)
 add_subdirectory(multitext)
