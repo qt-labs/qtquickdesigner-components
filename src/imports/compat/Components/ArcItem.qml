@@ -37,8 +37,9 @@ Shape {
     implicitHeight: 100
 
     // These properties are not supported in Qt Quick Ultralite:
-    // gradient, strokeStyle, dashPattern, dashOffset
+    // strokeStyle, dashPattern, dashOffset
 
+    property alias gradient: path.fillGradient
     property alias strokeWidth: path.strokeWidth
     property alias strokeColor: path.strokeColor
     property alias joinStyle: path.joinStyle

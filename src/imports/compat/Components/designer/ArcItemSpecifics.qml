@@ -50,6 +50,9 @@ Column {
 
             ColorEditor {
                 backendValue: backendValues.fillColor
+                supportGradient: true
+                shapeGradients: true
+                mcuGradients: true
             }
 
             PropertyLabel {
