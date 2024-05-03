@@ -72,6 +72,9 @@ Item {
     }
 
     onVisibleChanged: {
+        if (root.parent == null)
+            return
+
         if (root.visible) {
             root.source = root.parent
             root.parent.layer.enabled = true
