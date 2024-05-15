@@ -7,6 +7,8 @@ qt_internal_add_qml_module(QuickStudioUtils
     VERSION "${PROJECT_VERSION}"
     DESIGNER_SUPPORTED
     PAST_MAJOR_VERSIONS 1 2
+    DEPENDENCIES 
+         QtQml.Models/auto
  INCLUDE_DIRECTORIES
     ${CMAKE_CURRENT_SOURCE_DIR}
     SOURCES
