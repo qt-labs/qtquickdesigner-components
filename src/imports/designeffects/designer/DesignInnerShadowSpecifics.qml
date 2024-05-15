@@ -43,7 +43,10 @@ Column {
         anchors.right: parent.right
 
         SectionLayout {
-            PropertyLabel { text: qsTr("Visible") }
+            PropertyLabel {
+                text: qsTr("Visible")
+                tooltip: qsTr("Toggles the visibility of the component shadow.")
+            }
 
             SecondColumnLayout {
                 CheckBox {
@@ -55,7 +58,11 @@ Column {
                 ExpandingSpacer {}
             }
 
-            PropertyLabel { text: qsTr("Blur") }
+            PropertyLabel {
+                text: qsTr("Blur")
+                tooltip: qsTr("Sets the softness of the component shadow. A larger value"
+                        + " causes the edges of the shadow to appear more blurry.")
+            }
 
             SecondColumnLayout {
                 SpinBox {
@@ -73,6 +80,7 @@ Column {
             // item this effect is assigned to is a Rectangle or not
             PropertyLabel {
                 text: qsTr("Spread")
+                tooltip: qsTr("You must select the component itself to change this property.")
                 enabled: false
             }
 
@@ -91,7 +99,7 @@ Column {
 
             PropertyLabel {
                 text: qsTr("Color")
-                tooltip: qsTr("Sets the color.")
+                tooltip: qsTr("Sets the color of the shadow.")
             }
 
             ColorEditor {
@@ -99,7 +107,11 @@ Column {
                 supportGradient: false
             }
 
-            PropertyLabel { text: qsTr("Offset") }
+            PropertyLabel {
+                text: qsTr("Offset")
+                tooltip: qsTr("Moves the shadow with respect to the component in "
+                        + "X and Y coordinates by pixels.")
+            }
 
             SecondColumnLayout {
                 SpinBox {
