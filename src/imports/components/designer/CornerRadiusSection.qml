@@ -49,8 +49,7 @@ Section {
                 backendValue: backendValues.topLeftRadius
                 decimals: 1
                 minimumValue: 0
-                maximumValue: Math.min(backendValues.height.value,
-                                       backendValues.width.value) / 2
+                maximumValue: 0xffff
                 stepSize: 1
             }
 
@@ -69,8 +68,7 @@ Section {
                 backendValue: backendValues.topRightRadius
                 decimals: 1
                 minimumValue: 0
-                maximumValue: Math.min(backendValues.height.value,
-                                       backendValues.width.value) / 2
+                maximumValue: 0xffff
                 stepSize: 1
             }
 
@@ -97,8 +95,7 @@ Section {
                 backendValue: backendValues.bottomLeftRadius
                 decimals: 1
                 minimumValue: 0
-                maximumValue: Math.min(backendValues.height.value,
-                                       backendValues.width.value) / 2
+                maximumValue: 0xffff
                 stepSize: 1
             }
 
@@ -118,8 +115,7 @@ Section {
                 backendValue: backendValues.bottomRightRadius
                 decimals: 1
                 minimumValue: 0
-                maximumValue: Math.min(backendValues.height.value,
-                                       backendValues.width.value) / 2
+                maximumValue: 0xffff
                 stepSize: 1
             }
 
@@ -146,8 +142,7 @@ Section {
                 backendValue: backendValues.radius
                 decimals: 1
                 minimumValue: 0
-                maximumValue: Math.min(backendValues.height.value,
-                                       backendValues.width.value) / 2
+                maximumValue: 0xffff
                 stepSize: 1
             }
 

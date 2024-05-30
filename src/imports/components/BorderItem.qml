@@ -373,14 +373,94 @@ Shape {
         }
     }
 
+    onRadiusChanged: Qt.callLater(root.calculateIndependentRadii)
+    onTopLeftRadiusChanged: Qt.callLater(root.calculateIndependentRadii)
+    onTopRightRadiusChanged: Qt.callLater(root.calculateIndependentRadii)
+    onBottomLeftRadiusChanged: Qt.callLater(root.calculateIndependentRadii)
+    onBottomRightRadiusChanged: Qt.callLater(root.calculateIndependentRadii)
+    onWidthChanged: Qt.callLater(root.calculateIndependentRadii)
+    onHeightChanged: Qt.callLater(root.calculateIndependentRadii)
+
+    function calculateIndependentRadii() {
+        let minDimension = Math.min(root.width, root.height)
+        let maxRadius = Math.floor(minDimension / 2)
+        let mixed = !(root.radius === root.topLeftRadius
+                   && root.radius === root.topRightRadius
+                   && root.radius === root.bottomLeftRadius
+                   && root.radius === root.bottomRightRadius)
+
+        // Uniform radii
+        if (!mixed) {
+            path.__topLeftRadius = Math.min(root.topLeftRadius, maxRadius)
+            path.__topRightRadius = Math.min(root.topRightRadius, maxRadius)
+            path.__bottomRightRadius = Math.min(root.bottomRightRadius, maxRadius)
+            path.__bottomLeftRadius = Math.min(root.bottomLeftRadius, maxRadius)
+            return
+        }
+
+        // Mixed radii
+        let topLeftRadiusMin = Math.min(minDimension, root.topLeftRadius)
+        let topRightRadiusMin = Math.min(minDimension, root.topRightRadius)
+        let bottomLeftRadiusMin = Math.min(minDimension, root.bottomLeftRadius)
+        let bottomRightRadiusMin = Math.min(minDimension, root.bottomRightRadius)
+
+        // Top radii
+        let topRadii = root.topLeftRadius + root.topRightRadius
+
+        if (topRadii > root.width) {
+            let topLeftRadiusFactor = root.topLeftRadius / topRadii
+            let tlr = Math.round(root.width * topLeftRadiusFactor)
+
+            topLeftRadiusMin = Math.min(topLeftRadiusMin, tlr)
+            topRightRadiusMin = Math.min(topRightRadiusMin, root.width - tlr)
+        }
+
+        // Right radii
+        let rightRadii = root.topRightRadius + root.bottomRightRadius
+
+        if (rightRadii > root.height) {
+            let topRightRadiusFactor = root.topRightRadius / rightRadii
+            let trr = Math.round(root.height * topRightRadiusFactor)
+
+            topRightRadiusMin = Math.min(topRightRadiusMin, trr)
+            bottomRightRadiusMin = Math.min(bottomRightRadiusMin, root.height - trr)
+        }
+
+        // Bottom radii
+        let bottomRadii = root.bottomRightRadius + root.bottomLeftRadius
+
+        if (bottomRadii > root.width) {
+            let bottomRightRadiusFactor = root.bottomRightRadius / bottomRadii
+            let brr = Math.round(root.width * bottomRightRadiusFactor)
+
+            bottomRightRadiusMin = Math.min(bottomRightRadiusMin, brr)
+            bottomLeftRadiusMin = Math.min(bottomLeftRadiusMin, root.width - brr)
+        }
+
+        // Left radii
+        let leftRadii = root.bottomLeftRadius + root.topLeftRadius
+
+        if (leftRadii > root.height) {
+            let bottomLeftRadiusFactor = root.bottomLeftRadius / leftRadii
+            let blr = Math.round(root.height * bottomLeftRadiusFactor)
+
+            bottomLeftRadiusMin = Math.min(bottomLeftRadiusMin, blr)
+            topLeftRadiusMin = Math.min(topLeftRadiusMin, root.height - blr)
+        }
+
+        path.__topLeftRadius = topLeftRadiusMin
+        path.__topRightRadius = topRightRadiusMin
+        path.__bottomLeftRadius = bottomLeftRadiusMin
+        path.__bottomRightRadius = bottomRightRadiusMin
+    }
+
     ShapePath {
         id: path
 
-        property int __maxRadius: Math.floor(Math.min(root.width, root.height) / 2)
-        property int __topLeftRadius: Math.min(root.topLeftRadius, path.__maxRadius)
-        property int __topRightRadius: Math.min(root.topRightRadius, path.__maxRadius)
-        property int __bottomRightRadius: Math.min(root.bottomRightRadius, path.__maxRadius)
-        property int __bottomLeftRadius: Math.min(root.bottomLeftRadius, path.__maxRadius)
+        property int __topLeftRadius: 0
+        property int __topRightRadius: 0
+        property int __bottomRightRadius: 0
+        property int __bottomLeftRadius: 0
 
         readonly property real __borderRadiusAdjustment: {
             if (root.adjustBorderRadius) {
@@ -508,5 +588,8 @@ Shape {
         path.pathElements = []
     }
 
-    Component.onCompleted: root.constructBorderItem()
+    Component.onCompleted: {
+        root.calculateIndependentRadii()
+        root.constructBorderItem()
+    }
 }
