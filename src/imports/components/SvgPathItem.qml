@@ -204,9 +204,13 @@ Shape {
     \sa Qt::PenCapStyle
 */
 
-    layer.enabled: root.antialiasing
-    layer.smooth: root.antialiasing
-    layer.samples: root.antialiasing ? 4 : 0
+    property bool __preferredRendererTypeAvailable: root.preferredRendererType !== "undefined"
+    property bool __curveRendererActive: root.__preferredRendererTypeAvailable
+                                         && root.rendererType === Shape.CurveRenderer
+
+    layer.enabled: root.antialiasing && !root.__curveRendererActive
+    layer.smooth: root.antialiasing && !root.__curveRendererActive
+    layer.samples: root.antialiasing && !root.__curveRendererActive ? 4 : 0
 
     ShapePath {
         id: shape
@@ -222,5 +226,11 @@ Shape {
 
             path: "M91,70.6c4.6,0,8.6,2.4,10.9,6.3l19.8,34.2c2.3,3.9,2.3,8.7,0,12.6c-2.3,3.9-6.4,6.3-10.9,6.3H71.2 c-4.6,0-8.6-2.4-10.9-6.3c-2.3-3.9-2.3-8.7,0-12.6l19.8-34.2C82.4,72.9,86.4,70.6,91,70.6z"
         }
+    }
+
+    Component.onCompleted: {
+        // If preferredRendererType wasn't set initially make CurveRenderer the default
+        if (root.__preferredRendererTypeAvailable && root.preferredRendererType === Shape.UnknownRenderer)
+            root.preferredRendererType = Shape.CurveRenderer
     }
 }

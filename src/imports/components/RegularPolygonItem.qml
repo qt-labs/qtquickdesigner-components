@@ -163,9 +163,13 @@ Shape {
 */
     property int sideCount: 6
 
-    layer.enabled: root.antialiasing
-    layer.smooth: root.antialiasing
-    layer.samples: root.antialiasing ? 4 : 0
+    property bool __preferredRendererTypeAvailable: root.preferredRendererType !== "undefined"
+    property bool __curveRendererActive: root.__preferredRendererTypeAvailable
+                                         && root.rendererType === Shape.CurveRenderer
+
+    layer.enabled: root.antialiasing && !root.__curveRendererActive
+    layer.smooth: root.antialiasing && !root.__curveRendererActive
+    layer.samples: root.antialiasing && !root.__curveRendererActive ? 4 : 0
 
     // This is used to make the bounding box of the item a bit bigger so it will draw sharp edges
     // in case of large stroke width instead of cutting it off.
@@ -195,7 +199,14 @@ Shape {
 
         root.__previousRadius = root.radius
     }
-    Component.onCompleted: root.constructPolygon()
+
+    Component.onCompleted: {
+        // If preferredRendererType wasn't set initially make CurveRenderer the default
+        if (root.__preferredRendererTypeAvailable && root.preferredRendererType === Shape.UnknownRenderer)
+            root.preferredRendererType = Shape.CurveRenderer
+
+        root.constructPolygon()
+    }
 
     property real __centerX: root.width / 2
     property real __centerY: root.height / 2

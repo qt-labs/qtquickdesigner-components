@@ -143,9 +143,13 @@ Shape {
 */
     property alias dashOffset: path.dashOffset
 
-    layer.enabled: root.antialiasing
-    layer.smooth: root.antialiasing
-    layer.samples: root.antialiasing ? 4 : 0
+    property bool __preferredRendererTypeAvailable: root.preferredRendererType !== "undefined"
+    property bool __curveRendererActive: root.__preferredRendererTypeAvailable
+                                         && root.rendererType === Shape.CurveRenderer
+
+    layer.enabled: root.antialiasing && !root.__curveRendererActive
+    layer.smooth: root.antialiasing && !root.__curveRendererActive
+    layer.samples: root.antialiasing && !root.__curveRendererActive ? 4 : 0
 
 /*!
     The border is rendered within the rectangle's boundaries, outside of them,
@@ -200,6 +204,11 @@ Shape {
             radiusY: root.height * 0.5 - root.borderOffset
             useLargeArc: true
         }
+    }
 
+    Component.onCompleted: {
+        // If preferredRendererType wasn't set initially make CurveRenderer the default
+        if (root.__preferredRendererTypeAvailable && root.preferredRendererType === Shape.UnknownRenderer)
+            root.preferredRendererType = Shape.CurveRenderer
     }
 }

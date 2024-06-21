@@ -306,9 +306,13 @@ Shape {
 
     property int maxRadius: 0
 
-    layer.enabled: root.antialiasing
-    layer.smooth: root.antialiasing
-    layer.samples: root.antialiasing ? 4 : 0
+    property bool __preferredRendererTypeAvailable: root.preferredRendererType !== "undefined"
+    property bool __curveRendererActive: root.__preferredRendererTypeAvailable
+                                         && root.rendererType === Shape.CurveRenderer
+
+    layer.enabled: root.antialiasing && !root.__curveRendererActive
+    layer.smooth: root.antialiasing && !root.__curveRendererActive
+    layer.samples: root.antialiasing && !root.__curveRendererActive ? 4 : 0
 
     // This is used to make the bounding box of the item a bit bigger so it will draw sharp edges
     // in case of large stroke width instead of cutting it off.
@@ -390,7 +394,13 @@ Shape {
     onLeftMarginChanged: root.calc()
     onRightMarginChanged: root.calc()
 
-    Component.onCompleted: root.calc()
+    Component.onCompleted: {
+        // If preferredRendererType wasn't set initially make CurveRenderer the default
+        if (root.__preferredRendererTypeAvailable && root.preferredRendererType === Shape.UnknownRenderer)
+            root.preferredRendererType = Shape.CurveRenderer
+
+        root.calc()
+    }
 
     function length(x, y) {
         return Math.sqrt(x * x + y * y)

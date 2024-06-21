@@ -284,9 +284,13 @@ Shape {
 */
     property real alpha: root.clamp(root.sortedEnd() - root.sortedBegin(), 0, 359.9)
 
-    layer.enabled: root.antialiasing
-    layer.smooth: root.antialiasing
-    layer.samples: root.antialiasing ? 4 : 0
+    property bool __preferredRendererTypeAvailable: root.preferredRendererType !== "undefined"
+    property bool __curveRendererActive: root.__preferredRendererTypeAvailable
+                                         && root.rendererType === Shape.CurveRenderer
+
+    layer.enabled: root.antialiasing && !root.__curveRendererActive
+    layer.smooth: root.antialiasing && !root.__curveRendererActive
+    layer.samples: root.antialiasing && !root.__curveRendererActive ? 4 : 0
 
 /*!
     Whether the arc has an outline.
@@ -494,6 +498,10 @@ Shape {
     }
 
     Component.onCompleted: {
+        // If preferredRendererType wasn't set initially make CurveRenderer the default
+        if (root.__preferredRendererTypeAvailable && root.preferredRendererType === Shape.UnknownRenderer)
+            root.preferredRendererType = Shape.CurveRenderer
+
         root.__wasFull = root.isArcFull()
         root.constructArcItem()
     }

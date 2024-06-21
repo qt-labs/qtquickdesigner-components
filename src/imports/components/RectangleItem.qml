@@ -317,9 +317,13 @@ Shape {
 */
     property bool bottomLeftBevel: root.bevel
 
-    layer.enabled: root.antialiasing
-    layer.smooth: root.antialiasing
-    layer.samples: root.antialiasing ? 4 : 0
+    property bool __preferredRendererTypeAvailable: root.preferredRendererType !== "undefined"
+    property bool __curveRendererActive: root.__preferredRendererTypeAvailable
+                                         && root.rendererType === Shape.CurveRenderer
+
+    layer.enabled: root.antialiasing && !root.__curveRendererActive
+    layer.smooth: root.antialiasing && !root.__curveRendererActive
+    layer.samples: root.antialiasing && !root.__curveRendererActive ? 4 : 0
 
 /*!
     The border is rendered within the rectangle's boundaries, outside of them,
@@ -362,7 +366,13 @@ Shape {
     onWidthChanged: Qt.callLater(root.calculateIndependentRadii)
     onHeightChanged: Qt.callLater(root.calculateIndependentRadii)
 
-    Component.onCompleted: root.calculateIndependentRadii()
+    Component.onCompleted: {
+        // If preferredRendererType wasn't set initially make CurveRenderer the default
+        if (root.__preferredRendererTypeAvailable && root.preferredRendererType === Shape.UnknownRenderer)
+            root.preferredRendererType = Shape.CurveRenderer
+
+        root.calculateIndependentRadii()
+    }
 
     function calculateIndependentRadii() {
         let minDimension = Math.min(root.width, root.height)
