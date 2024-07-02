@@ -155,8 +155,9 @@ static QString urlToLocalPath(const QUrl &url)
     return localPath;
 }
 
-static Q_LOGGING_CATEGORY(texttomodelMergerDebug, "qt.StudioCsvTableModel.debug", QtDebugMsg)
-    QuickStudioCsvTableModel::QuickStudioCsvTableModel(QObject *parent)
+static Q_LOGGING_CATEGORY(quickStudioCsvTableModelDebug, "qt.StudioCsvTableModel.debug", QtDebugMsg)
+
+QuickStudioCsvTableModel::QuickStudioCsvTableModel(QObject *parent)
     : QAbstractTableModel(parent)
     , m_fileWatcher(new QFileSystemWatcher(this))
 {
@@ -289,7 +290,7 @@ void QuickStudioCsvTableModel::checkPathAndReload(const QString &path)
 
 void QuickStudioCsvTableModel::startWatchingSource()
 {
-    qCDebug(texttomodelMergerDebug) << Q_FUNC_INFO << "Load file: " << source();
+    qCDebug(quickStudioCsvTableModelDebug) << Q_FUNC_INFO << "Load file: " << source();
 
     const QStringList oldWatchingFiles = m_fileWatcher->files();
     if (oldWatchingFiles.size())

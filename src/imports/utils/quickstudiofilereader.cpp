@@ -43,7 +43,7 @@
 
 QT_BEGIN_NAMESPACE
 
-static Q_LOGGING_CATEGORY(texttomodelMergerDebug, "qt.Studiofilereader.debug", QtDebugMsg)
+static Q_LOGGING_CATEGORY(quickStudioFileReaderDebug, "qt.Studiofilereader.debug", QtDebugMsg)
 
     QuickStudioFileReader::QuickStudioFileReader(QObject *parent)
     : QObject(parent)
@@ -51,7 +51,7 @@ static Q_LOGGING_CATEGORY(texttomodelMergerDebug, "qt.Studiofilereader.debug", Q
 
 QString QuickStudioFileReader::loadFile(const QString &path)
 {
-    qCDebug(texttomodelMergerDebug) << Q_FUNC_INFO << "Load file: " << path;
+    qCDebug(quickStudioFileReaderDebug) << Q_FUNC_INFO << "Load file: " << path;
 
     QFile file(path);
     bool ok = file.open(QIODevice::ReadOnly);
@@ -73,7 +73,7 @@ QString QuickStudioFileReader::loadFile(const QString &path)
 
 void QuickStudioFileReader::reload()
 {
-    qCDebug(texttomodelMergerDebug) << Q_FUNC_INFO << "Load file: " << m_filePath;
+    qCDebug(quickStudioFileReaderDebug) << Q_FUNC_INFO << "Load file: " << m_filePath;
 
     QString localPath;
 
