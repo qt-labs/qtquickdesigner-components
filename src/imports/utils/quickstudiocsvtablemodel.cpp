@@ -155,7 +155,7 @@ static QString urlToLocalPath(const QUrl &url)
     return localPath;
 }
 
-static Q_LOGGING_CATEGORY(quickStudioCsvTableModelDebug, "qt.StudioCsvTableModel.debug", QtDebugMsg)
+Q_STATIC_LOGGING_CATEGORY(quickStudioCsvTableModelDebug, "qt.StudioCsvTableModel.debug", QtDebugMsg)
 
 QuickStudioCsvTableModel::QuickStudioCsvTableModel(QObject *parent)
     : QAbstractTableModel(parent)

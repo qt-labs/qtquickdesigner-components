@@ -43,7 +43,7 @@
 
 QT_BEGIN_NAMESPACE
 
-static Q_LOGGING_CATEGORY(quickStudioFileReaderDebug, "qt.Studiofilereader.debug", QtDebugMsg)
+Q_STATIC_LOGGING_CATEGORY(quickStudioFileReaderDebug, "qt.Studiofilereader.debug", QtDebugMsg)
 
     QuickStudioFileReader::QuickStudioFileReader(QObject *parent)
     : QObject(parent)
