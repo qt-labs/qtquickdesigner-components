@@ -86,6 +86,7 @@ qt.conf
 .qmlcache
 codeattributions.qdoc
 CMakeCache.txt
+CMakeLists.txt.user
 *.cmake
 *Plugin.cpp
 *qmltyperegistrations.cpp
