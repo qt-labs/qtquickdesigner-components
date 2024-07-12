@@ -248,7 +248,7 @@ Shape {
 */
     property real alpha: root.clamp(root.end - root.begin, 0, 359.9)
 
-    property bool __preferredRendererTypeAvailable: root.preferredRendererType !== "undefined"
+    property bool __preferredRendererTypeAvailable: root.preferredRendererType !== undefined
     property bool __curveRendererActive: root.__preferredRendererTypeAvailable
                                          && root.rendererType === Shape.CurveRenderer
 

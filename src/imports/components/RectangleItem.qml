@@ -317,7 +317,7 @@ Shape {
 */
     property bool bottomLeftBevel: root.bevel
 
-    property bool __preferredRendererTypeAvailable: root.preferredRendererType !== "undefined"
+    property bool __preferredRendererTypeAvailable: root.preferredRendererType !== undefined
     property bool __curveRendererActive: root.__preferredRendererTypeAvailable
                                          && root.rendererType === Shape.CurveRenderer
 
