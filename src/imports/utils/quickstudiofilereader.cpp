@@ -45,7 +45,7 @@ QT_BEGIN_NAMESPACE
 
 Q_STATIC_LOGGING_CATEGORY(quickStudioFileReaderDebug, "qt.Studiofilereader.debug", QtDebugMsg)
 
-    QuickStudioFileReader::QuickStudioFileReader(QObject *parent)
+QuickStudioFileReader::QuickStudioFileReader(QObject *parent)
     : QObject(parent)
 {}
 
