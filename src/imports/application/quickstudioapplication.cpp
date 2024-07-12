@@ -43,7 +43,11 @@
 
 QT_BEGIN_NAMESPACE
 
+#ifndef Q_STATIC_LOGGING_CATEGORY // introduced with Qt 6.9
+static Q_LOGGING_CATEGORY(texttomodelMergerDebug, "qt.Studioapplication.debug", QtDebugMsg)
+#else
 Q_STATIC_LOGGING_CATEGORY(texttomodelMergerDebug, "qt.Studioapplication.debug", QtDebugMsg)
+#endif
 
 QuickStudioApplication::QuickStudioApplication(QObject *parent) : QObject(parent) {}
 

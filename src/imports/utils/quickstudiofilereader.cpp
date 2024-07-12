@@ -43,7 +43,11 @@
 
 QT_BEGIN_NAMESPACE
 
+#ifndef Q_STATIC_LOGGING_CATEGORY // introduced with Qt 6.9
+static Q_LOGGING_CATEGORY(quickStudioFileReaderDebug, "qt.Studioapplication.debug", QtDebugMsg)
+#else
 Q_STATIC_LOGGING_CATEGORY(quickStudioFileReaderDebug, "qt.Studiofilereader.debug", QtDebugMsg)
+#endif
 
 QuickStudioFileReader::QuickStudioFileReader(QObject *parent)
     : QObject(parent)
