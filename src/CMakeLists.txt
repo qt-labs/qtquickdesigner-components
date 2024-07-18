@@ -7,3 +7,7 @@ if(QT_QDS_COMPONENTS_NOWARN)
 endif()
 
 add_subdirectory(imports)
+
+qt_internal_add_docs(QtQuickStudioComponents
+    doc/components.qdocconf
+)
