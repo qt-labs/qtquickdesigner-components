@@ -3,6 +3,14 @@ set_source_files_properties(FlowState.qml
         QT_QML_SINGLETON_TYPE true
 )
 
+option(FLOWVIEW_AUTO_QMLDIR "Enable auto-generation of QMLDIR for FlowView" OFF)
+
+if(NOT DEFINED FLOWVIEW_AUTO_QMLDIR)
+    list(qds_qml_extra_args NO_GENERATE_QMLDIR RESOURCES qmldir)
+else()
+    message(WARNING "Auto-generating qmldir for FlowView and skiping the provided one.")
+endif()
+
 qt_internal_add_qml_module(FlowView
     URI "FlowView"
     VERSION "${PROJECT_VERSION}"
@@ -10,7 +18,6 @@ qt_internal_add_qml_module(FlowView
     ${qds_qml_extra_args}
     NO_SYNC_QT
     PAST_MAJOR_VERSIONS 1
-    NO_GENERATE_QMLDIR
     QML_FILES
         DefaultFlowEffect.qml
         SwipeInteraction.qml
@@ -35,11 +42,8 @@ qt_internal_add_qml_module(FlowView
         FlowState.qml
         +DesignMode/FlowItem.qml
         +DesignMode/FlowView.qml
-    RESOURCES
-        qmldir
 )
 
 if(QT_FEATURE_quick_designer AND QT_BUILD_SHARED_LIBS)
     add_subdirectory(designer)
 endif()
-
