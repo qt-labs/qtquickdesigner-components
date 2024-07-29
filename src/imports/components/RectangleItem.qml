@@ -476,11 +476,13 @@ Shape {
         startX: path.__topLeftRadius + root.borderOffset + path.__borderRadiusAdjustment
         startY: root.borderOffset
 
+        // Top.
         PathLine {
             x: root.width - path.__topRightRadius - root.borderOffset - path.__borderRadiusAdjustment
             y: root.borderOffset
         }
 
+        // Top-right.
         PathArc {
             x: root.width - root.borderOffset
             y: path.__topRightRadius + root.borderOffset + path.__borderRadiusAdjustment
@@ -489,11 +491,13 @@ Shape {
             radiusY: root.topRightBevel ? 50000 : path.__topRightRadius + path.__borderRadiusAdjustment
         }
 
+        // Right.
         PathLine {
             x: root.width - root.borderOffset
             y: root.height - path.__bottomRightRadius - root.borderOffset - path.__borderRadiusAdjustment
         }
 
+        // Bottom-right.
         PathArc {
             x: root.width - path.__bottomRightRadius - root.borderOffset - path.__borderRadiusAdjustment
             y: root.height - root.borderOffset
@@ -502,11 +506,13 @@ Shape {
             radiusY: root.bottomRightBevel ? 50000 : path.__bottomRightRadius + path.__borderRadiusAdjustment
         }
 
+        // Bottom.
         PathLine {
             x: path.__bottomLeftRadius + root.borderOffset + path.__borderRadiusAdjustment
             y: root.height - root.borderOffset
         }
 
+        // Bottom-left.
         PathArc {
             x: root.borderOffset
             y: root.height - path.__bottomLeftRadius - root.borderOffset - path.__borderRadiusAdjustment
@@ -515,11 +521,13 @@ Shape {
             radiusY: root.bottomLeftBevel ? 50000 : path.__bottomLeftRadius + path.__borderRadiusAdjustment
         }
 
+        // Left.
         PathLine {
             x: root.borderOffset
             y: path.__topLeftRadius + root.borderOffset + path.__borderRadiusAdjustment
         }
 
+        // Top-left.
         PathArc {
             x: path.__topLeftRadius + root.borderOffset + path.__borderRadiusAdjustment
             y: root.borderOffset
