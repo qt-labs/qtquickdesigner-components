@@ -8,6 +8,7 @@ IsoItem 1.0 IsoItem.qml
 PieItem 1.0 PieItem.qml
 RectangleItem 1.0 RectangleItem.qml
 RegularPolygonItem 1.0 RegularPolygonItem.qml
+StarItem 1.0 StarItem.qml
 StraightArrow 1.0 StraightArrow.qml
 SvgPathItem 1.0 SvgPathItem.qml
 TextItem 1.0 TextItem.qml
