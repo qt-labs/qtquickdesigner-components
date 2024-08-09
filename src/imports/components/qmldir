@@ -1,14 +1,13 @@
+ArcArrow 1.0 ArcArrow.qml
 ArcItem 1.0 ArcItem.qml
-PieItem 1.0 PieItem.qml
-TriangleItem 1.0 TriangleItem.qml
-SvgPathItem 1.0 SvgPathItem.qml
+BorderItem 1.0 BorderItem.qml
 EllipseItem 1.0 EllipseItem.qml
 FlipableItem 1.0 FlipableItem.qml
+GroupItem 1.0 GroupItem.qml
+IsoItem 1.0 IsoItem.qml
+PieItem 1.0 PieItem.qml
 RectangleItem 1.0 RectangleItem.qml
 RegularPolygonItem 1.0 RegularPolygonItem.qml
-BorderItem 1.0 BorderItem.qml
-IsoItem 1.0 IsoItem.qml
-GroupItem 1.0 GroupItem.qml
-ArcArrow 1.0 ArcArrow.qml
 StraightArrow 1.0 StraightArrow.qml
-
+SvgPathItem 1.0 SvgPathItem.qml
+TriangleItem 1.0 TriangleItem.qml

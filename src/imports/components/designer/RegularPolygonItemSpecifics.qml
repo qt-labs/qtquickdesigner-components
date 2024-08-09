@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2021 The Qt Company Ltd.
+** Copyright (C) 2024 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Designer Components.
@@ -27,10 +27,10 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.15
-import QtQuick.Layouts 1.15
-import HelperWidgets 2.0
-import StudioTheme 1.0 as StudioTheme
+import QtQuick
+import QtQuick.Layouts
+import HelperWidgets
+import StudioTheme as StudioTheme
 
 Column {
     anchors.left: parent.left
@@ -153,8 +153,8 @@ Column {
                     implicitWidth: StudioTheme.Values.twoControlColumnWidth
                                    + StudioTheme.Values.actionIndicatorWidth
                     decimals: 0
-                    minimumValue: backendValues.minRadius.value
-                    maximumValue: backendValues.maxRadius.value
+                    minimumValue: 0
+                    maximumValue: 1000
                     stepSize: 1
                 }
 
