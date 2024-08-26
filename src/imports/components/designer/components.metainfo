@@ -155,4 +155,31 @@ MetaInfo {
         }
     }
 
+    Type {
+        name: "QtQuick.Studio.Components.TextItem"
+        icon: "images/polygon-16px.png" // TODO
+
+        ItemLibraryEntry {
+            name: "Text"
+            category: "Studio Components"
+            libraryIcon: "images/polygon-24px.png" // TODO
+            version: "1.0"
+            requiredImport: "QtQuick.Studio.Components"
+            toolTip: qsTr("A text painted with a solid fill color or linear gradient and an optional border.")
+        }
+    }
+
+    Type {
+        name: "QtQuick.Studio.Components.StarItem"
+        icon: "images/polygon-16px.png" // TODO
+
+        ItemLibraryEntry {
+            name: "Star"
+            category: "Studio Components"
+            libraryIcon: "images/polygon-24px.png" // TODO
+            version: "1.0"
+            requiredImport: "QtQuick.Studio.Components"
+            toolTip: qsTr("A star-shaped polygon, painted with a solid fill color or linear gradient and an optional border.")
+        }
+    }
 }

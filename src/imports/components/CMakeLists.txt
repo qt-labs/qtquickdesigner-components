@@ -6,19 +6,21 @@ qt_internal_add_qml_module(QuickStudioComponents
     NO_SYNC_QT
     PAST_MAJOR_VERSIONS 1
         QML_FILES
+        ArcArrow.qml
         ArcItem.qml
-        PieItem.qml
-        TriangleItem.qml
-        SvgPathItem.qml
+        BorderItem.qml
         EllipseItem.qml
         FlipableItem.qml
+        GroupItem.qml
+        IsoItem.qml
+        PieItem.qml
         RectangleItem.qml
         RegularPolygonItem.qml
-        BorderItem.qml
-        IsoItem.qml
-        GroupItem.qml
-        ArcArrow.qml
+        StarItem.qml
         StraightArrow.qml
+        SvgPathItem.qml
+        TextItem.qml
+        TriangleItem.qml
 )
 
 qt_internal_add_docs(QuickStudioComponents
