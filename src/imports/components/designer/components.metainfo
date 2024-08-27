@@ -166,6 +166,9 @@ MetaInfo {
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
             toolTip: qsTr("A text painted with a solid fill color or linear gradient and an optional border.")
+
+            Property { name: "text"; type: "binding"; value: "qsTr(\"Text Item\")"; }
+            Property { name: "font.pixelSize"; type: "int"; value: 32; }
         }
     }
 
