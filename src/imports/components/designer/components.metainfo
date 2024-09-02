@@ -157,12 +157,12 @@ MetaInfo {
 
     Type {
         name: "QtQuick.Studio.Components.TextItem"
-        icon: "images/polygon-16px.png" // TODO
+        icon: "images/text-16px.png"
 
         ItemLibraryEntry {
             name: "Text"
             category: "Studio Components"
-            libraryIcon: "images/polygon-24px.png" // TODO
+            libraryIcon: "images/text-24px.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
             toolTip: qsTr("A text painted with a solid fill color or linear gradient and an optional border.")
@@ -174,12 +174,12 @@ MetaInfo {
 
     Type {
         name: "QtQuick.Studio.Components.StarItem"
-        icon: "images/polygon-16px.png" // TODO
+        icon: "images/star-16px.png"
 
         ItemLibraryEntry {
             name: "Star"
             category: "Studio Components"
-            libraryIcon: "images/polygon-24px.png" // TODO
+            libraryIcon: "images/star-24px.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
             toolTip: qsTr("A star-shaped polygon, painted with a solid fill color or linear gradient and an optional border.")
