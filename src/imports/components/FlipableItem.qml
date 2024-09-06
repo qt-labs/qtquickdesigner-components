@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2021 The Qt Company Ltd.
+** Copyright (C) 2024 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Studio Components.
@@ -36,44 +36,57 @@ import QtQuick
 
     \brief Provides a surface that can be flipped.
 
-    A Flipable type can be visibly \e flipped between its front and back sides,
-    like a card. The front and back sides are specified by using any two types
-    inside the Flipable type. The type with the higher z-order is the front
-    side. The \l opacityFront and \l opacityBack properties are used to hide
-    and show either the front or back side of the item at a time.
+    A Flipable type can be visibly flipped between its front and back sides, like a card. The front
+    and back sides are specified by using any two types inside the Flipable type. The type with the
+    higher z-order is the front side. The \l opacityFront and \l opacityBack properties are used to
+    hide and show either the front or back side of the item at a time.
 
-    The \l flipAngle property is used to animate the angle of the type to
-    produce the flipping effect. The value of the \l rotationalAxis property
-    determines which axis the type is rotated around.
+    The \l flipAngle property is used to animate the angle of the type to produce the flipping
+    effect. The value of the \l rotationalAxis property determines which axis the type is rotated
+    around.
 
     \section2 Example Usage
 
-    You can use the Flipable component in \QDS to create an item that can be
-    flipped. In this example, the two sides of the item show ISO 7000 icons.
+    You can use the Flipable component in \QDS to create an item that can be flipped.
 
-    \image studio-flipable.png
+    \image studio-flipable.webp
 
     The QML code looks as follows:
 
     \code
     FlipableItem {
         id: flipable
-        width: 90
-        height: 89
-        opacityBack: 0
+        x: 595
+        y: 277
+        width: 493
+        height: 493
+        opacityFront: 1
+        opacityBack: 0.09412
+        flipAngle: 45
+        rotationalAxis: 1
 
-        IsoItem {
-            id: arrowIsoIcon
-            color: "#808080"
-            anchors.fill: parent
-            source: "./iso-icons/iso_grs_7000_4_0251.dat"
+        TriangleItem {
+            id: triangle
+            x: 122
+            y: 122
+            width: 250
+            height: 250
+            opacity: 1
+            z: 0
+            strokeWidth: 10
+            fillColor: "#6cff9f"
+            rotation: -270
         }
 
-        IsoItem {
-            id: questionIsoIcon
-            color: "#808080"
-            anchors.fill: parent
-            source: "./iso-icons/iso_grs_7000_4_0435.dat"
+        TriangleItem {
+            id: triangle1
+            x: 16
+            y: 122
+            width: 250
+            height: 250
+            strokeWidth: 10
+            rotation: 270
+            fillColor: "#6cff9f"
         }
     }
     \endcode

@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2021 The Qt Company Ltd.
+** Copyright (C) 2024 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of the documentation of the Qt Toolkit.
@@ -41,7 +41,7 @@
     statement in your .qml file:
 
     \code
-    import QtQuick.Studio.Components 1.0
+    import QtQuick.Studio.Components
     \endcode
 
     \section1 Reference

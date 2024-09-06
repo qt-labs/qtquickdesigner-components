@@ -12,7 +12,6 @@ qt_internal_add_qml_module(QuickStudioComponents
         EllipseItem.qml
         FlipableItem.qml
         GroupItem.qml
-        IsoItem.qml
         PieItem.qml
         RectangleItem.qml
         RegularPolygonItem.qml

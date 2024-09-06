@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2021 The Qt Company Ltd.
+** Copyright (C) 2024 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of the documentation of the Qt Toolkit.
@@ -26,21 +26,22 @@
 ****************************************************************************/
 
 /*!
-    \qmlmodule QtQuick.Studio.Components 1.0
+    \qmlmodule QtQuick.Studio.Components
     \title Qt Quick Studio Components QML Types
     \ingroup qmlmodules
     \brief Provides components enhanced for creating animated UIs.
 
     Preset components are available for creating differently shaped objects,
-    such as arcs, pies, or triangles, as well as objects with particular
-    abilities, such as being visibly \e flipped between their front and back
+    such as arcs, pies, regular polygons, stars, texts, or triangles, as well
+    as objects with particular abilities, such as being visibly
+    \e flipped between their front and back
     sides, like a card. The components are built on top of
     \l {Qt Quick Shapes QML Types}, with some additional properties.
 
     The QML types can be imported into your application using the following
     import statements in your .qml file:
 
-    \badcode
-    import QtQuick.Studio.Components 1.0
+    \code
+    import QtQuick.Studio.Components
     \endcode
 */

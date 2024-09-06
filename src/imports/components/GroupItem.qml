@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2021 The Qt Company Ltd.
+** Copyright (C) 2024 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Studio Components.
@@ -37,35 +37,37 @@ import QtQuick
 
     \brief A group item that gets its size from its children.
 
-    The Group type is an \l Item type extended with the size property. The value
-    of size is automatically calculated to fit the children of the group.
+    The Group type is an \l Item type extended with the size property. The value of size is
+    automatically calculated to fit the children of the group.
 
     \section2 Example Usage
 
     You can use the Group type to specify the size of one or several items.
 
-    \image studio-group.png
+    \image studio-group.webp
 
     The QML code looks as follows:
 
     \code
-    GroupItem {
+     GroupItem {
         id: group
+        x: 820
+        y: 437
 
         Rectangle {
-        id: rectangle
-        width: 200
-        height: 200
-        color: "#c2c2c2"
+            id: rectangle1
+            width: 200
+            height: 200
+            color: "#c2c2c2"
         }
 
         Rectangle {
-        id: rectangle1
-        x: 140
-        y: 140
-        width: 200
-        height: 200
-        color: "#000000"
+            id: rectangle2
+            x: 140
+            y: 140
+            width: 200
+            height: 200
+            color: "#000000"
         }
     }
     \endcode

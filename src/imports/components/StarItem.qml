@@ -31,12 +31,121 @@ import QtQuick
 import QtQuick.Shapes
 
 /*!
-    \qmltype RegularPolygon
+    \qmltype Star
     \inqmlmodule QtQuick.Studio.Components
     \since QtQuick.Studio.Components 1.0
     \inherits Shape
 
-    \brief A filled polygon that is arranged in a star shape with an optional border.
+    \brief A filled star-shaped polygon with an optional border.
+
+    A star can be a star shaped stroke, a filling, or a stroke with filling. The \l strokeColor,
+    \l strokeWidth, and \l strokeStyle properties specify the appearance of the outline. The
+    \l dashPattern and \l dashOffset properties specify the appearance of dashed stroke.
+
+    Set the \l count property between 3 and 60 to specify the number of points of the star. Set the
+    \l ratio between 0.1 and 1 to specify the distance of the inner points of the star from the
+    center.
+
+    The area inside the stroke is painted using either a solid fill color, specified using the
+    \l fillColor property, or a gradient, defined using one of the \l ShapeGradient subtypes and set
+    using the \l gradient property. If both a color and a gradient are specified, the gradient is
+    used.
+
+    To create a star with a stroke, set the \l strokeWidth property to a value greater than 0. The
+    \l strokeWidth property specifies the width of the polygon stroke.The default \l count value is
+    6 and the default \l strokeWidth value is 4. Setting the \l strokeWidth value to a negative
+    value hides the border.
+
+    The \l radius property specifies whether the star corners are rounded. Because this introduces
+    curved edges to the corners, it may be appropriate to set the \c antialiasing property that is
+    inherited from \l Item to improve the appearance of the stroke.
+
+    \section2 Example Usage
+
+    \image studio-star.webp
+
+    The QML code looks as follows:
+
+    \code
+
+    StarItem {
+        id: star
+        x: 621
+        y: 433
+        width: 142
+        height: 142
+        radius: 10
+    }
+
+    StarItem {
+        id: star1
+        x: 786
+        y: 433
+        width: 142
+        height: 142
+        radius: 1
+        gradient: RadialGradient {
+            GradientStop {
+                position: 0
+                color: "#ce9d9d"
+            }
+
+            GradientStop {
+                position: 1
+                color: "#000000"
+            }
+            focalY: star1.height * 0.5
+            focalX: star1.width * 0.5
+            focalRadius: Math.min(star1.width, star1.height) * 0
+            centerY: star1.height * 0.5
+            centerX: star1.width * 0.5
+            centerRadius: Math.min(star1.width, star1.height) * 0.5
+        }
+        count: 7
+    }
+
+    StarItem {
+        id: star2
+        x: 786
+        y: 603
+        width: 142
+        height: 142
+        radius: 1
+        fillColor: "#00ffffff"
+        strokeColor: "#000000"
+        ratio: 0.2
+        count: 3
+    }
+
+    StarItem {
+        id: star3
+        x: 621
+        y: 603
+        width: 142
+        height: 142
+        radius: 1
+        gradient: LinearGradient {
+            y2: star3.height * 1
+            y1: star3.height * 0
+            x2: star3.width * 1
+            x1: star3.width * 0
+
+            GradientStop {
+                position: 0
+                color: "#ff8686"
+            }
+
+            GradientStop {
+                position: 1
+                color: "#5c5e5d"
+            }
+        }
+        strokeColor: "#00ff0000"
+        ratio: 0.6
+        count: 25
+    }
+
+    \endcode
 */
 
 Shape {
@@ -45,126 +154,71 @@ Shape {
     height: 200
 
 /*!
-    The radius used to draw rounded corners.
-
-    The default value is 10.
-
-    If radius is non-zero, the corners will be rounded, otherwise they will
-    be sharp.
+    \include CommonItemDescriptions.qdocinc {component-radius} {10}
 */
     property int radius: 10
 
 /*!
-    The gradient of the regular polygon fill color.
-
-    By default, no gradient is enabled and the value is null. In this case, the
-    fill uses a solid color based on the value of \l fillColor.
-
-    When set, \l fillColor is ignored and filling is done using one of the
-    \l ShapeGradient subtypes.
-
-    \note The \l Gradient type cannot be used here. Rather, prefer using one of
-    the advanced subtypes, like \l LinearGradient.
+    \include CommonItemDescriptions.qdocinc {component-gradient} {star}
 */
     property alias gradient: path.fillGradient
 
 /*!
-    The style of the regular polygon border.
-
-    \value ShapePath.SolidLine
-           A solid line. This is the default value.
-    \value ShapePath.DashLine
-           Dashes separated by a few pixels.
-           The \l dashPattern property specifies the dash pattern.
-
-    \sa Qt::PenStyle
+    \include CommonItemDescriptions.qdocinc component-joinStyle
 */
     //property alias joinStyle: path.joinStyle
     property int joinStyle: ShapePath.MiterJoin //workaround for regression in Qt 6.6.1 (QDS-11845)
+
+/*!
+    \include CommonItemDescriptions.qdocinc component-capStyle
+*/
     //property alias capStyle: path.capStyle
     property int capStyle: ShapePath.SquareCap //workaround for regression in Qt 6.6.1 (QDS-11845)
+
+/*!
+    \include CommonItemDescriptions.qdocinc {component-strokeStyle} {star}
+*/
     //property alias strokeStyle: path.strokeStyle
     property int strokeStyle: ShapePath.SolidLine //workaround for regression in Qt 6.6.1 (QDS-11845)
 
 /*!
-    The width of the border of the regular polygon.
-
-    The default value is 4.
-
-    A width of 1 creates a thin line. For no line, use a negative value or a
-    transparent color.
-
-    \note The width of the regular polygon's border does not affect the geometry of
-    the regular polygon itself or its position relative to other items if anchors are
-    used.
-
-    The border is rendered within the regular polygon's boundaries.
+    \include CommonItemDescriptions.qdocinc {component-strokeWidth} {star}
 */
     property alias strokeWidth: path.strokeWidth
 
 /*!
-    The color used to draw the border of the regular polygon.
-
-    When set to \c transparent, no line is drawn.
-
-    The default value is \c red.
-
-    \sa QColor
+    \include CommonItemDescriptions.qdocinc {component-strokeColor} {star}
 */
     property alias strokeColor: path.strokeColor
 
 /*!
-    The dash pattern of the regular polygon border specified as the dashes and the
-    gaps between them.
-
-    The dash pattern is specified in units of the pen's width. That is, a dash
-    with the length 5 and width 10 is 50 pixels long.
-
-    The default value is (4, 2), meaning a dash of 4 * \l strokeWidth pixels
-    followed by a space of 2 * \l strokeWidth pixels.
-
-    \sa QPen::setDashPattern()
+    \include CommonItemDescriptions.qdocinc {component-dashPattern} {star}
 */
     property alias dashPattern: path.dashPattern
 
 /*!
-    The regular polygon fill color.
-
-    A gradient for the fill can be specified by using \l gradient. If both a
-    color and a gradient are specified, the gradient is used.
-
-    When set to \c transparent, no filling occurs.
-
-    The default value is \c white.
+    \include CommonItemDescriptions.qdocinc {component-fillColor} {star}
 */
     property alias fillColor: path.fillColor
 
 /*!
-    The starting point of the dash pattern for the regular polygon border.
-
-    The offset is measured in terms of the units used to specify the dash
-    pattern. For example, a pattern where each stroke is four units long,
-    followed by a gap of two units, will begin with the stroke when drawn
-    as a line. However, if the dash offset is set to 4.0, any line drawn
-    will begin with the gap. Values of the offset up to 4.0 will cause part
-    of the stroke to be drawn first, and values of the offset between 4.0 and
-    6.0 will cause the line to begin with part of the gap.
-
-    The default value is 0.
-
-    \sa QPen::setDashOffset()
+    \include CommonItemDescriptions.qdocinc {component-dashOffset} {star}
 */
     property alias dashOffset: path.dashOffset
 
 /*!
-    The number of points there are to the star. The minimum is three and
-    the maximum is 60.
+    The number of points in the star. It supports a minimum of 3 and a maximum of 60 points. Set the
+    count to 3 and the \l ratio to 0.5 to create a triangle.
+
+    The default value is 6.
 */
     property int count: 6
 
 /*!
     The distance of the inner points of the star from the center. This
     is represented as percentage of the star's diameter.
+
+    The default value is 0.5.
 */
     property real ratio: 0.5
 
