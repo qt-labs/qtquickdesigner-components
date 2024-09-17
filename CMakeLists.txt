@@ -23,13 +23,27 @@ if (NOT IGNORE_TOO_LONG_PATH_CHECK)
     endif()
 endif()
 
+# get Qt version without using find
+list(GET CMAKE_PREFIX_PATH 0 QT_INSTALL_PREFIX)
+set(QT_VERSION_FILE "${QT_INSTALL_PREFIX}/lib/cmake/Qt6/Qt6ConfigVersionImpl.cmake")
+if(EXISTS "${QT_VERSION_FILE}")
+    file(STRINGS "${QT_VERSION_FILE}" QT_VERSION_FILE_CONTENT REGEX "^set\\(PACKAGE_VERSION \".*\"\\)")
+    string(REGEX MATCH "set\\(PACKAGE_VERSION \"([0-9]+\\.[0-9]+\\.[0-9]+)\"" _ "${QT_VERSION_FILE_CONTENT}")
+    set(STUDIO_COMPONENTS_VERSION "${CMAKE_MATCH_1}")
+endif()
+
+if(NOT DEFINED STUDIO_COMPONENTS_VERSION)
+    message(WARNING "Could not extract Qt version from ${QT_VERSION_FILE}. Please check if the file contains the PACKAGE_VERSION.")
+    set(STUDIO_COMPONENTS_VERSION "6.0.0")
+endif()
+
 project(QtQuickDesignerComponents
     DESCRIPTION "QtQuick Designer Components"
     HOMEPAGE_URL "https://qt.io/"
     LANGUAGES CXX C
     # we do not know the Qt version here, but it is necessary to have one
     # version is set after we know the current Qt version again
-    VERSION "6.2.4"
+    VERSION ${STUDIO_COMPONENTS_VERSION}
 )
 
 set(CMAKE_AUTOMOC ON)
@@ -50,6 +64,9 @@ find_package(Qt6
         Qml
         ShaderTools
 )
-set(PROJECT_VERSION ${Qt6_VERSION})
+
+if(NOT "${STUDIO_COMPONENTS_VERSION}" STREQUAL "${Qt6_VERSION}")
+    message(WARNING "STUDIO_COMPONENTS_VERSION (${STUDIO_COMPONENTS_VERSION}) does not match the found Qt version (${Qt6_VERSION}).")
+endif()
 
 qt_build_repo()
