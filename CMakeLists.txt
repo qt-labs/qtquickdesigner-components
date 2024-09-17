@@ -23,7 +23,7 @@ if (NOT IGNORE_TOO_LONG_PATH_CHECK)
     endif()
 endif()
 
-# get Qt version without using find
+# get Qt version without using find, which would destroy the QT_REPO_DEPENDENCIES workaround
 list(GET CMAKE_PREFIX_PATH 0 QT_INSTALL_PREFIX)
 set(QT_VERSION_FILE "${QT_INSTALL_PREFIX}/lib/cmake/Qt6/Qt6ConfigVersionImpl.cmake")
 if(EXISTS "${QT_VERSION_FILE}")
@@ -41,8 +41,6 @@ project(QtQuickDesignerComponents
     DESCRIPTION "QtQuick Designer Components"
     HOMEPAGE_URL "https://qt.io/"
     LANGUAGES CXX C
-    # we do not know the Qt version here, but it is necessary to have one
-    # version is set after we know the current Qt version again
     VERSION ${STUDIO_COMPONENTS_VERSION}
 )
 
