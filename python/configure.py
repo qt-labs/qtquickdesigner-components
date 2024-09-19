@@ -76,10 +76,13 @@ def get_platform_tag() -> str:
 # NOTE: Needs to be set by hand
 QTDS_VERSION = "4.5"
 def get_ds_version() -> str:
-    with open(Path("PySide6/__init__.py"), "w") as f:
+    ds_path = Path("PySide6/ds")
+    if not ds_path.is_dir():
+        ds_path.mkdir(parents=True)
+    with open(Path("PySide6/ds/__init__.py"), "w") as f:
         f.write(f'__version__ = "{QTDS_VERSION}"')
 
-    return "PySide6.__version__"
+    return "PySide6.ds.__version__"
 
 
 def generate_pyproject_toml(artifacts: Path) -> str:
@@ -130,7 +133,10 @@ if __name__ == "__main__":
         f.write(pyproject_toml_content)
 
     # Copy components in the same structure
-    base = BASE_DIR / Path("lib")
+    if sys.platform == "win32":
+        base = BASE_DIR / Path("bin")
+    else:
+        base = BASE_DIR / Path("lib")
     for file in base.glob(LIB_PATTERN):
         # Exclude prl files
         if file.suffix in (".prl", ".dSYM"):
