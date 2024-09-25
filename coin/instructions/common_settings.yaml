@@ -1,0 +1,41 @@
+type: Group
+instructions:
+    - type: PrependToEnvironmentVariable
+      variableName: PATH
+      variableValue: "{{.InstallDir}}\\bin;"
+      enable_if:
+        condition: property
+        property: target.os
+        equals_value: Windows
+    - type: PrependToEnvironmentVariable
+      variableName: PATH
+      variableValue: "{{.InstallDir}}/bin:"
+      disable_if:
+        condition: property
+        property: target.os
+        equals_value: Windows
+    - type: EnvironmentVariable
+      variableName: TARGET_ARCHITECTURE
+      variableValue: amd64
+      disable_if:
+        condition: property
+        property: host.os
+        equals_value: MacOS
+    - type: EnvironmentVariable
+      variableName: Interpreter
+      variableValue: "python3"
+    - type: EnvironmentVariable
+      variableName: Interpreter
+      variableValue: "python3.8"
+      enable_if:
+        condition: property
+        property: host.osVersion
+        in_values: [RHEL_8_4, RHEL_8_6, RHEL_8_8]
+    - type: EnvironmentVariable
+      variableName: Interpreter
+      variableValue: "python3.9"
+      enable_if:
+        condition: property
+        property: host.osVersion
+        in_values: [MacOS_12, MacOS_13]
+
