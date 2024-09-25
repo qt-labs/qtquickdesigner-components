@@ -47,6 +47,7 @@ Section {
     SectionLayout {
         PropertyLabel {
             text: qsTr("Border mode")
+            tooltip: qsTr("Sets the way the border gets drawn along the boundary.")
             visible: showBorderMode
         }
 
@@ -59,6 +60,7 @@ Section {
 
         PropertyLabel {
             text: qsTr("Adjust radius")
+            tooltip: qsTr("Toggles the corners to adapt the radius of the component.")
             visible: showRadiusAdjustmentment
         }
 
@@ -72,7 +74,10 @@ Section {
             }
         }
 
-        PropertyLabel { text: qsTr("Stroke style") }
+        PropertyLabel {
+            text: qsTr("Stroke style")
+            tooltip: qsTr("Sets the style of the stroke. Selecting <b>None</b> would make it without a stroke.")
+            }
 
         SecondColumnLayout {
             ComboBox {
@@ -90,6 +95,7 @@ Section {
 
         PropertyLabel {
             text: qsTr("Join style")
+            tooltip: qsTr("Sets the style of the connecting points of the edges.")
             visible: showJoinStyle
         }
 
@@ -109,6 +115,7 @@ Section {
 
         PropertyLabel {
             text: qsTr("Cap style")
+            tooltip: qsTr("Sets the line ends as square or rounded.")
             visible: showCapStyle
         }
 
@@ -121,6 +128,7 @@ Section {
 
         PropertyLabel {
             text: qsTr("Dash pattern")
+            tooltip: qsTr("Sets the Dash length and gap in the Stroke.")
             Layout.alignment: Qt.AlignTop
             Layout.topMargin: 5
         }
@@ -129,7 +137,10 @@ Section {
             enableEditors: strokeStyle.currentIndex === 2
         }
 
-        PropertyLabel { text: qsTr("Dash offset") }
+        PropertyLabel {
+            text: qsTr("Dash offset")
+            tooltip: qsTr("Sets the starting point of the dash pattern for a line.")
+            }
 
         SecondColumnLayout {
             SpinBox {

@@ -9,6 +9,7 @@ MetaInfo {
             libraryIcon: "images/group-24px.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
+            toolTip: qsTr("Groups several Studio Components.")
         }
     }
 
@@ -23,6 +24,7 @@ MetaInfo {
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
             Property { name: "fillColor"; type: "QColor"; value: "transparent"; }
+            toolTip: qsTr("An arc that begins and ends at given positions.")
         }
     }
 
@@ -36,6 +38,7 @@ MetaInfo {
             libraryIcon: "images/item-pie-24px.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
+            toolTip: qsTr("A pie slice or a pie with a slice missing from it.")
         }
     }
 
@@ -49,6 +52,7 @@ MetaInfo {
             libraryIcon: "images/item-triangle-24px.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
+            toolTip: qsTr("A triangle with different dimensions and shapes is enclosed in an invisible rectangle.")
         }
     }
 
@@ -62,6 +66,7 @@ MetaInfo {
             libraryIcon: "images/item-svg-24px.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
+            toolTip: qsTr("Allows to implement vector shape paths from another design tool such as Adobe Illustrator or Figma.")
         }
     }
 
@@ -75,6 +80,7 @@ MetaInfo {
             libraryIcon: "images/item-flippable-24px.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
+            toolTip: qsTr("A component that can be visibly flipped between its front and back sides, like a card.")
         }
     }
 
@@ -89,6 +95,7 @@ MetaInfo {
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
             Property { name: "adjustBorderRadius"; type: "bool"; value: "true"; }
+            toolTip: qsTr("An extended rectangle painted with a solid fill color or linear, conical, or radial gradients and corners that you can shape independently of each other.")
         }
     }
 
@@ -102,6 +109,7 @@ MetaInfo {
             libraryIcon: "images/polygon-24px.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
+            toolTip: qsTr("A regular polygon with a variable amount of edges painted with a solid fill color or linear gradient and an optional border.")
         }
     }
 
@@ -115,6 +123,7 @@ MetaInfo {
             libraryIcon: "images/ellipse-24px.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
+            toolTip: qsTr("An ellipse painted with a solid fill color or linear gradient and an optional border.")
         }
     }
 
@@ -129,146 +138,38 @@ MetaInfo {
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
             Property { name: "adjustBorderRadius"; type: "bool"; value: "true"; }
+            toolTip: qsTr("An extended border painted without solid fill color, having corners that you can shape independently of each other.")
         }
     }
 
     Type {
-        name: "QtQuick.Studio.Components.IsoItem"
-        icon: "images/iso-icons-16px.png"
+        name: "QtQuick.Studio.Components.TextItem"
+        icon: "images/text-16px.png"
 
         ItemLibraryEntry {
-            name: "Iso Icon"
+            name: "Text"
             category: "Studio Components"
-            libraryIcon: "images/iso-icons-24px.png"
+            libraryIcon: "images/text-24px.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
+            toolTip: qsTr("A text painted with a solid fill color or linear gradient and an optional border.")
+
+            Property { name: "text"; type: "binding"; value: "qsTr(\"Text Item\")"; }
+            Property { name: "font.pixelSize"; type: "int"; value: 32; }
         }
     }
 
     Type {
-        name: "QtQuick.Studio.Components.ArcArrow"
-        icon: "images/item-arrow-arc-16px.png"
+        name: "QtQuick.Studio.Components.StarItem"
+        icon: "images/star-16px.png"
 
         ItemLibraryEntry {
-            name: "Arc Arrow"
-            category: "Studio Components Arrows"
-            libraryIcon: "images/item-arrow-arc-24px.png"
+            name: "Star"
+            category: "Studio Components"
+            libraryIcon: "images/star-24px.png"
             version: "1.0"
             requiredImport: "QtQuick.Studio.Components"
-        }
-    }
-
-    Type {
-        name: "QtQuick.Studio.Components.StraightArrow"
-        icon: "images/item-arrow-16px.png"
-        ItemLibraryEntry {
-            name: "Left"
-            category: "Studio Components Arrows"
-            libraryIcon: "images/item-arrow-left-24px.png"
-            version: "1.0"
-            requiredImport: "QtQuick.Studio.Components"
-        }
-        ItemLibraryEntry {
-            name: "Right"
-            category: "Studio Components Arrows"
-            libraryIcon: "images/item-arrow-right-24px.png"
-            version: "1.0"
-            requiredImport: "QtQuick.Studio.Components"
-            Property { name: "flip"; type: "bool"; value: "true"; }
-        }
-        ItemLibraryEntry {
-            name: "Up"
-            category: "Studio Components Arrows"
-            libraryIcon: "images/item-arrow-up-24px.png"
-            version: "1.0"
-            requiredImport: "QtQuick.Studio.Components"
-            Property { name: "rotate"; type: "bool"; value: "true"; }
-        }
-        ItemLibraryEntry {
-            name: "Down"
-            category: "Studio Components Arrows"
-            libraryIcon: "images/item-arrow-down-24px.png"
-            version: "1.0"
-            requiredImport: "QtQuick.Studio.Components"
-            Property { name: "rotate"; type: "bool"; value: "true"; }
-            Property { name: "flip"; type: "bool"; value: "true"; }
-        }
-        ItemLibraryEntry {
-            name: "Down Left"
-            category: "Studio Components Arrows"
-            libraryIcon: "images/item-arrow-down-left-24px.png"
-            version: "1.0"
-            requiredImport: "QtQuick.Studio.Components"
-            Property { name: "corner"; type: "bool"; value: "true"; }
-
-        }
-        ItemLibraryEntry {
-            name: "Up Right"
-            category: "Studio Components Arrows"
-            libraryIcon: "images/item-arrow-up-right-24px.png"
-            version: "1.0"
-            requiredImport: "QtQuick.Studio.Components"
-            Property { name: "flip"; type: "bool"; value: "true"; }
-            Property { name: "corner"; type: "bool"; value: "true"; }
-        }
-        ItemLibraryEntry {
-            name: "Right Up"
-            category: "Studio Components Arrows"
-            libraryIcon: "images/item-arrow-right-up-24px.png"
-            version: "1.0"
-            requiredImport: "QtQuick.Studio.Components"
-            Property { name: "rotate"; type: "bool"; value: "true"; }
-            Property { name: "corner"; type: "bool"; value: "true"; }
-        }
-        ItemLibraryEntry {
-            name: "Left Down"
-            category: "Studio Components Arrows"
-            libraryIcon: "images/item-arrow-left-down-24px.png"
-            version: "1.0"
-            requiredImport: "QtQuick.Studio.Components"
-            Property { name: "rotate"; type: "bool"; value: "true"; }
-            Property { name: "flip"; type: "bool"; value: "true"; }
-            Property { name: "corner"; type: "bool"; value: "true"; }
-        }
-        ItemLibraryEntry {
-            name: "Up Left"
-            category: "Studio Components Arrows"
-            libraryIcon: "images/item-arrow-up-left-24px.png"
-            version: "1.0"
-            requiredImport: "QtQuick.Studio.Components"
-            Property { name: "corner"; type: "bool"; value: "true"; }
-            Property { name: "flipCorner"; type: "bool"; value: "true"; }
-        }
-        ItemLibraryEntry {
-            name: "Down Right"
-            category: "Studio Components Arrows"
-            libraryIcon: "images/item-arrow-down-right-24px.png"
-            version: "1.0"
-            requiredImport: "QtQuick.Studio.Components"
-            Property { name: "flip"; type: "bool"; value: "true"; }
-            Property { name: "corner"; type: "bool"; value: "true"; }
-            Property { name: "flipCorner"; type: "bool"; value: "true"; }
-        }
-        ItemLibraryEntry {
-            name: "Left Up"
-            category: "Studio Components Arrows"
-            libraryIcon: "images/item-arrow-left-up-24px.png"
-            version: "1.0"
-            requiredImport: "QtQuick.Studio.Components"
-            Property { name: "rotate"; type: "bool"; value: "true"; }
-            Property { name: "corner"; type: "bool"; value: "true"; }
-            Property { name: "flipCorner"; type: "bool"; value: "true"; }
-        }
-        ItemLibraryEntry {
-            name: "Right Down"
-            category: "Studio Components Arrows"
-            libraryIcon: "images/item-arrow-right-down-24px.png"
-            version: "1.0"
-            requiredImport: "QtQuick.Studio.Components"
-            Property { name: "rotate"; type: "bool"; value: "true"; }
-            Property { name: "flip"; type: "bool"; value: "true"; }
-            Property { name: "corner"; type: "bool"; value: "true"; }
-            Property { name: "flipCorner"; type: "bool"; value: "true"; }
+            toolTip: qsTr("A star-shaped polygon, painted with a solid fill color or linear gradient and an optional border.")
         }
     }
 }

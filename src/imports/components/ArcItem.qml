@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2021 The Qt Company Ltd.
+** Copyright (C) 2024 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Studio Components.
@@ -27,8 +27,8 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.9
-import QtQuick.Shapes 1.12
+import QtQuick
+import QtQuick.Shapes
 
 /*!
     \qmltype ArcItem
@@ -36,51 +36,45 @@ import QtQuick.Shapes 1.12
     \since QtQuick.Studio.Components 1.0
     \inherits Shape
 
-    \brief An arc that ends at the specified position and uses the specified
-    radius.
 
-    An arc is specified by setting values in degrees for the \l begin and
-    \l end properties. The arc can be just a line or a filled outline.
-    The \l strokeColor, \l strokeWidth, and \l strokeStyle properties specify
-    the appearance of the line or outline. The \l dashPattern and \l dashOffset
+    \brief An arc that ends at the specified position and uses the specified radius.
+
+    An arc is specified by setting values in degrees for the \l begin and \l end properties. The arc
+    can be just a line or a filled outline. The \l strokeColor, \l strokeWidth, and \l strokeStyle
+    properties specify the appearance of the line or outline. The \l dashPattern and \l dashOffset
     properties specify the appearance of dashed lines.
 
-    The area between the arc's start and end points or the area inside the
-    outline are painted using either a solid fill color, specified using the
-    \l fillColor property, or a gradient, defined using one of the
-    \l ShapeGradient subtypes and set using the \l gradient property.
-    If both a color and a gradient are specified, the gradient is used.
+    The area between the arc's start and end points or the area inside the outline are painted using
+    either a solid fill color, specified using the \l fillColor property, or a gradient, defined
+    using one of the \l ShapeGradient subtypes and set using the \l gradient property. If both a
+    color and a gradient are specified, the gradient is used.
 
-    To create an arc with an outline, set the \l outlineArc property to \c true.
-    The \l arcWidth property specifies the width of the arc outline, including
-    the stroke. The \l arcWidthBegin and \l arcWidthEnd properties can be used
-    to specify the width of the start and end points of the outline separately.
-    The width of the outline between the start and end points is calculated
-    automatically. The inner and outer curves or the outline can be adjusted by
-    specifying values for the \l radiusInnerAdjust and \l radiusOuterAdjust
-    properties.
+    To create an arc with an outline, set the \l outlineArc property to \c true. The \l arcWidth
+    property specifies the width of the arc outline, including the stroke. The width of the outline
+    between the start and end points is calculated automatically.
 
-    The \l round, \l roundBegin, and \l roundEnd properties specify whether the
-    end points of the arc outline have rounded caps. For an arc that does not
-    have an outline, the \l capStyle property specifies whether the line ends
-    are square or rounded.
+    The \l round, \l roundBegin, and \l roundEnd properties specify whether the end points of the
+    arc outline have rounded caps. For an arc that does not have an outline, the \l capStyle
+    property specifies whether the line ends are square or rounded.
 
-    Because an arc has curves, it may be appropriate to set the \c antialiasing
-    property that is inherited from \l Item to improve its appearance.
+    Because an arc has curves, it may be appropriate to set the \c antialiasing property that is
+    inherited from \l Item to improve its appearance.
 
     \section2 Example Usage
 
     You can use the Arc component in \QDS to create different kinds of arcs.
 
-    \image studio-arc.png
+    \image studio-arc.webp
 
     The QML code looks as follows:
 
     \code
+
     ArcItem {
         id: arc
-        x: 31
-        y: 31
+        x: 667
+        y: 490
+        fillColor: "#00ffffff"
         capStyle: 32
         end: 180
         strokeWidth: 6
@@ -89,6 +83,8 @@ import QtQuick.Shapes 1.12
 
     ArcItem {
         id: arcOutline
+        x: 910
+        y: 490
         strokeColor: "gray"
         arcWidth: 13
         end: 180
@@ -100,6 +96,9 @@ import QtQuick.Shapes 1.12
 
     ArcItem {
         id: circle
+        x: 811
+        y: 490
+        fillColor: "#02ffffff"
         end: 360
         strokeWidth: 5
         strokeColor: "#000000"
@@ -107,6 +106,9 @@ import QtQuick.Shapes 1.12
 
     ArcItem {
         id: circleOutline
+        x: 1046
+        y: 490
+        antialiasing: false
         outlineArc: true
         round: true
         strokeColor: "gray"
@@ -124,124 +126,63 @@ Shape {
     height: 100
 
 /*!
-    The gradient of the arc fill color.
-
-    By default, no gradient is enabled and the value is null. In this case, the
-    fill uses a solid color based on the value of \l fillColor.
-
-    When set, \l fillColor is ignored and filling is done using one of the
-    \l ShapeGradient subtypes.
-
-    \note The \l Gradient type cannot be used here. Rather, prefer using one of
-    the advanced subtypes, like \l LinearGradient.
+    \include CommonItemDescriptions.qdocinc {component-gradient} {arc}
 */
     property alias gradient: path.fillGradient
 
 /*!
-    The style of the arc line or outline.
+    \include CommonItemDescriptions.qdocinc {component-strokeWidth} {arc}
 
-    \value ShapePath.SolidLine
-           A solid line. This is the default value.
-    \value ShapePath.DashLine
-           Dashes separated by a few pixels.
-           The \l dashPattern property specifies the dash pattern.
-
-    \sa Qt::PenStyle
-*/
-
-/*!
-    The width of the arc line or outline.
-
-    When set to a negative value, no line is drawn.
-
-    The default value is 4.
-
-    The total width of an arc that has an outline (that is, the outline and the
-    fill) is specified by \l arcWidth.
+    The total width of an arc that has an outline (that is, the outline and the fill) is specified
+    by \l arcWidth.
 */
     property alias strokeWidth: path.strokeWidth
 
 /*!
-    The color of the arc line or outline.
-
-    When set to \c transparent, no line is drawn.
-
-    The default value is \c red.
-
-    \sa QColor
+    \include CommonItemDescriptions.qdocinc {component-strokeColor} {arc}
 */
     property alias strokeColor: path.strokeColor
 
 /*!
-    The dash pattern of the arc or arc outline specified as the dashes and the
-    gaps between them.
-
-    The dash pattern is specified in units of the pen's width. That is, a dash
-    with the length 5 and width 10 is 50 pixels long.
-
-    Each dash is also subject to cap styles, and therefore a dash of 1 with
-    square cap set will extend 0.5 pixels out in each direction resulting in
-    a total width of 2.
-
-    The default \l capStyle is \c {ShapePath.SquareCap}, meaning that a square
-    line end covers the end point and extends beyond it by half the line width.
-
-    The default value is (4, 2), meaning a dash of 4 * \l strokeWidth pixels
-    followed by a space of 2 * \l strokeWidth pixels.
-
-    \sa QPen::setDashPattern()
+    \include CommonItemDescriptions.qdocinc {component-dashPattern} {arc}
 */
     property alias dashPattern: path.dashPattern
 
+/*!
+    \include CommonItemDescriptions.qdocinc component-joinStyle
+*/
     //property alias joinStyle: path.joinStyle
     property int joinStyle: ShapePath.BevelJoin //workaround for regression in Qt 6.6.1 (QDS-11845)
+
+/*!
+    \include CommonItemDescriptions.qdocinc component-capStyle
+*/
     //property alias capStyle: path.capStyle
     property int capStyle: ShapePath.FlatCap //workaround for regression in Qt 6.6.1 (QDS-11845)
+
+/*!
+    \include CommonItemDescriptions.qdocinc {component-strokeStyle} {arc}
+*/
     //property alias strokeStyle: path.strokeStyle
     property int strokeStyle: ShapePath.SolidLine //workaround for regression in Qt 6.6.1 (QDS-11845)
 
 /*!
-    The arc fill color.
+    \include CommonItemDescriptions.qdocinc {component-fillColor} {arc}
 
-    If the arc is just a line, the area between its \l begin and \l end
-    points is filled.
-
-    If the arc has an outline, the area within the outline is filled.
-
-    A gradient for the fill can be specified by using \l gradient. If both a
-    color and a gradient are specified, the gradient is used.
-
-    When set to \c transparent, no filling occurs.
-
-    The default value is \c white.
+    If the arc is just a line, the area between its \l begin and \l end points is filled. If the arc
+    has an outline, the area within the outline is filled.
 */
     property alias fillColor: path.fillColor
 
 /*!
-    The cap style of the line if the arc does not have an outline.
-
-    \value ShapePath.FlatCap
-           A square line end that does not cover the end point of the line.
-    \value ShapePath.SquareCap
-           A square line end that covers the end point and extends beyond it
-           by half the line width. This is the default value.
-    \value ShapePath.RoundCap
-           A rounded line end.
-
-    \sa round, roundBegin, roundEnd, Qt::PenCapStyle
-*/
-
-
-/*!
     The starting point of the dash pattern for the arc or arc outline.
 
-    The offset is measured in terms of the units used to specify the dash
-    pattern. For example, a pattern where each stroke is four units long,
-    followed by a gap of two units, will begin with the stroke when drawn
-    as a line. However, if the dash offset is set to 4.0, any line drawn
-    will begin with the gap. Values of the offset up to 4.0 will cause part
-    of the stroke to be drawn first, and values of the offset between 4.0 and
-    6.0 will cause the line to begin with part of the gap.
+    The offset is measured in terms of the units used to specify the dash pattern. For example, a
+    pattern where each stroke is four units long, followed by a gap of two units, will begin with
+    the stroke when drawn as a line. However, if the dash offset is set to 4.0, any line drawn will
+    begin with the gap. Values of the offset up to 4.0 will cause part of the stroke to be drawn
+    first, and values of the offset between 4.0 and 6.0 will cause the line to begin with part of
+    the gap.
 
     The default value is 0.
 
@@ -254,8 +195,7 @@ Shape {
 
     The default value is 0.
 
-    To create a circle, set the value of this property to 0 and the value
-    of the \l end property to 360.
+    To create a circle, set the value of \c begin to 0 and the value of the \c end to 360.
 */
     property real begin: 0
 
@@ -264,18 +204,16 @@ Shape {
 
     The default value is 90.
 
-    To create a circle, set the value of this property to 360 and the value of
-    the \l begin property to 0.
+    To create a circle, set the value of \c end to 360 and the value of the \c begin to 0.
 */
     property real end: 90
 
 /*!
-    The total width of an arc that has an outline, including the outline and
-    fill.
+    The total width of an arc that has an outline, including the outline and fill.
 
     The default value is 10.
 
-    \sa arcWidthBegin, arcWidthEnd, strokeWidth
+    \sa strokeWidth
 */
     property real arcWidth: 10
 
@@ -284,22 +222,26 @@ Shape {
 */
     property real alpha: root.clamp(root.sortedEnd() - root.sortedBegin(), 0, 359.9)
 
-    layer.enabled: root.antialiasing
-    layer.smooth: root.antialiasing
-    layer.samples: root.antialiasing ? 4 : 0
+    property bool __preferredRendererTypeAvailable: root.preferredRendererType !== undefined
+    property bool __curveRendererActive: root.__preferredRendererTypeAvailable
+                                         && root.rendererType === Shape.CurveRenderer
+
+    layer.enabled: root.antialiasing && !root.__curveRendererActive
+    layer.smooth: root.antialiasing && !root.__curveRendererActive
+    layer.samples: root.antialiasing && !root.__curveRendererActive ? 4 : 0
 
 /*!
     Whether the arc has an outline.
 
-    \sa arcWidth, arcWidthBegin, arcWidthEnd, round, roundBegin, roundEnd,
+    \sa arcWidth, round, roundBegin, roundEnd
 */
     property bool outlineArc: false
 
 /*!
     Whether the arc outline end points have round caps.
 
-    The \l roundBegin and \l roundEnd properties can be used to specify the
-    caps separately for the end points.
+    The \l roundBegin and \l roundEnd properties can be used to specify the caps separately for the
+    end points.
 */
     property bool round: false
 
@@ -317,41 +259,39 @@ Shape {
 */
     property bool roundBegin: root.round
 
-    function clamp(num: double, min: double, max: double): double {
+    function clamp(num, min, max) {
         return Math.max(min, Math.min(num, max))
     }
 
-// qmllint disable compiler
-    function toRadians(degrees: double): double {
+    function toRadians(degrees) {
         return degrees * (Math.PI / 180.0)
     }
-// qmllint enable compiler
 
-    function myCos(angleInDegrees: double): double {
+    function myCos(angleInDegrees) {
         return Math.cos(root.toRadians(angleInDegrees))
     }
 
-    function mySin(angleInDegrees: double): double {
+    function mySin(angleInDegrees) {
         return Math.sin(root.toRadians(angleInDegrees))
     }
 
-    function polarToCartesianX(centerX: double, centerY: double, radius: double, angleInDegrees: double): double {
+    function polarToCartesianX(centerX, centerY, radius, angleInDegrees) {
         return centerX + radius * Math.cos(root.toRadians(angleInDegrees))
     }
 
-    function polarToCartesianY(centerX: double, centerY: double, radius: double, angleInDegrees: double): double {
+    function polarToCartesianY(centerX, centerY, radius, angleInDegrees) {
         return centerY + radius * Math.sin(root.toRadians(angleInDegrees))
     }
 
-    function sortedBegin(): double {
+    function sortedBegin() {
         return Math.min(root.begin, root.end)
     }
 
-    function sortedEnd(): double {
+    function sortedEnd() {
         return Math.min(Math.max(root.begin, root.end), root.sortedBegin() + 359.9)
     }
 
-    function isArcFull(): bool {
+    function isArcFull() {
         return root.alpha > 359.5
     }
 
@@ -391,7 +331,6 @@ Shape {
         startY: root.polarToCartesianY(path.__xCenter, path.__yCenter, path.__yRadius, root.sortedBegin() - 90)
     }
 
-// qmllint disable compiler
     function constructArcItem() {
         root.clearPathElements()
 
@@ -488,18 +427,19 @@ Shape {
             path.pathElements.push(pathMove)
         }
     }
-    // qmllint enable compiler
 
-    // qmllint disable compiler
     function clearPathElements() {
         for (var i = 0; i !== path.pathElements.length; ++i)
             path.pathElements[i].destroy()
 
         path.pathElements = []
     }
-    // qmllint enable compiler
 
     Component.onCompleted: {
+        // If preferredRendererType wasn't set initially make CurveRenderer the default
+        if (root.__preferredRendererTypeAvailable && root.preferredRendererType === Shape.UnknownRenderer)
+            root.preferredRendererType = Shape.CurveRenderer
+
         root.__wasFull = root.isArcFull()
         root.constructArcItem()
     }

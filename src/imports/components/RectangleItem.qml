@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2021 The Qt Company Ltd.
+** Copyright (C) 2024 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Studio Components.
@@ -27,8 +27,8 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.10
-import QtQuick.Shapes 1.12
+import QtQuick
+import QtQuick.Shapes
 
 /*!
     \qmltype RectangleItem
@@ -38,109 +38,121 @@ import QtQuick.Shapes 1.12
 
     \brief A filled rectangle with an optional border.
 
-    Rectangle items are used to fill areas with solid color or gradients and
-    to provide a rectangular border.
+    Rectangle items are used to fill areas with solid color or gradients and to provide a
+    rectangular border.
 
-    Each Rectangle item is painted using either a solid fill color, specified
-    using the \l fillColor property, or a gradient, defined using one of the
-    \l ShapeGradient subtypes and set using the \l gradient property.
-    If both a color and a gradient are specified, the gradient is used.
+    Each Rectangle item is painted using either a solid fill color, specified using the \l fillColor
+    property, or a gradient, defined using one of the \l ShapeGradient subtypes and set using the
+    \l gradient property. If both a color and a gradient are specified, the gradient is used.
 
-    An optional border can be added to a rectangle with its own color and
-    thickness by setting the \l strokeColor and \l strokeWidth properties.
-    Setting the color to \c transparent creates a border without a fill color.
+    An optional border can be added to a rectangle with its own color and thickness by setting the
+    \l strokeColor and \l strokeWidth properties. Setting the color to \c transparent creates a
+    border without a fill color.
 
-    Rounded rectangles can be drawn using the \l radius property. The radius
-    can also be specified separately for each corner. Because this introduces
-    curved edges to the corners of a rectangle, it may be appropriate to set
-    the \c antialiasing property that is inherited from \l Item to improve the
-    appearance of the rectangle.
+    Rounded rectangles can be drawn using the \l radius property. The radius can also be specified
+    separately for each corner. Because this introduces curved edges to the corners of a rectangle.
+    Additionally, \l bevel can be applied on any corner to cut it off sharply.
 
     \section2 Example Usage
 
-    You can use the Rectangle component in \QDS to create different kinds of
-    rectangles.
+    You can use the Rectangle component in \QDS to create different kinds of rectangles.
 
-    \image studio-rectangle.png
+    \image studio-rectangle.webp
 
     The QML code looks as follows:
 
     \code
     RectangleItem {
-        id: rectangle
-        gradient: RadialGradient {
-            focalRadius: 0
-            centerY: 38.5
-            focalY: 38.5
-            centerX: 51.5
-            centerRadius: 38.5
-            GradientStop {
-                position: 0
-                color: "#ffffff"
-            }
-
-            GradientStop {
-                position: 1
-                color: "#000000"
-            }
-            focalX: 51.5
-        }
-        bottomRightRadius: 0
-        topLeftRadius: 0
-        strokeColor: "gray"
-    }
-
-    RectangleItem {
         id: rectangle1
-        gradient: LinearGradient {
-            y1: 0
-            y2: 77
-            x2: 103
-            x1: 0
+        x: 480
+        y: 164
+        width: 409
+        height: 307
+        radius: 0
+        gradient: RadialGradient {
             GradientStop {
                 position: 0
-                color: "#ffffff"
+                color: "#cea1f9fc"
             }
 
             GradientStop {
                 position: 1
-                color: "#000000"
+                color: "#ec7d7d"
             }
+            focalY: rectangle1.height * 0.5
+            focalX: rectangle1.width * 0.5
+            focalRadius: Math.min(rectangle1.width, rectangle1.height) * 0
+            centerY: rectangle1.height * 0.5
+            centerX: rectangle1.width * 0.5
+            centerRadius: Math.min(rectangle1.width, rectangle1.height) * 0.5
         }
-        topRightRadius: 0
-        bottomLeftRadius: 0
-        strokeColor: "#808080"
+        strokeWidth: 6
+        strokeColor: "#ff0000"
+        bottomLeftRadius: 30
+        topRightRadius: 30
+        adjustBorderRadius: true
     }
 
     RectangleItem {
         id: rectangle2
-        topLeftRadius: 0
-        bottomRightRadius: 0
-        fillColor: "#d3d3d3"
-        strokeColor: "#808080"
+        x: 954
+        y: 164
+        width: 409
+        height: 307
+        radius: 0
+        fillColor: "#c062606a"
+        strokeWidth: -1
+        topRightRadius: 30
+        strokeColor: "#8b8a8a"
+        bottomLeftRadius: 30
+        adjustBorderRadius: true
     }
 
     RectangleItem {
         id: rectangle3
-        fillColor: "#000000"
+        x: 480
+        y: 533
+        width: 409
+        height: 307
+        radius: 0
         gradient: LinearGradient {
-            y1: 0
-            y2: 77
-            x2: 103
-            x1: 0
+            y2: rectangle3.height * 1
+            y1: rectangle3.height * 0
+            x2: rectangle3.width * 1
+            x1: rectangle3.width * 0
             GradientStop {
-                position: 0
-                color: "#000000"
+                position: 0.10526
+                color: "#e77979"
             }
-
             GradientStop {
-                position: 1
-                color: "#fdf9f9"
+                position: 0.67105
+                color: "#716767"
             }
         }
-        topRightRadius: 0
+        topRightBevel: true
+        topRightRadius: 30
+        strokeWidth: 6
+        strokeColor: "#ff0000"
         bottomLeftRadius: 0
-        strokeColor: "#808080"
+        adjustBorderRadius: true
+    }
+
+    RectangleItem {
+        id: rectangle4
+        x: 954
+        y: 533
+        width: 409
+        height: 307
+        radius: 30
+        fillColor: "#d87c7c"
+        borderMode: 2
+        dashOffset: 3
+        joinStyle: 2
+        strokeStyle: 5
+        topRightBevel: false
+        strokeWidth: 6
+        strokeColor: "#ff0000"
+        adjustBorderRadius: true
     }
     \endcode
 */
@@ -149,16 +161,12 @@ Shape {
     id: root
     width: 200
     height: 150
-
 /*!
-    The radius used to draw rounded corners.
+    \include CommonItemDescriptions.qdocinc {component-radius} {10}
 
-    The default value is 10.
-
-    If radius is non-zero, the corners will be rounded, otherwise they will
-    be sharp. The radius can also be specified separately for each corner by
-    using the \l bottomLeftRadius, \l bottomRightRadius, \l topLeftRadius, and
-    \l topRightRadius properties.
+    If radius is non-zero, the corners will be rounded, otherwise they will be sharp. The radius can
+    also be specified separately for each corner by using the \l bottomLeftRadius,
+    \l bottomRightRadius, \l topLeftRadius, and \l topRightRadius properties.
 */
     property int radius: 10
 
@@ -183,148 +191,96 @@ Shape {
     property int bottomRightRadius: root.radius
 
 /*!
-    The gradient of the rectangle fill color.
-
-    By default, no gradient is enabled and the value is null. In this case, the
-    fill uses a solid color based on the value of \l fillColor.
-
-    When set, \l fillColor is ignored and filling is done using one of the
-    \l ShapeGradient subtypes.
-
-    \note The \l Gradient type cannot be used here. Rather, prefer using one of
-    the advanced subtypes, like \l LinearGradient.
+    \include CommonItemDescriptions.qdocinc {component-gradient} {rectangle}
 */
-    property alias gradient: path.fillGradient
+    property ShapeGradient gradient: null
 
 /*!
-    The style of the rectangle border.
-
-    \value ShapePath.SolidLine
-           A solid line. This is the default value.
-    \value ShapePath.DashLine
-           Dashes separated by a few pixels.
-           The \l dashPattern property specifies the dash pattern.
-
-    \sa Qt::PenStyle
+    \include CommonItemDescriptions.qdocinc component-joinStyle
 */
     //property alias joinStyle: path.joinStyle
     property int joinStyle: ShapePath.MiterJoin //workaround for regression in Qt 6.6.1 (QDS-11845)
+
+/*!
+    \include CommonItemDescriptions.qdocinc component-capStyle
+*/
     //property alias capStyle: path.capStyle
     property int capStyle: ShapePath.SquareCap //workaround for regression in Qt 6.6.1 (QDS-11845)
+
+/*!
+    \include CommonItemDescriptions.qdocinc {component-strokeStyle} {rectangle}
+*/
     //property alias strokeStyle: path.strokeStyle
     property int strokeStyle: ShapePath.SolidLine //workaround for regression in Qt 6.6.1 (QDS-11845)
 
 /*!
-    The width of the border of the rectangle.
-
-    The default value is 4.
-
-    A width of 1 creates a thin line. For no line, use a negative value or a
-    transparent color.
-
-    \note The width of the rectangle's border does not affect the geometry of
-    the rectangle itself or its position relative to other items if anchors are
-    used.
-
-    The border is rendered within the rectangle's boundaries.
+    \include CommonItemDescriptions.qdocinc {component-strokeWidth} {rectangle}
 */
     property alias strokeWidth: path.strokeWidth
 
 /*!
-    The color used to draw the border of the rectangle.
-
-    When set to \c transparent, no line is drawn.
-
-    The default value is \c red.
-
-    \sa QColor
+    \include CommonItemDescriptions.qdocinc {component-strokeColor} {rectangle}
 */
     property alias strokeColor: path.strokeColor
 
 /*!
-    The dash pattern of the rectangle border specified as the dashes and the
-    gaps between them.
-
-    The dash pattern is specified in units of the pen's width. That is, a dash
-    with the length 5 and width 10 is 50 pixels long.
-
-    The default value is (4, 2), meaning a dash of 4 * \l strokeWidth pixels
-    followed by a space of 2 * \l strokeWidth pixels.
-
-    \sa QPen::setDashPattern()
+    \include CommonItemDescriptions.qdocinc {component-dashPattern} {rectangle}
 */
     property alias dashPattern: path.dashPattern
 
-
 /*!
-    The rectangle fill color.
-
-    A gradient for the fill can be specified by using \l gradient. If both a
-    color and a gradient are specified, the gradient is used.
-
-    When set to \c transparent, no filling occurs.
-
-    The default value is \c white.
+    \include CommonItemDescriptions.qdocinc {component-fillColor} {rectangle}
 */
     property alias fillColor: path.fillColor
 
 /*!
-    The starting point of the dash pattern for the rectangle border.
-
-    The offset is measured in terms of the units used to specify the dash
-    pattern. For example, a pattern where each stroke is four units long,
-    followed by a gap of two units, will begin with the stroke when drawn
-    as a line. However, if the dash offset is set to 4.0, any line drawn
-    will begin with the gap. Values of the offset up to 4.0 will cause part
-    of the stroke to be drawn first, and values of the offset between 4.0 and
-    6.0 will cause the line to begin with part of the gap.
-
-    The default value is 0.
-
-    \sa QPen::setDashOffset()
+    \include CommonItemDescriptions.qdocinc {component-dashOffset} {rectangle}
 */
     property alias dashOffset: path.dashOffset
 
 /*!
-    Whether the border corner is beveled.
+    Whether the rectangle corner is beveled.
 */
     property bool bevel: false
 
 /*!
-    The bevel of the top left border corner.
+    The bevel of the top left rectangle corner.
 
     \sa bevel
 */
     property bool topLeftBevel: root.bevel
 
 /*!
-    The bevel of the top right border corner.
+    The bevel of the top right rectangle corner.
 
     \sa bevel
 */
     property bool topRightBevel: root.bevel
 
 /*!
-    The bevel of the bottom right border corner.
+    The bevel of the bottom right rectangle corner.
 
     \sa bevel
 */
     property bool bottomRightBevel: root.bevel
 
 /*!
-    The bevel of the bottom left border corner.
+    The bevel of the bottom left rectangle corner.
 
     \sa bevel
 */
     property bool bottomLeftBevel: root.bevel
 
-    layer.enabled: root.antialiasing
-    layer.smooth: root.antialiasing
-    layer.samples: root.antialiasing ? 4 : 0
+    property bool __preferredRendererTypeAvailable: root.preferredRendererType !== undefined
+    property bool __curveRendererActive: root.__preferredRendererTypeAvailable
+                                         && root.rendererType === Shape.CurveRenderer
+
+    layer.enabled: root.antialiasing && !root.__curveRendererActive
+    layer.smooth: root.antialiasing && !root.__curveRendererActive
+    layer.samples: root.antialiasing && !root.__curveRendererActive ? 4 : 0
 
 /*!
-    The border is rendered within the rectangle's boundaries, outside of them,
-    or on top of them.
+    \include CommonItemDescriptions.qdocinc component-borderMode
 */
     property int borderMode: 0
 
@@ -338,8 +294,7 @@ Shape {
     }
 
 /*!
-    The property changes the way border radius is calculated.
-    Deactivated by default.
+    \include CommonItemDescriptions.qdocinc component-adjustBorderRadius
 */
     property bool adjustBorderRadius: false
 
@@ -355,14 +310,102 @@ Shape {
         }
     }
 
+    onRadiusChanged: Qt.callLater(root.calculateIndependentRadii)
+    onTopLeftRadiusChanged: Qt.callLater(root.calculateIndependentRadii)
+    onTopRightRadiusChanged: Qt.callLater(root.calculateIndependentRadii)
+    onBottomLeftRadiusChanged: Qt.callLater(root.calculateIndependentRadii)
+    onBottomRightRadiusChanged: Qt.callLater(root.calculateIndependentRadii)
+    onWidthChanged: Qt.callLater(root.calculateIndependentRadii)
+    onHeightChanged: Qt.callLater(root.calculateIndependentRadii)
+
+    Component.onCompleted: {
+        // If preferredRendererType wasn't set initially make CurveRenderer the default
+        if (root.__preferredRendererTypeAvailable && root.preferredRendererType === Shape.UnknownRenderer)
+            root.preferredRendererType = Shape.CurveRenderer
+
+        root.calculateIndependentRadii()
+    }
+
+    function calculateIndependentRadii() {
+        let minDimension = Math.min(root.width, root.height)
+        let maxRadius = Math.floor(minDimension / 2)
+        let mixed = !(root.radius === root.topLeftRadius
+                   && root.radius === root.topRightRadius
+                   && root.radius === root.bottomLeftRadius
+                   && root.radius === root.bottomRightRadius)
+
+        // Uniform radii
+        if (!mixed) {
+            path.__topLeftRadius = Math.min(root.topLeftRadius, maxRadius)
+            path.__topRightRadius = Math.min(root.topRightRadius, maxRadius)
+            path.__bottomRightRadius = Math.min(root.bottomRightRadius, maxRadius)
+            path.__bottomLeftRadius = Math.min(root.bottomLeftRadius, maxRadius)
+            return
+        }
+
+        // Mixed radii
+        let topLeftRadiusMin = Math.min(minDimension, root.topLeftRadius)
+        let topRightRadiusMin = Math.min(minDimension, root.topRightRadius)
+        let bottomLeftRadiusMin = Math.min(minDimension, root.bottomLeftRadius)
+        let bottomRightRadiusMin = Math.min(minDimension, root.bottomRightRadius)
+
+        // Top radii
+        let topRadii = root.topLeftRadius + root.topRightRadius
+
+        if (topRadii > root.width) {
+            let topLeftRadiusFactor = root.topLeftRadius / topRadii
+            let tlr = Math.round(root.width * topLeftRadiusFactor)
+
+            topLeftRadiusMin = Math.min(topLeftRadiusMin, tlr)
+            topRightRadiusMin = Math.min(topRightRadiusMin, root.width - tlr)
+        }
+
+        // Right radii
+        let rightRadii = root.topRightRadius + root.bottomRightRadius
+
+        if (rightRadii > root.height) {
+            let topRightRadiusFactor = root.topRightRadius / rightRadii
+            let trr = Math.round(root.height * topRightRadiusFactor)
+
+            topRightRadiusMin = Math.min(topRightRadiusMin, trr)
+            bottomRightRadiusMin = Math.min(bottomRightRadiusMin, root.height - trr)
+        }
+
+        // Bottom radii
+        let bottomRadii = root.bottomRightRadius + root.bottomLeftRadius
+
+        if (bottomRadii > root.width) {
+            let bottomRightRadiusFactor = root.bottomRightRadius / bottomRadii
+            let brr = Math.round(root.width * bottomRightRadiusFactor)
+
+            bottomRightRadiusMin = Math.min(bottomRightRadiusMin, brr)
+            bottomLeftRadiusMin = Math.min(bottomLeftRadiusMin, root.width - brr)
+        }
+
+        // Left radii
+        let leftRadii = root.bottomLeftRadius + root.topLeftRadius
+
+        if (leftRadii > root.height) {
+            let bottomLeftRadiusFactor = root.bottomLeftRadius / leftRadii
+            let blr = Math.round(root.height * bottomLeftRadiusFactor)
+
+            bottomLeftRadiusMin = Math.min(bottomLeftRadiusMin, blr)
+            topLeftRadiusMin = Math.min(topLeftRadiusMin, root.height - blr)
+        }
+
+        path.__topLeftRadius = topLeftRadiusMin
+        path.__topRightRadius = topRightRadiusMin
+        path.__bottomLeftRadius = bottomLeftRadiusMin
+        path.__bottomRightRadius = bottomRightRadiusMin
+    }
+
     ShapePath {
         id: path
 
-        property int __maxRadius: Math.floor(Math.min(root.width, root.height) / 2)
-        property int __topLeftRadius: Math.min(root.topLeftRadius, path.__maxRadius)
-        property int __topRightRadius: Math.min(root.topRightRadius, path.__maxRadius)
-        property int __bottomRightRadius: Math.min(root.bottomRightRadius, path.__maxRadius)
-        property int __bottomLeftRadius: Math.min(root.bottomLeftRadius, path.__maxRadius)
+        property int __topLeftRadius: 0
+        property int __topRightRadius: 0
+        property int __bottomRightRadius: 0
+        property int __bottomLeftRadius: 0
 
         readonly property real __borderRadiusAdjustment: {
             if (root.adjustBorderRadius) {
@@ -380,15 +423,18 @@ Shape {
 
         strokeWidth: 4
         strokeColor: "red"
+        fillGradient: root.gradient
 
         startX: path.__topLeftRadius + root.borderOffset + path.__borderRadiusAdjustment
         startY: root.borderOffset
 
+        // Top.
         PathLine {
             x: root.width - path.__topRightRadius - root.borderOffset - path.__borderRadiusAdjustment
             y: root.borderOffset
         }
 
+        // Top-right.
         PathArc {
             x: root.width - root.borderOffset
             y: path.__topRightRadius + root.borderOffset + path.__borderRadiusAdjustment
@@ -397,11 +443,13 @@ Shape {
             radiusY: root.topRightBevel ? 50000 : path.__topRightRadius + path.__borderRadiusAdjustment
         }
 
+        // Right.
         PathLine {
             x: root.width - root.borderOffset
             y: root.height - path.__bottomRightRadius - root.borderOffset - path.__borderRadiusAdjustment
         }
 
+        // Bottom-right.
         PathArc {
             x: root.width - path.__bottomRightRadius - root.borderOffset - path.__borderRadiusAdjustment
             y: root.height - root.borderOffset
@@ -410,11 +458,13 @@ Shape {
             radiusY: root.bottomRightBevel ? 50000 : path.__bottomRightRadius + path.__borderRadiusAdjustment
         }
 
+        // Bottom.
         PathLine {
             x: path.__bottomLeftRadius + root.borderOffset + path.__borderRadiusAdjustment
             y: root.height - root.borderOffset
         }
 
+        // Bottom-left.
         PathArc {
             x: root.borderOffset
             y: root.height - path.__bottomLeftRadius - root.borderOffset - path.__borderRadiusAdjustment
@@ -423,11 +473,13 @@ Shape {
             radiusY: root.bottomLeftBevel ? 50000 : path.__bottomLeftRadius + path.__borderRadiusAdjustment
         }
 
+        // Left.
         PathLine {
             x: root.borderOffset
             y: path.__topLeftRadius + root.borderOffset + path.__borderRadiusAdjustment
         }
 
+        // Top-left.
         PathArc {
             x: path.__topLeftRadius + root.borderOffset + path.__borderRadiusAdjustment
             y: root.borderOffset

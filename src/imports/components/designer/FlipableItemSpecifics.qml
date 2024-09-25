@@ -44,7 +44,10 @@ Column {
         anchors.right: parent.right
 
         SectionLayout {
-            PropertyLabel { text: qsTr("Rotational axis") }
+            PropertyLabel {
+                text: qsTr("Rotational axis")
+                tooltip: qsTr("Sets the rotation along with the x-axis or y-axis.")
+            }
 
             SecondColumnLayout {
                 ComboBox {
@@ -59,7 +62,10 @@ Column {
                 ExpandingSpacer {}
             }
 
-            PropertyLabel { text: qsTr("Flip angle") }
+            PropertyLabel {
+                text: qsTr("Flip angle")
+                tooltip: qsTr("Sets the angle of the components to produce the flipping effect.")
+            }
 
             SecondColumnLayout {
                 SpinBox {
@@ -88,7 +94,10 @@ Column {
         anchors.right: parent.right
 
         SectionLayout {
-            PropertyLabel { text: qsTr("Front") }
+            PropertyLabel {
+                text: qsTr("Front")
+                tooltip: qsTr("Sets the visibility percentage of the front side component within the Flipable component.")
+            }
 
             SecondColumnLayout {
                 SpinBox {
@@ -108,7 +117,10 @@ Column {
 
                 ExpandingSpacer {}
             }
-            PropertyLabel { text: qsTr("Back") }
+            PropertyLabel {
+                text: qsTr("Back")
+                tooltip: qsTr("Sets the visibility percentage of the back side component within the Flipable component.")
+            }
 
             SecondColumnLayout {
                 SpinBox {

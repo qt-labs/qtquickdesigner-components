@@ -35,14 +35,21 @@ sourcedirs  += ..
 #exampledirs =
 imagedirs   += images \
 
-depends += qtcore qtdoc qtgui qtquick qtquickextras
+# depends += qtcore qtdoc qtgui qtquick qtquickextras
+
+indexes += $QT_INSTALL_DOCS/qtquick/qtquick.index \
+            $QT_INSTALL_DOCS/qtqml/qtqml.index \
+            $QT_INSTALL_DOCS/qtcore/qtcore.index \
+            $QT_INSTALL_DOCS/qtgui/qtgui.index
 
 tagfile  = qtquickstudiocomponents.tags
 
 #add generic thumbnail images for example documentation that does not have an image.
 #manifestmeta.thumbnail.names  +=
 
-navigation.landingpage = "Qt Quick Studio Components"
+# navigation.landingpage = "Qt Quick Studio Components"
+
+navigation.homepage = "Qt Quick Studio Components"
 navigation.qmltypespage = "Qt Quick Studio Components QML Types"
 
 macro.QDS = "Qt Design Studio"

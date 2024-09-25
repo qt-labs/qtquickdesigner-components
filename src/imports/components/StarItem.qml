@@ -31,132 +31,121 @@ import QtQuick
 import QtQuick.Shapes
 
 /*!
-    \qmltype RegularPolygon
+    \qmltype Star
     \inqmlmodule QtQuick.Studio.Components
     \since QtQuick.Studio.Components 1.0
     \inherits Shape
 
-    \brief A filled regular polygon with an optional border.
+    \brief A filled star-shaped polygon with an optional border.
 
-    A regular polygon can be just a 2D polygon shaped stroke, a filling, or a stroke with filling.
-    The \l strokeColor, \l strokeWidth, and \l strokeStyle properties specify the appearance of the
-    outline. The \l dashPattern and \l dashOffset properties specify the appearance of dashed stroke.
+    A star can be a star shaped stroke, a filling, or a stroke with filling. The \l strokeColor,
+    \l strokeWidth, and \l strokeStyle properties specify the appearance of the outline. The
+    \l dashPattern and \l dashOffset properties specify the appearance of dashed stroke.
+
+    Set the \l count property between 3 and 60 to specify the number of points of the star. Set the
+    \l ratio between 0.1 and 1 to specify the distance of the inner points of the star from the
+    center.
 
     The area inside the stroke is painted using either a solid fill color, specified using the
     \l fillColor property, or a gradient, defined using one of the \l ShapeGradient subtypes and set
     using the \l gradient property. If both a color and a gradient are specified, the gradient is
     used.
 
-    To create a polygon with a stroke, set the \sideCount property between 3 to 100 and the
-    \l strokeWidth property greater than 0. The \l strokeWidth property specifies the width of the
-    polygon stroke.The default \l sideCount value is 6 and the default \l strokeWidth value is 4.
-    Setting the \l strokeWidth value to a negetive value hides the border.
+    To create a star with a stroke, set the \l strokeWidth property to a value greater than 0. The
+    \l strokeWidth property specifies the width of the polygon stroke.The default \l count value is
+    6 and the default \l strokeWidth value is 4. Setting the \l strokeWidth value to a negative
+    value hides the border.
 
-    The \l radius property specifies whether the polygon corners are rounded. Because this
-    introduces curved edges to the corners, it may be appropriate to set the \c antialiasing
-    property that is inherited from \l Item to improve the appearance of the stroke.
+    The \l radius property specifies whether the star corners are rounded. Because this introduces
+    curved edges to the corners, it may be appropriate to set the \c antialiasing property that is
+    inherited from \l Item to improve the appearance of the stroke.
 
     \section2 Example Usage
 
-    \image studio-regularpolygon.webp
+    \image studio-star.webp
 
     The QML code looks as follows:
 
     \code
-    RegularPolygonItem {
-        id: regularPolygon
-        x: 817
-        y: 404
-        width: 133
-        height: 133
+
+    StarItem {
+        id: star
+        x: 621
+        y: 433
+        width: 142
+        height: 142
         radius: 10
-        strokeColor: "#262525"
-        fillColor: "#766e6e"
     }
 
-    RegularPolygonItem {
-        id: regularPolygon1
-        x: 973
-        y: 404
-        width: 133
-        height: 133
-        sideCount: 15
+    StarItem {
+        id: star1
+        x: 786
+        y: 433
+        width: 142
+        height: 142
+        radius: 1
         gradient: RadialGradient {
             GradientStop {
                 position: 0
-                color: "#c56060"
+                color: "#ce9d9d"
             }
 
             GradientStop {
                 position: 1
-                color: "#665e5e"
+                color: "#000000"
             }
-            focalY: regularPolygon1.height * 0.5
-            focalX: regularPolygon1.width * 0.5
-            focalRadius: Math.min(regularPolygon1.width, regularPolygon1.height) * 0
-            centerY: regularPolygon1.height * 0.5
-            centerX: regularPolygon1.width * 0.5
-            centerRadius: Math.min(regularPolygon1.width, regularPolygon1.height) * 0.5
+            focalY: star1.height * 0.5
+            focalX: star1.width * 0.5
+            focalRadius: Math.min(star1.width, star1.height) * 0
+            centerY: star1.height * 0.5
+            centerX: star1.width * 0.5
+            centerRadius: Math.min(star1.width, star1.height) * 0.5
         }
-        strokeColor: "#262525"
+        count: 7
     }
 
-    RegularPolygonItem {
-        id: regularPolygon2
-        x: 817
-        y: 567
-        width: 133
-        height: 133
-        gradient: ConicalGradient {
-            centerY: regularPolygon2.height * 0.5
-            centerX: regularPolygon2.width * 0.5
-            angle: 0
+    StarItem {
+        id: star2
+        x: 786
+        y: 603
+        width: 142
+        height: 142
+        radius: 1
+        fillColor: "#00ffffff"
+        strokeColor: "#000000"
+        ratio: 0.2
+        count: 3
+    }
+
+    StarItem {
+        id: star3
+        x: 621
+        y: 603
+        width: 142
+        height: 142
+        radius: 1
+        gradient: LinearGradient {
+            y2: star3.height * 1
+            y1: star3.height * 0
+            x2: star3.width * 1
+            x1: star3.width * 0
 
             GradientStop {
                 position: 0
-                color: "#fc8e8e"
+                color: "#ff8686"
             }
 
             GradientStop {
                 position: 1
-                color: "#f0b9b9"
+                color: "#5c5e5d"
             }
         }
-        joinStyle: 1
-        strokeStyle: 4
-        strokeColor: "#262525"
-        sideCount: 10
+        strokeColor: "#00ff0000"
+        ratio: 0.6
+        count: 25
     }
 
-    RegularPolygonItem {
-        id: regularPolygon3
-        x: 973
-        y: 567
-        width: 133
-        height: 133
-        strokeWidth: -1
-        strokeColor: "#262525"
-        sideCount: 7
-        gradient: RadialGradient {
-            GradientStop {
-                position: 0.21053
-                color: "#60c2c5"
-            }
-
-            GradientStop {
-                position: 1
-                color: "#deb2b2"
-            }
-            focalY: regularPolygon3.height * 0.5
-            focalX: regularPolygon3.width * 0.5
-            focalRadius: Math.min(regularPolygon3.width, regularPolygon3.height) * 0
-            centerY: regularPolygon3.height * 0.5
-            centerX: regularPolygon3.width * 0.5
-            centerRadius: Math.min(regularPolygon3.width, regularPolygon3.height) * 0.5
-        }
-    }
     \endcode
-
 */
 
 Shape {
@@ -170,7 +159,7 @@ Shape {
     property int radius: 10
 
 /*!
-    \include CommonItemDescriptions.qdocinc {component-gradient} {regular polygon}
+    \include CommonItemDescriptions.qdocinc {component-gradient} {star}
 */
     property alias gradient: path.fillGradient
 
@@ -187,42 +176,51 @@ Shape {
     property int capStyle: ShapePath.SquareCap //workaround for regression in Qt 6.6.1 (QDS-11845)
 
 /*!
-    \include CommonItemDescriptions.qdocinc {component-strokeStyle} {regular polygon}
+    \include CommonItemDescriptions.qdocinc {component-strokeStyle} {star}
 */
     //property alias strokeStyle: path.strokeStyle
     property int strokeStyle: ShapePath.SolidLine //workaround for regression in Qt 6.6.1 (QDS-11845)
 
 /*!
-    \include CommonItemDescriptions.qdocinc {component-strokeWidth} {regular polygon}
+    \include CommonItemDescriptions.qdocinc {component-strokeWidth} {star}
 */
     property alias strokeWidth: path.strokeWidth
 
 /*!
-    \include CommonItemDescriptions.qdocinc {component-strokeColor} {regular polygon}
+    \include CommonItemDescriptions.qdocinc {component-strokeColor} {star}
 */
     property alias strokeColor: path.strokeColor
 
 /*!
-    \include CommonItemDescriptions.qdocinc {component-dashPattern} {regular polygon}
+    \include CommonItemDescriptions.qdocinc {component-dashPattern} {star}
 */
     property alias dashPattern: path.dashPattern
 
 /*!
-    \include CommonItemDescriptions.qdocinc {component-fillColor} {regular polygon}
+    \include CommonItemDescriptions.qdocinc {component-fillColor} {star}
 */
     property alias fillColor: path.fillColor
 
 /*!
-    \include CommonItemDescriptions.qdocinc {component-dashOffset} {regular polygon}
+    \include CommonItemDescriptions.qdocinc {component-dashOffset} {star}
 */
     property alias dashOffset: path.dashOffset
 
 /*!
-    The number of edges on the regular polygon.
-    The minimum number of edges can be 3.
+    The number of points in the star. It supports a minimum of 3 and a maximum of 60 points. Set the
+    count to 3 and the \l ratio to 0.5 to create a triangle.
+
     The default value is 6.
 */
-    property int sideCount: 6
+    property int count: 6
+
+/*!
+    The distance of the inner points of the star from the center. This
+    is represented as percentage of the star's diameter.
+
+    The default value is 0.5.
+*/
+    property real ratio: 0.5
 
     property bool __preferredRendererTypeAvailable: root.preferredRendererType !== "undefined"
     property bool __curveRendererActive: root.__preferredRendererTypeAvailable
@@ -254,8 +252,9 @@ Shape {
 
     onWidthChanged: root.constructPolygon()
     onHeightChanged: root.constructPolygon()
-    onSideCountChanged: root.constructPolygon()
+    onCountChanged: root.constructPolygon()
     onRadiusChanged: root.constructPolygon()
+    onRatioChanged: root.constructPolygon()
 
     Component.onCompleted: {
         // If preferredRendererType wasn't set initially make CurveRenderer the default
@@ -267,6 +266,16 @@ Shape {
 
     property real __centerX: root.width / 2
     property real __centerY: root.height / 2
+
+    Component {
+        id: myPathLine
+        PathLine {}
+    }
+
+    Component {
+        id: myPathArc
+        PathArc {}
+    }
 
     function constructPolygon() {
         root.clearPathElements()
@@ -286,33 +295,34 @@ Shape {
     }
 
     function getPoints() {
-        let sliceAngle = (360.0 / root.sideCount)
+        let numPoints =  root.count * 2
+        let sliceAngle = (360.0 / numPoints)
         // The Draftsman's Method
         let a = root.width / 2 // x-radius
         let b = root.height / 2 // y-radius
         let points = []
+        let r = Math.min(Math.max(root.ratio, 0.001), 1.0)
 
-        // Go clockwise from top center
-        for (var corner = 0; corner < root.sideCount; corner++) {
+        for (var corner = 0; corner < numPoints; corner++) {
             let angleToCorner = root.toRadians(corner * sliceAngle)
             // Start at top center
             let x = root.__centerX + a * Math.sin(angleToCorner)
             let y = root.__centerY - b * Math.cos(angleToCorner)
 
+            // If the corner is an odd number, move the point towards the center by the ratio (0.001 - 1.0)
+            if (corner % 2 === 1) {
+                let vec = Qt.vector2d(x - root.__centerX, y - root.__centerY)
+                let vecLength = vec.length()
+                vec = vec.normalized().times(vecLength * r)
+
+                x = root.__centerX + vec.x
+                y = root.__centerY + vec.y
+            }
+
             points.push(Qt.point(x ,y))
         }
 
         return points
-    }
-
-    Component {
-        id: myPathLine
-        PathLine {}
-    }
-
-    Component {
-        id: myPathArc
-        PathArc {}
     }
 
     function constructPolygonPath() {
@@ -338,19 +348,6 @@ Shape {
         path.pathElements.push(pathLineClose)
     }
 
-    // https://stackoverflow.com/questions/58541430/find-intersection-point-of-two-vectors-independent-from-direction
-    // This function returns the length of the vector from p to the intersection point of the two lines
-    // both defined by a point and a vector.
-    function intersect(p: point, dir1: vector2d, q: point, dir2: vector2d) : real {
-        let r = dir1.normalized()
-        let s = dir2.normalized()
-
-        let pq  = Qt.vector2d(q.x - p.x, q.y - p.y)
-        let snv = Qt.vector2d(s.y, -s.x);
-
-        return pq.dotProduct(snv) / r.dotProduct(snv)
-    }
-
     function wrapIndex(index, size) {
         return (index + size) % size
     }
@@ -359,63 +356,21 @@ Shape {
         let angle = (360.0 / root.sideCount)
         let points = root.getPoints()
 
-        // A list of vectors that are the bisectors of the inner angles of the polygon.
-        // This is used to calculate the intersection point of neighboring bisectors for a corner.
-        // The minimum length of the two neighboring corner bisectors intersection point is the
-        // maximum for the center of the circle that make up the corner radius.
-        let bisectors = []
-
-        // Create angle bisectors by using the parallelolgram rule.
         for (var i = 0; i < points.length; i++) {
             let a = points[root.wrapIndex(i, points.length)]
             let b = points[root.wrapIndex(i - 1, points.length)]
             let c = points[root.wrapIndex(i + 1, points.length)]
-
-            let vAB = Qt.vector2d(b.x - a.x, b.y - a.y).normalized()
-            let vAC = Qt.vector2d(c.x - a.x, c.y - a.y).normalized()
-            let bisector = vAB.plus(vAC).normalized()
-
-            bisectors.push(bisector)
-        }
-
-        for (var i = 0; i < points.length; i++) {
-            let a = points[root.wrapIndex(i, points.length)]
-            let b = points[root.wrapIndex(i - 1, points.length)]
-            let c = points[root.wrapIndex(i + 1, points.length)]
-            let r = root.radius
 
             let vAB = Qt.vector2d(b.x - a.x, b.y - a.y)
             let vAC = Qt.vector2d(c.x - a.x, c.y - a.y)
 
-            // Calculate the intersection points of the two neighboring bisectors
-            let tAB = root.intersect(a, bisectors[root.wrapIndex(i, bisectors.length)],
-                                     b, bisectors[root.wrapIndex(i - 1, bisectors.length)])
-            let tAC = root.intersect(a, bisectors[root.wrapIndex(i, bisectors.length)],
-                                     c, bisectors[root.wrapIndex(i + 1, bisectors.length)])
-            let tMax = Math.min(tAB, tAC)
+            let alpha = Math.acos(vAB.dotProduct(vAC) / (vAB.length() * vAC.length())) // as radians
 
-            // Angle between the two vectors AB and AC as radians
-            let alpha = Math.acos(vAB.dotProduct(vAC) / (vAB.length() * vAC.length()))
-
-            // The maximum radius of the circle that can be drawn at the corner. This is another
-            // constraint that Figma uses to calculate the corner radius. The corner radius shouldn't
-            // be bigger than half of the distance between the two neighboring corners.
-            let maxRadius = Math.round(Qt.vector2d(c.x - b.x, c.y - b.y).length() / 2)
-            r = Math.min(r, maxRadius)
-
-            // The optimal length of the corner bisector to place the center of the circle.
-            let cLength = r / (Math.sin(alpha / 2))
-
-            // Clamp c to the maximum value found from the intersection points of the bisectors.
-            let realC = Math.min(cLength, tMax)
-
-            if (realC < cLength)
-                r = realC * Math.sin(alpha / 2)
-
-            let t = Math.sqrt(Math.pow(realC, 2) - Math.pow(r, 2))
+            let t = root.radius * (1 / Math.tan(alpha / 2))
 
             let p1 = vAB.normalized().times(t).plus(Qt.vector2d(a.x, a.y))
             let p2 = vAC.normalized().times(t).plus(Qt.vector2d(a.x, a.y))
+
 
             if (i === 0) {
                 path.startX = p1.x
@@ -430,8 +385,11 @@ Shape {
             let pathArc = myPathArc.createObject(path)
             pathArc.x = p2.x
             pathArc.y = p2.y
-            pathArc.radiusX = r
-            pathArc.radiusY = r
+            pathArc.radiusX = root.radius
+            pathArc.radiusY = root.radius
+
+            if (i % 2 === 1)
+                pathArc.direction = PathArc.Counterclockwise
 
             path.pathElements.push(pathArc)
         }

@@ -42,7 +42,10 @@ Column {
         caption: qsTr("Pie Item")
 
         SectionLayout {
-            PropertyLabel { text: qsTr("Fill color") }
+            PropertyLabel {
+                text: qsTr("Fill color")
+                tooltip: qsTr("Sets the color to fill the Pie.")
+            }
 
             ColorEditor {
                 backendValue: backendValues.fillColor
@@ -50,14 +53,20 @@ Column {
                 shapeGradients: true
             }
 
-            PropertyLabel { text: qsTr("Stroke color") }
+            PropertyLabel {
+                text: qsTr("Stroke color")
+                tooltip: qsTr("Sets the stroke color of the boundary.")
+            }
 
             ColorEditor {
                 backendValue: backendValues.strokeColor
                 supportGradient: false
             }
 
-            PropertyLabel { text: qsTr("Stroke width") }
+            PropertyLabel {
+                text: qsTr("Stroke width")
+                tooltip: qsTr("Sets the stroke thickness of the boundary.")
+            }
 
             SecondColumnLayout {
                 SpinBox {
@@ -100,7 +109,10 @@ Column {
                 ExpandingSpacer {}
             }
 
-            PropertyLabel { text: qsTr("Pie start") }
+            PropertyLabel {
+                text: qsTr("Pie start")
+                tooltip: qsTr("Sets the starting angle of the Pie.")
+            }
 
             SecondColumnLayout {
                 SpinBox {
@@ -120,7 +132,10 @@ Column {
                 ExpandingSpacer {}
             }
 
-            PropertyLabel { text: qsTr("Pie end") }
+            PropertyLabel {
+                text: qsTr("Pie end")
+                tooltip: qsTr("Sets the ending angle of the Pie.")
+            }
 
             SecondColumnLayout {
                 SpinBox {

@@ -42,14 +42,20 @@ Column {
         caption: qsTr("Border Item")
 
         SectionLayout {
-            PropertyLabel { text: qsTr("Stroke color") }
+            PropertyLabel {
+                text: qsTr("Stroke color")
+                tooltip: qsTr("Sets the stroke color of the Border.")
+            }
 
             ColorEditor {
                 backendValue: backendValues.strokeColor
                 supportGradient: false
             }
 
-            PropertyLabel { text: qsTr("Stroke width") }
+            PropertyLabel {
+                text: qsTr("Stroke width")
+                tooltip: qsTr("Sets the stroke thickness of the Border.")
+            }
 
             SecondColumnLayout {
                 SpinBox {
@@ -100,7 +106,10 @@ Column {
         caption: qsTr("Draw Edges")
 
         SectionLayout {
-            PropertyLabel { text: qsTr("Vertical") }
+            PropertyLabel {
+                text: qsTr("Vertical")
+                tooltip: qsTr("Toggles the top or bottom edges of the border.")
+            }
 
             SecondColumnLayout {
                 CheckBox {
@@ -135,7 +144,10 @@ Column {
                 ExpandingSpacer {}
             }
 
-            PropertyLabel { text: qsTr("Horizontal") }
+            PropertyLabel {
+                text: qsTr("Horizontal")
+                tooltip: qsTr("Toggles the left or right edges of the border.")
+            }
 
             SecondColumnLayout {
                 CheckBox {

@@ -39,12 +39,12 @@ Column {
     Section {
         anchors.left: parent.left
         anchors.right: parent.right
-        caption: qsTr("Regular Polygon Item")
+        caption: qsTr("Text Item")
 
         SectionLayout {
             PropertyLabel {
                 text: qsTr("Fill color")
-                tooltip: qsTr("Sets the color to fill the enclosed Regular Polygon.")
+                tooltip: qsTr("Sets the color to fill the Text.")
             }
 
             ColorEditor {
@@ -110,20 +110,19 @@ Column {
             }
 
             PropertyLabel {
-                text: qsTr("Side count")
-                tooltip: qsTr("Sets the number of edges for the Regular Polygon.")
+                text: qsTr("Text")
+                tooltip: qsTr("Sets the text to display.")
             }
 
             SecondColumnLayout {
-                SpinBox {
-                    backendValue: backendValues.sideCount
-                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
-                                   + StudioTheme.Values.actionIndicatorWidth
-                    decimals: 0
-                    minimumValue: 3
-                    maximumValue: 100
-                    stepSize: 1
+                LineEdit {
+                    implicitWidth: StudioTheme.Values.singleControlColumnWidth
+                                + StudioTheme.Values.actionIndicatorWidth
+                    width: implicitWidth
+                    backendValue: backendValues.text
                 }
+
+                Spacer { implicitWidth: StudioTheme.Values.twoControlColumnGap }
 
                 ExpandingSpacer {}
             }
@@ -136,37 +135,7 @@ Column {
         showCapStyle: false
     }
 
-    Section {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        caption: qsTr("Radiuses")
-
-        SectionLayout {
-            PropertyLabel {
-                text: qsTr("Radius")
-                tooltip: qsTr("Sets the radius of the corners in the Regular Polygon.")
-            }
-
-            SecondColumnLayout {
-                SpinBox {
-                    backendValue: backendValues.radius
-                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
-                                   + StudioTheme.Values.actionIndicatorWidth
-                    decimals: 0
-                    minimumValue: 0
-                    maximumValue: 1000
-                    stepSize: 1
-                }
-
-                Spacer { implicitWidth: StudioTheme.Values.controlLabelGap }
-
-                MultiIconLabel {
-                    icon0: StudioTheme.Constants.triangleCornerB
-                    icon1: StudioTheme.Constants.triangleCornerA
-                }
-
-                ExpandingSpacer {}
-            }
-        }
+    FontSection {
+        showHinting: false
     }
 }

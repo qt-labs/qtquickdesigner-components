@@ -37,7 +37,10 @@ Section {
     caption: qsTr("Corner Radiuses")
 
     SectionLayout {
-        PropertyLabel { text: qsTr("Top") }
+        PropertyLabel {
+            text: qsTr("Top")
+            tooltip: qsTr("Toggles the top left or right corner to a rounded shape.")
+        }
 
         SecondColumnLayout {
             SpinBox {
@@ -46,8 +49,7 @@ Section {
                 backendValue: backendValues.topLeftRadius
                 decimals: 1
                 minimumValue: 0
-                maximumValue: Math.min(backendValues.height.value,
-                                       backendValues.width.value) / 2
+                maximumValue: 0xffff
                 stepSize: 1
             }
 
@@ -66,8 +68,7 @@ Section {
                 backendValue: backendValues.topRightRadius
                 decimals: 1
                 minimumValue: 0
-                maximumValue: Math.min(backendValues.height.value,
-                                       backendValues.width.value) / 2
+                maximumValue: 0xffff
                 stepSize: 1
             }
 
@@ -82,7 +83,10 @@ Section {
             ExpandingSpacer {}
         }
 
-        PropertyLabel { text: qsTr("Bottom") }
+        PropertyLabel {
+            text: qsTr("Bottom")
+            tooltip: qsTr("Toggles the bottom left or right corner to a rounded shape.")
+        }
 
         SecondColumnLayout {
             SpinBox {
@@ -91,8 +95,7 @@ Section {
                 backendValue: backendValues.bottomLeftRadius
                 decimals: 1
                 minimumValue: 0
-                maximumValue: Math.min(backendValues.height.value,
-                                       backendValues.width.value) / 2
+                maximumValue: 0xffff
                 stepSize: 1
             }
 
@@ -112,8 +115,7 @@ Section {
                 backendValue: backendValues.bottomRightRadius
                 decimals: 1
                 minimumValue: 0
-                maximumValue: Math.min(backendValues.height.value,
-                                       backendValues.width.value) / 2
+                maximumValue: 0xffff
                 stepSize: 1
             }
 
@@ -128,7 +130,10 @@ Section {
             ExpandingSpacer {}
         }
 
-        PropertyLabel { text: qsTr("Global") }
+        PropertyLabel {
+            text: qsTr("Global")
+            tooltip: qsTr("Toggles all the corners into a rounded shape.")
+        }
 
         SecondColumnLayout {
             SpinBox {
@@ -137,8 +142,7 @@ Section {
                 backendValue: backendValues.radius
                 decimals: 1
                 minimumValue: 0
-                maximumValue: Math.min(backendValues.height.value,
-                                       backendValues.width.value) / 2
+                maximumValue: 0xffff
                 stepSize: 1
             }
 

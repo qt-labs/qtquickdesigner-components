@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2019 The Qt Company Ltd.
+** Copyright (C) 2024 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Studio Components.
@@ -27,9 +27,8 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.0
-import QtQuick.Timeline 1.0
-import QtQuick.Shapes 1.12
+import QtQuick
+import QtQuick.Shapes
 
 /*!
     \qmltype SvgPathItem
@@ -41,22 +40,101 @@ import QtQuick.Shapes 1.12
 
     The SvgPathItem type uses an SVG path data string to draw a path as a line.
 
-    The \l strokeColor, \l strokeWidth, and \l strokeStyle, properties specify
-    the appearance of the path. The \l dashPattern and \l dashOffset properties
-    specify the appearance of dashed lines.
+    The \l strokeColor, \l strokeWidth, and \l strokeStyle, properties specify the appearance of the
+    path. The \l dashPattern and \l dashOffset properties specify the appearance of dashed lines.
 
-    The \l capStyle property specifies whether line ends are square or
-    rounded.
+    The \l capStyle property specifies whether line ends are square or rounded.
 
-    The \l joinStyle property specifies how to connect two path segments.
-    If the path segments enclose areas, they can be painted using either
-    a solid fill color, specified using the \l fillColor property, or a
-    gradient, defined using one of the \l ShapeGradient subtypes and set
-    using the \l gradient property. If both a color and a gradient are
-    specified, the gradient is used.
+    The \l joinStyle property specifies how to connect two path segments. If the path segments
+    enclose areas, they can be painted using either a solid fill color, specified using the
+    \l fillColor property, or a gradient, defined using one of the \l ShapeGradient subtypes and set
+    using the \l gradient property. If both a color and a gradient are specified, the gradient is
+    used.
 
-    If the path has curves, it may be appropriate to set the \c antialiasing
-    property that is inherited from \l Item to improve its appearance.
+    If the path has curves, it may be appropriate to set the \c antialiasing property that is
+    inherited from \l Item to improve its appearance.
+
+    \section2 Example Usage
+
+    \image studio-svgpathitem.webp
+
+    The QML code looks as follows:
+
+    \code
+        SvgPathItem {
+            id: sVGPathItem
+            x: 2
+            y: 3
+            width: 152
+            height: 154
+            strokeWidth: 4
+            strokeColor: "black"
+            path: "M127.99,0 L150.061,124.052 L22.0704,146.823 L0,22.7711 L127.99,0"
+            fillColor: "transparent"
+        }
+
+        SvgPathItem {
+            id: sVGPathItem1
+            x: 56.32
+            y: 44.32
+            width: 150.06
+            height: 146.82
+            strokeWidth: 4
+            strokeColor: "black"
+            path: "M127.99,0 L150.061,124.052 L22.0704,146.823 L0,22.7711 L127.99,0"
+            fillColor: "transparent"
+        }
+
+        SvgPathItem {
+            id: sVGPathItem2
+            x: 3.18
+            y: 27.38
+            width: 55
+            height: 40
+            strokeWidth: 4
+            strokeColor: "black"
+            path: "M0,0 L55,40"
+            fillColor: "transparent"
+        }
+
+        SvgPathItem {
+            id: sVGPathItem3
+            x: 130.21
+            y: 2.41
+            width: 55
+            height: 42
+            strokeWidth: 4
+            strokeColor: "black"
+            path: "M0,0 L55,42"
+            fillColor: "transparent"
+        }
+
+        SvgPathItem {
+            id: sVGPathItem4
+            x: 22
+            y: 148
+            width: 56
+            height: 43
+            strokeWidth: 4
+            strokeColor: "black"
+            path: "M0,0 L54,40"
+            fillColor: "transparent"
+        }
+
+        SvgPathItem {
+            id: sVGPathItem5
+            x: 151.21
+            y: 126.41
+            width: 55
+            height: 42
+            strokeWidth: 4
+            strokeColor: "black"
+            path: "M0,0 L55,42"
+            fillColor: "transparent"
+        }
+        clip: false
+    \endcode
+
 */
 
 Shape {
@@ -65,102 +143,45 @@ Shape {
     height: 200
 
 /*!
-    The gradient of the fill color.
-
-    By default, no gradient is enabled and the value is null. In this case, the
-    fill uses a solid color based on the value of \l fillColor.
-
-    When set, \l fillColor is ignored and filling is done using one of the
-    \l ShapeGradient subtypes.
-
-    \note The \l Gradient type cannot be used here. Rather, prefer using one of
-    the advanced subtypes, like \l LinearGradient.
+    \include CommonItemDescriptions.qdocinc {component-gradient} {SVG Path Item}
 */
     property alias gradient: shape.fillGradient
 
 /*!
-    The style of the line.
-
-    \value Shape.SolidLine
-           A solid line. This is the default value.
-    \value Shape.DashLine
-           Dashes separated by a few pixels.
-           The \l dashPattern property specifies the dash pattern.
-
-    \sa Qt::PenStyle
+    \include CommonItemDescriptions.qdocinc component-joinStyle
 */
     //property alias joinStyle: path.joinStyle
     property int joinStyle: ShapePath.MiterJoin //workaround for regression in Qt 6.6.1 (QDS-11845)
+
+/*!
+    \include CommonItemDescriptions.qdocinc component-capStyle
+*/
     //property alias capStyle: path.capStyle
     property int capStyle: ShapePath.SquareCap //workaround for regression in Qt 6.6.1 (QDS-11845)
+
+/*!
+    \include CommonItemDescriptions.qdocinc {component-strokeStyle} {SVG Path Item}
+*/
     //property alias strokeStyle: path.strokeStyle
     property int strokeStyle: ShapePath.SolidLine //workaround for regression in Qt 6.6.1 (QDS-11845)
 
 /*!
-    The width of the line.
-
-    When set to a negative value, no line is drawn.
-
-    The default value is 4.
+    \include CommonItemDescriptions.qdocinc {component-strokeWidth} {SVG Path Item}
 */
     property alias strokeWidth: shape.strokeWidth
 
 /*!
-    The color of the line.
-
-    When set to \c transparent, no line is drawn.
-
-    The default value is \c red.
-
-    \sa QColor
+    \include CommonItemDescriptions.qdocinc {component-strokeColor} {SVG Path Item}
 */
     property alias strokeColor: shape.strokeColor
 
 /*!
-    The dash pattern of the line specified as the dashes and the gaps between
-    them.
-
-    The dash pattern is specified in units of the pen's width. That is, a dash
-    with the length 5 and width 10 is 50 pixels long.
-
-    Each dash is also subject to cap styles, and therefore a dash of 1 with
-    square cap set will extend 0.5 pixels out in each direction resulting in
-    a total width of 2.
-
-    The default \l capStyle is \c {ShapePath.SquareCap}, meaning that a square
-    line end covers the end point and extends beyond it by half the line width.
-
-    The default value is (4, 2), meaning a dash of 4 * \l strokeWidth pixels
-    followed by a space of 2 * \l strokeWidth pixels.
-
-    \sa QPen::setDashPattern()
+    \include CommonItemDescriptions.qdocinc {component-dashPattern} {SVG Path Item}
 */
     property alias dashPattern: shape.dashPattern
 
 /*!
-    The join style used to connect two path segments.
-
-    \value Shape.MiterJoin
-           The outer edges of the lines are extended to meet at an angle, and
-           this area is filled.
-    \value Shape.BevelJoin
-           The triangular notch between the two lines is filled.
-           This is the default value.
-    \value Shape.RoundJoin
-           A circular arc between the two lines is filled.
-
-    \sa Qt::PenJoinStyle
-*/
-
-/*!
-    The fill color of enclosed path segments.
-
-    A gradient for the fill can be specified by using \l gradient. If both a
-    color and a gradient are specified, the gradient is used.
-
-    When set to \c transparent, no filling occurs.
-
-    The default value is \c white.
+    \include CommonItemDescriptions.qdocinc {component-fillColor} {SVG Path Item}
 */
     property alias fillColor: shape.fillColor
 
@@ -169,45 +190,22 @@ Shape {
 
     The SVG path data string specifying the path.
 
-    For more information, see \l{https://www.w3.org/TR/SVG/paths.html#PathData}
-    {W3C SVG Path Data}.
+    For more information, see \l{https://www.w3.org/TR/SVG/paths.html#PathData} {W3C SVG Path Data}.
 */
     property alias path: pathSvg.path
 
 /*!
-    The starting point of the dash pattern for the line.
-
-    The offset is measured in terms of the units used to specify the dash
-    pattern. For example, a pattern where each stroke is four units long,
-    followed by a gap of two units, will begin with the stroke when drawn
-    as a line. However, if the dash offset is set to 4.0, any line drawn
-    will begin with the gap. Values of the offset up to 4.0 will cause part
-    of the stroke to be drawn first, and values of the offset between 4.0 and
-    6.0 will cause the line to begin with part of the gap.
-
-    The default value is 0.
-
-    \sa QPen::setDashOffset()
+    \include CommonItemDescriptions.qdocinc {component-dashOffset} {SVG Path Item}
 */
     property alias dashOffset: shape.dashOffset
 
-/*!
-    The cap style of the line.
+    property bool __preferredRendererTypeAvailable: root.preferredRendererType !== undefined
+    property bool __curveRendererActive: root.__preferredRendererTypeAvailable
+                                         && root.rendererType === Shape.CurveRenderer
 
-    \value Shape.FlatCap
-           A square line end that does not cover the end point of the line.
-    \value Shape.SquareCap
-           A square line end that covers the end point and extends beyond it
-           by half the line width. This is the default value.
-    \value Shape.RoundCap
-           A rounded line end.
-
-    \sa Qt::PenCapStyle
-*/
-
-    layer.enabled: root.antialiasing
-    layer.smooth: root.antialiasing
-    layer.samples: root.antialiasing ? 4 : 0
+    layer.enabled: root.antialiasing && !root.__curveRendererActive
+    layer.smooth: root.antialiasing && !root.__curveRendererActive
+    layer.samples: root.antialiasing && !root.__curveRendererActive ? 4 : 0
 
     ShapePath {
         id: shape
@@ -223,5 +221,11 @@ Shape {
 
             path: "M91,70.6c4.6,0,8.6,2.4,10.9,6.3l19.8,34.2c2.3,3.9,2.3,8.7,0,12.6c-2.3,3.9-6.4,6.3-10.9,6.3H71.2 c-4.6,0-8.6-2.4-10.9-6.3c-2.3-3.9-2.3-8.7,0-12.6l19.8-34.2C82.4,72.9,86.4,70.6,91,70.6z"
         }
+    }
+
+    Component.onCompleted: {
+        // If preferredRendererType wasn't set initially make CurveRenderer the default
+        if (root.__preferredRendererTypeAvailable && root.preferredRendererType === Shape.UnknownRenderer)
+            root.preferredRendererType = Shape.CurveRenderer
     }
 }

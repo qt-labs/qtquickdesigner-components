@@ -1,0 +1,162 @@
+// Copyright (C) 2024 The Qt Company Ltd.
+// SPDX-License-Identifier: LicenseRef-Qt-Commercial OR GFDL-1.3-no-invariants-only
+
+/*!
+
+//! [component-radius]
+
+    The radius used to draw rounded corners.
+    The default value is \1.
+    If radius is non-zero, the corners will be rounded, otherwise they will be sharp.
+
+//! [component-radius]
+
+//! [component-fillColor]
+
+    The \1 fill color.
+
+    A \1 can be filled with a \c solid color or with any of the \c linear, \c radial, or
+    \c conical gradients.
+
+    When set to \c transparent, no filling occurs.
+
+    The default value is \c white.
+//! [component-fillColor]
+
+//! [component-gradient]
+
+    The gradient of the \1 fill color.
+
+    By default, no gradient is enabled and the value is null. In this case, the fill uses a solid
+    color based on the value of \l fillColor.
+
+    When set, \l fillColor is ignored and filling is done using one of the \l ShapeGradient
+    subtypes.
+//! [component-gradient]
+
+//! [component-joinStyle]
+
+    The join style is used to connect two border line segments.
+
+    \value ShapePath.MiterJoin
+           The outer edges of the lines are extended to meet at an angle, and
+           this area is filled.
+    \value ShapePath.BevelJoin
+           The triangular notch between the two lines is filled.
+           This is the default value.
+    \value ShapePath.RoundJoin
+           A circular arc between the two lines is filled.
+
+    \sa Qt::PenJoinStyle
+//! [component-joinStyle]
+
+//! [component-capStyle]
+
+    The cap style defines how the end points of lines are drawn using QPainter. The cap style
+    only applies to lines with width 1 or greater. The cap style can be \c square, \c flat, or
+    \c round.
+
+    The default is \l Qt::SquareCap
+
+    \sa QPen::capStyle()
+
+//! [component-capStyle]
+
+//! [component-strokeStyle]
+
+    The style of the \1 stroke.
+
+    When set to \c None, no stroke is drawn.
+
+    The stroke can be set to have a \c Solid, \c Dash, \c Dot, \c {Dash Dot}, or \c {Dash Dot Dot}
+    pattern.
+
+    The default value is \c Solid.
+
+//! [component-strokeStyle]
+
+//! [component-strokeWidth]
+
+    The width of the border of the \1.
+    The default value is 4.
+    A width of 1 creates a thin line. For no line, use a negative value or a transparent color.
+
+    \note The width of the \1's border does not affect the geometry of the \1 itself or its
+    position relative to other items if anchors are used.
+
+    The border is rendered within the \1's boundaries.
+
+//! [component-strokeWidth]
+
+//! [component-strokeColor]
+
+    The color used to draw the border of the \1.
+    When set to \c transparent, no line is drawn.
+    The default value is \c red.
+
+    \sa QColor
+
+//! [component-strokeColor]
+
+//! [component-dashPattern]
+
+    The dash pattern of the \1 border specified as the dashes and the gaps between them.
+
+    The dash pattern is specified in units of the pen's width. That is, a dash with the length 5
+    and width 10 is 50 pixels long.
+
+    Each dash is also subject to cap styles, and therefore a dash of 1 with square cap set will
+    extend 0.5 pixels out in each direction resulting in a total width of 2.
+
+    The default value is (4, 2), meaning a dash of 4 * \l strokeWidth pixels followed by a space
+    of 2 * \l strokeWidth pixels.
+
+    \sa QPen::setDashPattern()
+
+//! [component-dashPattern]
+
+//! [component-dashOffset]
+
+    The starting point of the dash pattern for the \1 border.
+
+    The offset is measured in terms of the units used to specify the dash pattern. For example, a
+    pattern where each stroke is four units long, followed by a gap of two units, will begin with
+    the stroke when drawn as a line. However, if the dash offset is set to 4.0, any line drawn will
+    begin with the gap. Values of the offset up to 4.0 will cause part of the stroke to be drawn
+    first, and values of the offset between 4.0 and 6.0 will cause the line to begin with part of
+    the gap.
+
+    The default value is 0.
+
+    \sa QPen::setDashOffset()
+
+//! [component-dashOffset]
+
+//! [component-borderMode]
+
+    It defines where the border is drawn.
+
+    \value Border.Inside
+           The border is drawn along the inside edge of the item and does not
+           affect the item width.
+           This is the default value.
+    \value Border.Middle
+           The border is drawn over the edge of the item and does not
+           affect the item width.
+    \value Border.Outside
+           The border is drawn along the outside edge of the item and increases
+           the item width by the value of \l strokeWidth.
+
+    The default value is 0, which sets the border along the inside edge of the \l Item.
+
+    \sa strokeWidth
+
+//! [component-borderMode]
+
+//! [component-adjustBorderRadius]
+
+    It defines how the border radius is calculated for the corners.
+
+//! [component-adjustBorderRadius]
+
+*/

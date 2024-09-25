@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2021 The Qt Company Ltd.
+** Copyright (C) 2024 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Qt Quick Studio Components.
@@ -27,8 +27,8 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.10
-import QtQuick.Shapes 1.12
+import QtQuick
+import QtQuick.Shapes
 
 /*!
     \qmltype EllipseItem
@@ -37,119 +37,132 @@ import QtQuick.Shapes 1.12
     \inherits Shape
 
     \brief A filled ellipse with an optional border.
+
+    An ellipse can be just an ellipse shaped stroke, a filling, or a stroke with filling. The
+    \l strokeColor, \l strokeWidth, and \l strokeStyle properties specify the appearance of the
+    outline. The \l dashPattern and \l dashOffset properties specify the appearance of a dashed
+    stroke.
+
+    The area inside the stroke is painted using either a solid fill color, specified using the
+    \l fillColor property, or a gradient, defined using one of the \l ShapeGradient subtypes and set
+    using the \l gradient property. If both a color and a gradient are specified, the gradient is
+    used.
+
+    To create an ellipse with a stroke, set a \l strokeWidth property that is greater than 0. The
+    \l strokeWidth property specifies the width of the ellipse stroke. The default \l strokeWidth
+    value is 4. Setting the \l strokeWidth value to -1 hides the border. To set the border outside,
+    inside, or on top of the ellipse's boundary, use \l borderMode. The default value 0 sets the
+    border inside the ellipse's boundary.
+
+    \section2 Example Usage
+
+    \image studio-ellipse.webp
+
+    The QML code looks as follows:
+
+    \code
+    EllipseItem {
+        id: ellipse
+        x: 571
+        y: 199
+        width: 167
+        height: 125
+        strokeColor: "#808080"
+        strokeStyle: 1
+        borderMode: 0
+        strokeWidth: 4
+    }
+
+    EllipseItem {
+        id: ellipseStroke
+        x: 773
+        y: 199
+        width: 167
+        height: 125
+        fillColor: "#00ffffff"
+        strokeWidth: 4
+        strokeStyle: 1
+        strokeColor: "#808080"
+        borderMode: 0
+    }
+
+    EllipseItem {
+        id: ellipseFilling
+        x: 571
+        y: 350
+        width: 167
+        height: 125
+        strokeWidth: -1
+        strokeStyle: 1
+        strokeColor: "#808080"
+        borderMode: 0
+    }
+
+    EllipseItem {
+        id: ellipseDashDotStroke
+        x: 773
+        y: 350
+        width: 167
+        height: 125
+        strokeWidth: 4
+        strokeStyle: 4
+        strokeColor: "#808080"
+        fillColor: "#00ffffff"
+        borderMode: 0
+    }
+    \endcode
 */
 
 Shape {
     id: root
     width: 200
     height: 150
-
 /*!
-    The gradient of the rectangle fill color.
-
-    By default, no gradient is enabled and the value is null. In this case, the
-    fill uses a solid color based on the value of \l fillColor.
-
-    When set, \l fillColor is ignored and filling is done using one of the
-    \l ShapeGradient subtypes.
-
-    \note The \l Gradient type cannot be used here. Rather, prefer using one of
-    the advanced subtypes, like \l LinearGradient.
+    \include CommonItemDescriptions.qdocinc {component-gradient} {ellipse}
 */
     property alias gradient: path.fillGradient
 
 /*!
-    The style of the rectangle border.
-
-    \value ShapePath.SolidLine
-           A solid line. This is the default value.
-    \value ShapePath.DashLine
-           Dashes separated by a few pixels.
-           The \l dashPattern property specifies the dash pattern.
-
-    \sa Qt::PenStyle
+    \include CommonItemDescriptions.qdocinc {component-strokeStyle} {ellipse}
 */
-
     //property alias strokeStyle: path.strokeStyle
     property int strokeStyle: ShapePath.SolidLine //workaround for regression in Qt 6.6.1 (QDS-11845)
 
 /*!
-    The width of the border of the rectangle.
-
-    The default value is 4.
-
-    A width of 1 creates a thin line. For no line, use a negative value or a
-    transparent color.
-
-    \note The width of the rectangle's border does not affect the geometry of
-    the rectangle itself or its position relative to other items if anchors are
-    used.
-
-    The border is rendered within the rectangle's boundaries.
+    \include CommonItemDescriptions.qdocinc {component-strokeWidth} {ellipse}
 */
     property alias strokeWidth: path.strokeWidth
 
 /*!
-    The color used to draw the border of the rectangle.
-
-    When set to \c transparent, no line is drawn.
-
-    The default value is \c red.
-
-    \sa QColor
+    \include CommonItemDescriptions.qdocinc {component-strokeColor} {ellipse}
 */
     property alias strokeColor: path.strokeColor
 
 /*!
-    The dash pattern of the rectangle border specified as the dashes and the
-    gaps between them.
-
-    The dash pattern is specified in units of the pen's width. That is, a dash
-    with the length 5 and width 10 is 50 pixels long.
-
-    The default value is (4, 2), meaning a dash of 4 * \l strokeWidth pixels
-    followed by a space of 2 * \l strokeWidth pixels.
-
-    \sa QPen::setDashPattern()
+    \include CommonItemDescriptions.qdocinc {component-dashPattern} {ellipse}
 */
     property alias dashPattern: path.dashPattern
 
 /*!
-    The rectangle fill color.
-
-    A gradient for the fill can be specified by using \l gradient. If both a
-    color and a gradient are specified, the gradient is used.
-
-    When set to \c transparent, no filling occurs.
-
-    The default value is \c white.
+    \include CommonItemDescriptions.qdocinc {component-fillColor} {ellipse}
 */
     property alias fillColor: path.fillColor
 
 /*!
-    The starting point of the dash pattern for the rectangle border.
-
-    The offset is measured in terms of the units used to specify the dash
-    pattern. For example, a pattern where each stroke is four units long,
-    followed by a gap of two units, will begin with the stroke when drawn
-    as a line. However, if the dash offset is set to 4.0, any line drawn
-    will begin with the gap. Values of the offset up to 4.0 will cause part
-    of the stroke to be drawn first, and values of the offset between 4.0 and
-    6.0 will cause the line to begin with part of the gap.
-
-    The default value is 0.
-
-    \sa QPen::setDashOffset()
+    \include CommonItemDescriptions.qdocinc {component-dashOffset} {ellipse}
 */
     property alias dashOffset: path.dashOffset
 
-    layer.enabled: root.antialiasing
-    layer.smooth: root.antialiasing
-    layer.samples: root.antialiasing ? 4 : 0
+    property bool __preferredRendererTypeAvailable: root.preferredRendererType !== undefined
+    property bool __curveRendererActive: root.__preferredRendererTypeAvailable
+                                         && root.rendererType === Shape.CurveRenderer
+
+    layer.enabled: root.antialiasing && !root.__curveRendererActive
+    layer.smooth: root.antialiasing && !root.__curveRendererActive
+    layer.samples: root.antialiasing && !root.__curveRendererActive ? 4 : 0
 
 /*!
-    The border is rendered within the rectangle's boundaries, outside of them,
-    or on top of them.
+    \include CommonItemDescriptions.qdocinc component-borderMode
 */
     property int borderMode: 0
 
@@ -200,6 +213,11 @@ Shape {
             radiusY: root.height * 0.5 - root.borderOffset
             useLargeArc: true
         }
+    }
 
+    Component.onCompleted: {
+        // If preferredRendererType wasn't set initially make CurveRenderer the default
+        if (root.__preferredRendererTypeAvailable && root.preferredRendererType === Shape.UnknownRenderer)
+            root.preferredRendererType = Shape.CurveRenderer
     }
 }

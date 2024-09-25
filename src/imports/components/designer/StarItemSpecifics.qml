@@ -39,12 +39,12 @@ Column {
     Section {
         anchors.left: parent.left
         anchors.right: parent.right
-        caption: qsTr("Regular Polygon Item")
+        caption: qsTr("Star Item")
 
         SectionLayout {
             PropertyLabel {
                 text: qsTr("Fill color")
-                tooltip: qsTr("Sets the color to fill the enclosed Regular Polygon.")
+                tooltip: qsTr("Sets the color to fill the enclosed Star.")
             }
 
             ColorEditor {
@@ -110,19 +110,38 @@ Column {
             }
 
             PropertyLabel {
-                text: qsTr("Side count")
-                tooltip: qsTr("Sets the number of edges for the Regular Polygon.")
+                text: qsTr("Count")
+                tooltip: qsTr("Sets the number of TODO for the Star.")
             }
 
             SecondColumnLayout {
                 SpinBox {
-                    backendValue: backendValues.sideCount
+                    backendValue: backendValues.count
                     implicitWidth: StudioTheme.Values.twoControlColumnWidth
                                    + StudioTheme.Values.actionIndicatorWidth
                     decimals: 0
                     minimumValue: 3
-                    maximumValue: 100
+                    maximumValue: 60
                     stepSize: 1
+                }
+
+                ExpandingSpacer {}
+            }
+
+            PropertyLabel {
+                text: qsTr("Ratio")
+                tooltip: qsTr("TODO")
+            }
+
+            SecondColumnLayout {
+                SpinBox {
+                    backendValue: backendValues.ratio
+                    implicitWidth: StudioTheme.Values.twoControlColumnWidth
+                                   + StudioTheme.Values.actionIndicatorWidth
+                    decimals: 3
+                    minimumValue: 0.001
+                    maximumValue: 1.0
+                    stepSize: 0.01
                 }
 
                 ExpandingSpacer {}
@@ -153,8 +172,8 @@ Column {
                     implicitWidth: StudioTheme.Values.twoControlColumnWidth
                                    + StudioTheme.Values.actionIndicatorWidth
                     decimals: 0
-                    minimumValue: 0
-                    maximumValue: 1000
+                    minimumValue: backendValues.minRadius.value
+                    maximumValue: backendValues.maxRadius.value
                     stepSize: 1
                 }
 
