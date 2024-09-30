@@ -3,6 +3,7 @@ include($QT_INSTALL_DOCS/global/qt-module-defaults.qdocconf)
 project                 = QtQuickStudioComponents
 description             = Qt Quick Studio Components Reference Documentation
 version                 = $QT_VERSION
+productname             = Qt Quick Studio Components
 
 examplesinstallpath = qtquickstudiocomponents
 
