@@ -24,17 +24,38 @@ if (NOT IGNORE_TOO_LONG_PATH_CHECK)
 endif()
 
 # get Qt version without using find, which would destroy the QT_REPO_DEPENDENCIES workaround
-list(GET CMAKE_PREFIX_PATH 0 QT_INSTALL_PREFIX)
-set(QT_VERSION_FILE "${QT_INSTALL_PREFIX}/lib/cmake/Qt6/Qt6ConfigVersionImpl.cmake")
-if(EXISTS "${QT_VERSION_FILE}")
-    file(STRINGS "${QT_VERSION_FILE}" QT_VERSION_FILE_CONTENT REGEX "^set\\(PACKAGE_VERSION \".*\"\\)")
-    string(REGEX MATCH "set\\(PACKAGE_VERSION \"([0-9]+\\.[0-9]+\\.[0-9]+)\"" _ "${QT_VERSION_FILE_CONTENT}")
-    set(STUDIO_COMPONENTS_VERSION "${CMAKE_MATCH_1}")
-endif()
-
 if(NOT DEFINED STUDIO_COMPONENTS_VERSION)
-    message(WARNING "Could not extract Qt version from ${QT_VERSION_FILE}. Please check if the file contains the PACKAGE_VERSION.")
-    set(STUDIO_COMPONENTS_VERSION "6.0.0")
+    set(QT_SEARCH_PATHS)
+
+    if(DEFINED CMAKE_TOOLCHAIN_FILE)
+        file(TO_CMAKE_PATH "${CMAKE_TOOLCHAIN_FILE}" CMAKE_TOOLCHAIN_FILE_UNIX)
+        string(REGEX REPLACE "/lib/cmake/Qt6/qt\\.toolchain\\.cmake$" "" QT_INSTALL_PREFIX "${CMAKE_TOOLCHAIN_FILE_UNIX}")
+        list(APPEND QT_SEARCH_PATHS "${QT_INSTALL_PREFIX}")
+    endif()
+
+    if(DEFINED CMAKE_PREFIX_PATH)
+        list(APPEND QT_SEARCH_PATHS ${CMAKE_PREFIX_PATH})
+    endif()
+
+    set(QT_VERSION_FILE "")
+    foreach(QT_INSTALL_PREFIX IN LISTS QT_SEARCH_PATHS)
+        set(POTENTIAL_QT_VERSION_FILE "${QT_INSTALL_PREFIX}/lib/cmake/Qt6/Qt6ConfigVersionImpl.cmake")
+        if(EXISTS "${POTENTIAL_QT_VERSION_FILE}")
+            set(QT_VERSION_FILE "${POTENTIAL_QT_VERSION_FILE}")
+            break()
+        endif()
+    endforeach()
+
+    if(EXISTS "${QT_VERSION_FILE}")
+        file(STRINGS "${QT_VERSION_FILE}" QT_VERSION_FILE_CONTENT REGEX "^set\\(PACKAGE_VERSION \".*\"\\)")
+        string(REGEX MATCH "set\\(PACKAGE_VERSION \"([0-9]+\\.[0-9]+\\.[0-9]+)\"" _ "${QT_VERSION_FILE_CONTENT}")
+        set(STUDIO_COMPONENTS_VERSION "${CMAKE_MATCH_1}")
+    endif()
+
+    if(NOT DEFINED STUDIO_COMPONENTS_VERSION)
+        message(WARNING "Could not extract Qt version from ${QT_VERSION_FILE}. Please check if the file contains the PACKAGE_VERSION.")
+        set(STUDIO_COMPONENTS_VERSION "6.0.0")
+    endif()
 endif()
 
 project(QtQuickDesignerComponents
