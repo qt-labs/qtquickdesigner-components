@@ -74,7 +74,7 @@ def get_platform_tag() -> str:
 
 
 # NOTE: Needs to be set by hand
-QTDS_VERSION = "4.5"
+QTDS_VERSION = "4.6"
 def get_ds_version() -> str:
     ds_path = Path("PySide6/ds")
     if not ds_path.is_dir():
