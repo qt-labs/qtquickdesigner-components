@@ -1,9 +1,0 @@
-module QtAndroidAutomotive.ActivityView
-linktarget Qt6::AndroidAutomotiveActivityViewplugin
-optional plugin androidautomotiveactivityviewplugin
-classname QtAndroidAutomotive_ActivityViewPlugin
-designersupported
-typeinfo AndroidAutomotiveActivityView.qmltypes
-prefer :/qt-project.org/imports/QtAndroidAutomotive/ActivityView/
-ActivityView 6.0 ActivityView.qml
-ActivityView 1.0 ActivityView.qml
