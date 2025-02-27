@@ -58,6 +58,14 @@ if(NOT DEFINED STUDIO_COMPONENTS_VERSION)
     endif()
 endif()
 
+# Store initial build type (if any is specified) to be read by
+# qt_internal_set_default_build_type().
+# See qt_internal_set_default_build_type() for details.
+if(DEFINED CACHE{CMAKE_BUILD_TYPE})
+    set(__qt_internal_standalone_project_cmake_build_type_before_project_call
+        "${CMAKE_BUILD_TYPE}")
+endif()
+
 project(QtQuickDesignerComponents
     DESCRIPTION "QtQuick Designer Components"
     HOMEPAGE_URL "https://qt.io/"
