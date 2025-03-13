@@ -1,70 +1,17 @@
 cmake_minimum_required(VERSION 3.16)
 
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+include(QtCompHelper)
+
 if (NOT IGNORE_TOO_LONG_PATH_CHECK)
-    execute_process(
-        COMMAND cmd /c "ver"
-        RESULT_VARIABLE EXIT_CODE_RETURN
-        OUTPUT_VARIABLE OS_VERSION
-        ERROR_QUIET
-        OUTPUT_STRIP_TRAILING_WHITESPACE
-    )
-
-    if(NOT EXIT_CODE_RETURN AND OS_VERSION MATCHES "Microsoft Windows")
-            string(LENGTH
-                   ${CMAKE_BINARY_DIR}/src/imports/compat/Components/QuickUltraLiteStudioComponentsplugin_autogen/include/QuickUltraLiteStudioComponentsplugin_QtQuickUltralite_Studio_ComponentsPlugin.moc
-                   BINARY_DIR_LENGTH)
-            if(BINARY_DIR_LENGTH GREATER 250)
-                message(FATAL_ERROR "The path to the build directory results in excessively long file"
-                                    " paths. This may cause build issues on Windows. Please use a shorter"
-                                    " build directory."
-                                    " Or you can try to build by adding -DIGNORE_TOO_LONG_PATH_CHECK=ON"
-                                    " to your CMAKE command.")
-            endif()
-    endif()
+    check_path_length()
 endif()
 
-# get Qt version without using find, which would destroy the QT_REPO_DEPENDENCIES workaround
 if(NOT DEFINED STUDIO_COMPONENTS_VERSION)
-    set(QT_SEARCH_PATHS)
-
-    if(DEFINED CMAKE_TOOLCHAIN_FILE)
-        file(TO_CMAKE_PATH "${CMAKE_TOOLCHAIN_FILE}" CMAKE_TOOLCHAIN_FILE_UNIX)
-        string(REGEX REPLACE "/lib/cmake/Qt6/qt\\.toolchain\\.cmake$" "" QT_INSTALL_PREFIX "${CMAKE_TOOLCHAIN_FILE_UNIX}")
-        list(APPEND QT_SEARCH_PATHS "${QT_INSTALL_PREFIX}")
-    endif()
-
-    if(DEFINED CMAKE_PREFIX_PATH)
-        list(APPEND QT_SEARCH_PATHS ${CMAKE_PREFIX_PATH})
-    endif()
-
-    set(QT_VERSION_FILE "")
-    foreach(QT_INSTALL_PREFIX IN LISTS QT_SEARCH_PATHS)
-        set(POTENTIAL_QT_VERSION_FILE "${QT_INSTALL_PREFIX}/lib/cmake/Qt6/Qt6ConfigVersionImpl.cmake")
-        file(TO_NATIVE_PATH "${POTENTIAL_QT_VERSION_FILE}" QT_VERSION_FILE)
-        if(EXISTS "${POTENTIAL_QT_VERSION_FILE}")
-            break()
-        endif()
-    endforeach()
-
-    if(EXISTS "${QT_VERSION_FILE}")
-        file(STRINGS "${QT_VERSION_FILE}" QT_VERSION_FILE_CONTENT REGEX "^set\\(PACKAGE_VERSION \".*\"\\)")
-        string(REGEX MATCH "set\\(PACKAGE_VERSION \"([0-9]+\\.[0-9]+\\.[0-9]+)\"" _ "${QT_VERSION_FILE_CONTENT}")
-        set(STUDIO_COMPONENTS_VERSION "${CMAKE_MATCH_1}")
-    endif()
-
-    if(NOT DEFINED STUDIO_COMPONENTS_VERSION)
-        message(WARNING "Could not extract Qt version from ${QT_VERSION_FILE}. Please check if the file exists and contains the PACKAGE_VERSION.")
-        set(STUDIO_COMPONENTS_VERSION "6.0.0")
-    endif()
+    set_studio_components_version()
 endif()
 
-# Store initial build type (if any is specified) to be read by
-# qt_internal_set_default_build_type().
-# See qt_internal_set_default_build_type() for details.
-if(DEFINED CACHE{CMAKE_BUILD_TYPE})
-    set(__qt_internal_standalone_project_cmake_build_type_before_project_call
-        "${CMAKE_BUILD_TYPE}")
-endif()
+store_build_type_pre_project()
 
 project(QtQuickDesignerComponents
     DESCRIPTION "QtQuick Designer Components"
@@ -96,4 +43,5 @@ if(NOT "${STUDIO_COMPONENTS_VERSION}" STREQUAL "${Qt6_VERSION}")
     message(WARNING "STUDIO_COMPONENTS_VERSION (${STUDIO_COMPONENTS_VERSION}) does not match the found Qt version (${Qt6_VERSION}).")
 endif()
 
+qt_policy(SET QTP0004 NEW)
 qt_build_repo()

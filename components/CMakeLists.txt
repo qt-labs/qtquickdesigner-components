@@ -1,0 +1,16 @@
+find_package(Qt6 COMPONENTS ShaderTools)
+
+add_library(QtQuickDesignerComponents INTERFACE)
+
+function(register_plugin module_name)
+    target_link_libraries(QtQuickDesignerComponents INTERFACE ${module_name}plugin)
+endfunction()
+
+set(qds_qml_extra_args "")
+if(QT_QDS_COMPONENTS_NOWARN)
+   list(APPEND qds_qml_extra_args NO_LINT)
+endif()
+
+qt_policy(SET QTP0004 NEW)
+
+add_subdirectory(imports)

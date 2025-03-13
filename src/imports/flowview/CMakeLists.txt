@@ -1,15 +1,45 @@
-set_source_files_properties(FlowState.qml
-    PROPERTIES
-        QT_QML_SINGLETON_TYPE true
+map_to_components(${CMAKE_CURRENT_SOURCE_DIR} MIRROR_DIR)
+
+set(MIRROR_QML_FILES
+    ${MIRROR_DIR}/DefaultFlowEffect.qml
+    ${MIRROR_DIR}/SwipeInteraction.qml
+    ${MIRROR_DIR}/FlowEffect.qml
+    ${MIRROR_DIR}/FlowFadeEffect.qml
+    ${MIRROR_DIR}/FlowPushLeftEffect.qml
+    ${MIRROR_DIR}/FlowPushRightEffect.qml
+    ${MIRROR_DIR}/FlowSlideDownEffect.qml
+    ${MIRROR_DIR}/FlowSlideLeftEffect.qml
+    ${MIRROR_DIR}/FlowSlideRightEffect.qml
+    ${MIRROR_DIR}/FlowSlideUpEffect.qml
+    ${MIRROR_DIR}/FlowMoveEffect.qml
+    ${MIRROR_DIR}/FlowPushEffect.qml
+    ${MIRROR_DIR}/FlowTransition.qml
+    ${MIRROR_DIR}/FlowTransitionList.qml
+    ${MIRROR_DIR}/FlowView.qml
+    ${MIRROR_DIR}/FlowPushUpEffect.qml
+    ${MIRROR_DIR}/FlowItem.qml
+    ${MIRROR_DIR}/FlowDecision.qml
+    ${MIRROR_DIR}/FlowWildcard.qml
+    ${MIRROR_DIR}/FlowActionArea.qml
 )
 
-option(FLOWVIEW_AUTO_QMLDIR "Enable auto-generation of QMLDIR for FlowView" OFF)
+set_qml_resource_aliases(${MIRROR_QML_FILES})
 
-if(NOT DEFINED FLOWVIEW_AUTO_QMLDIR)
-    list(qds_qml_extra_args NO_GENERATE_QMLDIR RESOURCES qmldir)
-else()
-    message(WARNING "Auto-generating qmldir for FlowView and skiping the provided one.")
-endif()
+set_source_files_properties(${MIRROR_DIR}/FlowState.qml
+    PROPERTIES
+        QT_QML_SINGLETON_TYPE true
+        QT_RESOURCE_ALIAS "FlowState.qml"
+)
+
+set_source_files_properties(${MIRROR_DIR}/+DesignMode/FlowItem.qml
+    PROPERTIES
+        QT_RESOURCE_ALIAS "+DesignMode/FlowItem.qml"
+)
+
+set_source_files_properties(${MIRROR_DIR}/+DesignMode/FlowView.qml
+    PROPERTIES
+        QT_RESOURCE_ALIAS "+DesignMode/FlowView.qml"
+)
 
 qt_internal_add_qml_module(FlowView
     URI "FlowView"
@@ -19,29 +49,10 @@ qt_internal_add_qml_module(FlowView
     NO_SYNC_QT
     PAST_MAJOR_VERSIONS 1
     QML_FILES
-        DefaultFlowEffect.qml
-        SwipeInteraction.qml
-        FlowEffect.qml
-        FlowFadeEffect.qml
-        FlowPushLeftEffect.qml
-        FlowPushRightEffect.qml
-        FlowSlideDownEffect.qml
-        FlowSlideLeftEffect.qml
-        FlowSlideRightEffect.qml
-        FlowSlideUpEffect.qml
-        FlowMoveEffect.qml
-        FlowPushEffect.qml
-        FlowTransition.qml
-        FlowTransitionList.qml
-        FlowView.qml
-        FlowPushUpEffect.qml
-        FlowItem.qml
-        FlowDecision.qml
-        FlowWildcard.qml
-        FlowActionArea.qml
-        FlowState.qml
-        +DesignMode/FlowItem.qml
-        +DesignMode/FlowView.qml
+        ${MIRROR_QML_FILES}
+        ${MIRROR_DIR}/FlowState.qml
+        ${MIRROR_DIR}/+DesignMode/FlowItem.qml
+        ${MIRROR_DIR}/+DesignMode/FlowView.qml
 )
 
 if(QT_FEATURE_quick_designer AND QT_BUILD_SHARED_LIBS)

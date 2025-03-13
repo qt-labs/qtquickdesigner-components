@@ -34,7 +34,7 @@
 **
 ****************************************************************************/
 
-#include "quickstudiocsvtablemodel_p.h"
+#include "quickstudiocsvtablemodel.h"
 
 #include <QColor>
 #include <QFile>

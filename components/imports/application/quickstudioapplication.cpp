@@ -34,7 +34,7 @@
 **
 ****************************************************************************/
 
-#include "quickstudioapplication_p.h"
+#include "quickstudioapplication.h"
 
 #include <QDir>
 #include <QDirIterator>

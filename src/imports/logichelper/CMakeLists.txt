@@ -1,3 +1,17 @@
+map_to_components(${CMAKE_CURRENT_SOURCE_DIR} MIRROR_DIR)
+
+set(MIRROR_QML_FILES
+    ${MIRROR_DIR}/BidirectionalBinding.qml
+    ${MIRROR_DIR}/RangeMapper.qml
+    ${MIRROR_DIR}/MinMaxMapper.qml
+    ${MIRROR_DIR}/StringMapper.qml
+    ${MIRROR_DIR}/OrOperator.qml
+    ${MIRROR_DIR}/AndOperator.qml
+    ${MIRROR_DIR}/NotOperator.qml
+)
+
+set_qml_resource_aliases(${MIRROR_QML_FILES})
+
 qt_internal_add_qml_module(QuickStudioLogicHelper
     URI "QtQuick.Studio.LogicHelper"
     VERSION "${PROJECT_VERSION}"
@@ -6,13 +20,7 @@ qt_internal_add_qml_module(QuickStudioLogicHelper
     NO_SYNC_QT
     PAST_MAJOR_VERSIONS 1
     QML_FILES
-        BidirectionalBinding.qml
-        RangeMapper.qml
-        MinMaxMapper.qml
-        StringMapper.qml
-        OrOperator.qml
-        AndOperator.qml
-        NotOperator.qml
+        ${MIRROR_QML_FILES}
 )
 
 qt_internal_add_docs(QuickStudioLogicHelper

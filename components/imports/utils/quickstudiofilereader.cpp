@@ -34,7 +34,7 @@
 **
 ****************************************************************************/
 
-#include "quickstudiofilereader_p.h"
+#include "quickstudiofilereader.h"
 
 #include <QDir>
 #include <QDirIterator>
