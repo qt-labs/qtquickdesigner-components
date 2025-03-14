@@ -424,9 +424,6 @@ Shape {
         strokeWidth: 4
         strokeColor: "red"
         fillColor: "transparent"
-
-        startX: path.__topLeftRadius + root.borderOffset + path.__borderRadiusAdjustment
-        startY: root.borderOffset
     }
 
     onDrawTopChanged: root.constructBorderItem()
@@ -434,95 +431,188 @@ Shape {
     onDrawBottomChanged: root.constructBorderItem()
     onDrawLeftChanged: root.constructBorderItem()
 
+    function __top_topLeftCorner(): var {
+        return {
+            x: function() { return path.__topLeftRadius + root.borderOffset + path.__borderRadiusAdjustment },
+            y: function() { return root.borderOffset }
+        }
+    }
+
+    function __top_topRightCorner(): var {
+        return {
+            x: function() { return root.width - path.__topRightRadius - root.borderOffset - path.__borderRadiusAdjustment },
+            y: function() { return root.borderOffset }
+        }
+    }
+
+    function __right_topRightCorner(): var {
+        return {
+            x: function() { return root.width - root.borderOffset },
+            y: function() { return path.__topRightRadius + root.borderOffset + path.__borderRadiusAdjustment }
+        }
+    }
+
+    function __right_bottomRightCorner(): var {
+        return {
+            x: function() { return root.width - root.borderOffset },
+            y: function() { return root.height - path.__bottomRightRadius - root.borderOffset - path.__borderRadiusAdjustment }
+        }
+    }
+
+    function __bottom_bottomRightCorner(): var {
+        return {
+            x: function() { return root.width - path.__bottomRightRadius - root.borderOffset - path.__borderRadiusAdjustment },
+            y: function() { return root.height - root.borderOffset }
+        }
+    }
+
+    function __bottom_bottomLeftCorner(): var {
+        return {
+            x: function() { return path.__bottomLeftRadius + root.borderOffset + path.__borderRadiusAdjustment },
+            y: function() { return root.height - root.borderOffset }
+        }
+    }
+
+    function __left_bottomLeftCorner(): var {
+        return {
+            x: function() { return root.borderOffset },
+            y: function() { return root.height - path.__bottomLeftRadius - root.borderOffset - path.__borderRadiusAdjustment }
+        }
+    }
+
+    function __left_topLeftCorner(): var {
+        return {
+            x: function() { return root.borderOffset },
+            y: function() { return path.__topLeftRadius + root.borderOffset + path.__borderRadiusAdjustment }
+        }
+    }
+
+    function __topLeftRadius(): var {
+        return function() { return root.topLeftBevel ? 50000 : path.__topLeftRadius + path.__borderRadiusAdjustment }
+    }
+
+    function __topRightRadius(): var {
+        return function() { return root.topRightBevel ? 50000 : path.__topRightRadius + path.__borderRadiusAdjustment }
+    }
+
+    function __bottomRightRadius(): var {
+        return function() { return root.bottomRightBevel ? 50000 : path.__bottomRightRadius + path.__borderRadiusAdjustment }
+    }
+
+    function __bottomLeftRadius(): var {
+        return function() { return root.bottomLeftBevel ? 50000 : path.__bottomLeftRadius + path.__borderRadiusAdjustment }
+    }
+
+    function createPathLine(positionCallback) {
+        let component = Qt.createComponent("QtQuick", "PathLine")
+        let pathLine = component.createObject(path)
+        pathLine.x = Qt.binding(positionCallback().x)
+        pathLine.y = Qt.binding(positionCallback().y)
+        return pathLine
+    }
+
+    function createPathMove(positionCallback) {
+        let component = Qt.createComponent("QtQuick", "PathMove")
+        let pathMove = component.createObject(path)
+        pathMove.x = Qt.binding(positionCallback().x)
+        pathMove.y = Qt.binding(positionCallback().y)
+        return pathMove
+    }
+
+    function createPathArc(positionCallback, radiusCallback) {
+        let component = Qt.createComponent("QtQuick", "PathArc")
+        let pathArc = component.createObject(path)
+        pathArc.x = Qt.binding(positionCallback().x)
+        pathArc.y = Qt.binding(positionCallback().y)
+        pathArc.radiusX = Qt.binding(radiusCallback())
+        pathArc.radiusY = Qt.binding(radiusCallback())
+        return pathArc
+    }
+
     function constructBorderItem() {
         root.clearPathElements()
 
-        // Top line
-        if (root.drawTop) {
-            let pathLine = Qt.createQmlObject('import QtQuick 2.15; PathLine {}', path)
-            pathLine.x = Qt.binding(function() { return root.width - path.__topRightRadius - root.borderOffset - path.__borderRadiusAdjustment })
-            pathLine.y = Qt.binding(function() { return root.borderOffset })
-            path.pathElements.push(pathLine)
-        } else {
-            let pathMove = Qt.createQmlObject('import QtQuick 2.15; PathMove {}', path)
-            pathMove.x = Qt.binding(function() { return root.width - root.borderOffset })
-            pathMove.y = Qt.binding(function() { return path.__topRightRadius + root.borderOffset + path.__borderRadiusAdjustment })
-            path.pathElements.push(pathMove)
+        // If all edges are invisible don't construct anything
+        if (!root.drawTop && !root.drawRight && !root.drawBottom && !root.drawLeft)
+            return
+
+        let visibleEdges = [root.drawTop, root.drawRight, root.drawBottom, root.drawLeft]
+
+        // Find first visible edge after a hidden edge
+        let startIndex = -1
+        for (let i = 0; i < 4; i++) {
+            let currentEdge = i
+            let previousEdge = (i + 3) % 4
+
+            if (!visibleEdges[previousEdge] && visibleEdges[currentEdge]) {
+                startIndex = currentEdge
+                break
+            }
         }
 
-        // Top right corner
-        if (root.drawTop && root.drawRight) {
-            let pathArc = Qt.createQmlObject('import QtQuick 2.15; PathArc {}', path)
-            pathArc.x = Qt.binding(function() { return root.width - root.borderOffset })
-            pathArc.y = Qt.binding(function() { return path.__topRightRadius + root.borderOffset + path.__borderRadiusAdjustment })
-            pathArc.radiusX = Qt.binding(function() { return root.topRightBevel ? 50000 : path.__topRightRadius + path.__borderRadiusAdjustment })
-            pathArc.radiusY = Qt.binding(function() { return root.topRightBevel ? 50000 : path.__topRightRadius + path.__borderRadiusAdjustment })
-            path.pathElements.push(pathArc)
-        }
+        // If all edges are visible, start from top
+        if (startIndex === -1)
+            startIndex = 0
 
-        // Right line
-        if (root.drawRight) {
-            let pathLine = Qt.createQmlObject('import QtQuick 2.15; PathLine {}', path)
-            pathLine.x = Qt.binding(function() { return root.width - root.borderOffset })
-            pathLine.y = Qt.binding(function() { return root.height - path.__bottomRightRadius - root.borderOffset - path.__borderRadiusAdjustment })
-            path.pathElements.push(pathLine)
-        } else {
-            let pathMove = Qt.createQmlObject('import QtQuick 2.15; PathMove {}', path)
-            pathMove.x = Qt.binding(function() { return root.width - path.__bottomRightRadius - root.borderOffset - path.__borderRadiusAdjustment })
-            pathMove.y = Qt.binding(function() { return root.height - root.borderOffset })
-            path.pathElements.push(pathMove)
-        }
+        for (let i = 0; i < 4; i++) {
+            let currentEdge = (startIndex + i) % 4
+            let nextEdge  = (startIndex + i + 1) % 4
+            let isFirstEdge = (i === 0)
 
-        // Bottom right corner
-        if (root.drawBottom && root.drawRight) {
-            let pathArc = Qt.createQmlObject('import QtQuick 2.15; PathArc {}', path)
-            pathArc.x = Qt.binding(function() { return root.width - path.__bottomRightRadius - root.borderOffset - path.__borderRadiusAdjustment })
-            pathArc.y = Qt.binding(function() { return root.height - root.borderOffset })
-            pathArc.radiusX = Qt.binding(function() { return root.bottomRightBevel ? 50000 : path.__bottomRightRadius + path.__borderRadiusAdjustment })
-            pathArc.radiusY = Qt.binding(function() { return root.bottomRightBevel ? 50000 : path.__bottomRightRadius + path.__borderRadiusAdjustment })
-            path.pathElements.push(pathArc)
-        }
-
-        // Bottom line
-        if (root.drawBottom) {
-            let pathLine = Qt.createQmlObject('import QtQuick 2.15; PathLine {}', path)
-            pathLine.x = Qt.binding(function() { return path.__bottomLeftRadius + root.borderOffset + path.__borderRadiusAdjustment })
-            pathLine.y = Qt.binding(function() { return root.height - root.borderOffset })
-            path.pathElements.push(pathLine)
-        } else {
-            let pathMove = Qt.createQmlObject('import QtQuick 2.15; PathMove {}', path)
-            pathMove.x = Qt.binding(function() { return root.borderOffset })
-            pathMove.y = Qt.binding(function() { return root.height - path.__bottomLeftRadius - root.borderOffset - path.__borderRadiusAdjustment })
-            path.pathElements.push(pathMove)
-        }
-
-        // Bottom left corner
-        if (root.drawBottom && root.drawLeft) {
-            let pathArc = Qt.createQmlObject('import QtQuick 2.15; PathArc {}', path)
-            pathArc.x = Qt.binding(function() { return root.borderOffset })
-            pathArc.y = Qt.binding(function() { return root.height - path.__bottomLeftRadius - root.borderOffset - path.__borderRadiusAdjustment })
-            pathArc.radiusX = Qt.binding(function() { return root.bottomLeftBevel ? 50000 : path.__bottomLeftRadius + path.__borderRadiusAdjustment })
-            pathArc.radiusY = Qt.binding(function() { return root.bottomLeftBevel ? 50000 : path.__bottomLeftRadius + path.__borderRadiusAdjustment })
-            path.pathElements.push(pathArc)
-        }
-
-        // Left line
-        if (root.drawLeft) {
-            let pathLine = Qt.createQmlObject('import QtQuick 2.15; PathLine {}', path)
-            pathLine.x = Qt.binding(function() { return root.borderOffset })
-            pathLine.y = Qt.binding(function() { return path.__topLeftRadius + root.borderOffset + path.__borderRadiusAdjustment })
-            path.pathElements.push(pathLine)
-        }
-        // No need to use PathMove, if left line shouldn't be drawn we just leave the shape open.
-
-        // Top left corner
-        if (root.drawTop && root.drawLeft) {
-            let pathArc = Qt.createQmlObject('import QtQuick 2.15; PathArc {}', path)
-            pathArc.x = Qt.binding(function() { return path.__topLeftRadius + root.borderOffset + path.__borderRadiusAdjustment })
-            pathArc.y = Qt.binding(function() { return root.borderOffset })
-            pathArc.radiusX = Qt.binding(function() { return root.topLeftBevel ? 50000 : path.__topLeftRadius + path.__borderRadiusAdjustment })
-            pathArc.radiusY = Qt.binding(function() { return root.topLeftBevel ? 50000 : path.__topLeftRadius + path.__borderRadiusAdjustment })
-            path.pathElements.push(pathArc)
+            switch (currentEdge) {
+                case 0: // Top edge
+                    if (isFirstEdge) {
+                        path.startX = Qt.binding(root.__top_topLeftCorner().x)
+                        path.startY = Qt.binding(root.__top_topLeftCorner().y)
+                    }
+                    if (visibleEdges[currentEdge])
+                        path.pathElements.push(root.createPathLine(root.__top_topRightCorner))
+                    else
+                        path.pathElements.push(root.createPathMove(root.__right_topRightCorner))
+                    // Top right corner
+                    if (visibleEdges[currentEdge] && visibleEdges[nextEdge])
+                        path.pathElements.push(root.createPathArc(root.__right_topRightCorner, root.__topRightRadius))
+                    break
+                case 1: // Right edge
+                    if (isFirstEdge) {
+                        path.startX = Qt.binding(root.__right_topRightCorner().x)
+                        path.startY = Qt.binding(root.__right_topRightCorner().y)
+                    }
+                    if (visibleEdges[currentEdge])
+                        path.pathElements.push(root.createPathLine(root.__right_bottomRightCorner))
+                    else
+                        path.pathElements.push(root.createPathMove(root.__bottom_bottomRightCorner))
+                    // Bottom right corner
+                    if (visibleEdges[currentEdge] && visibleEdges[nextEdge])
+                        path.pathElements.push(root.createPathArc(root.__bottom_bottomRightCorner, root.__bottomRightRadius))
+                    break
+                case 2: // Bottom edge
+                    if (isFirstEdge) {
+                        path.startX = Qt.binding(root.__bottom_bottomRightCorner().x)
+                        path.startY = Qt.binding(root.__bottom_bottomRightCorner().y)
+                    }
+                    if (visibleEdges[currentEdge])
+                        path.pathElements.push(root.createPathLine(root.__bottom_bottomLeftCorner))
+                    else
+                        path.pathElements.push(root.createPathMove(root.__left_bottomLeftCorner))
+                    // Bottom left corner
+                    if (visibleEdges[currentEdge] && visibleEdges[nextEdge])
+                        path.pathElements.push(root.createPathArc(root.__left_bottomLeftCorner, root.__bottomLeftRadius))
+                    break
+                case 3: // Left line
+                    if (isFirstEdge) {
+                        path.startX = Qt.binding(root.__left_bottomLeftCorner().x)
+                        path.startY = Qt.binding(root.__left_bottomLeftCorner().y)
+                    }
+                    if (visibleEdges[currentEdge])
+                        path.pathElements.push(root.createPathLine(root.__left_topLeftCorner))
+                    else
+                        path.pathElements.push(root.createPathMove(root.__top_topLeftCorner))
+                    // Top left corner
+                    if (visibleEdges[currentEdge] && visibleEdges[nextEdge])
+                        path.pathElements.push(root.createPathArc(root.__top_topLeftCorner, root.__topLeftRadius))
+                    break
+            }
         }
     }
 
