@@ -44,15 +44,12 @@ Item {
     property bool backgroundBlurVisible: true
     property real backgroundBlurRadius: 0
 
-    onSourceChanged: root.source.antialiasing = false // Workaround
-
     width: root.source.width
     height: root.source.height
 
     Component.onCompleted: root.calculateBoundingBox()
 
     function clamp(input: real, min: real, max: real): real {
-
         if (isNaN(input))
             return 0
 
@@ -105,9 +102,6 @@ Item {
         sourceItem: wrapper
         sourceRect: root.effectBoundingBox
         hideSource: root.layerBlurVisible
-
-        //samples: 4 // Workaround
-        //smooth: true
     }
 
     Item {
@@ -133,7 +127,6 @@ Item {
             sourceItem: root.source
             hideSource: true
             z: 1
-            //samples: 4 // Workaround
         }
 
         Repeater {
