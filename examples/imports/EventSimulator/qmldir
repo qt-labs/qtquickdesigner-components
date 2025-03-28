@@ -1,3 +1,0 @@
-module io.qt.EventSimulator
-singleton EventSimulator 1.0 EventSimulator.qml
-EventListener 1.0 EventListener.qml
