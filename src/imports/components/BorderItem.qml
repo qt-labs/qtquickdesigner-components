@@ -344,59 +344,20 @@ Shape {
         }
 
         // Mixed radii
-        let topLeftRadiusMin = Math.min(minDimension, root.topLeftRadius)
-        let topRightRadiusMin = Math.min(minDimension, root.topRightRadius)
-        let bottomLeftRadiusMin = Math.min(minDimension, root.bottomLeftRadius)
-        let bottomRightRadiusMin = Math.min(minDimension, root.bottomRightRadius)
-
-        // Top radii
         let topRadii = root.topLeftRadius + root.topRightRadius
-
-        if (topRadii > root.width) {
-            let topLeftRadiusFactor = root.topLeftRadius / topRadii
-            let tlr = Math.round(root.width * topLeftRadiusFactor)
-
-            topLeftRadiusMin = Math.min(topLeftRadiusMin, tlr)
-            topRightRadiusMin = Math.min(topRightRadiusMin, root.width - tlr)
-        }
-
-        // Right radii
         let rightRadii = root.topRightRadius + root.bottomRightRadius
-
-        if (rightRadii > root.height) {
-            let topRightRadiusFactor = root.topRightRadius / rightRadii
-            let trr = Math.round(root.height * topRightRadiusFactor)
-
-            topRightRadiusMin = Math.min(topRightRadiusMin, trr)
-            bottomRightRadiusMin = Math.min(bottomRightRadiusMin, root.height - trr)
-        }
-
-        // Bottom radii
         let bottomRadii = root.bottomRightRadius + root.bottomLeftRadius
-
-        if (bottomRadii > root.width) {
-            let bottomRightRadiusFactor = root.bottomRightRadius / bottomRadii
-            let brr = Math.round(root.width * bottomRightRadiusFactor)
-
-            bottomRightRadiusMin = Math.min(bottomRightRadiusMin, brr)
-            bottomLeftRadiusMin = Math.min(bottomLeftRadiusMin, root.width - brr)
-        }
-
-        // Left radii
         let leftRadii = root.bottomLeftRadius + root.topLeftRadius
 
-        if (leftRadii > root.height) {
-            let bottomLeftRadiusFactor = root.bottomLeftRadius / leftRadii
-            let blr = Math.round(root.height * bottomLeftRadiusFactor)
+        let tlr = Math.min(root.width / topRadii, root.height / leftRadii) * root.topLeftRadius
+        let trr = Math.min(root.width / topRadii, root.height / rightRadii) * root.topRightRadius
+        let brr = Math.min(root.width / bottomRadii, root.height / rightRadii) * root.bottomRightRadius
+        let blr = Math.min(root.width / bottomRadii, root.height / leftRadii) * root.bottomLeftRadius
 
-            bottomLeftRadiusMin = Math.min(bottomLeftRadiusMin, blr)
-            topLeftRadiusMin = Math.min(topLeftRadiusMin, root.height - blr)
-        }
-
-        path.__topLeftRadius = topLeftRadiusMin
-        path.__topRightRadius = topRightRadiusMin
-        path.__bottomLeftRadius = bottomLeftRadiusMin
-        path.__bottomRightRadius = bottomRightRadiusMin
+        path.__topLeftRadius = Math.round(Math.min(root.topLeftRadius, tlr))
+        path.__topRightRadius = Math.round(Math.min(root.topRightRadius, trr))
+        path.__bottomRightRadius = Math.round(Math.min(root.bottomRightRadius, brr))
+        path.__bottomLeftRadius = Math.round(Math.min(root.bottomLeftRadius, blr))
     }
 
     ShapePath {
