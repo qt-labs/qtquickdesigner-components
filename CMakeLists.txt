@@ -43,5 +43,8 @@ if(NOT "${STUDIO_COMPONENTS_VERSION}" STREQUAL "${Qt6_VERSION}")
     message(WARNING "STUDIO_COMPONENTS_VERSION (${STUDIO_COMPONENTS_VERSION}) does not match the found Qt version (${Qt6_VERSION}).")
 endif()
 
-qt_policy(SET QTP0004 NEW)
+if (Qt6_VERSION VERSION_GREATER_EQUAL "6.8")
+    qt_policy(SET QTP0004 NEW)
+endif()
+
 qt_build_repo()

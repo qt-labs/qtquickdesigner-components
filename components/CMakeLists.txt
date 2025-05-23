@@ -11,6 +11,8 @@ if(QT_QDS_COMPONENTS_NOWARN)
    list(APPEND qds_qml_extra_args NO_LINT)
 endif()
 
-qt_policy(SET QTP0004 NEW)
+if (Qt6_VERSION VERSION_GREATER_EQUAL "6.8")
+    qt_policy(SET QTP0004 NEW)
+endif()
 
 add_subdirectory(imports)
