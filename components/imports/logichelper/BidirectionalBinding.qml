@@ -137,13 +137,13 @@ QtObject {
     property Binding __b01: Binding {
         target: __internal
         property: "value01"
-        value: target01[property01]
+        value: target01 ? target01[property01] : null
     }
 
     property Binding __b02: Binding {
         target: __internal
         property: "value02"
-        value: target02[property02]
+        value: target02 ? target02[property02] : null
     }
 
 
