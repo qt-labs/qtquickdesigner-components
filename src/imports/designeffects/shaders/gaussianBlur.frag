@@ -24,11 +24,19 @@ vec4 gaussianBlur(sampler2D tex, int miplevel) {
     float k = ceil(blurKernel);
 
     // Normalize kernel weights
-    for (float i = -k; i <= k; ++i) {
+    float i = -k;
+    for(int ii = 0; ii < 10000; ++ii) {
+        if (i > k)
+            break;
         sum += exp(-0.5 * pow(i / sigma, 2.0)) / (sqrtDoublePI * sigma);
+        ++i;
     }
 
-    for (float i = -k; i <= k; ++i) {
+    i = -k;
+    for(int ii = 0; ii < 10000; ++ii) {
+        if (i > k)
+            break;
+
         vec2 coord = qt_TexCoord0 + (pixelSize * float(i));
         float weight = exp(-0.5 * pow(i / sigma, 2.0)) / (sqrtDoublePI * sigma);
 
@@ -39,6 +47,7 @@ vec4 gaussianBlur(sampler2D tex, int miplevel) {
         } else {
             col += texture(tex, coord) * weight / sum;
         }
+        ++i;
     }
 
     return col;
