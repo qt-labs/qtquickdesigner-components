@@ -11,7 +11,7 @@ The modules get installed into Qt and provide the respective imports for QML.
 ```
 mkdir build
 cd build
-cmake -GNinja -DCMAKE_INSTALL_PREFIX=path_to_qt_install_directory path_to_qtquickdesigner-components_cmake
+cmake -GNinja -DCMAKE_TOOLCHAIN_FILE=<path_to_qt_install_directory>/lib/cmake/Qt6/qt.toolchain.cmake -DCMAKE_INSTALL_PREFIX=<path_to_qt_install_directory> -DCMAKE_PREFIX_PATH=<path_to_qt_install_directory> -DCMAKE_BUILD_TYPE=<Debug|Release> ..
 cmake --build .
 cmake --install .
 ```
